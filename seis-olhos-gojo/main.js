@@ -10,7 +10,7 @@ const PH=PHR.map(p=>p[0]),PT=PHR.map(p=>[p[1],p[2]]);
 const ps=i=>PT[i-1][0]+OFF,pe=i=>PT[i-1][1]+OFF;
 const nrm=x=>x.toLowerCase().replace(/[^a-zà-ú0-9]/g,'');
 const wt=(i,w,f=.5)=>{const q=nrm(w.split(' ')[0]);if(typeof PWD!='undefined'&&PWD&&PWD[i-1]){const x=PWD[i-1].find(z=>nrm(z[0]).startsWith(q));if(x)return x[1]+(x[2]-x[1])*f+OFF}const s=PH[i-1].toLowerCase(),p=Math.max(0,s.indexOf(w.toLowerCase()));return ps(i)+(pe(i)-ps(i))*(p+w.length*f)/s.length};
-const TOTAL=Math.round((pe(PH.length)+3.0)*24)/24;window.TOTAL=TOTAL;window.PHRASES=PH.map((t,i)=>[t,ps(i+1),pe(i+1)]);
+const OLDT=Math.round((pe(Math.min(21,PH.length))+3.0)*24)/24,TOTAL=PH.length>21?Math.round((pe(PH.length)+1.45)*24)/24:OLDT;window.TOTAL=TOTAL;window.PHRASES=PH.map((t,i)=>[t,ps(i+1),pe(i+1)]);
 // energia da voz por quadro (pulsa o brilho dos olhos com a narracao)
 const vox=t=>ENV[Math.floor((t-OFF)*24)]||0;
 const mouthAt=(k,t)=>({o:0,w:0,on:0});
@@ -40,9 +40,9 @@ for(const k in CHD)CHS[k]={...mkg(),d:CHD[k],id:CHD[k].id};['C','C2','C3','C4','
 const PLS={bed:1.2,hot:1.2,liv:1.2,kit:1.1,str:1.25,prc:1.35,prcW:1.35},PLC={};let CSH=null,GT=0,FR=[],FX={},CU=0,SHD=[];
 const getPl=k=>{if(!PLC[k]){const c=PLATES[k].cam,VP=mul(persp(c.fov,W/H,.1,90),look(c.eye,c.tg));PLC[k]={VP,tf:Math.tan(c.fov/2),cam:c}}return PLC[k]};
 function put(k,x,y,z,o={}){const C=CHS[k],P=CSH.pl,t=GT,id=C.id,p=o.px?[o.px[0],o.px[1],1]:pj(P.VP,x,y,z),ku=o.ku||.0046*(H/2)/(P.tf*p[2])*(o.sc||1)*(PLS[CSH.plate]||1),lm=mouthAt(k,t),spk=lm.on;
- let mood=o.m||'happy';if(spk&&o.mt)mood=o.mt;const six=o.six!=null,bl=o.blind!=null;const key=[mood,o.fr||'',o.pd?o.pd.join():'',o.hat===0?0:1,six?1:0,bl?1:0].join('|');
+ let mood=o.m||'happy';if(spk&&o.mt)mood=o.mt;const six=o.six!=null,bl=o.blind!=null;const key=[mood,o.fr||'',o.pd?o.pd.join():'',o.hat===0?0:1,six?1:0,bl?1:0,o.hold?1:0].join('|');
  if(C.key!=key){C.key=key;const d={...C.d};if(o.hat===0)d.hat='';if(six)d.ic='#1d6fd6';d.fx=(d.fx||'')+(six?SIXFX(id):'')+(bl?BLINDFX(id):'');
-  C.in.innerHTML=ch({...d,m:mood,front:o.fr,walk:1,pd:o.pd});const q=n=>$(n+id);C.el={aR:q('aR'),aL:q('aL'),lgL:q('lgL'),lgR:q('lgR'),mo:q('mo'),bl:q('bl'),bw:q('bw'),hg:q('hg'),bd:q('bd'),pp:C.g.querySelectorAll('.pp'),sx:q('sx'),sxi:q('sxi'),bf:q('bf'),bft:q('bft')}}
+  C.in.innerHTML=ch({...d,m:mood,front:o.fr,walk:1,pd:o.pd,hold:o.hold});const q=n=>$(n+id);C.el={aR:q('aR'),aL:q('aL'),lgL:q('lgL'),lgR:q('lgR'),mo:q('mo'),bl:q('bl'),bw:q('bw'),hg:q('hg'),bd:q('bd'),pp:C.g.querySelectorAll('.pp'),sx:q('sx'),sxi:q('sxi'),bf:q('bf'),bft:q('bft')}}
  const e=C.el,em=emph(t),g=spk*(o.gest??1)*(.4+lm.o);
  e.aR&&(e.aR.style.transform=`rotate(${o.aR??(sn(t*1.6+id)*3+g*16*sn(t*4.1+id*2)+em*9)}deg)`);e.aL&&(e.aL.style.transform=`rotate(${o.aL??(sn(t*1.4+id)*-3-g*16*sn(t*3.7+id*3)-em*9)}deg)`);
  const LGv=o.lg!=null?o.lg:2.2*sn(t*1.1+id);e.lgL&&(e.lgL.style.transform=`rotate(${LGv}deg)`);e.lgR&&(e.lgR.style.transform=`rotate(${-LGv}deg)`);
@@ -418,8 +418,71 @@ shot(null,ps(21)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.5+.5*ob(GT,tDsp,.4),streak:
  if(GT>tDsp)ui+=SCAN(e[0],e[1],tDsp,1,1500)+EMB(540,1040,330,GT,.4*awk);
  if(GT>tEnd){const a=ob(GT,tEnd,.4);ui+=`<rect x="0" y="1290" width="1080" height="330" fill="#04061a" opacity="${(.82*a).toFixed(2)}"/>`+TXT('VOCÊ DESPERTARIA?',540,1400,84,CY,-2,pop(GT,tEnd))+TXT('COMENTE: SIM ou NÃO',540,1520,62,'#fff',-2,pop(GT,tEnd+.3))+TXT('E SE VOCÊ TIVESSE',540,270,70,'#fff',-3,pop(GT,tEnd+.1))+TXT('OS SEIS OLHOS?',540,385,112,CY,-3,pop(GT,tEnd+.2))}
  const F=foc(e[0],e[1],.6);
- camA([[ps(21)-.3,.05,0,0,-1],[tCor,.35,F[0]*.6,F[1]*.6,0],[tDsp,.6,F[0],F[1],0,'c'],[tEnd,.2,0,0,0],[TOTAL,.28,0,0,1]]);
+ camA([[ps(21)-.3,.05,0,0,-1],[tCor,.35,F[0]*.6,F[1]*.6,0],[tDsp,.6,F[0],F[1],0,'c'],[tEnd,.2,0,0,0],[OLDT,.28,0,0,1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.cos,awk);FX.vig=.85-.25*awk;FX.shake=12*sh1(GT,[tDsp],5);FX.flash=.6*sh1(GT,[tDsp],8);FX.flcol='170,230,255';FX.chroma=5*sh1(GT,[tDsp],4)},'dip');
+// ===== 17) ENCERRAMENTO: like + inscreva-se (Cibito precisa da sua ajuda) =====
+if(PH.length>21){
+const T0=OLDT,tLock=wt(22,'desbloquear',.3),tPod=wt(22,'poder',.2),tMas=wt(23,'mas',.1),tAju=wt(23,'ajuda',.0),tLik=wt(24,'like',.0),tPress=wt(24,'like',.9)+.05,
+ tIns=wt(24,'inscreva',.0),tCan=wt(24,'canal',.3),tFor2=wt(24,'força',.0),tCur=wt(25,'curtida',.0),tTra=wt(25,'transformação',.35),tSer=wt(26,'será',.0),tEndO=pe(26)+.25;
+// icones em unidades de tela (desenhados no mesmo traco grosso)
+const THUMB=(c='#fff')=>`<path d="M-58 2H-28V70H-58Z" fill="${c}" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/><path d="M-20 4L8-44Q16-70 34-58Q44-50 38-20H70Q90-18 84 4L72 58Q68 72 52 72H-20Z" fill="${c}" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/>`;
+const LIKEB=(on,pr)=>`<circle r="128" fill="rgba(0,0,0,.28)" cy="10"/><circle r="122" fill="${on?'url(#likeg)':'#fff'}" stroke="${INK}" stroke-width="12"/><circle r="104" fill="none" stroke="${on?'rgba(255,255,255,.35)':'rgba(31,123,255,.18)'}" stroke-width="8"/><g transform="translate(4 -6) scale(${(1.05+.12*pr).toFixed(3)})">${THUMB(on?'#fff':'#1f7bff')}</g>`;
+const SUBB=(on)=>`<rect x="-300" y="-72" width="600" height="144" rx="72" fill="rgba(0,0,0,.3)" transform="translate(0 10)"/><rect x="-300" y="-72" width="600" height="144" rx="72" fill="${on?'#3a3a46':'#ff1f3d'}" stroke="${INK}" stroke-width="12"/><text y="22" font-size="62" text-anchor="middle" fill="#fff" font-family="Poppins,DejaVu Sans" font-weight="900">${on?'INSCRITO ✓':'INSCREVA-SE'}</text>`;
+const BELL=(sw,ring)=>`<g transform="rotate(${sw.toFixed(1)} 0 -70)"><path d="M-62 40Q-58-50 0-66Q58-50 62 40L80 62H-80Z" fill="#ffd23f" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/><circle cy="-74" r="14" fill="#ffd23f" stroke="${INK}" stroke-width="8"/><circle cy="78" r="18" fill="#ffd23f" stroke="${INK}" stroke-width="8"/><path d="M-36-20Q-30-40-12-46" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/></g>`+(ring>0?[1,2].map(i=>`<path d="M${-100-i*26}-40Q${-120-i*30} 0 ${-100-i*26} 40M${100+i*26}-40Q${120+i*30} 0 ${100+i*26} 40" stroke="#ffd23f" stroke-width="10" fill="none" stroke-linecap="round" opacity="${(ring*(.9-.3*i)).toFixed(2)}"/>`).join(''):'');
+const CURSOR=`<path d="M0 0L0 88L22 68L38 104L54 96L38 62L66 60Z" fill="#fff" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>`;
+const LOCK=(sh,cr,op)=>`<g transform="rotate(${sh.toFixed(1)})"><path d="M-46-30V${(-70-60*op).toFixed(0)}Q-46${(-130-60*op).toFixed(0)} 0${(-130-60*op).toFixed(0)}Q46${(-130-60*op).toFixed(0)} 46${(-70-60*op).toFixed(0)}V-30" fill="none" stroke="${INK}" stroke-width="30"/><path d="M-46-30V${(-70-60*op).toFixed(0)}Q-46${(-130-60*op).toFixed(0)} 0${(-130-60*op).toFixed(0)}Q46${(-130-60*op).toFixed(0)} 46${(-70-60*op).toFixed(0)}V-30" fill="none" stroke="#c9ced8" stroke-width="16"/><rect x="-80" y="-40" width="160" height="130" rx="24" fill="#ffc02e" stroke="${INK}" stroke-width="12"/><circle cy="12" r="16" fill="${INK}"/><path d="M0 18V50" stroke="${INK}" stroke-width="14" stroke-linecap="round"/>${cr>0?`<path d="M-60-30L-20 10L-40 40L0 80M50-30L20 0L40 30" stroke="${CY2}" stroke-width="${(4+5*cr).toFixed(1)}" fill="none" stroke-linecap="round" opacity="${cr.toFixed(2)}"/>`:''}</g>`;
+const FINGER=`<path d="M-7 4V40Q0 50 7 40V4Z" fill="#f6c8a0" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>`;
+document.querySelector('#SV defs').insertAdjacentHTML('beforeend','<linearGradient id="likeg" x1="0" y1="-1" x2="0" y2="1"><stop offset="0" stop-color="#5fd0ff"/><stop offset="1" stop-color="#1f5bff"/></linearGradient>');
+shot('twn3',T0,(t,u)=>{
+ const inn=ob(GT,T0+.12,.5),jy=(1-inn)*900,pressA=GT>tPress-.25&&GT<tPress+.35,flex=GT>tFor2&&GT<tCur+.2,tr=ob(GT,tTra,.3),ser=GT>tSer;
+ // pose do Cibito, sincronizada com cada frase
+ let aR=-20+6*sn(GT*5),aL=20-6*sn(GT*4.6),m='grin',hold=null,tilt=4*sn(GT*2.2),brow=0,look=[0,-2];
+ if(GT>tMas-.1&&GT<tAju-.05){m='hope';aR=-30;aL=30;brow=4;look=[6,0]}
+ if(GT>=tAju-.05&&GT<tIns-.1){m=GT<tLik?'happy':'grin';hold=FINGER;aR=GT<tLik-.15?tw(-30,-105,tAju-.05,.3):GT<tPress-.25?tw(-105,-72,tLik-.15,.3):GT<tPress?-38:tw(-38,-74,tPress,.18);look=[8,-4]}
+ if(GT>=tIns-.1&&GT<tFor2){m='grin';aR=-120+10*sn(GT*9);aL=20;look=[-6,-8]}
+ if(flex){m='focus';aR=-150+6*sn(GT*14);aL=150-6*sn(GT*14);brow=8}
+ if(GT>=tCur+.2&&!ser){m=GT<tTra?'awe':'grin';aR=-40+8*sn(GT*6);aL=40-8*sn(GT*6)}
+ if(ser){m='worry';aR=-14;aL=14;brow=5;look=[0,-6]}
+ const six=Math.min(1,.55+.25*sh1(GT,[tPod],2)+.35*tr+(flex?.3:0)),px=[380,1560+jy];
+ put('CIB',0,0,0,{px,ku:2.1,top:1,m,six,hold,aR,aL,tilt,brow,look,nodrift:1,bob:1.5,brr:3,sq:GT<T0+.8?SQ(T0+.45,1.3):pressA?SQ(tPress,.6):flex?SQ(tFor2,1):SQ(tTra,1.2)});
+ eyeGlow('CIB',six,1+.6*tr);aura('CIB',.45+.4*(flex?1:0)+.5*tr,'#1f7bff','#7fe6ff',1.1+.5*tr,1);
+ const p=C.CIB.sp,ku=p[2],c0=chestP('CIB'),e=eyeP('CIB');
+ // cadeado do "novo poder" acima da cabeca: treme, racha e quase abre
+ const lockA=ob(GT,tLock-.2,.4)*(1-ob(GT,tAju-.3,.3)*.6)*(GT>tLik-.2&&GT<tCur?0:1),crack=cl((GT-tPod)/.4)*.5+.5*cl((GT-tCur)/(tTra-tCur)),opn=tr*.35;
+ if(lockA>0)fw(`<g transform="translate(${(p[0]+330).toFixed(1)} ${(p[1]-560+30*sn(GT*2)).toFixed(1)}) scale(${(lockA*.8*(1+.08*sh1(GT,[tPod,tTra],5))).toFixed(3)})">${LOCK((GT>tPod?6:2)*sn(GT*30)*(.4+crack),crack,opn)}</g>`);
+ // botao de LIKE: surge com impacto, balanca e e pressionado pela mao do Cibito
+ const lkA=GT<tLik-.15?0:ob(GT,tLik-.15,.45),on=GT>tPress,lsq=pressA?SQ(tPress,1.6):{sx:1,sy:1},lx=p[0]+210*ku,ly=p[1]-185*ku;
+ if(lkA>0&&GT<tFor2+.4){const out=1-ob(GT,tFor2-.15,.3),sc=lkA*out*(.95+.05*sn(GT*6))*(1+.12*sh1(GT,[tPress],7));
+  fw(`<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)}) rotate(${(5*sn(GT*4)).toFixed(1)}) scale(${(1.15*sc*lsq.sx).toFixed(3)} ${(1.15*sc*lsq.sy).toFixed(3)})">${LIKEB(on,sh1(GT,[tPress],6))}</g>`+RIP(lx,ly,tPress,.6,320,'#7fd8ff')+RIP(lx,ly,tPress+.12,.6,240,'#fff'));
+  if(on){let s='';for(let i=0;i<10;i++){const d=GT-tPress,a=rnd(i,3.3)*6.283,r=60+520*d*(.5+rnd(i,7.1)),o=cl(1-d/1.2);if(o>0)s+=`<g transform="translate(${(lx+cs(a)*r).toFixed(1)} ${(ly+sn(a)*r-120*d).toFixed(1)}) scale(${(.22+.18*rnd(i,5.5)).toFixed(2)})" opacity="${o.toFixed(2)}">${i%2?THUMB('#5fd0ff'):`<path d="M0 30C-60-10-50-70 0-34C50-70 60-10 0 30Z" fill="#ff3b6b" stroke="${INK}" stroke-width="10"/>`}</g>`}fw(s)}}
+ // INSCREVA-SE + cursor + sino
+ const sbA=GT<tIns-.2?0:ob(GT,tIns-.2,.4),sOn=GT>tCan,sx0=540+(1-sbA)*900,sy0=640;
+ let ui='';
+ if(sbA>0&&GT<tFor2+.4){const out=1-ob(GT,tFor2-.15,.3),ssq=GT>tCan&&GT<tCan+.5?SQ(tCan,1.3):{sx:1,sy:1};
+  fw(`<g transform="translate(${(sx0-60).toFixed(1)} ${sy0}) scale(${(out*ssq.sx*(1+.06*sh1(GT,[tCan],7))).toFixed(3)} ${(out*ssq.sy).toFixed(3)})">${SUBB(sOn)}</g>`+RIP(sx0-60,sy0,tCan,.6,380,'#ff7a8a'));
+  const bA=ob(GT,tCan+.1,.35)*out;if(bA>0)fw(`<g transform="translate(860 ${sy0-150}) scale(${(.85*bA).toFixed(3)})">${BELL(28*Math.exp(-(GT-tCan-.1)*2.2)*sn((GT-tCan)*16),Math.exp(-(GT-tCan-.1)*1.5))}</g>`);
+  const cp=ob(GT,tIns+.1,.5),cx=lp(1150,sx0+30,cp),cy=lp(1150,sy0+20,cp),cs2=GT>tCan-.06&&GT<tCan+.12?.82:1;if(GT<tCan+.6)fw(`<g transform="translate(${cx.toFixed(1)} ${cy.toFixed(1)}) scale(${(cs2*1.15).toFixed(2)})" opacity="${cl(1-(GT-tCan-.3)/.3).toFixed(2)}">${CURSOR}</g>`)}
+ // medidor de curtidas -> transformacao
+ if(GT>tCur-.2){const a=ob(GT,tCur-.2,.35),f=GT<tTra?lp(.12,.92,ez((GT-tCur)/(tTra-tCur))):lp(.92,.99,cl((GT-tTra)/.5)),blink=ser&&sn(GT*18)>0?1:.65,val=Math.round(f*100);
+  ui+=`<g opacity="${a.toFixed(2)}"><rect x="140" y="1330" width="800" height="150" rx="30" fill="#070a24" opacity=".85" stroke="${CY}" stroke-width="6"/><rect x="330" y="1380" width="580" height="54" rx="27" fill="#16204e"/><rect x="336" y="1386" width="${(568*f).toFixed(1)}" height="42" rx="21" fill="${ser?`rgba(255,210,63,${blink})`:CY}"/></g><g transform="translate(240 1410) scale(.6)" opacity="${a.toFixed(2)}">${THUMB('#5fd0ff')}</g>`+TXT(`PODER ${val}%`,620,1315,54,'#fff',0,a);
+  // curtidas voando ate o Cibito
+  if(GT<tTra+.2){let s='';for(let i=0;i<8;i++){const ph=((GT-tCur)*1.1+i/8)%1;const q=zpE([c0[0],c0[1]]),x=lp(240,q[0],ez(ph)),y=lp(1410,q[1],ez(ph))-160*sn(ph*3.14);s+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(.3*(1-ph*.5)).toFixed(2)})" opacity="${sn(ph*3.14).toFixed(2)}">${THUMB('#5fd0ff')}</g>`}ui+=s}}
+ // textos
+ if(GT>tLock-.1&&GT<tMas)ui+=TXT('NOVO PODER',540,330,120,'#ffd23f',-3,pop(GT,tPod-.05))+(GT>wt(22,'animação',0)?TXT('DESBLOQUEANDO...',540,440,58,CY2,-3,pop(GT,wt(22,'animação',0))):'');
+ if(GT>tAju-.05&&GT<tLik-.2)ui+=TXT('PRECISO DA',540,290,72,'#fff',-4,pop(GT,tAju-.05))+TXT('SUA AJUDA!',540,410,136,CY,-4,pop(GT,tAju+.08)*(1+.03*sn(GT*8)));
+ if(GT>tLik-.15&&GT<tIns-.1)ui+=TXT('DEIXE O LIKE!',540,330,118,'#5fd0ff',-3,pop(GT,tLik-.15));
+ if(GT>tFor2-.05&&GT<tCur-.2)ui+=TXT('MOSTRE SUA',540,290,72,'#fff',-3,pop(GT,tFor2-.05))+TXT('FORÇA!',540,420,160,'#ffd23f',-3,pop(GT,tFor2+.1)*(1+.04*sn(GT*10)))+RAYS(GT,tFor2+.1,540,400,.45,18,'#ffe27a');
+ if(GT>tTra-.05&&GT<tSer)ui+=TXT('TRANSFORMAÇÃO',540,330,104,CY,-3,pop(GT,tTra));
+ if(ser&&GT<tEndO+.2)ui+=TXT('SERÁ QUE ELE',540,300,76,'#fff',-3,pop(GT,tSer))+TXT('VAI CONSEGUIR?',540,410,110,'#ffd23f',-3,pop(GT,wt(26,'conseguir',0)));
+ // final elegante: iris se fechando no olho brilhante do Cibito
+ const ir=ob(GT,tEndO,.7);if(GT>tEndO){const q=zpE(e),R=lp(1500,0,ez(cl((GT-tEndO)/.8)));ui+=`<path fill-rule="evenodd" d="M-10-10H1090V1930H-10ZM${(q[0]-R).toFixed(1)} ${q[1].toFixed(1)}a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(2*R).toFixed(1)} 0a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(-2*R).toFixed(1)} 0Z" fill="#02030c"/><circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${R.toFixed(1)}" fill="none" stroke="${CY}" stroke-width="${(10*(1-ir*.5)).toFixed(1)}"/>`+(R<200?EMB(q[0],q[1],90,GT,cl((200-R)/150)*(1-cl((GT-tEndO-.8)/.4))):'')}
+ FX.pf=[[c0[0],c0[1],420*ku/2.1,34,'150,220,255',.7+.3*tr,flex||tr>0?'rise':'orbit']];
+ const F=foc(e[0],e[1]+120*ku,.4),Fp=foc(e[0],e[1],.85),Fw=foc(640,1100,.08);
+ camA([[T0,.45,F[0],F[1],-3],[T0+.6,.22,F[0]*.6,F[1]*.6,1],[tMas,.25,F[0]*.6,F[1]*.6,0],[tAju-.1,.3,F[0]*.7,F[1]*.7,0],[tAju,.48,F[0],F[1],-2,'c'],[tLik-.25,.5,F[0],F[1],0],[tLik-.15,.06,Fw[0],Fw[1],0,'c'],[tFor2-.1,.06,Fw[0],Fw[1],1],[tFor2,.3,F[0]*.8,F[1]*.8,-2,'c'],[tCur,.12,0,0,0],[tTra,.35,F[0],F[1],0,'c'],[tSer,.4,F[0],F[1],0],[tEndO+.6,.85,Fp[0],Fp[1],0]]);
+ FX.ui=ui;FX.lit=blueLit(LIT.twn3,.8+.2*tr);FX.vig=.55;FX.shake=14*sh1(GT,[T0+.45],5)+6*sh1(GT,[tPress,tCan],8)+12*sh1(GT,[tFor2,tTra],5);
+ FX.flash=Math.max(.9*cl(1-(GT-T0)/.35),.35*sh1(GT,[tPod,tPress],10),.6*sh1(GT,[tTra],7));FX.flcol=GT<T0+.4?'190,235,255':'170,230,255';FX.chroma=5*sh1(GT,[tFor2,tTra],4);
+ if(GT>tCur)FX.rays=[[c0[0],c0[1]-60*ku,.25+.4*tr,'90,170,255',16,1500]]},'');
+}
 SH.forEach((s,i)=>{s.t1=i<SH.length-1?SH[i+1].t0:TOTAL+1});
 // conversao cena -> tela (usa o transform real do quadro anterior; atualizado em F)
 let XF={s:1,dx:0,dy:0,cr:1,sr:0};
@@ -483,5 +546,5 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
   for(let y=0;y<H;y+=6){c.fillStyle=`rgba(0,0,0,${(.15*vh).toFixed(3)})`;c.fillRect(0,y,W,2)}}
  for(let i=0;i<220;i++){const x=rnd(i+gt*97,1.7)*W,y=rnd(i+gt*31,8.3)*H;c.fillStyle=i%2?'rgba(255,255,255,.045)':'rgba(0,0,0,.055)';c.fillRect(x,y,3,3)}
  const fl=Math.max(Tn.fl,FX.flash||0);if(fl>0){c.fillStyle=`rgba(${(FX.flash||0)>Tn.fl?(FX.flcol||'255,255,255'):Tn.col},${fl})`;c.fillRect(0,0,W,H)}
- const fd=cl((gt-(TOTAL-.6))/.6);if(fd>0){c.fillStyle=`rgba(0,0,0,${fd})`;c.fillRect(0,0,W,H)}
+ const fd=gt<OLDT?cl((gt-(OLDT-.6))/.6):0;if(fd>0){c.fillStyle=`rgba(0,0,0,${fd})`;c.fillRect(0,0,W,H)}
  $('UI').innerHTML=FX.ui||'';$('UI').style.opacity=1-fd;$('st').style.filter=FX.grade||'contrast(1.06) saturate(1.1)'};

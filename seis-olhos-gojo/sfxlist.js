@@ -40,4 +40,16 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  a(cut(17),'wind',1);a(tFor,'pop',.5);a(pe(19)+.05,'swish',.6);a(tPot-.6,'cloth',.8);a(tPot-.4,'riser_s',.7);a(tPot,'eye_open',1.1);a(tPot,'boom',1.2);a(tXt,'shimmer',.7);
  // 16 pergunta
  a(cut(18),'amb_space',1);a(tCor,'pop',.5);a(tDsp-.5,'riser_s',.8);a(tDsp,'eye_open',1.2);a(tDsp,'boom',1.3);a(tEnd,'final',1);
+ 
+ // 17 encerramento
+ if(PH.length>21){const T0=OLDT,w=(i,k,f=.5)=>wt(i,k,f),tP=w(24,'like',.9)+.05,tC=w(24,'canal',.3),tF=w(24,'força',0),tT=w(25,'transformação',.35),tE=pe(26)+.25;
+  a(T0,'M_outro');a(w(24,'like',0),'M_o_like');a(tE,'M_o_end');
+  a(T0,'flash',.9);a(T0+.4,'boom',1.1);a(T0+.45,'whoosh',.8);a(T0+.5,'energy',.7);a(T0,'amb_night',.6);
+  a(w(22,'desbloquear',.1),'lock_rattle',.8);a(w(22,'poder',.2),'shimmer',.7);a(w(22,'poder',.2),'hit',.5);
+  a(w(23,'ajuda',0),'swish',.7);a(w(23,'ajuda',0),'pop',.7);
+  a(w(24,'like',0)-.15,'pop',.9);a(w(24,'like',0)-.15,'whoosh',.5);a(tP,'click',1);a(tP,'ding',.8);a(tP+.05,'sparkle',.6);
+  a(w(24,'inscreva',0)-.2,'swish',.7);a(tC,'click',1);a(tC+.1,'bell_ring',.9);
+  a(tF,'boom',1);a(tF,'energy',.8);
+  for(let t=w(25,'curtida',0);t<tT;t+=.22)a(t,'pop',.28);a(w(25,'curtida',0),'charge',.7);a(tT-.4,'riser_s',.8);a(tT,'boom',1.2);a(tT,'unlock',.9);a(tT+.05,'shimmer',.8);
+  for(let t=w(26,'será',0);t<tE;t+=.55)a(t,'heart',.8);a(tE,'whoosh',.7);a(tE+.5,'final',.9)}
  L.sort((x,y)=>x[0]-y[0]);return L};

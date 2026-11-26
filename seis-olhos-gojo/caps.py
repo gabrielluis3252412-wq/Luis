@@ -7,7 +7,7 @@ KW = {'Seis': CY, 'Olhos': CY, 'Gojo?': CY, 'Gojo': CY, 'rara': AM, 'poderosos':
       'detalhes': CY, 'jamais': AM, 'invisível,': RX, 'escondido': RX, 'olhos.': CY, 'infinita.': AM, 'controlar': CY,
       'precisão': CY, 'absurda,': AM, 'desperdício': VM, 'insignificante.': CY, 'Ilimitada,': CY, 'espaço': CY, 'defesa': CY,
       'superar.': AM, 'preço.': VM, 'constantemente': VM, 'desgaste.': VM, 'venda,': AM, 'esforço': CY, 'raras': AM,
-      'forte.': AM, 'potencial': CY, 'extraordinário.': AM, 'coragem': AM, 'despertar': CY, 'poder?': CY}
+      'forte.': AM, 'potencial': CY, 'extraordinário.': AM, 'coragem': AM, 'despertar': CY, 'poder?': CY, 'like,': CY, 'inscreva-se': VM, 'canal': VM, 'força.': AM, 'curtida': CY, 'transformação.': CY, 'conseguir?': AM, 'ajuda.': AM}
 def ts(x): h = int(x // 3600); m = int(x % 3600 // 60); s = x % 60; return f"{h}:{m:02d}:{s:05.2f}"
 ev = []
 for text, a, b in D['phrases']:

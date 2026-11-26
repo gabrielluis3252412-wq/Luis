@@ -1,6 +1,6 @@
 {
  "fonte": "narracao-elevenlabs.mp3 (Will, ElevenLabs) - texto transcrito do proprio audio",
- "duracao": 83.331,
+ "duracao": 103.654,
  "frases": [
   [
    "E se você tivesse os Seis Olhos de Satoru Gojo?",
@@ -106,6 +106,31 @@
    "E agora me diga, você teria coragem de despertar esse poder?",
    79.24,
    83.04
+  ],
+  [
+   "Cibito está prestes a desbloquear um novo poder de animação,",
+   86.492,
+   90.292
+  ],
+  [
+   "mas, para isso, ele precisa da sua ajuda.",
+   90.792,
+   93.732
+  ],
+  [
+   "Deixe o like, inscreva-se no canal e mostre sua força.",
+   94.212,
+   97.732
+  ],
+  [
+   "Cada curtida aproxima Cibito de sua próxima transformação.",
+   98.212,
+   101.612
+  ],
+  [
+   "Será que ele vai conseguir?",
+   102.092,
+   103.252
   ]
  ],
  "palavras": [
@@ -1085,6 +1110,226 @@
     82.7,
     83.04
    ]
+  ],
+  [
+   [
+    "Cibito",
+    86.492,
+    87.052
+   ],
+   [
+    "está",
+    87.052,
+    87.272
+   ],
+   [
+    "prestes",
+    87.272,
+    87.932
+   ],
+   [
+    "a",
+    87.932,
+    88.012
+   ],
+   [
+    "desbloquear",
+    88.012,
+    88.612
+   ],
+   [
+    "um",
+    88.612,
+    88.732
+   ],
+   [
+    "novo",
+    88.732,
+    89.092
+   ],
+   [
+    "poder",
+    89.092,
+    89.612
+   ],
+   [
+    "de",
+    89.612,
+    89.752
+   ],
+   [
+    "animação,",
+    89.752,
+    90.292
+   ]
+  ],
+  [
+   [
+    "mas,",
+    90.792,
+    91.132
+   ],
+   [
+    "para",
+    91.352,
+    91.492
+   ],
+   [
+    "isso,",
+    91.492,
+    91.832
+   ],
+   [
+    "ele",
+    92.212,
+    92.292
+   ],
+   [
+    "precisa",
+    92.292,
+    92.752
+   ],
+   [
+    "da",
+    92.752,
+    92.992
+   ],
+   [
+    "sua",
+    92.992,
+    93.332
+   ],
+   [
+    "ajuda.",
+    93.332,
+    93.732
+   ]
+  ],
+  [
+   [
+    "Deixe",
+    94.212,
+    94.572
+   ],
+   [
+    "o",
+    94.572,
+    94.712
+   ],
+   [
+    "like,",
+    94.712,
+    94.932
+   ],
+   [
+    "inscreva-se",
+    95.252,
+    95.852
+   ],
+   [
+    "no",
+    95.852,
+    95.972
+   ],
+   [
+    "canal",
+    95.972,
+    96.312
+   ],
+   [
+    "e",
+    96.312,
+    96.632
+   ],
+   [
+    "mostre",
+    96.632,
+    97.112
+   ],
+   [
+    "sua",
+    97.112,
+    97.272
+   ],
+   [
+    "força.",
+    97.272,
+    97.732
+   ]
+  ],
+  [
+   [
+    "Cada",
+    98.212,
+    98.412
+   ],
+   [
+    "curtida",
+    98.412,
+    99.012
+   ],
+   [
+    "aproxima",
+    99.012,
+    99.552
+   ],
+   [
+    "Cibito",
+    99.552,
+    100.032
+   ],
+   [
+    "de",
+    100.032,
+    100.152
+   ],
+   [
+    "sua",
+    100.152,
+    100.332
+   ],
+   [
+    "próxima",
+    100.332,
+    100.812
+   ],
+   [
+    "transformação.",
+    100.812,
+    101.612
+   ]
+  ],
+  [
+   [
+    "Será",
+    102.092,
+    102.352
+   ],
+   [
+    "que",
+    102.352,
+    102.572
+   ],
+   [
+    "ele",
+    102.572,
+    102.672
+   ],
+   [
+    "vai",
+    102.672,
+    102.872
+   ],
+   [
+    "conseguir?",
+    102.872,
+    103.252
+   ]
   ]
- ]
+ ],
+ "encerramento": {
+  "inicio_cena": 86.04166666666667,
+  "inicio_fala": 86.49166666666667,
+  "fonte": "encerramento-elevenlabs.mp3"
+ }
 }

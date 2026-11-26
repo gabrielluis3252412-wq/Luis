@@ -163,6 +163,25 @@ def breath():
 def final():
     d = 3.0; n = int(d * SR); x = sum(osc(f, d, 'saw') for f in (73.4, 110, 146.8, 174.6)) / 4
     return norm(reverb(filt(x, hi=1400) * att(n, .01) * dec(n, 1.8) + boom()[:n] * .7, 2.4, .4), .95)
+def click():
+    d = .12; n = int(d * SR); return norm(filt(noise(n), lo=1500, hi=8000) * dec(n, 40) + osc(np.linspace(1800, 900, n), d) * dec(n, 25) * .6, .7)
+def bell_ring():  # sino de notificacao
+    d = 2.2; n = int(d * SR); t = T(d); x = np.zeros(n)
+    for k, t0 in enumerate((0, .16, .32)):
+        i = int(t0 * SR); L = n - i
+        for f, g in ((1318.5, 1), (2637, .35), (3520, .25), (4186, .15)):
+            x[i:] += osc(f * (1 + .002 * k), L / SR)[:L] * np.exp(-np.linspace(0, 6, L)) * g * (1 - .25 * k)
+    return norm(reverb(x, 1.2, .3), .6)
+def lock_rattle():
+    o = np.zeros(int(.9 * SR))
+    for k in range(6):
+        d = .05; s = filt(noise(int(d * SR)), lo=2500, hi=9000) * dec(int(d * SR), 20) + osc(3200 + 400 * k, d) * dec(int(d * SR), 30) * .4
+        i = int(k * .13 * SR); o[i:i + len(s)] += s
+    return norm(o, .5)
+def unlock():
+    d = 1.0; n = int(d * SR); x = osc(np.linspace(400, 1600, n), d, 'tri') * dec(n, 5) * .5 + filt(noise(n), lo=3000) * dec(n, 30) * .5
+    return norm(reverb(x + shimmer()[:n] * .6, 1.2, .35), .7)
+def sparkle(): return shimmer() * .8
 # ambiencias
 def amb_night(d):
     n = int(d * SR); t = T(d); cr = osc(4600, d) * ((np.sin(2 * np.pi * 28 * t) > .2) * (np.sin(2 * np.pi * .9 * t) > 0)) * .04
@@ -285,8 +304,26 @@ chords(cu('M_pot'), cu('M_end'), 'choir', .55, 2); chords(cu('M_pot'), cu('M_end
 # a pergunta: suspensao e acorde final
 P(cu('M_end'), note(50, cu('M_dsp') - cu('M_end') + .3, 'pad') + note(57, cu('M_dsp') - cu('M_end') + .3, 'pad') + note(64, cu('M_dsp') - cu('M_end') + .3, 'pad'), .3)
 for k, m in enumerate([69, 74, 76]): P(cu('M_end') + .5 + k * 1.2, note(m, 2, 'bell'), .14)
-L = TOTAL - cu('M_dsp') + .2
+L = (CUE.get('M_outro', TOTAL)) - cu('M_dsp') + .2
 P(cu('M_dsp'), taiko() * 1.4, 1); P(cu('M_dsp'), note(38, L, 'brass') + note(50, L, 'choir') + note(57, L, 'choir') + note(62, L, 'choir') + note(65, L, 'choir'), .5)
+# ENCERRAMENTO: trilha animada (re maior, mais rapida)
+if 'M_outro' in CUE:
+    o0, o1, oE = cu('M_outro'), cu('M_o_like'), cu('M_o_end')
+    BO = .44; DMJ = [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]]  # D Bm G A
+    P(o0 + .1, taiko() * 1.3, 1); P(o0 + .1, note(38, 2.5, 'brass') + note(50, 2.5, 'choir') + note(57, 2.5, 'choir'), .4)
+    t = o0 + .5; k = 0
+    while t < oE - .2:
+        c = DMJ[int((t - o0) / (BO * 8)) % 4]; amp = .6 if t > o1 else .35
+        P(t, note(c[0] - 12, BO * .9, 'bass'), .45 * amp / .6)
+        P(t, note(c[(k % 3) + 1] + 12, .4, 'pluck'), .16); P(t + BO / 2, note(c[((k + 1) % 3) + 1] + 12, .4, 'pluck'), .12)
+        if k % 2 == 0: P(t, kick(), .5 * amp)
+        else: P(t, taiko(), .35 * amp)
+        if t > o1:
+            for h in range(2): P(t + h * BO / 2, hat(), .7)
+        if k % 8 == 0:
+            for m in c[1:]: P(t, note(m, BO * 8 + .3, 'choir'), .1)
+        t += BO; k += 1
+    P(oE - .2, taiko() * 1.4, 1); P(oE - .2, note(38, 2.2, 'brass') + note(50, 2.2, 'choir') + note(57, 2.2, 'choir') + note(62, 2.2, 'choir') + note(66, 2.2, 'choir'), .45)
 mus = reverb(mus, 2.0, .3)[:N]
 
 # ---------------- MIXAGEM ----------------
