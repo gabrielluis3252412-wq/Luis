@@ -52,4 +52,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
   a(tF,'boom',1);a(tF,'energy',.8);
   for(let t=w(25,'curtida',0);t<tT;t+=.22)a(t,'pop',.28);a(w(25,'curtida',0),'charge',.7);a(tT-.4,'riser_s',.8);a(tT,'boom',1.2);a(tT,'unlock',.9);a(tT+.05,'shimmer',.8);
   for(let t=w(26,'será',0);t<tE;t+=.55)a(t,'heart',.8);a(tE,'whoosh',.7);a(tE+.5,'final',.9)}
+ 
+ // pausas da narracao: "voz" do Cibito + balao + acento de transicao
+ REACTS.forEach((r,j)=>{a(r.t0,'babble',.9);a(r.t0,'pop',.45);a(r.t0-.05,['shimmer','swish','energy_pulse','whoosh_soft'][j%4],.55)});
  L.sort((x,y)=>x[0]-y[0]);return L};

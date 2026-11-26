@@ -183,6 +183,19 @@ def unlock():
     return norm(reverb(x + shimmer()[:n] * .6, 1.2, .35), .7)
 def sparkle(): return shimmer() * .8
 # ambiencias
+def babble():  # "voz" de desenho do Cibito (silabas sem palavras, timbre agudo)
+    out = np.zeros(int(.75 * SR)); t0 = 0
+    for k in range(4 + int(rng.random() * 2)):
+        d = .07 + rng.random() * .06; n = int(d * SR); t = T(d); f0 = 430 + 160 * rng.random()
+        f = f0 * (1 + .25 * np.sin(np.pi * t / d)); src = osc(f, d, 'saw')
+        F1, F2 = [(800, 1200), (500, 1700), (350, 2300), (650, 1000), (400, 800)][int(rng.random() * 5)]
+        v = filt(src, lo=F1 * .7, hi=F1 * 1.4) + .6 * filt(src, lo=F2 * .8, hi=F2 * 1.25)
+        i = int(t0 * SR); out[i:i + n] += v[:len(out) - i] * np.sin(np.pi * t / d) ** .6; t0 += d + .015
+        if t0 > .66: break
+    return norm(reverb(out, .5, .15), .55)
+def energy_pulse():
+    d = .7; n = int(d * SR); return norm(osc(np.linspace(90, 50, n), d) * dec(n, 6) + filt(noise(n), lo=2000, hi=7000) * bell(n) * .3, .6)
+def whoosh_soft(): return whoosh(.5, 3000) * .7
 def amb_night(d):
     n = int(d * SR); t = T(d); cr = osc(4600, d) * ((np.sin(2 * np.pi * 28 * t) > .2) * (np.sin(2 * np.pi * .9 * t) > 0)) * .04
     return cr + filt(noise(n), lo=80, hi=400) * .12
@@ -214,7 +227,7 @@ for t, k, v in SFX:
         s = AMB[k](end - t + .35); k2 = int(.35 * SR); s[-k2:] *= np.linspace(1, 0, k2); s[:int(.2 * SR)] *= np.linspace(0, 1, int(.2 * SR))
         add(amb, t, s, v)
     else:
-        if k not in cache or k == 'data': cache[k] = G[k]()
+        if k not in cache or k in ('data', 'babble'): cache[k] = G[k]()
         add(fx, t, cache[k], v)
 
 # ---------------- TRILHA (original, re menor, ~100 bpm) ----------------
@@ -313,7 +326,7 @@ if 'M_outro' in CUE:
     P(o0 + .1, taiko() * 1.3, 1); P(o0 + .1, note(38, 2.5, 'brass') + note(50, 2.5, 'choir') + note(57, 2.5, 'choir'), .4)
     t = o0 + .5; k = 0
     while t < oE - .2:
-        c = DMJ[int((t - o0) / (BO * 8)) % 4]; amp = .6 if t > o1 else .35
+        c = DMJ[int((t - o0) / (BO * 8)) % 4]; amp = .6 if t > o1 else .5
         P(t, note(c[0] - 12, BO * .9, 'bass'), .45 * amp / .6)
         P(t, note(c[(k % 3) + 1] + 12, .4, 'pluck'), .16); P(t + BO / 2, note(c[((k + 1) % 3) + 1] + 12, .4, 'pluck'), .12)
         if k % 2 == 0: P(t, kick(), .5 * amp)
@@ -332,10 +345,10 @@ def rd(f):
     return a.reshape(-1, ch).mean(1) if ch > 1 else a
 v = rd('audio/narracao.wav'); voice = np.zeros(N); voice[:min(N, len(v))] = v[:N]
 k = int(.12 * SR); ve = np.convolve(np.abs(voice), np.ones(k) / k, mode='same'); vl = np.clip(ve / .06, 0, 1)
-sm = np.zeros(N); a_, r_ = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.35 * SR)); st = 64
+sm = np.zeros(N); a_, r_ = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.16 * SR)); st = 64
 for i in range(0, N, st):
     prev = sm[i - 1] if i else 0; x = vl[i]; c = a_ if x > prev else r_; sm[i:i + st] = prev + (x - prev) * (1 - (1 - c) ** st)
-duck_mus = 1 - .72 * sm; duck_amb = 1 - .6 * sm; duck_fx = 1 - .5 * sm
+duck_mus = 1 - .58 * sm; duck_amb = 1 - .5 * sm; duck_fx = 1 - .4 * sm
 fx = np.tanh(fx * .9); M = norm(mus, 1)
 mix_m = voice * 1.0 + fx * .34 * duck_fx + amb * .45 * duck_amb + M * .2 * duck_mus
 d = int(.011 * SR); SB = fx * .34 * duck_fx + M * .2 * duck_mus; side = np.concatenate([np.zeros(d), SB[:-d]]) - SB
