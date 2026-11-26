@@ -20,7 +20,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 6 analise
  a(cut(7),'amb_room',.8);for(let t=cut(7)+.2;t<SH[8].t0-.3;t+=.16)a(t,'data',.28);a(tAna+1.3,'chime',.6);
  // 7 ponto 2
- a(cut(8),'amb_space',.7);a(cut(8)+.1,'stamp',.9);a(tInf-.2,'shimmer',.8);a(pe(8)+.05,'stamp',1.1);a(pe(8)+.05,'hit',.6);
+ a(cut(8),'amb_space',.7);a(cut(8)+.1,'stamp',.9);a(tInf-.2,'shimmer',.8);a(pe(8)-.4,'stamp',1.1);a(pe(8)-.4,'hit',.6);
  // 8 precisao
  a(cut(9),'amb_night',1);a(tCon-.3,'energy',.8);a(tCon-.2,'charge',.7);a(tPre,'ding',.8);a(tPre,'hit',.6);a(tExt,'shimmer',.5);
  // 9 desperdicio
