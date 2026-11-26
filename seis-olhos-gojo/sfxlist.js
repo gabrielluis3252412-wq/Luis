@@ -18,9 +18,9 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 5 sala
  a(cut(6),'amb_room',1);for(let t=cut(6)+.1;t<tSala+.3;t+=.38)a(t,'step',.55);a(tPer2,'scan',.7);a(tGig-.4,'riser_s',.7);a(tGig,'boom',1.2);a(tGig,'sting_low',1);a(tGig+.05,'energy_dark',1);
  // 6 analise
- a(cut(7),'amb_room',.8);for(let t=cut(7)+.2;t<SH[8].t0-.3;t+=.16)a(t,'data',.28);a(tEnt,'question',.5);a(tAna+1.3,'chime',.6);
+ a(cut(7),'amb_room',.8);for(let t=cut(7)+.2;t<SH[8].t0-.3;t+=.16)a(t,'data',.28);a(tAna+1.3,'chime',.6);
  // 7 ponto 2
- a(cut(8),'amb_space',.7);a(cut(8)+.1,'stamp',.9);a(tInf-.2,'shimmer',.8);a(pe(9)-.55,'stamp',1.1);a(pe(9)-.55,'hit',.6);
+ a(cut(8),'amb_space',.7);a(cut(8)+.1,'stamp',.9);a(tInf-.2,'shimmer',.8);a(pe(8)+.05,'stamp',1.1);a(pe(8)+.05,'hit',.6);
  // 8 precisao
  a(cut(9),'amb_night',1);a(tCon-.3,'energy',.8);a(tCon-.2,'charge',.7);a(tPre,'ding',.8);a(tPre,'hit',.6);a(tExt,'shimmer',.5);
  // 9 desperdicio
@@ -37,7 +37,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 14 meditacao
  a(cut(16),'amb_night',1);a(cut(16),'wind',.6);a(cut(16)+.4,'breath',.5);a(tRar,'shimmer',.5);a(tCtr,'energy',.6);
  // 15 final
- a(cut(17),'wind',1);a(tFor,'pop',.5);a(pe(22)-.4,'swish',.6);a(tPot-.6,'cloth',.8);a(tPot-.4,'riser_s',.7);a(tPot,'eye_open',1.1);a(tPot,'boom',1.2);a(tXt,'shimmer',.7);
+ a(cut(17),'wind',1);a(tFor,'pop',.5);a(pe(19)+.05,'swish',.6);a(tPot-.6,'cloth',.8);a(tPot-.4,'riser_s',.7);a(tPot,'eye_open',1.1);a(tPot,'boom',1.2);a(tXt,'shimmer',.7);
  // 16 pergunta
  a(cut(18),'amb_space',1);a(tCor,'pop',.5);a(tDsp-.5,'riser_s',.8);a(tDsp,'eye_open',1.2);a(tDsp,'boom',1.3);a(tEnd,'final',1);
  L.sort((x,y)=>x[0]-y[0]);return L};

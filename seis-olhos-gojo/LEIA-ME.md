@@ -1,6 +1,6 @@
 # E se você tivesse os Seis Olhos? — Short animado
 
-Short vertical **1080 × 1920, 24 fps, ~87 s, H.264 + AAC**, feito com o mesmo motor do projeto
+Short vertical **1080 × 1920, 24 fps, ~86 s, H.264 + AAC**, feito com o mesmo motor do projeto
 "Cibito e o Loop Temporal": personagens 2D de contorno grosso sobre cenários 3D prontos.
 
 **Vídeo final:** `seis-olhos-gojo.mp4`
@@ -14,41 +14,45 @@ Short vertical **1080 × 1920, 24 fps, ~87 s, H.264 + AAC**, feito com o mesmo m
   original não é desenhado.
 - **Motor:** `lib.js`, `sets.js` e `sets_loop.js` são cópias idênticas dos originais.
 - **Backup:** o projeto original continua intacto em `../cibito-loop-temporal/`.
-- **Roteiro:** as 25 frases aparecem exatamente como no seu texto, na ordem original.
 
-## Narração (IMPORTANTE)
-Nenhum áudio de narração veio junto com o roteiro. Por isso o vídeo usa uma **narração provisória**,
-gerada aqui com voz sintética em português do Brasil (`narracao.py`, espeak-ng + MBROLA).
-O texto é o mesmo e o tempo é o mesmo. Ela serve para validar o ritmo; o som é robótico.
+## Narração
+A voz é a **narração original do ElevenLabs** (`audio/narracao-elevenlabs.mp3`, voz "Will"), inteira, sem cortes
+nem alterações. Ela foi gravada com um texto reescrito em relação ao roteiro em texto (por exemplo,
+"Imagine acordar amanhã com uma habilidade tão rara…" e "Mas existe um preço."). Por isso as legendas e os
+textos na tela seguem **o que é falado no áudio**: 21 frases, transcritas com o tempo de cada palavra
+(`audio/palavras-elevenlabs.json`).
 
-Para colocar a narração definitiva (por exemplo do ElevenLabs), sem cortar nem alterar o áudio:
+Cada corte, efeito, texto e som está preso à palavra exata da narração (`wt(frase, 'palavra')` usa o tempo
+real da palavra). A narração provisória sintetizada ficou guardada em `audio/provisoria/`.
+
+Para trocar a voz de novo:
 ```
-python3 alinhar.py caminho/da/narracao.mp3   # detecta as pausas reais e encaixa as 25 frases
-./refazer.sh                                 # refaz trilha, efeitos, legendas, quadros e o MP4
+python3 transcrever.py nova.mp3 pasta-do-modelo-whisper   # se o texto falado mudou
+python3 alinhar.py nova.mp3                               # se o texto é o mesmo de roteiro.json
+./refazer.sh
 ```
-Os planos, cortes, efeitos e legendas são calculados a partir dos tempos das frases (`roteiro.json`).
-Por isso tudo se reajusta sozinho à nova voz.
+Se o texto mudar, ajuste também as palavras-gatilho dos planos em `main.js` (linhas `const t...=wt(...)`).
 
 ## Estrutura (19 planos)
 | Parte | Plano | Cenário |
 |---|---|---|
 | Gancho | Close: Cibito acorda, os olhos acendem em azul (onda de varredura, partículas, emblema dos seis anéis) | quarto à noite |
 | | "O poder mais absurdo": aura azul, raios volumétricos, partículas orbitando | espaço cósmico |
-| | "Mas existe um detalhe…": clima esfria, cor dessatura, câmera aproxima devagar | rua à noite |
+| | "Um dos feiticeiros mais poderosos do mundo": aura acende, câmera aproxima | rua à noite |
 | **Ponto 1 – A Visão** | Cartela + close nos olhos com HUD | espaço |
 | | A cidade vista pelos Seis Olhos: filtro de visão azul, auras coloridas em cada morador | cidade |
 | | Fluxo (correntes de energia), lupa de detalhe, feiticeiros comuns confusos ("?") | cidade |
-| | A sala: alguém escondendo energia… a aura roxa do Elias explode ("GIGANTESCA") | sala |
-| | Close de análise: anéis girando nos olhos, linhas ligando a objetos, barra "ANALISANDO" | sala |
+| | A sala: "um mundo invisível" — a aura roxa escondida do Elias explode | sala |
+| | Close: "escondido diante dos seus próprios olhos", anéis girando nos olhos, linhas de análise | sala |
 | **Ponto 2 – O Controle** | Cartela + ∞ "energia infinita?" riscado com um X "NÃO" | espaço |
 | | Aura selvagem que condensa num contorno fino; esfera de energia com mira ("PRECISÃO") | praça à noite |
 | | Medidor de desperdício caindo para 0,01%; gotas de energia voltam ao corpo | praça |
 | | Ilimitada: onda que dobra o espaço (deformação real do cenário 3D), esfera de refração | cidade à noite |
-| | Criatura amaldiçoada ataca; o punho desacelera e nunca encosta (ondulações na barreira) | cidade à noite |
-| **Ponto 3 – O Preço** | Cartela vermelha, luz fraca e piscando | hotel |
+| | "Uma defesa que poucos conseguiriam superar": a criatura ataca, o punho desacelera e nunca encosta | cidade à noite |
+| **Ponto 3 – O Preço** | "Mas existe um preço.": cartela vermelha, luz fraca e piscando | hotel |
 | | Sobrecarga: dados voando, aberração cromática, tremor, "DESGASTE" | cozinha |
 | | A venda desce, o caos some; a percepção continua (bordas do ambiente acesas em ciano) | quarto à noite |
-| | Meditação com a venda: aura calma e controlada | praça à noite |
+| | "Uma das habilidades mais raras de Jujutsu Kaisen": meditação com a venda | praça à noite |
 | Final | Tira a venda ao pôr do sol: olhos brilham, lens flare, "POTENCIAL" | estrada |
 | | "Você teria coragem?": close, os olhos despertam, tela final "COMENTE: SIM ou NÃO" | espaço |
 

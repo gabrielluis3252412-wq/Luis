@@ -3,10 +3,10 @@ import json, re, os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 D = json.load(open('sfx.json'))
 CY, AM, VM, RX = 'FFD24F', '3FD2FF', '6D4DFF', 'FF8BC9'   # cores em BGR: ciano, amarelo, vermelho, roxo
-KW = {'Seis': CY, 'Olhos': CY, 'Gojo?': CY, 'Gojo': CY, 'absurdo': AM, 'detalhe': AM, 'visão': CY, 'energia': CY, 'amaldiçoada': RX,
-      'fluxo': CY, 'detalhes': CY, 'jamais': AM, 'gigantesca': RX, 'analisando': CY, 'tudo.': CY, 'infinita.': AM, 'controlar': CY,
-      'precisão': CY, 'extraordinária.': AM, 'desperdício': VM, 'insignificante.': CY, 'Ilimitada,': CY, 'espaço': CY, 'defesa': CY,
-      'encostarem': AM, 'problema…': VM, 'constantemente,': VM, 'desgaste.': VM, 'venda:': AM, 'esforço': CY, 'raras': AM,
+KW = {'Seis': CY, 'Olhos': CY, 'Gojo?': CY, 'Gojo': CY, 'rara': AM, 'poderosos': CY, 'visão': CY, 'energia': CY, 'amaldiçoada': RX,
+      'detalhes': CY, 'jamais': AM, 'invisível,': RX, 'escondido': RX, 'olhos.': CY, 'infinita.': AM, 'controlar': CY,
+      'precisão': CY, 'absurda,': AM, 'desperdício': VM, 'insignificante.': CY, 'Ilimitada,': CY, 'espaço': CY, 'defesa': CY,
+      'superar.': AM, 'preço.': VM, 'constantemente': VM, 'desgaste.': VM, 'venda,': AM, 'esforço': CY, 'raras': AM,
       'forte.': AM, 'potencial': CY, 'extraordinário.': AM, 'coragem': AM, 'despertar': CY, 'poder?': CY}
 def ts(x): h = int(x // 3600); m = int(x % 3600 // 60); s = x % 60; return f"{h}:{m:02d}:{s:05.2f}"
 ev = []

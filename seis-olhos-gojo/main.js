@@ -8,7 +8,8 @@ const cl=x=>x<0?0:x>1?1:x,ez=x=>{x=cl(x);return x*x*(3-2*x)},lp=(a,b,x)=>a+(b-a)
 const OFF=ENVOFF;
 const PH=PHR.map(p=>p[0]),PT=PHR.map(p=>[p[1],p[2]]);
 const ps=i=>PT[i-1][0]+OFF,pe=i=>PT[i-1][1]+OFF;
-const wt=(i,w,f=.5)=>{const s=PH[i-1].toLowerCase(),p=Math.max(0,s.indexOf(w.toLowerCase()));return ps(i)+(pe(i)-ps(i))*(p+w.length*f)/s.length};
+const nrm=x=>x.toLowerCase().replace(/[^a-zà-ú0-9]/g,'');
+const wt=(i,w,f=.5)=>{const q=nrm(w.split(' ')[0]);if(typeof PWD!='undefined'&&PWD&&PWD[i-1]){const x=PWD[i-1].find(z=>nrm(z[0]).startsWith(q));if(x)return x[1]+(x[2]-x[1])*f+OFF}const s=PH[i-1].toLowerCase(),p=Math.max(0,s.indexOf(w.toLowerCase()));return ps(i)+(pe(i)-ps(i))*(p+w.length*f)/s.length};
 const TOTAL=Math.round((pe(PH.length)+3.0)*24)/24;window.TOTAL=TOTAL;window.PHRASES=PH.map((t,i)=>[t,ps(i+1),pe(i+1)]);
 // energia da voz por quadro (pulsa o brilho dos olhos com a narracao)
 const vox=t=>ENV[Math.floor((t-OFF)*24)]||0;
@@ -176,7 +177,7 @@ function cosmos(c,t,o={}){const g=c.createRadialGradient(540,950,0,540,950,1500)
 const SH=[];const shot=(plate,t0,f,tin)=>SH.push({plate,t0,f,tin});
 const C=CHS;
 // ===== 0) GANCHO: acordar com os Seis Olhos =====
-const tOpen=wt(1,'acordasse',.55),tSix=wt(1,'Seis',.0),tGojo=wt(1,'Gojo',.3);
+const tOpen=wt(1,'tivesse',.3),tSix=wt(1,'Seis',.0),tGojo=wt(1,'Gojo',.3);
 shot('bed',0,(t,u)=>{
  const on=ob(GT,tOpen,.25),six=GT<tOpen?0:Math.min(1,on*1.1)*(.75+.25*sn(GT*5));
  put('CIB',0,.85,-2.6,{sc:1,sit:1,m:GT<tOpen?'closed':GT<tSix?'wow':'focus',six:GT<tOpen?0:six,aR:tw(-18,-40,tOpen,.3),aL:tw(18,40,tOpen,.3),brow:tw(0,7,tOpen,.25),sq:SQ(tOpen,1.2),nobob:1,brr:GT<tOpen?.9:2.6,look:[0,0]});
@@ -191,23 +192,22 @@ shot('bed',0,(t,u)=>{
  camA([[0,.95,F[0],F[1],-2],[tOpen-.05,1.05,F[0],F[1],0],[tOpen,1.2,F[0]*1.1,F[1]*1.1,1,'c'],[tSix-.05,.7,F[0]*.75,F[1]*.75,-1],[tSix,1.55,F2[0],F2[1],0,'c'],[ps(2),1.7,F2[0],F2[1],1]]);
  FX.ui=ui;FX.night=1;FX.vig=.75;FX.shake=14*sh1(GT,[tOpen],5)+6*sh1(GT,[tSix],6);FX.flash=.55*sh1(GT,[tOpen],10);FX.flcol='150,220,255';FX.lit=blueLit(LIT.bed,six);FX.chroma=4*sh1(GT,[tOpen,tSix],5)},'');
 // ===== 1) "o poder mais absurdo" (espaco cosmico) =====
-const tAbs=wt(2,'absurdo',.2),tJK=wt(2,'Jujutsu',.1);
+const tAbs=wt(2,'rara',.1),tJK=wt(2,'habilidade',.1);
 shot(null,ps(2)-.15,(t,u)=>{FX.bg=c=>cosmos(c,GT,{streak:.35});
  const fl=sn(GT*1.6)*14;put('CIB',0,0,0,{px:[540,1420+fl],ku:2.05,m:GT<tAbs?'awe':'grin',six:1,aR:tw(-40,-150,tAbs-.25,.45)+6*sn(GT*3),aL:tw(40,150,tAbs-.25,.45)-6*sn(GT*3.2),lg:6*sn(GT*2),brow:tw(0,6,tAbs,.3),sq:SQ(tAbs,.8),nodrift:1,nobob:1,rot:2*sn(GT*.8),zz:2,look:[0,-3]});
  aura('CIB',.9,'#1f7bff','#7fe6ff',1.15,1,0);eyeGlow('CIB',1,1.1);const c0=chestP('CIB'),ku=C.CIB.sp[2];
  FX.pf=[[c0[0],c0[1],380*ku,40,'140,215,255',.9,'orbit']];FX.rays=[[c0[0],c0[1]-60*ku,.35+.25*sh1(GT,[tAbs],2),'90,170,255',14,1400]];
- let ui='';if(GT>tAbs-.05)ui+=TXT('O PODER MAIS',540,270,76,'#fff',-3,pop(GT,tAbs-.05))+TXT('ABSURDO',540,400,150,'#ffd23f',-3,pop(GT,tAbs+.1)*(1+.03*sn(GT*7)))+RAYS(GT,tAbs+.1,540,380,.4,16,'#ffe27a');
- if(GT>tJK)ui+=TXT('DO UNIVERSO DE JUJUTSU KAISEN',540,505,40,CY2,-3,pop(GT,tJK));
+ let ui='';if(GT>tJK)ui+=TXT('UMA HABILIDADE',540,270,76,'#fff',-3,pop(GT,tJK));if(GT>tAbs-.05)ui+=TXT('TÃO RARA',540,400,150,'#ffd23f',-3,pop(GT,tAbs+.1)*(1+.03*sn(GT*7)))+RAYS(GT,tAbs+.1,540,380,.4,16,'#ffe27a');
  camA([[ps(2)-.15,.55,0,-250,-3],[tAbs-.3,.18,0,-60,2],[tAbs,.05,0,0,0,'c'],[ps(3),.12,0,-40,-1.5]]);
  FX.ui=ui;FX.shake=10*sh1(GT,[tAbs],5)+1.5;FX.lit=LIT.cos;FX.flash=.3*sh1(GT,[tAbs],9);FX.flcol='180,230,255'},'flashB');
 // ===== 2) "Mas existe um detalhe..." (rua a noite, clima muda) =====
-const tDet=wt(3,'detalhe',.2),tVida=wt(3,'vida',.3);
-shot('str',ps(3)-.2,(t,u)=>{
- put('CIB',0,0,1.6,{sc:1.05,m:GT<tDet?'calm':'worry',six:.55+.15*sn(GT*4),look:[0,2],brow:tw(0,4,tDet,.4),brr:1.3});eyeGlow('CIB',.5);
+const tDet=wt(3,'poderosos',.2),tVida=wt(3,'mundo',.3);
+shot('str',ps(3)-.05,(t,u)=>{
+ put('CIB',0,0,1.6,{sc:1.05,m:GT<tDet?'calm':'cool',six:.75+.15*sn(GT*4),look:[0,2],brr:1.3});eyeGlow('CIB',.75);aura('CIB',ob(GT,tDet,.4)*.6,'#1f7bff','#7fe6ff',1,1);
  const e=eyeP('CIB'),F=foc(e[0],e[1]+120*C.CIB.sp[2],.5);
- let ui='';if(GT>tDet)ui+=TXT('UM DETALHE...',540,320,104,'#fff',-2,pop(GT,tDet));
+ let ui='';if(GT>wt(3,'feiticeiros',.1))ui+=TXT('UM DOS FEITICEIROS',540,270,70,'#fff',-2,pop(GT,wt(3,'feiticeiros',.1)));if(GT>tDet)ui+=TXT('MAIS PODEROSOS',540,390,112,CY,-2,pop(GT,tDet)*(1+.02*sn(GT*7)));
  camA([[ps(3)-.2,.02,0,0,0],[tDet,.25,F[0]*.6,F[1]*.6,0],[ps(4),.52,F[0],F[1],1]]);
- FX.ui=ui;FX.vig=.8;FX.fog=1;FX.grade='contrast(1.08) saturate(.72)';FX.lit=LIT.str;FX.gl=[[540,560,700,'90,120,255',.12]]},'dip');
+ FX.ui=ui;FX.vig=.7;FX.fog=1;FX.lit=blueLit(LIT.str,.7);FX.shake=6*sh1(GT,[tDet],6);FX.gl=[[540,560,700,'90,120,255',.12]]},'dip');
 // ===== 3) PONTO 1: A VISAO =====
 const tVis=wt(4,'visão',.3);
 shot(null,ps(4)-.25,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.6,dr:.4});
@@ -218,7 +218,7 @@ shot(null,ps(4)-.25,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.6,dr:.4});
  FX.ui=ui;FX.pf=[[e[0],e[1],520,30,'140,215,255',.8,'in']];FX.lit=blueLit(LIT.cos,1);FX.vig=.7;FX.shake=6*sh1(GT,[tVis],6);FX.flash=.35*sh1(GT,[tVis],10);FX.flcol='150,220,255'},'zoom');
 // ===== 4a) A cidade vista pelos Seis Olhos: energia ao redor das pessoas =====
 const RES=[['T1',-2.3,-1.2,'#ff5d8f','#ffc2d4'],['T2',2.2,-2.0,'#2ee6c8','#c8fff4'],['T3',-.5,-5.2,'#ffbe0b','#fff1b8'],['R4',2.9,-6.8,'#9b6bff','#e2d4ff'],['R5',-3.2,-8.2,'#4caf50','#d4ffd6']];
-const tPer=wt(5,'perceber',.4),tRed=wt(5,'redor',.3);
+const tPer=wt(5,'enxergar',.4),tRed=wt(5,'energia',.3);
 shot('twn',ps(5)-.1,(t,u)=>{
  const vis=ob(GT,tPer+.15,.35);
  RES.forEach(([k,x,z,c1,c2],i)=>{put(k,x,0,z,{sc:2.4,m:'happy',look:[-x*1.5,0],...(i==2?walk(GT,7,.6):{})});});
@@ -230,22 +230,22 @@ shot('twn',ps(5)-.1,(t,u)=>{
  camA([[ps(5)-.1,.36,F[0],F[1],-1],[tPer,.4,F[0]*1.05,F[1]*1.05,0],[tPer+.15,.08,0,-60,0,'c'],[ps(6),.03,0,-40,1]]);
  FX.ui=ui;FX.vis=vis;FX.lit=blueLit(LIT.twn,vis*.8);FX.flash=.4*sh1(GT,[tPer+.15],9);FX.flcol='150,220,255';FX.chroma=3*sh1(GT,[tPer+.15],6)},'wr');
 // ===== 4b) identificar o fluxo / detalhes que outros feiticeiros nao notam =====
-const tFlu=wt(6,'fluxo',.2),tDtl=wt(6,'detalhes',.2),tFei=wt(6,'feiticeiros',.2),tJam=wt(6,'jamais',.3);
-shot('twn',ps(6)-.1,(t,u)=>{
+const tFlu=wt(6,'perceber',.2),tDtl=wt(6,'detalhes',.2),tFei=wt(6,'outras',.2),tJam=wt(6,'jamais',.3);
+shot('twn',ps(6)-.05,(t,u)=>{
  RES.forEach(([k,x,z,c1,c2],i)=>{const conf=(k=='R4'||k=='T3')&&GT>tFei;put(k,x,0,z,{sc:2.4,m:conf?'worry':'happy',look:conf?[6*sn(GT*2+i),-4]:[-x*1.5,0],tilt:conf?6*sn(GT*1.5+i):0});
   aura(k,1,c1,c2,1,k=='T1'?ob(GT,tFlu,.4):(k=='T2'&&GT>tDtl?1:.35),i)});
  const p1=C.T1.sp,p2=C.T2.sp;
  // reticulo no fluxo (T1) e lupa de detalhe (T2)
  if(GT>tFlu-.1&&GT<tDtl+.1){const a=ob(GT,tFlu-.1,.3);fw(`<g transform="translate(${p1[0].toFixed(1)} ${(p1[1]-160*p1[2]).toFixed(1)}) scale(${p1[2].toFixed(4)})" opacity="${a.toFixed(2)}"><rect x="-170" y="-220" width="340" height="420" fill="none" stroke="${CY}" stroke-width="6" stroke-dasharray="60 280"/><circle r="40" fill="none" stroke="${CY2}" stroke-width="4" transform="rotate(${GT*120})" stroke-dasharray="20 12"/></g>`)}
  if(GT>tDtl-.1){const a=ob(GT,tDtl-.1,.3),x=p2[0],y=p2[1]-200*p2[2];fw(`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(p2[2]*a).toFixed(4)})"><circle r="120" fill="rgba(120,220,255,.12)" stroke="${CY2}" stroke-width="8"/><path d="M84 84L170 170" stroke="${CY2}" stroke-width="18" stroke-linecap="round"/>${[0,1,2,3].map(i=>`<circle cx="${(50*cs(GT*3+i*1.57)).toFixed(1)}" cy="${(50*sn(GT*3+i*1.57)).toFixed(1)}" r="9" fill="#fff"/>`).join('')}</g>`)}
- let ui='';if(GT>tFlu)ui+=TXT('FLUXO',540,300,120,CY,-3,pop(GT,tFlu));
+ let ui='';if(GT>tFlu&&GT<tDtl)ui+=TXT('FLUXO',540,300,120,CY,-3,pop(GT,tFlu));if(GT>tDtl)ui+=TXT('DETALHES',540,300,120,CY,-3,pop(GT,tDtl));
  if(GT>tFei){[['R4'],['T3']].forEach(([k],i)=>{const p=C[k].sp,q=zpS(p[0]+40*p[2],p[1]-360*p[2]);ui+=TXT('?',q[0],q[1],110,'#fff',8*sn(GT*3+i),pop(GT,tFei+i*.12))})}
  if(GT>tJam)ui+=TXT('JAMAIS NOTARIAM',540,430,66,'#ffd23f',-3,pop(GT,tJam));
  const F1=foc(p1[0],p1[1]-170*p1[2],.5),F2=foc(p2[0],p2[1]-180*p2[2],.55);
  camA([[ps(6)-.1,.42,F1[0],F1[1],-1],[tDtl-.25,.5,F1[0],F1[1],1],[tDtl-.05,.55,F2[0],F2[1],0,'c'],[tFei-.15,.6,F2[0],F2[1],-1],[tFei,.1,0,-40,0,'c'],[ps(7),.14,0,-60,1]]);
  FX.ui=ui;FX.vis=1;FX.lit=blueLit(LIT.twn,.8)},'zoom');
 // ===== 5) A sala: alguem escondendo uma energia gigantesca =====
-const tSala=wt(7,'sala',.4),tPer2=wt(7,'perceber',.3),tGig=wt(7,'gigantesca',.15);
+const tSala=wt(7,'como',.4),tPer2=wt(7,'descobrir',.3),tGig=wt(7,'invisível',.15);
 shot('liv',ps(7)-.2,(t,u)=>{
  const vis=ob(GT,tPer2,.3),cx=lp(-2.1,-.85,ez((GT-ps(7)+.2)/(tSala-ps(7)+.6))),wk=GT<tSala+.35,big=ob(GT,tGig,.35);
  put('T3',-.15,.55,-2.45,{sc:1,sit:1,m:'happy',look:[-4,0]});
@@ -255,38 +255,38 @@ shot('liv',ps(7)-.2,(t,u)=>{
  aura('T3',vis*.8,'#ffbe0b','#fff1b8',.8,.3,2);
  aura('ELI',vis*(GT<tGig?.18:1.6),'#7a2cff','#d6a8ff',GT<tGig?.7:lp(.7,3.6,big),GT>tGig?1:0,5);
  const pe2=C.ELI.sp;let ui='';
- if(GT>tGig){ui+=TXT('GIGANTESCA',540,330,140,'#c98bff',-4,pop(GT,tGig)*(1+.03*sn(GT*9)));const q=zpS(pe2[0],pe2[1]-200*pe2[2]);ui+=RAYS(GT,tGig,q[0],q[1],.45,18,'#c98bff')}
+ if(GT>tGig){ui+=TXT('UM MUNDO',540,235,64,'#fff',-4,pop(GT,tGig-.1))+TXT('INVISÍVEL',540,385,140,'#c98bff',-4,pop(GT,tGig)*(1+.03*sn(GT*9)));const q=zpS(pe2[0],pe2[1]-200*pe2[2]);ui+=RAYS(GT,tGig,q[0],q[1],.45,18,'#c98bff')}
  const F=foc(pe2[0],pe2[1]-210*pe2[2],.45);
  camA([[ps(7)-.2,.05,0,0,-1],[tPer2,.1,-40,0,0],[tGig-.35,.16,F[0]*.4,F[1]*.4,0],[tGig,.45,F[0],F[1],-2,'c'],[ps(8),.34,F[0]*.8,F[1]*.8,1]]);
  FX.ui=ui;FX.vis=vis*.85;FX.lit=blueLit(LIT.liv,vis*.6);FX.shake=16*sh1(GT,[tGig],4);FX.flash=.5*sh1(GT,[tGig],10);FX.flcol='190,120,255';FX.chroma=6*sh1(GT,[tGig],4);
  if(GT>tGig)FX.tint=[90,0,160,.12*big]},'dip');
 // ===== 6) Os olhos ja estariam analisando tudo (close) =====
-const tEnt=wt(8,'entender',.3),tAna=wt(8,'analisando',.2);
-shot('liv',ps(8)-.2,(t,u)=>{
+const tEnt=1e9,tAna=wt(7,'diante',.1);
+shot('liv',wt(7,'escondido',0)-.15,(t,u)=>{
  put('ELI',.95,0,-2.1,{sc:1.05,flip:-1,m:'smirk',look:[-7,0],still:1});aura('ELI',.55,'#7a2cff','#d6a8ff',2.6,.6,5);
  const lk=[(rnd(Math.floor(GT*3.2),3.1)-.5)*14,(rnd(Math.floor(GT*3.2),7.7)-.5)*6];
- put('CIB',-.85,0,-1.55,{sc:1,m:GT<tAna?'worry':'focus',six:1,look:lk,brow:3,tilt:-2,brr:2.4});eyeGlow('CIB',1,1.1);
- EYEHUD('CIB',ob(GT,ps(8),.4),GT);
+ put('CIB',-.85,0,-1.55,{sc:1,m:GT<tAna?'awe':'focus',six:1,look:lk,brow:3,tilt:-2,brr:2.4});eyeGlow('CIB',1,1.1);
+ EYEHUD('CIB',ob(GT,CSH.t0,.4),GT);
  const e=eyeP('CIB'),ku=C.CIB.sp[2];
  // linhas de analise ligando o olho ao ambiente
- for(let i=0;i<6;i++){const a=cl((GT-ps(8)-i*.25)/.3);if(a>0){const tx=e[0]+(i%2?1:-1)*(160+90*i)*ku,ty=e[1]+(-120+60*i)*ku;fw(`<path d="M${e[0].toFixed(1)} ${e[1].toFixed(1)}L${tx.toFixed(1)} ${ty.toFixed(1)}" stroke="${CY}" stroke-width="${(2.5*ku).toFixed(2)}" stroke-dasharray="${(8*ku).toFixed(1)} ${(6*ku).toFixed(1)}" opacity="${(.8*a).toFixed(2)}"/><rect x="${(tx-26*ku).toFixed(1)}" y="${(ty-16*ku).toFixed(1)}" width="${(52*ku).toFixed(1)}" height="${(32*ku).toFixed(1)}" fill="none" stroke="${CY2}" stroke-width="${(2*ku).toFixed(2)}" opacity="${a.toFixed(2)}"/>`)}}
+ for(let i=0;i<6;i++){const a=cl((GT-CSH.t0-i*.25)/.3);if(a>0){const tx=e[0]+(i%2?1:-1)*(160+90*i)*ku,ty=e[1]+(-120+60*i)*ku;fw(`<path d="M${e[0].toFixed(1)} ${e[1].toFixed(1)}L${tx.toFixed(1)} ${ty.toFixed(1)}" stroke="${CY}" stroke-width="${(2.5*ku).toFixed(2)}" stroke-dasharray="${(8*ku).toFixed(1)} ${(6*ku).toFixed(1)}" opacity="${(.8*a).toFixed(2)}"/><rect x="${(tx-26*ku).toFixed(1)}" y="${(ty-16*ku).toFixed(1)}" width="${(52*ku).toFixed(1)}" height="${(32*ku).toFixed(1)}" fill="none" stroke="${CY2}" stroke-width="${(2*ku).toFixed(2)}" opacity="${a.toFixed(2)}"/>`)}}
  let ui='';if(GT>tEnt&&GT<tAna)ui+=TXT('?',300,560,130,'#fff',-8,pop(GT,tEnt));
- if(GT>tAna){const dots='.'.repeat(1+Math.floor(GT*4)%3);ui+=TXT('ANALISANDO'+dots,540,330,92,CY,-2,pop(GT,tAna));ui+=`<rect x="290" y="372" width="500" height="22" rx="11" fill="#0b1240" stroke="${CY}" stroke-width="4"/><rect x="296" y="378" width="${(488*cl((GT-tAna)/1.3)).toFixed(1)}" height="10" rx="5" fill="${CY}"/>`}
+ if(GT>tAna){const dots='.'.repeat(1+Math.floor(GT*4)%3);ui+=TXT('ESCONDIDO'+dots,540,330,92,CY,-2,pop(GT,tAna));ui+=`<rect x="290" y="372" width="500" height="22" rx="11" fill="#0b1240" stroke="${CY}" stroke-width="4"/><rect x="296" y="378" width="${(488*cl((GT-tAna)/1.3)).toFixed(1)}" height="10" rx="5" fill="${CY}"/>`}
  const F=foc(e[0],e[1]+30*ku,1.0);
- camA([[ps(8)-.2,.85,F[0],F[1],-2],[ps(9),1.05,F[0],F[1],2]]);
+ camA([[CSH.t0,.85,F[0],F[1],-2],[ps(8),1.05,F[0],F[1],2]]);
  FX.ui=ui;FX.vis=.6;FX.lit=blueLit(LIT.liv,1);FX.pf=[[e[0],e[1],300*ku,22,'150,220,255',.6,'in']]},'zoom');
 // ===== 7) PONTO 2: O CONTROLE - nao e energia infinita =====
-const tInf=wt(9,'infinita',.15),tNao=wt(9,'não criam',.1);
-shot(null,ps(9)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.8,c0:'#22318a',c1:'#0b0f42'});
+const tInf=wt(8,'infinita',.15),tNao=wt(8,'não',.1);
+shot(null,ps(8)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.8,c0:'#22318a',c1:'#0b0f42'});
  put('CIB',0,0,0,{px:[540,1560],ku:2.0,m:GT<tInf?'focus':'calm',six:1,look:[0,-6],aR:-14,aL:14,nodrift:1,zz:2});eyeGlow('CIB',1);aura('CIB',.55,'#1f7bff','#7fe6ff',1,.6);
- let ui=CARD(ps(9)-.25,tInf-.15,2,'O CONTROLE');
+ let ui=CARD(ps(8)-.25,tInf-.15,2,'O CONTROLE');
  if(GT>tInf-.2){const a=ob(GT,tInf-.2,.35),x=540,y=700+12*sn(GT*2);ui+=`<g opacity="${a.toFixed(2)}"><circle cx="${x}" cy="${y}" r="230" fill="rgba(60,150,255,.12)"/></g>`+INF(x,y,1.9*pop(GT,tInf-.2),CY,1,sn(GT*2)*3)+TXT('ENERGIA INFINITA?',540,330,82,'#fff',-3,pop(GT,tInf));
-  const tx=pe(9)-.55;if(GT>tx){const k=ob(GT,tx,.25);ui+=`<g transform="translate(540 700) rotate(-12) scale(${(1.6-.6*k).toFixed(3)})" opacity="${k.toFixed(2)}"><path d="M-200-150L200 150M200-150L-200 150" stroke="${INK}" stroke-width="64" stroke-linecap="round"/><path d="M-200-150L200 150M200-150L-200 150" stroke="#ff3b5c" stroke-width="40" stroke-linecap="round"/></g>`+TXT('NÃO',540,1000,130,'#ff3b5c',-6,pop(GT,tx+.05))}}
- camA([[ps(9)-.3,.0,0,0,-2],[tInf,.08,0,-120,0],[ps(10),.12,0,-160,2]]);
- FX.ui=ui;FX.lit=LIT.cos;FX.vig=.6;FX.shake=8*sh1(GT,[pe(9)-.55],7)},'flashB');
+  const tx=pe(8)+.05;if(GT>tx){const k=ob(GT,tx,.25);ui+=`<g transform="translate(540 700) rotate(-12) scale(${(1.6-.6*k).toFixed(3)})" opacity="${k.toFixed(2)}"><path d="M-200-150L200 150M200-150L-200 150" stroke="${INK}" stroke-width="64" stroke-linecap="round"/><path d="M-200-150L200 150M200-150L-200 150" stroke="#ff3b5c" stroke-width="40" stroke-linecap="round"/></g>`+TXT('NÃO',540,1000,130,'#ff3b5c',-6,pop(GT,tx+.05))}}
+ camA([[ps(8)-.3,.0,0,0,-2],[tInf,.08,0,-120,0],[ps(9),.12,0,-160,2]]);
+ FX.ui=ui;FX.lit=LIT.cos;FX.vig=.6;FX.shake=8*sh1(GT,[pe(8)+.05],7)},'flashB');
 // ===== 8) Controle com precisao extraordinaria =====
-const tImp=wt(10,'impressionante',.3),tCon=wt(11,'controlar',.3),tPre=wt(11,'precisão',.2),tExt=wt(11,'extraordinária',.3);
-shot('prcW',ps(10)-.15,(t,u)=>{
+const tImp=1e9,tCon=wt(9,'controlar',.3),tPre=wt(9,'precisão',.2),tExt=wt(9,'absurda',.3);
+shot('prcW',ps(9)-.15,(t,u)=>{
  const cond=ob(GT,tCon,.6),prec=ob(GT,tPre,.35);
  put('CIB',0,0,5.6,{sc:.95,m:GT<tCon?'focus':'calm',six:1,aR:tw(-14,-62,tCon-.2,.5),aL:tw(14,62,tCon-.2,.5),look:[0,6],brr:1.4});eyeGlow('CIB',1);
  const p=C.CIB.sp,ku=p[2];
@@ -300,13 +300,13 @@ shot('prcW',ps(10)-.15,(t,u)=>{
   fw(s+'</g>');(FX.gls=FX.gls||[]).push([ox,oy,orbR*7,'120,210,255',.6*a])}
  let ui='';if(GT>tImp-.1&&GT<tCon)ui+=TXT('MUITO MAIS',540,320,96,'#fff',-3,pop(GT,tImp-.1));
  if(GT>tPre)ui+=TXT('PRECISÃO',540,330,132,CY,-3,pop(GT,tPre)*(1+.02*sn(GT*8)));
- if(GT>tExt)ui+=TXT('EXTRAORDINÁRIA',540,450,66,'#ffd23f',-3,pop(GT,tExt));
+ if(GT>tExt)ui+=TXT('ABSURDA',540,450,80,'#ffd23f',-3,pop(GT,tExt));
  const F=foc(ox,oy-40*ku,.5);
- camA([[ps(10)-.15,.05,0,-80,-2],[tCon-.2,.2,F[0]*.5,F[1]*.5,0],[tPre-.05,.3,F[0]*.7,F[1]*.7,0],[tPre,.55,F[0],F[1],0,'c'],[ps(12),.6,F[0],F[1],1]]);
+ camA([[ps(9)-.15,.05,0,-80,-2],[tCon-.2,.2,F[0]*.5,F[1]*.5,0],[tPre-.05,.3,F[0]*.7,F[1]*.7,0],[tPre,.55,F[0],F[1],0,'c'],[ps(10),.6,F[0],F[1],1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.prcW,1);FX.shake=5*sh1(GT,[tPre],7);FX.flash=.25*sh1(GT,[tPre],12);FX.flcol='180,235,255'},'wl');
 // ===== 9) Desperdicio praticamente insignificante =====
-const tDes=wt(12,'desperdício',.3),tIns=wt(12,'insignificante',.3);
-shot('prcW',ps(12)-.15,(t,u)=>{
+const tDes=wt(10,'desperdício',.3),tIns=wt(10,'insignificante',.3);
+shot('prcW',ps(10)-.15,(t,u)=>{
  put('CIB',0,0,5.6,{sc:.95,m:'calm',six:1,aR:-62,aL:62,look:[0,4],brr:1.2});eyeGlow('CIB',.9);aura('CIB',.3,'#1f7bff','#7fe6ff',1,1);
  const p=C.CIB.sp,ku=p[2],c0=chestP('CIB');
  // gotas de energia que escapariam sao puxadas de volta
@@ -314,11 +314,11 @@ shot('prcW',ps(12)-.15,(t,u)=>{
  const lv=lp(34,.01,ez((GT-tDes)/(tIns-tDes+.3)));const val=lv<1?lv.toFixed(2).replace('.',','):Math.round(lv);
  let ui='';if(GT>tDes-.2){const a=ob(GT,tDes-.2,.3);ui+=`<g opacity="${a.toFixed(2)}"><rect x="200" y="300" width="680" height="200" rx="26" fill="#070a24" opacity=".8" stroke="${CY}" stroke-width="5"/><rect x="240" y="410" width="600" height="46" rx="23" fill="#16204e"/><rect x="246" y="416" width="${(588*lv/34).toFixed(1)}" height="34" rx="17" fill="${lv>5?'#ff6b6b':CY}"/></g>`+TXT('DESPERDÍCIO',540,385,58,'#fff',0,a)+TXT(`${val}%`,540,575,lv<1?110:90,lv<1?CY:'#ff6b6b',0,lv<1?pop(GT,tIns):a)}
  const F=foc(c0[0],c0[1],.35);
- camA([[ps(12)-.15,.3,F[0],F[1]-120,1],[ps(13),.42,F[0],F[1]-140,-1]]);
+ camA([[ps(10)-.15,.3,F[0],F[1]-120,1],[ps(11),.42,F[0],F[1]-140,-1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.prcW,1);FX.vig=.6},'zoom');
 // ===== 10a) A tecnica Ilimitada: o espaco se dobra =====
-const tIli=wt(13,'Ilimitada',.3),tEsp=wt(14,'espaço',.3),tRed2=wt(14,'redor',.3);
-shot('twn3',ps(13)-.2,(t,u)=>{
+const tIli=wt(11,'Ilimitada',.3),tEsp=wt(12,'espaço',.3),tRed2=wt(12,'redor',.3);
+shot('twn3',ps(11)-.2,(t,u)=>{
  const raise=ob(GT,tIli-.35,.4);
  put('CIB',0,0,3.4,{sc:2.4,m:GT<tIli?'focus':'cool',six:1,aR:tw(-16,-118,tIli-.35,.4),aL:16,look:[0,-2],brr:1.5,sq:SQ(tIli,.6)});eyeGlow('CIB',1);aura('CIB',.6,'#1f7bff','#7fe6ff',1,1);
  const c0=chestP('CIB'),ku=C.CIB.sp[2],sp=ob(GT,tEsp-.2,.5);
@@ -327,11 +327,11 @@ shot('twn3',ps(13)-.2,(t,u)=>{
  let ui='';if(GT>tIli-.05)ui+=INF(540,520,1.05*pop(GT,tIli),CY,1,sn(GT*2)*4)+TXT('ILIMITADA',540,330,128,'#fff',-3,pop(GT,tIli+.05));
  if(GT>tEsp)ui+=TXT('O ESPAÇO SE DOBRA',540,700,58,CY2,-3,pop(GT,tEsp));
  const F=foc(c0[0],c0[1],.3);
- camA([[ps(13)-.2,.38,F[0],F[1]+60,-3],[tIli,.25,F[0]*.8,F[1]*.8,0,'c'],[tEsp,.1,0,-60,2],[ps(15),.14,0,-80,-1]]);
+ camA([[ps(11)-.2,.38,F[0],F[1]+60,-3],[tIli,.25,F[0]*.8,F[1]*.8,0,'c'],[tEsp,.1,0,-60,2],[ps(13),.14,0,-80,-1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.twn3,1);FX.shake=12*sh1(GT,[tIli],5);FX.flash=.4*sh1(GT,[tIli],9);FX.flcol='170,230,255';FX.vig=.65;FX.chroma=5*sh1(GT,[tIli],4)},'flashB');
 // ===== 10b) Os inimigos nao conseguem encostar =====
-const tIni=wt(15,'inimigos',.1),tImpd=wt(15,'impede',.2),tSim=wt(15,'simplesmente',.2),tEnc=wt(15,'encostarem',.3);
-shot('twn3',ps(15)-.15,(t,u)=>{
+const tIni=wt(13,'criando',.1),tImpd=wt(13,'defesa',.2),tSim=wt(13,'poucos',.2),tEnc=wt(13,'superar',.3);
+shot('twn3',ps(13)-.15,(t,u)=>{
  const mx=lp(4.2,1.65,ob(GT,tImpd-.5,.5)),mz=2.8;
  put('CIB',-.75,0,3.4,{sc:2.4,m:GT<tIni?'focus':'cool',six:1,aR:-16,aL:16,look:[8,-2],brr:1.3});eyeGlow('CIB',1);
  const p=C.CIB.sp,ku=p[2],c0=[p[0],p[1]-170*ku],Rb=250*ku;
@@ -346,32 +346,32 @@ shot('twn3',ps(15)-.15,(t,u)=>{
  let ui='';if(GT>tIni-.1)ui+=TXT('!',zpS(mp[0],mp[1]-480*mk)[0],zpS(mp[0],mp[1]-480*mk)[1],120,'#ff3b5c',0,pop(GT,tIni-.1));
  if(GT>tEnc)ui+=TXT('NEM ENCOSTA',540,330,118,CY,-3,pop(GT,tEnc)*(1+.03*sn(GT*8)));
  const F=foc(tgx,tgy,.9),Fw=foc((c0[0]+mp[0])/2,c0[1],.05);
- camA([[ps(15)-.15,.05,Fw[0],Fw[1],-2],[tImpd,.12,Fw[0],Fw[1],0],[tSim-.1,.3,F[0]*.6,F[1]*.6,0],[tSim,.9,F[0],F[1],2,'c'],[ps(16),1.0,F[0],F[1],-1]]);
+ camA([[ps(13)-.15,.05,Fw[0],Fw[1],-2],[tImpd,.12,Fw[0],Fw[1],0],[tSim-.1,.3,F[0]*.6,F[1]*.6,0],[tSim,.9,F[0],F[1],2,'c'],[ps(14),1.0,F[0],F[1],-1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.twn3,1);FX.shake=3*push+10*sh1(GT,[tImpd+.25],6);FX.vig=.65;FX.dof=GT>tSim?4:null},'wr');
 // ===== 11) PONTO 3: O PRECO =====
-const tVer=wt(16,'verdadeiro',.2),tPro=wt(16,'problema',.3);
-shot('hot',ps(16)-.3,(t,u)=>{
+const tVer=wt(14,'existe',.2),tPro=wt(14,'preço',.3);
+shot('hot',ps(14)-.3,(t,u)=>{
  const fk=rnd(Math.floor(GT*12),5.1)>.25?1:.25;
  put('CIB',0,0,-1.5,{sc:1,m:GT<tPro?'worry':'strain',six:.6*fk,look:[0,3],brow:tw(2,7,tPro,.4),brr:2.6,tilt:-3});eyeGlow('CIB',.45*fk);
  const e=eyeP('CIB'),F=foc(e[0],e[1]+150*C.CIB.sp[2],.42);
- let ui=CARD(ps(16)-.2,ps(17)-.05,3,'O PREÇO','#ff4d6d');
- camA([[ps(16)-.3,.08,F[0]*.3,F[1]*.3,0],[ps(17),.42,F[0],F[1],-1.5]]);
+ let ui=CARD(ps(14)-.2,ps(15)-.05,3,'O PREÇO','#ff4d6d');
+ camA([[ps(14)-.3,.08,F[0]*.3,F[1]*.3,0],[ps(15),.42,F[0],F[1],-1.5]]);
  FX.ui=ui;FX.lit=LIT.hot;FX.vig=.85;FX.grade='contrast(1.1) saturate(.55)';FX.dark=.15;FX.tint=[120,10,30,.08]},'dip');
 // ===== 12) Sobrecarga: informacao o tempo todo, desgaste =====
-const tInfo=wt(17,'informações',.2),tCons=wt(17,'constantemente',.3),tDsg=wt(17,'desgaste',.2);
-shot('kit',ps(17)-.15,(t,u)=>{
- const ov=cl((GT-ps(17)+.15)/1.6),fk=rnd(Math.floor(GT*16),2.3)>.2?1:.3;
+const tInfo=wt(15,'informações',.2),tCons=wt(15,'constantemente',.3),tDsg=wt(16,'desgaste',.2);
+shot('kit',ps(15)-.15,(t,u)=>{
+ const ov=cl((GT-ps(15)+.15)/1.6),fk=rnd(Math.floor(GT*16),2.3)>.2?1:.3;
  put('CIB',0,0,-1.7,{sc:1,m:GT<tDsg?'strain':'angry',six:fk,aR:tw(-20,-152,tInfo-.2,.35)+4*sn(GT*13),aL:tw(20,152,tInfo-.2,.35)-4*sn(GT*12),look:[(rnd(Math.floor(GT*6),3.1)-.5)*12,2],brow:9,tilt:5*sn(GT*2.3),rot:2*sn(GT*17)*ov,brr:3.6,sq:SQ(tDsg,1),
   extra:SWEAT(-80,-300,.9)+SWEAT(90,-280,.7*ov)});eyeGlow('CIB',fk,1+.5*ov);
  const e=eyeP('CIB'),q=zpE(e);let ui=OVER(GT,ov,q[0],q[1]);
  if(GT>tDsg)ui+=TXT('DESGASTE',540,330,140,'#ff4d6d',-4,pop(GT,tDsg)*(1+.03*sn(GT*11)));
  const F=foc(e[0],e[1]+60*C.CIB.sp[2],.55);
- camA([[ps(17)-.15,.2,F[0]*.4,F[1]*.4,0],[tCons,.4,F[0]*.8,F[1]*.8,2],[tDsg,.62,F[0],F[1],-3,'c'],[ps(18),.7,F[0],F[1],3]]);
+ camA([[ps(15)-.15,.2,F[0]*.4,F[1]*.4,0],[tCons,.4,F[0]*.8,F[1]*.8,2],[tDsg,.62,F[0],F[1],-3,'c'],[ps(17),.7,F[0],F[1],3]]);
  FX.ui=ui;FX.vis=ov*(rnd(Math.floor(GT*9),1.3)>.5?.8:.35);FX.lit=blueLit(LIT.kit,fk*.8);FX.shake=3+5*ov+14*sh1(GT,[tDsg],6);FX.chroma=4+10*ov;FX.vhs=.18*ov;FX.vig=.8;
  FX.tint=GT>tDsg?[255,30,60,.1+.06*ab(sn(GT*8))]:null;FX.flash=.4*sh1(GT,[tDsg],10);FX.flcol='255,60,90'},'glitch');
 // ===== 13) A venda: menos esforco, mas continua percebendo =====
-const tVen=wt(18,'venda',.15),tRedz=wt(19,'reduzir',.2),tAmb=wt(19,'percebendo',.2);
-shot('bed',ps(18)-.2,(t,u)=>{
+const tVen=wt(17,'venda',.15),tRedz=wt(17,'reduzir',.2),tAmb=wt(17,'esforço',.2);
+shot('bed',ps(17)-.2,(t,u)=>{
  const b=ob(GT,tVen-.35,.5),son=ob(GT,tAmb-.1,.6);
  put('CIB',0,.85,-2.6,{sc:1,sit:1,m:GT<tVen?'strain':'calm',six:GT<tVen?1:.35,blind:b,aR:GT<tVen+.4?tw(-20,-150,tVen-.9,.3):tw(-150,-18,tVen+.4,.4),aL:GT<tVen+.4?tw(20,150,tVen-.9,.3):tw(150,18,tVen+.4,.4),look:[0,2],brow:GT<tVen?8:0,brr:GT<tVen?3:1.1,nobob:1});
  eyeGlow('CIB',GT<tVen?1:.18);const e=eyeP('CIB'),q=zpE(e);
@@ -380,36 +380,36 @@ shot('bed',ps(18)-.2,(t,u)=>{
  if(GT>tRedz)ui+=TXT('MENOS ESFORÇO',540,440,62,CY2,-3,pop(GT,tRedz));
  if(GT>tAmb-.1){ui+=SCAN(q[0],q[1],tAmb-.1,1.3,1600,CY)+SCAN(q[0],q[1],tAmb+.6,1.3,1600,CY)}
  const F=foc(e[0],e[1]+40*C.CIB.sp[2],.7);
- camA([[ps(18)-.2,.7,F[0],F[1],2],[tVen-.1,.78,F[0],F[1],0],[tVen+.5,.5,F[0]*.7,F[1]*.7,0],[tAmb-.1,.25,F[0]*.4,F[1]*.4,0],[ps(20),.12,0,60,-1]]);
+ camA([[ps(17)-.2,.7,F[0],F[1],2],[tVen-.1,.78,F[0],F[1],0],[tVen+.5,.5,F[0]*.7,F[1]*.7,0],[tAmb-.1,.25,F[0]*.4,F[1]*.4,0],[ps(18),.12,0,60,-1]]);
  FX.ui=ui;FX.night=1;FX.sonar=son;FX.chroma=GT<tVen?6:0;FX.vhs=GT<tVen?.12:0;FX.lit=blueLit(LIT.bed,GT<tVen?1:.3);FX.flash=.3*sh1(GT,[tVen],8);FX.flcol='20,20,40';FX.vig=.7},'wl');
 // ===== 14) Habilidade rara, precisa de controle (meditacao) =====
-const tRar=wt(20,'raras',.3),tCtr=wt(21,'controlar',.3);
-shot('prcW',ps(20)-.2,(t,u)=>{
+const tRar=wt(18,'raras',.3),tCtr=wt(18,'Jujutsu',.1);
+shot('prcW',ps(18)-.2,(t,u)=>{
  const ctl=ob(GT,tCtr,.6);
  put('CIB',0,0,5.7,{sc:.8,m:'calm',six:.3,blind:1,aR:tw(-12,-36,tCtr-.1,.5),aL:tw(12,36,tCtr-.1,.5),look:[0,0],still:0,brr:.8,bob:.4});eyeGlow('CIB',.16);
  aura('CIB',.75-.35*ctl,'#1f7bff','#7fe6ff',1.15-.25*ctl,1,3);
  const c0=chestP('CIB'),ku=C.CIB.sp[2];FX.pf=[[c0[0],c0[1],(300-80*ctl)*ku,26,'150,220,255',.7,'orbit']];
  let ui='';if(GT>tRar)ui+=TXT('RARÍSSIMA',540,320,118,'#ffd23f',-3,pop(GT,tRar));
- if(GT>tCtr)ui+=TXT('APRENDER A CONTROLAR',540,450,60,CY,-3,pop(GT,tCtr));
- camA([[ps(20)-.2,.0,0,-260,-2],[tRar,.12,0,-100,0],[ps(22),.3,0,40,2]]);
+ if(GT>tCtr)ui+=TXT('DE JUJUTSU KAISEN',540,450,60,CY,-3,pop(GT,tCtr));
+ camA([[ps(18)-.2,.0,0,-260,-2],[tRar,.12,0,-100,0],[ps(19),.3,0,40,2]]);
  FX.ui=ui;FX.lit=blueLit(LIT.prcW,.5);FX.vig=.6},'dip');
 // ===== 15) Final: potencial extraordinario (tira a venda ao por do sol) =====
-const tFor=wt(22,'forte',.3),tPot=wt(23,'potencial',.0),tXt=wt(23,'extraordinário',.25);
-shot('road',ps(22)-.3,(t,u)=>{
+const tFor=wt(19,'forte',.3),tPot=wt(20,'potencial',.0),tXt=wt(20,'extraordinário',.25);
+shot('road',ps(19)-.3,(t,u)=>{
  const lift=ob(GT,tPot-.55,.6),fl=ob(GT,tPot,.35);
  put('CIB',0,0,6.4,{sc:1.9,m:GT<tPot?'calm':'focus',six:GT<tPot?.2:fl,blind:1-lift,aR:GT<tPot+.3?tw(-16,-160,tPot-.85,.35):tw(-160,-20,tPot+.3,.4),aL:16,look:[0,-2],brr:1.4,tilt:2*sn(GT*1.3)});eyeGlow('CIB',GT<tPot?.1:fl,1.3);
  const e=eyeP('CIB'),ku=C.CIB.sp[2],q=zpE(e);
  if(GT>tPot)aura('CIB',fl*.8,'#1f7bff','#7fe6ff',1.2,1);
  FX.flare=GT>tPot?[[e[0]-25*ku,e[1],fl],[e[0]+25*ku,e[1],fl]]:[];FX.rays=[[560,560,.3+.3*fl,'255,200,140',16,1700]];
- let ui='';if(GT>tFor){const a=ob(GT,tFor,.3);ui+=TXT('O MAIS FORTE?',540,320,104,'#fff',-3,pop(GT,tFor));if(GT>pe(22)-.4){const k=ob(GT,pe(22)-.4,.3);ui+=`<path d="M150 ${288}L${(150+780*k).toFixed(1)} ${280}" stroke="#ff3b5c" stroke-width="22" stroke-linecap="round" opacity="${a.toFixed(2)}"/>`}}
+ let ui='';if(GT>tFor){const a=ob(GT,tFor,.3);ui+=TXT('O MAIS FORTE?',540,320,104,'#fff',-3,pop(GT,tFor));if(GT>pe(19)+.05){const k=ob(GT,pe(19)+.05,.3);ui+=`<path d="M150 ${288}L${(150+780*k).toFixed(1)} ${280}" stroke="#ff3b5c" stroke-width="22" stroke-linecap="round" opacity="${a.toFixed(2)}"/>`}}
  if(GT>tPot-.05)ui=TXT('POTENCIAL',540,330,140,CY,-3,pop(GT,tPot))+SCAN(q[0],q[1],tPot,1,1400,CY);
  if(GT>tXt)ui+=TXT('EXTRAORDINÁRIO',540,455,78,'#ffd23f',-3,pop(GT,tXt));
  const F=foc(e[0],e[1]+200*ku,.25),F2=foc(e[0],e[1],.85);
- camA([[ps(22)-.3,.05,0,-200,-2],[tFor,.18,F[0],F[1],0],[tPot-.6,.32,F[0],F[1],0],[tPot-.05,.85,F2[0],F2[1],0,'c'],[ps(24),.6,F2[0]*.8,F2[1]*.8,2]]);
+ camA([[ps(19)-.3,.05,0,-200,-2],[tFor,.18,F[0],F[1],0],[tPot-.6,.32,F[0],F[1],0],[tPot-.05,.85,F2[0],F2[1],0,'c'],[ps(21),.6,F2[0]*.8,F2[1]*.8,2]]);
  FX.ui=ui;FX.lit=blueLit(LIT.road,fl*.7);FX.shake=10*sh1(GT,[tPot],6);FX.flash=.45*sh1(GT,[tPot],8);FX.flcol='200,240,255';FX.vig=.5},'flashO');
 // ===== 16) A pergunta: voce teria coragem? =====
-const tAg=ps(24),tCor=wt(25,'coragem',.2),tDsp=wt(25,'despertar',.2),tEnd=pe(25)+.25;
-shot(null,ps(24)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.5+.5*ob(GT,tDsp,.4),streak:GT>tDsp?.5:0,dr:.3});
+const tAg=ps(21),tCor=wt(21,'coragem',.2),tDsp=wt(21,'despertar',.2),tEnd=pe(21)+.25;
+shot(null,ps(21)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.5+.5*ob(GT,tDsp,.4),streak:GT>tDsp?.5:0,dr:.3});
  const awk=ob(GT,tDsp,.3);
  put('CIB',0,0,0,{px:[540,1040+232*3.4],ku:3.4,m:GT<tDsp?'calm':'focus',six:.35+.65*awk,look:[0,0],nodrift:1,nobob:1,zz:2});eyeGlow('CIB',.35+.65*awk,1+.6*sh1(GT,[tDsp],3));
  const e=eyeP('CIB'),ku=C.CIB.sp[2];if(GT>tDsp)aura('CIB',awk*.9,'#1f7bff','#7fe6ff',1.2,1);
@@ -418,7 +418,7 @@ shot(null,ps(24)-.3,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.5+.5*ob(GT,tDsp,.4),streak:
  if(GT>tDsp)ui+=SCAN(e[0],e[1],tDsp,1,1500)+EMB(540,1040,330,GT,.4*awk);
  if(GT>tEnd){const a=ob(GT,tEnd,.4);ui+=`<rect x="0" y="1290" width="1080" height="330" fill="#04061a" opacity="${(.82*a).toFixed(2)}"/>`+TXT('VOCÊ DESPERTARIA?',540,1400,84,CY,-2,pop(GT,tEnd))+TXT('COMENTE: SIM ou NÃO',540,1520,62,'#fff',-2,pop(GT,tEnd+.3))+TXT('E SE VOCÊ TIVESSE',540,270,70,'#fff',-3,pop(GT,tEnd+.1))+TXT('OS SEIS OLHOS?',540,385,112,CY,-3,pop(GT,tEnd+.2))}
  const F=foc(e[0],e[1],.6);
- camA([[ps(24)-.3,.05,0,0,-1],[tCor,.35,F[0]*.6,F[1]*.6,0],[tDsp,.6,F[0],F[1],0,'c'],[tEnd,.2,0,0,0],[TOTAL,.28,0,0,1]]);
+ camA([[ps(21)-.3,.05,0,0,-1],[tCor,.35,F[0]*.6,F[1]*.6,0],[tDsp,.6,F[0],F[1],0,'c'],[tEnd,.2,0,0,0],[TOTAL,.28,0,0,1]]);
  FX.ui=ui;FX.lit=blueLit(LIT.cos,awk);FX.vig=.85-.25*awk;FX.shake=12*sh1(GT,[tDsp],5);FX.flash=.6*sh1(GT,[tDsp],8);FX.flcol='170,230,255';FX.chroma=5*sh1(GT,[tDsp],4)},'dip');
 SH.forEach((s,i)=>{s.t1=i<SH.length-1?SH[i+1].t0:TOTAL+1});
 // conversao cena -> tela (usa o transform real do quadro anterior; atualizado em F)

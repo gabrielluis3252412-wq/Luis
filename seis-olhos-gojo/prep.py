@@ -2,7 +2,7 @@
 import json, wave, os, numpy as np
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 R = json.load(open('roteiro.json'))
-open('roteiro.js', 'w').write('const PHR=' + json.dumps(R['frases'], ensure_ascii=False) + ';\n')
+open('roteiro.js', 'w').write('const PHR=' + json.dumps(R['frases'], ensure_ascii=False) + ',PWD=' + json.dumps(R.get('palavras'), ensure_ascii=False) + ';\n')
 w = wave.open('audio/narracao.wav'); sr = w.getframerate(); ch = w.getnchannels()
 a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768; w.close()
 if ch > 1: a = a.reshape(-1, ch).mean(1)

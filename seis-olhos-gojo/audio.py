@@ -127,7 +127,7 @@ def glitch():
     d = .35; n = int(d * SR); x = np.zeros(n)
     for k in range(7):
         s0 = int(rng.random() * .3 * SR); L = int(.02 * SR + rng.random() * .04 * SR)
-        x[s0:s0 + L] += osc(200 + rng.random() * 3000, L / SR, 'sq')[:len(x[s0:s0 + L])] * .5
+        g = osc(200 + rng.random() * 3000, L / SR + .01, 'sq'); seg = x[s0:s0 + L]; seg += g[:len(seg)] * .5
     return norm(x + filt(noise(n), lo=3000) * .2 * dec(n, 8), .55)
 def tinnitus():
     d = 2.4; n = int(d * SR); return norm(osc(7040, d) * bell(n) ** .4 * .5, .3)
