@@ -1,0 +1,75 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Cap,Poppins Black,84,&H00FFFFFF,&H00FFFFFF,&H00241018,&H96000000,0,0,0,0,100,100,0,0,1,9,4,2,70,70,300,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.30,0:00:01.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se você ficasse
+Dialogue: 0,0:00:01.37,0:00:02.32,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}preso em um dia
+Dialogue: 0,0:00:02.32,0:00:03.57,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}que {\c&HFFD94C&}nunca{\c&HFFFFFF&} {\c&HFFD94C&}termina?{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.99,0:00:05.54,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Foi exatamente isso que
+Dialogue: 0,0:00:05.54,0:00:06.95,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}aconteceu com Cibito,
+Dialogue: 0,0:00:06.95,0:00:08.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ao visitar uma cidade
+Dialogue: 0,0:00:08.37,0:00:10.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}chamada {\c&H6BFF7D&}Colinas{\c&HFFFFFF&} dos {\c&H6BFF7D&}Mares.{\c&HFFFFFF&}
+Dialogue: 0,0:00:10.54,0:00:11.61,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Durante a viagem,
+Dialogue: 0,0:00:11.61,0:00:12.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seu celular tocou.
+Dialogue: 0,0:00:13.25,0:00:14.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Era a operadora {\c&H3B3BFF&}Clarona!{\c&HFFFFFF&}
+Dialogue: 0,0:00:15.20,0:00:16.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cibito reclamou:
+Dialogue: 0,0:00:16.61,0:00:18.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"Para cobrar dinheiro vocês
+Dialogue: 0,0:00:18.22,0:00:18.97,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}são rápidos,
+Dialogue: 0,0:00:18.97,0:00:20.24,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mas para dar {\c&H3FD2FF&}internet{\c&HFFFFFF&}
+Dialogue: 0,0:00:20.24,0:00:21.17,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}desaparecem!"{\c&HFFFFFF&}
+Dialogue: 0,0:00:21.55,0:00:22.40,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Pouco depois,
+Dialogue: 0,0:00:22.40,0:00:23.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um {\c&HFFD94C&}veado{\c&HFFFFFF&} apareceu na
+Dialogue: 0,0:00:23.67,0:00:24.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}estrada.
+Dialogue: 0,0:00:24.60,0:00:26.05,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cibito tentou frear,
+Dialogue: 0,0:00:26.05,0:00:27.68,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mas acabou {\c&H3B3BFF&}colidindo!{\c&HFFFFFF&}
+Dialogue: 0,0:00:27.95,0:00:28.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3B3BFF&}"MEU{\c&HFFFFFF&} {\c&H3B3BFF&}DEUS!{\c&HFFFFFF&}
+Dialogue: 0,0:00:28.71,0:00:30.35,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ATROPELEI {\c&H3B3BFF&}MEU{\c&HFFFFFF&} AMIGO!"
+Dialogue: 0,0:00:30.65,0:00:31.63,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas era apenas um
+Dialogue: 0,0:00:31.63,0:00:32.18,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6BFF7D&}animal.{\c&HFFFFFF&}
+Dialogue: 0,0:00:32.51,0:00:33.78,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"Ah, menos mal...
+Dialogue: 0,0:00:34.15,0:00:35.50,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Achei que conhecia ele!"
+Dialogue: 0,0:00:35.89,0:00:37.07,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ao chegar à cidade,
+Dialogue: 0,0:00:37.07,0:00:38.36,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}percebeu que todos os
+Dialogue: 0,0:00:38.36,0:00:40.19,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}moradores estavam {\c&HFF8FC9&}olhando{\c&HFFFFFF&} para
+Dialogue: 0,0:00:40.19,0:00:40.60,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ele.
+Dialogue: 0,0:00:40.89,0:00:42.13,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Foi quando um homem
+Dialogue: 0,0:00:42.13,0:00:43.80,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}chamado {\c&HFFB8C9&}Elias{\c&HFFFFFF&} se aproximou
+Dialogue: 0,0:00:43.80,0:00:44.54,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e avisou:
+Dialogue: 0,0:00:44.85,0:00:46.49,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"Se você acordar novamente
+Dialogue: 0,0:00:46.49,0:00:47.04,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}em casa,
+Dialogue: 0,0:00:47.04,0:00:48.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}não {\c&H3B3BFF&}volte{\c&HFFFFFF&} para cá."
+Dialogue: 0,0:00:48.76,0:00:50.50,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cibito achou aquilo estranho,
+Dialogue: 0,0:00:50.50,0:00:51.54,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mas foi dormir em
+Dialogue: 0,0:00:51.54,0:00:52.24,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um {\c&HFFD94C&}hotel.{\c&HFFFFFF&}
+Dialogue: 0,0:00:52.58,0:00:53.49,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Quando acordou...
+Dialogue: 0,0:00:53.70,0:00:55.60,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}estava novamente em {\c&HFFD94C&}casa!{\c&HFFFFFF&}
+Dialogue: 0,0:00:55.88,0:00:57.15,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Sua mãe apareceu e
+Dialogue: 0,0:00:57.15,0:00:57.74,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}disse:
+Dialogue: 0,0:00:58.02,0:00:58.52,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"Filho,
+Dialogue: 0,0:00:58.73,0:00:59.94,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}toma cuidado e não
+Dialogue: 0,0:00:59.94,0:01:01.33,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HC95DFF&}engravida{\c&HFFFFFF&} ninguém!"
+Dialogue: 0,0:01:01.66,0:01:03.33,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cibito percebeu que estava
+Dialogue: 0,0:01:03.33,0:01:04.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}revivendo o {\c&HFFD94C&}mesmo{\c&HFFFFFF&} {\c&HFFD94C&}dia.{\c&HFFFFFF&}
+Dialogue: 0,0:01:05.12,0:01:06.31,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele estava preso em
+Dialogue: 0,0:01:06.31,0:01:07.51,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um {\c&HFFF27E&}loop{\c&HFFFFFF&} {\c&HC97AFF&}temporal!{\c&HFFFFFF&}
+Dialogue: 0,0:01:07.79,0:01:09.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Decidiu voltar à cidade
+Dialogue: 0,0:01:09.22,0:01:10.64,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}para encontrar {\c&HFFB8C9&}Elias.{\c&HFFFFFF&}
+Dialogue: 0,0:01:10.85,0:01:11.90,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas, ao chegar,
+Dialogue: 0,0:01:11.90,0:01:13.81,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}encontrou todos os moradores
+Dialogue: 0,0:01:13.81,0:01:14.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF8FC9&}parados{\c&HFFFFFF&} na rua,
+Dialogue: 0,0:01:14.87,0:01:16.18,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF8FC9&}olhando{\c&HFFFFFF&} para ele.
+Dialogue: 0,0:01:16.47,0:01:18.21,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Então {\c&HFFB8C9&}Elias{\c&HFFFFFF&} apareceu e
+Dialogue: 0,0:01:18.21,0:01:18.86,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}disse:
+Dialogue: 0,0:01:19.06,0:01:20.51,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}"Eu tentei avisar você...
+Dialogue: 0,0:01:20.83,0:01:21.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas agora ele {\c&H3B3BFF&}sabe{\c&HFFFFFF&}
+Dialogue: 0,0:01:21.85,0:01:23.58,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}que está procurando {\c&H3B3BFF&}escapar."{\c&HFFFFFF&}
+Dialogue: 0,0:01:23.89,0:01:25.09,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cibito perguntou:
+Dialogue: 0,0:01:25.32,0:01:26.52,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H4CD9FF&}"ELE{\c&HFFFFFF&} {\c&H4CD9FF&}QUEM?!"{\c&HFFFFFF&}
