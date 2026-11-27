@@ -258,7 +258,7 @@ const KJ=(o={})=>{const t=GT,P=KJP[o.pal||'a'],mo=o.mo||0,lvA=.55+.45*ab(sn(t*4.
  if(o.q)s+=`<g transform="translate(${o.q[0]} ${o.q[1]}) scale(${o.q[2]||1})">${TXT('?',0,0,260,'#fff')}</g>`;
  return s};
 // coloca o monstro (sprite) e acende as rachaduras de lava
-const mon=(sl,x,y,s,o={})=>{let g=KJ(o);if(o.center)g=`<g transform="translate(0 480)">${g}</g>`;if(o.clip!=null)g=`<clipPath id="kc${sl}"><rect x="-3000" y="-4000" width="6000" height="${(4000+o.clip).toFixed(0)}"/></clipPath><g clip-path="url(#kc${sl})">${g}</g>`;sprite(g,x,y,s,o.z??60,sl,o.rot||0,o.op??1);CHS[sl].hf=o.hf||0;CHS[sl].sp=null;const P=KJP[o.pal||'a'];if(!o.noglow)(FX.gls=FX.gls||[]).push([x,y-480*s,520*s,P.lvg,.12*(o.op??1)])};
+const mon=(sl,x,y,s,o={})=>{let g=KJ(o);if(o.sx!=null)g=`<g transform="scale(${o.sx.toFixed(3)} 1)">${g}</g>`;if(o.center)g=`<g transform="translate(0 480)">${g}</g>`;if(o.clip!=null)g=`<clipPath id="kc${sl}"><rect x="-3000" y="-4000" width="6000" height="${(4000+o.clip).toFixed(0)}"/></clipPath><g clip-path="url(#kc${sl})">${g}</g>`;sprite(g,x,y,s,o.z??60,sl,o.rot||0,o.op??1);CHS[sl].hf=o.hf||0;CHS[sl].sp=null;const P=KJP[o.pal||'a'];if(!o.noglow)(FX.gls=FX.gls||[]).push([x,y-480*s,520*s,P.lvg,.12*(o.op??1)])};
 const monPt=(x,y,s,lx,ly)=>[x+lx*s,y+ly*s];
 // ---------- PECAS DE INTERFACE ----------
 const FIST=(x,y,s,c='#f6c8a0',r=0)=>`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r}) scale(${s.toFixed(3)})"><path d="M-54-40Q-60-74-26-74H40Q70-74 70-40V30Q70 66 30 66H-24Q-60 66-60 30Z" fill="${c}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/><path d="M-30-74V-20M4-74V-20M38-74V-20" stroke="${INK}" stroke-width="8" stroke-linecap="round"/><path d="M-60-6Q-90-10-90 20Q-88 44-50 40" fill="${c}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/></g>`;
@@ -509,56 +509,101 @@ shot('cbdS',ps(11)-.2,(t,u)=>{
  fw(DEBRIS(540,1150,tSur,1.2,18)+DEBRIS(300,1180,tSur+.3,.9,10)+DEBRIS(800,1180,tSur+.5,.9,10));
  camA([[ps(11)-.2,.0,0,60,-2],[tSur,.0,0,40,0],[ps(12),.06,0,-40,1]]);
  FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=6+20*ri*(1-ri)*4*(GT<tCid+1?1:.3);FX.tint=[255,90,40,.06];FX.fog=1},'dip');
-// ===== 11) ele levanta o punho para destruir tudo (e o heroi segura um golpe com UMA mao) =====
-const tLev=wt(12,'levantaria',.1),tPun=wt(12,'punho',.1),tDst=wt(12,'destruir',.3),tTud=wt(12,'tudo',.1),tBlk=tDst+.12;
-const MX=600,MY=1185,MS=1.0;
+// ===== 11-12) SEQUENCIA DO SOCO (encarada -> arrancada -> volta pelas costas -> punho -> soco -> freeze -> onda de choque) =====
+const tLev=wt(12,'levantaria',.1),tPun=wt(12,'punho',.1),tDst=wt(12,'destruir',.2),tTud=wt(12,'tudo',.1);
+const tDsv=wt(13,'desviaria',0),tGol=wt(13,'golpe',0),tApa=wt(13,'apareceria',0),tAtr=wt(13,'atrás',.1),tAce=wt(13,'acertaria',0),tSo2=wt(13,'soco',.15),tPod=wt(13,'poderoso',.1),tQue=wt(13,'que',0),tVen=wt(13,'vento',.1),tNuv=wt(13,'nuvens',.1);
+const MX=600,MY=1185,MS=1.0,tDash=tDsv-.1,tSlam=tDsv+.28,tFist=Math.max(tAtr+.5,tAce-.35),tLat=tFist+.5,tHit=Math.max(tSo2,tLat+.42),tFz=tHit+.05,tRel=tHit+.42;
+// vento: poeira e pedacinhos de entulho subindo e passando pela tela (unidades de tela)
+const WINDDUST=(a,dir=-1,k=1)=>{if(a<=0)return'';let s='';for(let i=0;i<46;i++){const sp=.25+.5*rnd(i,3.1),ph=(GT*sp*k+rnd(i,7.7))%1,x=dir<0?1180-ph*1400:-100+ph*1400,y=600+rnd(i,2.9)*1300-ph*260*rnd(i,4.4)+30*sn(GT*2+i),z=rnd(i,5.5);
+ s+=i%3?`<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(30+60*z).toFixed(0)}" ry="${(10+16*z).toFixed(0)}" fill="#e8c9a4" opacity="${(a*.22*sn(ph*3.14)).toFixed(2)}"/>`:`<path transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(GT*300*(i%2?1:-1)+i*50).toFixed(0)})" d="M-${(6+8*z).toFixed(0)} -4L0 -${(8+8*z).toFixed(0)}L${(8+8*z).toFixed(0)} 2L2 ${(7+6*z).toFixed(0)}Z" fill="#6e6058" stroke="${INK}" stroke-width="3" opacity="${(a*.9*sn(ph*3.14)).toFixed(2)}"/>`}return s};
+// linhas radiais de foco (estilo manga) para o freeze frame
+const FOCUSL=(cx,cy,a,seed=0)=>{if(a<=0)return'';let s='';for(let i=0;i<64;i++){const an=i/64*6.283+rnd(i,seed+1)*.08,r1=260+160*rnd(i,seed+2),w=.012+.02*rnd(i,seed+3);s+=`<path d="M${(cx+cs(an-w)*r1).toFixed(0)} ${(cy+sn(an-w)*r1).toFixed(0)}L${(cx+cs(an)*2300).toFixed(0)} ${(cy+sn(an)*2300).toFixed(0)}L${(cx+cs(an+w)*r1).toFixed(0)} ${(cy+sn(an+w)*r1).toFixed(0)}Z" fill="${i%2?'#fff':INK}" opacity="${(a*(i%2?.55:.8)).toFixed(2)}"/>`}return s};
+// punho gigante em close: os dedos se fecham (k 0 -> 1)
+const BIGFIST=(x,y,s,k,sh=0)=>{const sk='#f6c8a0',L=lp(150,46,ez(k));let f='';[-78,-26,26,78].forEach((dx,i)=>{const l=L*(1-.08*ab(i-1.5)),cy=-60;f+=`<rect x="${dx-24}" y="${(cy-l).toFixed(1)}" width="48" height="${(l+40).toFixed(1)}" rx="24" fill="${sk}" stroke="${INK}" stroke-width="10"/>`+(k>.6?`<path d="M${dx-16} ${(cy-l+14).toFixed(1)}Q${dx} ${(cy-l+4).toFixed(1)} ${dx+16} ${(cy-l+14).toFixed(1)}" stroke="${INK}" stroke-width="6" fill="none"/>`:'')});
+ return`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${s.toFixed(3)}) rotate(${sh.toFixed(1)})"><path d="M-120-60Q-128 120-40 150H70Q130 120 122-60Z" fill="${sk}" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>${f}<g transform="rotate(${lp(-50,8,ez(k)).toFixed(1)} -110 40)"><rect x="-170" y="10" width="110" height="54" rx="27" fill="${sk}" stroke="${INK}" stroke-width="10"/></g><path d="M-60 60Q0 80 60 60" stroke="rgba(0,0,0,.18)" stroke-width="10" fill="none"/><path d="M-92-${(L+30).toFixed(0)}Q-70-${(L+52).toFixed(0)}-40-${(L+40).toFixed(0)}" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" opacity=".7"/><rect x="-130" y="140" width="260" height="140" fill="#1c1620" stroke="${INK}" stroke-width="12"/><rect x="-136" y="150" width="272" height="30" fill="#e8343f" stroke="${INK}" stroke-width="8"/></g>`};
+document.body.insertAdjacentHTML('beforeend','<svg width="0" height="0" style="position:absolute"><filter id="mbp" x="-10%" y="-5%" width="120%" height="110%"><feGaussianBlur id="mbpg" stdDeviation="0 0"/></filter></svg>');
+// 1a) plano aberto: o monstro ergue o punho, o heroi (silhueta, de costas) o encara
 shot('cbdS',ps(12)-.15,(t,u)=>{
- const rz=ob(GT,tLev,.9),blk=GT>tBlk-.14;
- put('BAL',-.35,0,3.0,{sc:1.3,m:'blank',aR:blk?-168:-14,aL:14,look:[2,-8],glint:.3,wind:1.5,still:1,sq:SQ(tBlk,.8)});
- const p=C.BAL.sp,ku=p[2],A=armPos('BAL',-168,1),tg=[(A.f[0]-MX)/MS+40,(A.f[1]-MY)/MS-70];
- const sw=GT<tBlk?ez(cl((GT-tDst+.3)/.42)):1,arc=-260*sn(sw*Math.PI);
- mon('C',MX,MY,MS,{pal:'a',mo:GT>tBlk?.2:.7,ey:GT>tBlk+.05?'wow':'mad',fr:[lp(290,140,rz),lp(-430,-1000,rz)],bigF:lp(92,125,rz),fl:[lp(-290,tg[0],sw),lp(-430,tg[1],sw)+arc],ht:GT>tBlk?-8:0,z:95,hf:inHit([tBlk],.08)?1:0});
- let s=SHOCK(p[0],p[1],tBlk,700,'#fff',.7,.3)+CRACKS(p[0],p[1],ku,ob(GT,tBlk,.3))+DUST(p[0],p[1],tBlk,ku*1.2)+STARB(A.f[0],A.f[1]-30*ku,tBlk,ku*.9)+SPARKS(A.f[0],A.f[1],tBlk,ku);fw(s);
- const fst=monPt(MX,MY,MS,lp(290,140,rz),lp(-430,-1000,rz));(FX.gls=FX.gls||[]).push([fst[0],fst[1],260,'255,140,60',.3*rz]);
- let ui='';if(GT>tPun)ui+=TXT('O PUNHO',540,290,120,'#fff',-3,pop(GT,tPun));if(GT>tDst)ui+=TXT('PARA DESTRUIR TUDO...',540,405,64,RED,-3,pop(GT,tDst));
- if(GT>tBlk)ui+=TXT('COM UMA MÃO',540,1380,78,GOLD,-3,pop(GT,tBlk+.1));
- const F=foc(p[0],p[1]-200*ku,.2);camA([[ps(12)-.15,.0,0,40,-2],[tPun,.0,0,20,0],[tBlk-.05,.04,F[0]*.4,F[1]*.4,0],[tBlk,.2,F[0],F[1],-2,'c'],[ps(13),.24,F[0],F[1],0]]);
- FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=3*rz+28*sh1(GT,[tBlk],5);FX.flash=.45*sh1(GT,[tBlk],9);FX.flcol='255,240,210';FX.impact=GT>=tBlk&&GT<tBlk+.045;if(FX.impact)FX.flash=0;FX.vig=.7},'flashO');
-// ===== 12a) mas voce desviaria do golpe =====
-const tDsv=wt(13,'desviaria',.1),tGol=wt(13,'golpe',0),tApa=wt(13,'apareceria',0),tAtr=wt(13,'atrás',.1),tAce=wt(13,'acertaria',0),tSo2=wt(13,'soco',.2),tPod=wt(13,'poderoso',.1),tQue=wt(13,'que',0),tVen=wt(13,'vento',.1),tNuv=wt(13,'nuvens',.1);
-const tSlam=tGol+.05;
-shot('cbdS',ps(13)-.12,(t,u)=>{
- const g=P3(-.35,0,3.0),dn=ez(cl((GT-tSlam+.3)/.3)),tg=[(g[0]-MX)/MS,(g[1]-MY)/MS-80];
- mon('C',MX,MY,MS,{pal:'a',mo:.8,ey:'mad',fr:[lp(140,tg[0],dn),lp(-1000,tg[1],dn)],bigF:125,fl:[-290,-430],z:95,ht:4*dn});
- const dg=ob(GT,tSlam-.2,.18);put('BAL',lp(-.35,1.7,dg),0,3.0,{sc:1.3,m:'blank',aR:-14,aL:14,rot:-12*dg*(1-ob(GT,tSlam+.2,.3)),look:[-6,-4],glint:.3,wind:2,still:1});
- if(GT>tSlam-.2&&GT<tSlam+.35)put('GB1',-.35,0,3.0,{sc:1.3,m:'blank',still:1,op:(.5*(1-cl((GT-tSlam+.2)/.5))).toFixed(2)});
- fw(SHOCK(g[0],g[1],tSlam,1000,'#fff',.8,.3)+DUST(g[0],g[1],tSlam,g[2]*1.8,1.3)+CRACKS(g[0],g[1],g[2]*1.8,ob(GT,tSlam,.3))+DEBRIS(g[0],g[1],tSlam,1.2,20));
- let ui='';if(GT>tDsv)ui+=TXT('DESVIA!',540,300,150,SKY,-3,pop(GT,tDsv));
- const F=foc(g[0],g[1]-250,.15);camA([[ps(13)-.12,.05,F[0]*.5,F[1]*.5,0],[tSlam-.15,.1,F[0],F[1],0],[tSlam,.16,F[0]-160,F[1],-5,'c'],[tApa,.12,F[0]-140,F[1],-2]]);
- FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=40*sh1(GT,[tSlam],4)**1.4;FX.flash=.4*sh1(GT,[tSlam],8);FX.flcol='255,220,180';FX.chroma=6*sh1(GT,[tSlam],4)},'wu');
-// ===== 12b) apareceria atras dele: salta por cima dos predios e surge colado nas costas do monstro =====
-shot('cbdS',tApa-.1,(t,u)=>{
- const j=cl((GT-tApa)/(tAtr-.05-tApa)),pp=GT>tAtr-.05,looks=GT>tAtr+.2;
- mon('C',580,1210,1.02,{pal:'a',back:1,z:95,hx:looks?-25:0,ht:looks?-6:0,q:looks?[230,-1120,1]:null});
- if(!pp)put('BAL',0,0,0,{px:[lp(1150,760,j),lp(1350,420,j)-260*sn(j*Math.PI)],ku:.45,top:1,m:'cool',aR:-150,aL:40,rot:lp(30,-10,j),nodrift:1,nobob:1,glint:.4,wind:2.5});
- else put('BAL',0,0,0,{px:[300,1240],ku:1.4,top:1,m:'focus',brow:6,aR:-40,aL:40,rot:-6,nodrift:1,nobob:1,glint:.5,wind:2.5,sq:SQ(tAtr-.05,1.3)});
- const p=C.BAL.sp;let s=pp?TWINK(p[0],p[1]-300,tAtr-.05,1.6)+SHOCK(p[0],p[1]-250,tAtr-.05,500,'#fff',.4,1):'';if(pp&&GT<tAtr+.4)put('GB1',0,0,0,{px:[760,420],ku:.45,m:'cool',still:1,op:(.6*(1-cl((GT-tAtr)/.4))).toFixed(2)});fw(s);
- let ui=fastLines(.3*(1-j),-1);if(GT>tAtr)ui+=TXT('ATRÁS DELE',540,300,124,GOLD,-3,pop(GT,tAtr));
- camA([[tApa-.1,.05,0,40,3],[tAtr-.06,.1,0,20,0],[tAtr-.05,.18,120,-60,-2,'c'],[tAce,.22,120,-60,0]]);FX.ui=ui;FX.lit=LIT.cbdS;FX.vig=.6;FX.shake=10*sh1(GT,[tAtr-.05],7)},'wl');
-// ===== 12c) e acertaria um soco tao poderoso... (silencio -> camera lenta -> impacto) =====
-const tHit=tSo2;
-shot('cbdS',tAce-.15,(t,u)=>{
- const pc=PUNCH(tHit),sl=GT>tHit?cl((GT-tHit)/(tQue-tHit)):0;
- const sq=GT>tHit?1-.25*Math.exp(-(GT-tHit)*3):1;mon('C',840,1950,2.6,{pal:'a',back:1,z:60,hf:inHit([tHit],.1)?1:0,ht:GT>tHit?lp(0,-10,sl):0,rot:GT>tHit?lp(0,6,sl):0});
- put('BAL',0,0,0,{px:[340,1520],ku:1.6,top:1,m:GT<tAce?'blank':GT<tHit?'focus':'angry',brow:GT<tAce?0:10,aR:lp(-20,-95,Math.max(0,pc)),aL:40,tilt:6*pc,look:[8,-4],glint:sh1(GT,[tAce],2),wind:2.5,nobob:1,nodrift:1,sq:{sx:1+.08*Math.max(0,pc),sy:1-.06*Math.max(0,pc)}});
- const A=armPos('BAL',lp(-20,-95,Math.max(0,pc)),1),f=[A.f[0]+40,A.f[1]];let s='';
+ const rz=ob(GT,tLev,1.0);mon('C',MX,MY,MS,{pal:'a',mo:.4+.3*rz,ey:'mad',fr:[lp(290,140,rz),lp(-430,-1000,rz)],bigF:lp(92,125,rz),fl:[-290,-430],z:95,ht:3*sn(GT*1.5)});
+ put('BAL',0,0,3.4,{sc:1.3,sil:1,still:1,wind:2.5,aR:-10,aL:10});
+ const p=C.BAL.sp;fw(WINDDUST(.8,-1));const fst=monPt(MX,MY,MS,lp(290,140,rz),lp(-430,-1000,rz));(FX.gls=FX.gls||[]).push([fst[0],fst[1],260,'255,140,60',.3*rz]);
+ let ui='';if(GT>tPun)ui+=TXT('O PUNHO',540,290,120,'#fff',-3,pop(GT,tPun));
+ const F=foc(p[0],p[1]-500,.1);camA([[ps(12)-.15,.0,0,60,-1],[tPun+.25,.08,F[0],F[1],0]]);
+ FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=2+3*rz;FX.vig=.75;FX.grade='contrast(1.12) saturate(1.05)'},'flashO');
+// 1b) a encarada: camera se aproxima devagar do rosto; vento, poeira e destrocos subindo
+shot('cbdS',tPun+.25,(t,u)=>{
+ const k=cl((GT-tPun-.25)/(tDash-.12-tPun-.25)),wd=.5+.5*k;
+ put('BAL',0,0,2.4,{sc:1.2,m:GT<tDst?'blank':'focus',brow:GT<tDst?0:7,aR:-12,aL:12,look:[0,-4],still:1,noblink:GT>tDst,glint:.35,wind:2+2*wd});
+ const p=C.BAL.sp,ku=p[2],e=eyeP('BAL');
+ // sombra do punho descendo sobre ele
+ const dn=ez(cl((GT-tTud+.1)/(tDash-.12-tTud+.1)));
+ let s=WINDDUST(wd,-1,1+k);for(let i=0;i<10;i++){const ph=((GT-tPun)*(.5+.3*rnd(i,2.2))+rnd(i,4.1))%1,x=p[0]+(rnd(i,6.3)-.5)*520*ku,y=p[1]-ph*500*ku;s+=`<path transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(GT*200+i*36).toFixed(0)})" d="M-9-6L-2-12L10-4L6 9L-8 7Z" fill="#7a6a62" stroke="${INK}" stroke-width="3" opacity="${(wd*sn(ph*3.14)).toFixed(2)}"/>`}fw(s);
+ let ui='';if(GT>tDst)ui+=TXT('PARA DESTRUIR TUDO...',540,300,66,RED,-3,pop(GT,tDst));
+ if(dn>0)ui+=`<rect x="0" y="0" width="1080" height="${(1920*dn*.55).toFixed(0)}" fill="url(#shdg)" opacity="${(.75*dn).toFixed(2)}"/>`;
+ const F0=foc(e[0],e[1]+260*ku,.25),F1=foc(e[0],e[1]+20*ku,2.5);camA([[tPun+.25,.25,F0[0],F0[1],1],[tDash-.12,2.5,F1[0],F1[1],-1]]);
+ FX.ui=ui;FX.lit={amb:[.95,.78,.72],rim:[255,150,80],d:[.2,-1],sh:.5,ri:1};FX.vig=.6+.3*k;FX.shake=1.5+3*k+5*dn;FX.grade=`contrast(${(1.1+.12*k).toFixed(2)}) saturate(1.05)`},'');
+document.querySelector('#SV defs').insertAdjacentHTML('beforeend','<linearGradient id="shdg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#05020a" stop-opacity="1"/><stop offset="1" stop-color="#05020a" stop-opacity="0"/></linearGradient>');
+// 2) a arrancada: camera lateral acompanhando, fundo borrado, rastro de poeira e energia; o punho do monstro acerta o vazio
+shot('cbdS',tDash-.12,(t,u)=>{
+ const d=GT-tDash,acc=cl(d/.5),run=d>0;
+ const wk=walk(GT,28,1.6);put('BAL',run?lp(-.6,.5,ez(cl(d/1.2))):-.6,0,3.0,{sc:1.3,m:'focus',brow:8,...(run?wk:{}),aR:run?55+10*sn(GT*28):-30,aL:run?-55-10*sn(GT*28):30,rot:run?lp(0,24,acc):-6,sq:run?{sx:1+.06*acc,sy:1-.05*acc}:SQ(tDash,1.6),nobob:!run,glint:.4,wind:3.5,top:1});
+ const p=C.BAL.sp,ku=p[2];let s='';
+ if(run){for(let g=1;g<=2;g++){const dd=d-.08*g;if(dd>0)put(['GB1','GB2'][g-1],lp(-.6,.5,ez(cl(dd/1.2))),0,3.0,{sc:1.3,m:'focus',still:1,rot:24*cl(dd/.5),op:(.42-.14*g).toFixed(2)})}
+  // rastro de energia (fita) e nuvens de poeira que ficam para tras
+  const tx=p[0]-60*ku,ty=p[1]-150*ku;s+=`<path d="M${tx.toFixed(0)} ${ty.toFixed(0)}Q${(tx-300).toFixed(0)} ${(ty+20*sn(GT*9)).toFixed(0)} ${(tx-760*acc).toFixed(0)} ${(ty+60).toFixed(0)}" stroke="${GOLD2}" stroke-width="${(30*ku*acc).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".45"/><path d="M${tx.toFixed(0)} ${ty.toFixed(0)}Q${(tx-280).toFixed(0)} ${ty.toFixed(0)} ${(tx-700*acc).toFixed(0)} ${(ty+50).toFixed(0)}" stroke="#fff" stroke-width="${(10*ku*acc).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".8"/>`;
+  for(let i=0;i<14;i++){const age=((GT*6+i/14)%1),x=p[0]-age*900*acc-40,y=p[1]-10*ku-age*60;s+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${((24+70*age)*ku).toFixed(0)}" fill="#e2c7a5" stroke="${INK}" stroke-width="3" opacity="${(.7*(1-age)*acc).toFixed(2)}"/>`}}
+ // o punho do monstro desce na posicao antiga (fora do quadro em cima) e explode o chao
+ const g=P3(-.6,0,3.0),dn=ez(cl((GT-tSlam+.25)/.25));if(GT<tSlam+.5){const fy=lp(-500,g[1]-120,dn);s+=`<g transform="translate(${(g[0]-40).toFixed(0)} ${fy.toFixed(0)}) scale(1.9)"><circle r="92" fill="#6f8a99" stroke="${INK}" stroke-width="7"/><path d="M-60-50Q0-90 60-50" stroke="${INK}" stroke-width="7" fill="none"/></g>`}
+ s+=SHOCK(g[0],g[1],tSlam,1100,'#fff',.8,.3)+DUST(g[0],g[1],tSlam,ku*2,1.2)+CRACKS(g[0],g[1],ku*2,ob(GT,tSlam,.3))+DEBRIS(g[0],g[1],tSlam,1.2,22);fw(s);
+ let ui=run?fastLines(.4+.5*acc,-1,300,1700):'';if(GT>tDsv)ui+=TXT('DESVIA!',540,300,140,SKY,-3,pop(GT,tDsv));
+ // camera lateral: acompanha o heroi, o cenario passa borrado
+ const F=foc(p[0],p[1]-170*ku,.35);FX.cz=.35;FX.cpn=[F[0]*.9-(run?120*acc:0),F[1]*.9];FX.roll=run?-3*acc:0;FX.mbx=run?28*acc:0;
+ FX.ui=ui;FX.lit={amb:[1,.82,.74],rim:[255,180,110],d:[1,-.5],sh:.4,ri:1};FX.shake=3+40*sh1(GT,[tSlam],4)**1.4+4*acc;FX.flash=Math.max(.35*sh1(GT,[tSlam],8),.25*sh1(GT,[tDash],12));FX.flcol='255,220,180';FX.chroma=3*acc+6*sh1(GT,[tSlam],4)},'');
+// 3) movimento circular: a camera gira em volta do monstro e revela o heroi nas costas dele
+shot('cbdS',tApa-.05,(t,u)=>{
+ const k=ez(cl((GT-tApa+.05)/(tAtr-tApa+.05))),th=k*Math.PI,sx=Math.max(.12,ab(cs(th))),back=th>Math.PI/2,stop=GT>tAtr;
+ mon('C',MX+260*sn(th)*(back?-1:1)*.6,MY+20*sn(th),MS*1.08,{pal:'a',back:back?1:0,mo:.3,ey:back?'mad':'conf',sx,z:95,hx:stop?-20:0,q:stop&&GT>tAtr+.15?[220,-1100,1]:null});
+ // o heroi e so um rastro dando a volta... e para derrapando nas costas do monstro
+ let s='';if(!stop){for(let i=0;i<6;i++){const a=th*1.6-i*.12,x=540+420*cs(a+Math.PI),y=1150+90*sn(a+Math.PI);s+=`<ellipse cx="${x.toFixed(0)}" cy="${(y-140).toFixed(0)}" rx="${(70-8*i).toFixed(0)}" ry="${(140-14*i).toFixed(0)}" fill="${i?'#fff':GOLD2}" opacity="${(.5-.07*i).toFixed(2)}"/>`}
+  s+=`<path d="M${(540+420*cs(th*1.6+Math.PI)).toFixed(0)} ${(1010+90*sn(th*1.6+Math.PI)).toFixed(0)}A420 90 0 0 0 ${(540+420*cs(th*1.6+Math.PI-1)).toFixed(0)} ${(1010+90*sn(th*1.6+Math.PI-1)).toFixed(0)}" stroke="${GOLD2}" stroke-width="18" fill="none" opacity=".6" stroke-linecap="round"/>`}
+ else{const sk=ob(GT,tAtr,.25);put('BAL',0,0,0,{px:[lp(160,300,sk),1360],ku:1.45,top:1,m:'focus',brow:7,aR:-30,aL:40,rot:lp(-18,0,sk),nodrift:1,nobob:1,glint:.6,wind:3,sq:SQ(tAtr,1.2)});
+  s+=DUST(300,1360,tAtr,1.4,.9)+SHOCK(300,1360,tAtr,600,'#fff',.5,.3)+TWINK(300,1000,tAtr+.05,1.5);for(let i=0;i<5;i++){const d=GT-tAtr;if(d<.5)s+=`<line x1="${(300-60-i*40-500*d).toFixed(0)}" y1="${(1360-i*16).toFixed(0)}" x2="${(300-260-i*40-500*d).toFixed(0)}" y2="${(1360-i*16).toFixed(0)}" stroke="#e2c7a5" stroke-width="12" stroke-linecap="round" opacity="${(1-d/.5).toFixed(2)}"/>`}}
+ fw(s+WINDDUST(.5,1));
+ let ui=!stop?fastLines(.5,1):'';if(GT>tAtr)ui+=TXT('ATRÁS DELE',540,300,124,GOLD,-3,pop(GT,tAtr));
+ FX.cz=lp(.12,.2,k);FX.cpn=[-260*sn(th),-40];FX.roll=lp(-6,4,k);FX.mbx=stop?0:18*sn(th);
+ FX.ui=ui;FX.lit=LIT.cbdS;FX.vig=.65;FX.shake=3+10*sh1(GT,[tAtr],7)},'');
+// 4a) o tempo desacelera: close no punho se fechando
+shot(null,tFist,(t,u)=>{FX.bg=c=>{const g=c.createRadialGradient(540,1000,100,540,1000,1300);g.addColorStop(0,'#5a2a3a');g.addColorStop(1,'#0a0410');c.fillStyle=g;c.fillRect(0,0,W,H)};
+ const k=cl((GT-tFist)/(tLat-tFist-.08)),tr=k>.85?3*sn(GT*80):0;
+ let s=FOCUSL(540,980,.35+.3*k,7);s+=BIGFIST(540,1150,2.2+.25*k,k,tr);
+ for(let i=0;i<26;i++){const ph=((GT-tFist)*.35+rnd(i,4.4))%1,a=rnd(i,9.1)*6.283,r=700*(1-ph);s+=`<circle cx="${(540+cs(a)*r).toFixed(0)}" cy="${(900+sn(a)*r).toFixed(0)}" r="${(4+5*rnd(i,2.2)).toFixed(1)}" fill="${GOLD2}" opacity="${(sn(ph*3.14)).toFixed(2)}"/>`}
+ fw(s);FX.gls=[[540,900,500,'255,200,140',.25+.3*k]];
+ FX.ui='';FX.lit=HL;FX.vig=.8;FX.shake=k>.85?4:0;FX.grade='contrast(1.15) saturate(.9)'},'flash');
+// 4b-6) enquadramento lateral -> SOCO -> freeze frame -> onda de choque atravessa o cenario, monstro lancado longe
+shot('cbdS',tLat,(t,u)=>{
+ const G0=GT;const fz=G0>=tFz&&G0<tRel;if(fz)GT=tFz;else if(G0>=tRel)GT=G0-(tRel-tFz);   // freeze frame
+ const pc=PUNCH(tHit),lt=GT>tHit?cl((GT-tHit)/(tQue-tHit-(tRel-tFz))):0,fly=ez(lt);
+ const ms=lp(2.6,.08,ez(cl(lt*1.4))),mx=lp(840,960,fly),my=lp(1950-480*2.6,230,ez(cl(lt*1.2)));
+ mon('C',mx,my,ms,{center:1,pal:'a',back:GT<tFz+.15,ey:'ko',mo:.9,z:60,hf:inHit([tHit],.1)||fz?1:0,ht:GT>tHit?-10:0,rot:GT>tHit?lp(0,520,fly):0,sx:GT>tHit&&GT<tFz+.05?.84:1});
+ const a0=lp(-20,30,ez(cl((GT-tLat)/(tHit-.16-tLat))));const arm=GT<tHit-.16?a0:lp(-20,-95,Math.max(0,pc));
+ put('BAL',0,0,0,{px:[340,1520],ku:1.6,top:1,m:GT<tHit?'focus':'angry',brow:10,aR:arm,aL:40,tilt:6*pc,look:[8,-4],glint:.6,wind:3,nobob:1,nodrift:1,noblink:1,sq:GT<tHit?{sx:1-.05*ez(cl((GT-tLat)/.4)),sy:1+.04*ez(cl((GT-tLat)/.4))}:{sx:1+.08*Math.max(0,pc),sy:1-.06*Math.max(0,pc)},rot:GT<tHit?lp(0,-8,cl((GT-tLat)/.4)):6});
+ const A=armPos('BAL',arm,1),f=[A.f[0]+40,A.f[1]];let s='';
+ if(GT<tHit){FX.pf=[[A.f[0],A.f[1],260,30,'255,240,200',cl((GT-tLat)/.3),'in']];s+=FOCUSL(f[0],f[1],.25*cl((GT-tLat)/.3),3)}
  if(smearOn([tHit]))s+=SMEAR(A,'#fff');
- s+=STARB(f[0],f[1],tHit,2.2,GOLD2,.55)+SPARKS(f[0],f[1],tHit,2)+SHOCK(f[0],f[1],tHit,1600,'#fff',1.1,1)+SHOCK(f[0],f[1],tHit+.15,1300,GOLD2,1.1,1)+SHOCK(f[0],f[1],tHit+.3,1000,'#fff',1.1,1);fw(s);
- const ch=GT>tAce&&GT<tHit;FX.pf=ch?[[A.s[0],A.s[1],200,26,'255,240,200',cl((GT-tAce)/.3),'in']]:[];
- let ui='';if(GT>tAce+.1&&GT<tHit)ui+=TXT('...',540,330,120,'#fff',0,1);if(GT>tHit)ui+=TXT('UM SOCO',540,300,150,'#fff',-4,pop(GT,tHit))+TXT('TÃO PODEROSO',540,420,90,GOLD,-4,pop(GT,tPod))+fastLines(.6*(1-sl),1);
- const F=foc(f[0],f[1],.6),Fz=foc(f[0],f[1],1.0);camA([[tAce-.15,.4,F[0],F[1]+100,0],[tHit-.06,.62,Fz[0],Fz[1],-2],[tHit,.95,Fz[0],Fz[1],0,'c'],[tHit+.1,.55,F[0],F[1],3],[tQue,.48,F[0],F[1],1]]);
- FX.ui=ui;FX.lit=HL;FX.vig=GT>tAce&&GT<tHit?.95:.6;FX.shake=48*sh1(GT,[tHit],3)**1.5;FX.flash=.7*sh1(GT,[tHit],5);FX.flcol='255,255,240';FX.chroma=10*sh1(GT,[tHit],3);FX.dark=GT>tAce&&GT<tHit?.25*cl((GT-tAce)/.3):0;
- FX.impact=GT>=tHit&&GT<tHit+.042||GT>=tHit+.085&&GT<tHit+.125;if(FX.impact)FX.flash=0;FX.grade=GT>tAce&&GT<tHit?'contrast(1.15) saturate(.5)':'contrast(1.08) saturate(1.15)'},'zoom');
+ s+=STARB(f[0],f[1],tHit,2.4,GOLD2,.55)+SPARKS(f[0],f[1],tHit,2.2);
+ if(fz)s+=FOCUSL(f[0],f[1],.9,11)+RIP(f[0],f[1],tHit,.6,260,'#fff');
+ // liberou: onda de choque atravessa a tela, o ar se deforma, entulho e poeira voam
+ const rl=tFz+.01;s+=SHOCK(f[0],f[1],rl,2600,'#fff',1.1,.55)+SHOCK(f[0],f[1],rl+.12,2100,GOLD2,1.1,.55)+SHOCK(f[0],f[1],rl+.25,1600,'#fff',1,.55)+DEBRIS(f[0],f[1],rl,2.2,26)+DEBRIS(f[0],1700,rl+.05,1.8,20,'#8a7a70');
+ if(GT>rl){const d=GT-rl;for(let i=0;i<18;i++){const a=rnd(i,1.7)*6.283,r=200+1800*d*(.6+.4*rnd(i,2.4));s+=`<ellipse cx="${(f[0]+cs(a)*r).toFixed(0)}" cy="${(f[1]+sn(a)*r*.6).toFixed(0)}" rx="${(80+120*d).toFixed(0)}" ry="${(30+40*d).toFixed(0)}" transform="rotate(${(a*57.3).toFixed(0)} ${(f[0]+cs(a)*r).toFixed(0)} ${(f[1]+sn(a)*r*.6).toFixed(0)})" fill="#ead6bd" opacity="${(.6*cl(1-d/.9)).toFixed(2)}"/>`}}
+ s+=TWINK(mx,my,tQue-(tRel-tFz)-.15,1.6);fw(s);
+ FX.warp=GT>=rl&&GT<rl+.8?[f[0],f[1],lp(150,1700,cl((GT-rl)/.8)),110*(1-cl((GT-rl)/.8))]:null;
+ let ui='';if(G0>tHit&&!fz)ui+=TXT('UM SOCO',540,300,150,'#fff',-4,pop(G0,tRel))+(G0>tPod?TXT('TÃO PODEROSO',540,420,90,GOLD,-4,pop(G0,Math.max(tPod,tRel+.1))):'')+fastLines(.6*(1-lt),1);
+ const F=foc(f[0],f[1],.55),Fz=foc(f[0],f[1],.8),Fw=foc(760,900,.08);
+ GT=G0;camA([[tLat,.35,F[0],F[1]+120,4],[tHit-.06,.62,Fz[0],Fz[1],-2],[tHit,.8,Fz[0],Fz[1],0,'c'],[tRel,.9,Fz[0],Fz[1],0],[tRel+.01,.3,F[0],F[1],3,'c'],[tRel+.35,.08,Fw[0],Fw[1],0],[tQue,.04,Fw[0],Fw[1],1]]);
+ FX.ui=ui;FX.lit={amb:[1.02,.86,.8],rim:[255,200,130],d:[1,-.3],sh:.45,ri:1};FX.vig=G0<tHit?.92:.6;FX.dark=G0<tHit?.2:0;
+ FX.shake=fz?0:52*sh1(G0,[tHit,tRel],3)**1.5;FX.flash=fz?0:.7*sh1(G0,[tRel],5);FX.flcol='255,255,240';FX.chroma=fz?0:12*sh1(G0,[tHit,tRel],3);
+ FX.impact=G0>=tHit&&G0<tHit+.042;if(FX.impact)FX.flash=0;
+ FX.grade=fz?'contrast(1.5) saturate(.35) brightness(1.05)':G0<tHit?'contrast(1.18) saturate(.7)':'contrast(1.08) saturate(1.15)'},'');
 // ===== 12d) o vento abriria caminho entre as nuvens =====
 shot(null,tQue-.05,(t,u)=>{const op=ez(cl((GT-tVen+.2)/(tNuv-tVen+.6)));FX.bg=c=>sky(c,GT,{top:'#3a3f9a',mid:'#d0587a',bot:'#ffb35a',open:op,cx:540,cy:520,city:'#2a1330',drift:10});
  const k=cl((GT-tQue)/(pe(13)+.4-tQue)),my=lp(1500,520,ez(k)),ms=lp(.5,.02,ez(k));if(k<1)mon('C',540+40*sn(GT*3),my,ms,{center:1,pal:'a',ey:'ko',mo:.9,rot:GT*900%360,z:50,noglow:1,op:1-cl((k-.85)/.15)});
@@ -672,7 +717,7 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  if(FX.warp&&FX.warp[3]>.5){const [wx,wy,wr,ws]=FX.warp,R=wr;$('wimg').setAttribute('x',(wx-R).toFixed(1));$('wimg').setAttribute('y',(wy-R).toFixed(1));$('wimg').setAttribute('width',(2*R).toFixed(1));$('wimg').setAttribute('height',(2*R).toFixed(1));$('wdm').setAttribute('scale',ws.toFixed(1));pf+=' url(#warp)'}
  if(FX.sonar>.01){const k=1-.75*FX.sonar;['sdR','sdG','sdB'].forEach(i=>$(i).setAttribute('slope',k.toFixed(3)));const g=(4.5*FX.sonar*(.75+.25*sn(gt*4))).toFixed(3);$('scm').setAttribute('values',`0 0 0 0 0 ${(.55*g).toFixed(3)} ${(.55*g).toFixed(3)} ${(.55*g).toFixed(3)} 0 0 ${g} ${g} ${g} 0 0 0 0 0 1 0`);pf+=' url(#sonar)'}
  const bri=FX.dark?`brightness(${1-FX.dark})`:'',dof=FX.dof!=null?FX.dof:(sh.plate?Math.min(6,Math.max(0,(zb-.16)*12)):0);
- $('LA').style.filter=((dof>.3?`blur(${dof.toFixed(1)}px)`:'')+pf+' '+bl+' '+bri).trim()||'none';$('LB').style.filter=((dof>.3?`blur(${(dof*.6).toFixed(1)}px)`:'')+pf+' '+bl+' '+bri).trim()||'none';
+ const mbp=(FX.mbx||0)>.5?' url(#mbp)':'';$('mbpg').setAttribute('stdDeviation',`${(FX.mbx||0).toFixed(1)} 0`);$('LA').style.filter=((dof>.3?`blur(${dof.toFixed(1)}px)`:'')+pf+mbp+' '+bl+' '+bri).trim()||'none';$('LB').style.filter=((dof>.3?`blur(${(dof*.6).toFixed(1)}px)`:'')+pf+mbp+' '+bl+' '+bri).trim()||'none';
  // visao dos Seis Olhos: copia do cenario em azul por cima, com opacidade = intensidade (sem cores intermediarias)
  const VF=' sepia(1) hue-rotate(172deg) saturate(2.3) brightness(.7) contrast(1.15)',von=sh.plate&&vs>.01;$('LV').style.display=$('LW').style.display=von?'':'none';
  if(von){$('LV').style.transform=$('LA').style.transform;$('LW').style.transform=$('LB').style.transform;$('LV').style.filter=$('LA').style.filter.replace('none','')+VF;$('LW').style.filter=$('LB').style.filter.replace('none','')+VF;$('LV').style.opacity=$('LW').style.opacity=Math.min(1,vs).toFixed(3)}

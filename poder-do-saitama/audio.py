@@ -337,6 +337,33 @@ def rain(d):
     return x
 def amb_wind(d):
     n = int(d * SR); t = T(d); return filt(noise(n), lo=200, hi=1500) * (.6 + .4 * np.sin(2 * np.pi * .23 * t)) * .2
+# ---- efeitos da sequencia do soco ----
+def gust():  # rajada de vento levantando poeira
+    d = 1.8; n = int(d * SR); t = T(d); e = bell(n) ** 1.3
+    return norm(filt(noise(n), lo=200, hi=2500) * e * (1 + .5 * np.sin(2 * np.pi * 2.3 * t)) + filt(noise(n), lo=2500, hi=7000) * e * .25, .7)
+def accel():  # arrancada: sobe de grave a agudo (aceleracao)
+    d = 1.0; n = int(d * SR); w = np.linspace(0, 1, n); f = 60 + 900 * w ** 2.2
+    x = osc(f, d, 'saw') * .25 + filt(noise(n), lo=400, hi=6000) * w ** 2 * .8
+    return norm(filt(x, hi=7000) * w ** 1.4 * fadeout(np.ones(n), .03), .9)
+def skid():  # derrapada no asfalto
+    d = .7; n = int(d * SR); t = T(d); x = filt(noise(n), lo=900, hi=5000) * (1 + .4 * np.sin(2 * np.pi * 60 * t)) * np.exp(-t * 3.5)
+    return norm(x + osc(np.linspace(260, 120, n), d) * np.exp(-t * 6) * .3, .8)
+def clench():  # punho fechando: estalos de dedos + couro
+    o = np.zeros(int(.5 * SR))
+    for k in range(4):
+        L = int(.03 * SR); s_ = filt(noise(L), lo=1500, hi=6000) * dec(L, 25); i = int(k * .07 * SR); o[i:i + L] += s_
+    o += osc(np.linspace(180, 90, len(o)), len(o) / SR) * dec(len(o), 10) * .5
+    return norm(o, .6)
+def inhale():
+    d = .9; n = int(d * SR); return norm(filt(noise(n), lo=600, hi=4000) * np.linspace(0, 1, n) ** 2 * fadeout(np.ones(n), .05), .35)
+def freeze_ring():  # o tempo para: anel agudo + reverso
+    d = .5; n = int(d * SR); x = (osc(3520, d) + .5 * osc(5274, d)) * att(n, .005) * fadeout(np.ones(n), .05) * .5
+    return norm(x + filt(noise(n), lo=4000) * np.linspace(1, 0, n) * .2, .45)
+def air_burst():  # explosao de ar: estrondo grave + rajada que se espalha
+    d = 3.0; n = int(d * SR); t = T(d)
+    sub = osc(36 * np.exp(-t * .8) + 20, d) * np.exp(-t * 2) * 1.4
+    blast = filt(noise(n), lo=120, hi=3000) * np.exp(-t * 2.6) + filt(noise(n), lo=3000, hi=9000) * np.exp(-t * 6) * .5
+    return norm(reverb(sub + blast * .9, 2.4, .45), 1)
 AMB = {'amb_night': amb_night, 'amb_town': amb_town, 'amb_room': amb_room, 'amb_space': amb_space, 'wind': wind, 'drone': drone, 'rain': rain, 'amb_wind': amb_wind}
 G = {k: v for k, v in globals().items() if callable(v) and k in {s[1] for s in SFX} and k not in AMB}
 

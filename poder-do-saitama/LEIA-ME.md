@@ -1,27 +1,41 @@
 # E se você tivesse o poder do Saitama? — Short animado
 
-Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
+Vertical **1080 × 1920, 24 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
 "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D. Os **11 cenários deste vídeo são novos**.
 
 **Vídeo final:** `poder-do-saitama.mp4`
 
 ## Narração
-- O roteiro enviado entra **inteiro, na ordem e sem trocar nenhuma palavra**: são 19 frases, de "E se você
-  tivesse o mesmo poder absurdo de Saitama…" até "Comente “CARECA” se você aceitaria esse poder!". O título
-  "E SE VOCÊ TIVESSE O PODER DO SAITAMA?" aparece escrito na tela, junto com o desenho de um punho.
-- **Esta narração é PROVISÓRIA.** O áudio do ElevenLabs desta história não veio junto, então gerei uma voz
-  offline (espeak-ng + MBROLA, `narracao.py`). O tempo de cada palavra sai da lista de fonemas da própria voz
-  (`roteiro.json` → `palavras`), e cada corte, efeito e texto está preso à palavra exata (`wt(frase, 'palavra')`).
-- **Para usar a voz definitiva do ElevenLabs:**
+- **Voz definitiva do ElevenLabs** (`audio/narracao-elevenlabs.mp3`, voz "Will"), inteira, sem cortes e sem alterações.
+  O texto é exatamente o do roteiro (19 frases). O título "E SE VOCÊ TIVESSE O PODER DO SAITAMA?" aparece escrito na tela.
+- **Tempos:** `alinhar.py` encontra as frases pelas pausas reais do áudio. Como aqui não há modelo de transcrição
+  offline, `palavras_dtw.py` acha o tempo de **cada palavra** comparando (DTW sobre MFCC) cada frase com a mesma frase da
+  voz provisória, cujos tempos de palavra são exatos. Cada corte, efeito e texto está preso à palavra (`wt(frase, 'palavra')`).
+- A voz provisória (espeak-ng) ficou guardada em `audio/provisoria/`.
+- **Para trocar a voz de novo:**
   ```
-  python3 transcrever.py audio/narracao-elevenlabs.mp3 pasta-do-modelo-whisper   # tempo de cada palavra
-  #   ou, sem o Whisper:  python3 alinhar.py audio/narracao-elevenlabs.mp3      # tempos pelas pausas
-  ./refazer.sh 4
+  python3 alinhar.py audio/nova.mp3 && python3 palavras_dtw.py && ./refazer.sh 4
   ```
-  As cenas se reajustam sozinhas aos novos tempos. Se a voz definitiva for bem mais lenta ou mais rápida, o
-  vídeo acompanha: fica em torno de 90 a 100 s.
-- **Abertura a frio:** o vídeo começa com 1,3 s de ação (o soco no monstro) antes da primeira palavra.
-  O valor fica em `ABERTURA` no `prep.py`.
+- **Abertura a frio:** 1,3 s de ação (o soco no monstro) antes da primeira palavra (`ABERTURA` no `prep.py`).
+
+## A sequência do soco (o momento principal)
+Ela cobre as frases "Ele levantaria o punho para destruir tudo…" e "Mas você desviaria do golpe, apareceria atrás dele e
+acertaria um soco tão poderoso…", em 7 planos sem cortes confusos:
+1. **Encarada:** um plano aberto do monstro erguendo o punho, com o herói de costas, em silhueta. Depois a câmera se aproxima
+   devagar do rosto por ~2,5 s. O vento levanta poeira e pedacinhos de entulho, o cachecol chicoteia e a sombra do punho
+   desce sobre ele. O olhar fecha no "destruir".
+2. **Arrancada:** no "desviaria" ele dispara. A câmera acompanha de lado, o cenário fica com borrão de movimento horizontal
+   (só o fundo: o herói fica nítido) e aparecem um rastro de energia dourada, nuvens de poeira ficando para trás e
+   imagens residuais. O punho do monstro acerta o vazio e explode o asfalto atrás dele.
+3. **Volta pelas costas:** a câmera gira em volta da criatura (ela vira de frente → de lado → de costas) enquanto o rastro
+   do herói dá a volta. No "atrás" ele surge derrapando na retaguarda do monstro, que olha em volta confuso.
+4. **O tempo desacelera:** close no punho se fechando dedo por dedo, com linhas de foco, energia sendo sugada e tremor.
+5. **Enquadramento lateral:** ele arma o golpe, com o cenário escurecido e dessaturado e a energia entrando no punho.
+6. **O soco:** smear, impact frame e então um **freeze frame** de ~0,4 s em alto contraste, com linhas de foco de mangá.
+7. **Impacto final:** a onda de choque atravessa a tela e o **ar se deforma de verdade** (o filtro desloca o cenário 3D).
+   Entulho e poeira voam e o monstro sai girando até virar estrela. O som acompanha: rajadas de vento, aceleração,
+   derrapagem, punho fechando, silêncio com coração, anel agudo no freeze, impacto grave e explosão de ar.
+   No "vento abriria caminho entre as nuvens", o céu se abre.
 
 ## Pesquisa sobre One-Punch Man (o que inspirou as cenas)
 - **A rotina real do Saitama**: 100 flexões, 100 abdominais, 100 agachamentos e 10 km de corrida por dia, durante 3 anos.
@@ -52,7 +66,7 @@ Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cib
   presas e espinhos. Ele tem vista de frente e de costas, punhos posicionáveis, boca animada e olhos que mudam
   (bravo, susto, confuso e nocaute). Há 4 paletas: cinza-lava, verde, roxo e vermelho.
 
-## Estrutura (33 planos, mais os cortes rápidos de dia e noite)
+## Estrutura (35 planos, mais os cortes rápidos das estações)
 | Narração | O que acontece | Cenário |
 |---|---|---|
 | (abertura, antes da voz) + frase 1 | O herói salta e soca a cara do monstro: smear, hit-stop, impact frame e onda de choque. O monstro sai voando e vira uma estrela no céu. Depois o herói pousa com cratera | distrito comercial (dia) |
@@ -68,8 +82,7 @@ Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cib
 | frase 9 | Dá de ombros com cara de tédio | terraço ao pôr do sol |
 | frase 10 | Salta por cima dos prédios (cratera na decolagem), corre a velocímetro máximo com estrondo supersônico e boceja na frente de um monstro gigante (ECG a 60 BPM) | distrito comercial, cidade fantasma à noite |
 | frase 11 | O monstro colossal surge do horizonte na frente do sol, com terremoto, entulho e moradores fugindo. O herói corre em direção a ele (silhueta) | distrito comercial ao pôr do sol |
-| frase 12 | O monstro ergue o punho. No "destruir", o outro punho desce e o herói **segura com uma mão** | distrito comercial ao pôr do sol |
-| frase 13 | **Esquiva** (o punho abre uma cratera onde ele estava), **salto por cima dos prédios** até aparecer **atrás dele**, **silêncio** (a música some e só se ouve o coração), **o soco** (impact frames, câmera lenta, 3 ondas de choque) e o **vento abrindo as nuvens** com o monstro subindo até virar estrela | distrito comercial ao pôr do sol, céu |
+| frases 12 e 13 | **Sequência do soco** (veja a seção acima): encarada, arrancada, volta pelas costas, punho, soco, freeze e onda de choque. Depois o vento abre as nuvens e o monstro vira estrela | distrito comercial ao pôr do sol, céu |
 | frase 14 | "K.O." carimbado, cronômetro "00:03" e moradores comemorando | cidade fantasma em ruínas |
 | frases 15 e 16 | Sentado numa pilha de monstros nocauteados ("999+ VITÓRIAS"). A cor vai sumindo e ele fica sozinho na estrada à noite, com a barra "DESAFIO" quase em 0 | cidade fantasma à noite, terraço à noite |
 | frase 17 | Na mesinha, com sono e bocejando | apartamento à noite |

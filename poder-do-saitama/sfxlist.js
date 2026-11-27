@@ -4,8 +4,8 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  const cue=(t,k)=>a(t,'M_'+k);
  // deixas da trilha
  cue(0,'hook');cue(ps(2)-.25,'flash');cue(ps(3)-.15,'train');cue(ps(4)-.25,'suffer');cue(ps(5)-.2,'cont');cue(ps(6)-.2,'reps');cue(tAlg-.1,'stop');
- cue(ps(7)-.2,'power');cue(tDe,'hair');cue(tCar,'bald');cue(ps(9)-.2,'chill');cue(ps(10)-.2,'feats');cue(ps(11)-.2,'kaiju');cue(ps(13)-.12,'fight');
- cue(tAce,'silence');cue(tHit,'hit');cue(ps(14)-.2,'ko');cue(ps(15)-.25,'lonely');cue(tAce2,'heart');cue(ps(19)-.25,'cta');cue(TOTAL,'end');
+ cue(ps(7)-.2,'power');cue(tDe,'hair');cue(tCar,'bald');cue(ps(9)-.2,'chill');cue(ps(10)-.2,'feats');cue(ps(11)-.2,'kaiju');cue(tDash-.12,'fight');
+ cue(tFist,'silence');cue(tHit,'hit');cue(ps(14)-.2,'ko');cue(ps(15)-.25,'lonely');cue(tAce2,'heart');cue(ps(19)-.25,'cta');cue(TOTAL,'end');
  // 0a abertura: rugido, salto, SOCO, voo do monstro, pouso
  a(0,'amb_town',.6);a(0,'kaiju_roar',1);a(.05,'rumble',.7);a(.25,'whoosh',.9);a(tH-.12,'whiff',1);a(tH,'punch',1.3);a(tH,'boom',1.4);a(tH,'clash',.8);a(tH+.05,'glass',.4);
  a(tH+.15,'whoosh',.9);a(tH+1.55,'ping',.7);a(tLand-.25,'whoosh_soft',.6);a(tLand,'stomp',1.1);a(tLand,'crumble',.8);a(tSai,'ping',.9);a(tSai,'hit',.5);
@@ -42,13 +42,14 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  a(tEnf-.2,'amb_night',.6);a(tEnf,'kaiju_roar',1.1);a(tEnf+.1,'rumble',.6);for(let t=tSem;t<ps(11)-.3;t+=1)a(t,'beep',.5);a(tSem+.2,'yawn',.8);
  // 10 colossal surge
  a(ps(11)-.2,'rumble',1);a(ps(11)-.2,'amb_town',.6);a(tSur,'quake',1.1);a(tSur+.3,'crumble',.9);a(tCol,'kaiju_roar',1.2);a(tCid,'crowd_scream',.9);for(let t=tCid+.3;t<ps(12)-.3;t+=.27)a(t,'step',.4);
- // 11 o punho / bloqueio com uma mao
- a(ps(12)-.15,'wind',.7);a(tLev,'riser_s',.6);a(tLev,'kaiju_growl',.9);a(tDst-.2,'whoosh',1);a(tBlk,'block',1.2);a(tBlk,'boom',1.2);a(tBlk,'crumble',.8);a(tBlk+.1,'glass',.4);
- // 12 luta
- a(tSlam-.3,'whoosh',1);a(tSlam-.2,'swish',.7);a(tSlam,'boom',1.4);a(tSlam,'stomp',1.2);a(tSlam,'crumble',1);
- a(tApa,'whoosh',.9);a(tApa+.3,'whoosh_soft',.6);a(tAtr-.05,'teleport',1);a(tAtr+.2,'question',.6);
- a(tAce,'slowmo',.6);a(tAce+.05,'heart',.9);a(tHit-.16,'whiff',1.2);a(tHit,'punch',1.5);a(tHit,'boom',1.6);a(tHit,'clash',1.1);a(tHit+.05,'thunder',.8);a(tHit+.1,'kaiju_hurt',.9);a(tHit+.2,'glass',.5);
- a(tQue-.05,'wind_blast',1.2);a(tVen,'warp',.7);a(tNuv,'shimmer',.9);a(pe(13)+.25,'ping',.8);
+ // 11-12 sequencia do soco: vento, encarada, arrancada, volta, punho, SOCO, freeze, onda de choque
+ a(ps(12)-.15,'wind',1);a(tLev,'kaiju_growl',.9);a(tLev,'riser_s',.4);a(tPun+.25,'amb_wind',1);a(tPun+.3,'gust',.9);a(tDst,'gust',1);a(tDst,'heart',.8);a(tTud,'heart',.9);a(tTud+.3,'whoosh_soft',.7);
+ a(tDash-.3,'accel',1.1);a(tDash,'sonic',1.1);a(tDash,'stomp',.6);for(let t=tDash;t<tApa-.1;t+=.09)a(t,'step',.35);a(tSlam-.2,'whoosh',1);a(tSlam,'boom',1.4);a(tSlam,'stomp',1.2);a(tSlam,'crumble',1);
+ a(tApa-.05,'whoosh',1);a(tApa+.25,'whoosh',.8);a(tApa+.5,'whoosh_soft',.7);a(tAtr-.05,'skid',1);a(tAtr,'teleport',.6);a(tAtr+.2,'question',.6);
+ a(tFist,'slowmo',.9);a(tFist,'heart',1);a(tFist+.1,'clench',1);a(tFist+.3,'charge',.6);a(tLat,'heart',.9);a(tLat+.05,'inhale',.8);
+ a(tHit-.16,'whiff',1.3);a(tHit,'punch',1.6);a(tHit,'clash',1.2);a(tHit+.02,'freeze_ring',.8);
+ a(tRel,'air_burst',1.5);a(tRel,'boom',1.6);a(tRel+.03,'thunder',.9);a(tRel+.05,'glass',.7);a(tRel+.1,'kaiju_hurt',.9);a(tRel+.15,'crumble',1);a(tRel+.1,'wind_blast',1);
+a(tVen,'warp',.7);a(tNuv,'shimmer',.9);a(pe(13)+.25,'ping',.8);
  // 13 K.O.
  a(ps(14)-.2,'amb_wind',.5);a(tDer,'stamp',1.1);a(tDer,'hit',.6);a(tDer+.2,'cheer',.9);for(let k=0;k<3;k++)a(tSeg+k/9,'tick',.6);a(tSeg+.35,'ding',.6);
  // 14-16 solidao
