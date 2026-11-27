@@ -5,7 +5,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // deixas da trilha
  cue(0,'hook');cue(ps(2)-.25,'flash');cue(ps(3)-.15,'train');cue(ps(4)-.25,'suffer');cue(ps(5)-.2,'cont');cue(ps(6)-.2,'reps');cue(tAlg-.1,'stop');
  cue(ps(7)-.2,'power');cue(tDe,'hair');cue(tCar,'bald');cue(ps(9)-.2,'chill');cue(ps(10)-.2,'feats');cue(ps(11)-.2,'kaiju');cue(tDash-.12,'fight');
- cue(tFist,'silence');cue(tHit,'hit');cue(ps(14)-.2,'ko');cue(ps(15)-.25,'lonely');cue(tAce2,'heart');cue(ps(19)-.25,'cta');cue(TOTAL,'end');
+ cue(tFist,'silence');cue(tP0,'pause');cue(tHit,'hit');cue(ps(14)-.2,'ko');cue(ps(15)-.25,'lonely');cue(tAce2,'heart');cue(ps(19)-.25,'cta');cue(TOTAL,'end');
  // 0a abertura: rugido, salto, SOCO, voo do monstro, pouso
  a(0,'amb_town',.6);a(0,'kaiju_roar',1);a(.05,'rumble',.7);a(.25,'whoosh',.9);a(tH-.12,'whiff',1);a(tH,'punch',1.3);a(tH,'boom',1.4);a(tH,'clash',.8);a(tH+.05,'glass',.4);
  a(tH+.15,'whoosh',.9);a(tH+1.55,'ping',.7);a(tLand-.25,'whoosh_soft',.6);a(tLand,'stomp',1.1);a(tLand,'crumble',.8);a(tSai,'ping',.9);a(tSai,'hit',.5);
@@ -42,13 +42,18 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  a(tEnf-.2,'amb_night',.6);a(tEnf,'kaiju_roar',1.1);a(tEnf+.1,'rumble',.6);for(let t=tSem;t<ps(11)-.3;t+=1)a(t,'beep',.5);a(tSem+.2,'yawn',.8);
  // 10 colossal surge
  a(ps(11)-.2,'rumble',1);a(ps(11)-.2,'amb_town',.6);a(tSur,'quake',1.1);a(tSur+.3,'crumble',.9);a(tCol,'kaiju_roar',1.2);a(tCid,'crowd_scream',.9);for(let t=tCid+.3;t<ps(12)-.3;t+=.27)a(t,'step',.4);
- // 11-12 sequencia do soco: vento, encarada, arrancada, volta, punho, SOCO, freeze, onda de choque
- a(ps(12)-.15,'wind',1);a(tLev,'kaiju_growl',.9);a(tLev,'riser_s',.4);a(tPun+.25,'amb_wind',1);a(tPun+.3,'gust',.9);a(tDst,'gust',1);a(tDst,'heart',.8);a(tTud,'heart',.9);a(tTud+.3,'whoosh_soft',.7);
- a(tDash-.3,'accel',1.1);a(tDash,'sonic',1.1);a(tDash,'stomp',.6);for(let t=tDash;t<tApa-.1;t+=.09)a(t,'step',.35);a(tSlam-.2,'whoosh',1);a(tSlam,'boom',1.4);a(tSlam,'stomp',1.2);a(tSlam,'crumble',1);
- a(tApa-.05,'whoosh',1);a(tApa+.25,'whoosh',.8);a(tApa+.5,'whoosh_soft',.7);a(tAtr-.05,'skid',1);a(tAtr,'teleport',.6);a(tAtr+.2,'question',.6);
- a(tFist,'slowmo',.9);a(tFist,'heart',1);a(tFist+.1,'clench',1);a(tFist+.3,'charge',.6);a(tLat,'heart',.9);a(tLat+.05,'inhale',.8);
- a(tHit-.16,'whiff',1.3);a(tHit,'punch',1.6);a(tHit,'clash',1.2);a(tHit+.02,'freeze_ring',.8);
- a(tRel,'air_burst',1.5);a(tRel,'boom',1.6);a(tRel+.03,'thunder',.9);a(tRel+.05,'glass',.7);a(tRel+.1,'kaiju_hurt',.9);a(tRel+.15,'crumble',1);a(tRel+.1,'wind_blast',1);
+ // 11-12 sequencia do soco (10 passos): ameaca, observa, ataque, esquiva, travelling, corrida, giro, punho, PAUSA, SOCO
+ a(ps(12)-.15,'wind',1);a(ps(12)-.15,'rumble',.7);a(tLev-.1,'kaiju_roar',1.1);a(tLev+.4,'crumble',.6);                                   // 1 ameaca (contra-plongee)
+ a(tDst-.25,'amb_wind',1);a(tDst-.2,'whoosh_soft',.6);a(tDst-.1,'gust',.9);a(tDst+.1,'heart',.8);a(tTud,'heart',.9);                       // 2 o heroi observa
+ a(tTud+.25,'kaiju_growl',1);a(tTud+.55,'whoosh',1.2);a(tTud+.6,'riser_s',.6);                                                            // 3 o monstro ataca
+ a(tDash-.3,'accel',1.1);a(tDash,'sonic',1.1);for(let t=tDash;t<tApa-.1;t+=.085)a(t,'step',.35);a(tSlam-.2,'whoosh',1);a(tSlam,'boom',1.4);a(tSlam,'stomp',1.2);a(tSlam,'crumble',1); // 4-5 esquiva + travelling
+ a(tApa-.1,'whoosh',1);for(let t=tApa-.05;t<tApa+.35;t+=.07)a(t,'step',.4);a(tApa+.32,'sonic',.7);                                           // 6 corre ate o monstro
+ a(tApa+.35,'whoosh',1);a(tApa+.6,'whoosh',.8);a(tAtr,'whoosh_soft',.7);a(tAtr+.05,'skid',1);a(tAtr+.3,'kaiju_growl',.5);                    // 7 giro e revelacao
+ a(tFist,'slowmo',.9);a(tFist,'heart',1);a(tFist+.1,'clench',1);a(tFist+.3,'charge',.6);a(tLat,'heart',.9);a(tLat+.02,'inhale',.8);a(tLat,'riser_s',.7); // 8 preparacao
+ a(tP0,'vacuum',1);a(tP0+.05,'heart',.7);                                                                                                  // 9 pausa dramatica (o resto silencia)
+ a(tPunch-.04,'whiff',1.4);a(tHit,'punch',1.5);a(tHit,'clash',1.0);a(tHit+.05,'boom',1.15);a(tHit+.02,'freeze_ring',.8);                        // 10 SOCO + freeze
+ a(tRel2,'kaiju_hurt',1.1);a(tRel2,'impact',1);a(tRel2+.03,'glass',.8);                                                                   //    reacao do monstro (dentes estilhacando)
+ a(tWide-.04,'air_burst',1.6);a(tWide,'boom',1.5);a(tWide+.02,'thunder',.9);a(tWide+.05,'glass',.7);a(tWide+.1,'crumble',1.1);a(tWide+.05,'wind_blast',1.1); // onda de choque e lancamento
 a(tVen,'warp',.7);a(tNuv,'shimmer',.9);a(pe(13)+.25,'ping',.8);
  // 13 K.O.
  a(ps(14)-.2,'amb_wind',.5);a(tDer,'stamp',1.1);a(tDer,'hit',.6);a(tDer+.2,'cheer',.9);for(let k=0;k<3;k++)a(tSeg+k/9,'tick',.6);a(tSeg+.35,'ding',.6);

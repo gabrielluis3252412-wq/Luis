@@ -364,6 +364,10 @@ def air_burst():  # explosao de ar: estrondo grave + rajada que se espalha
     sub = osc(36 * np.exp(-t * .8) + 20, d) * np.exp(-t * 2) * 1.4
     blast = filt(noise(n), lo=120, hi=3000) * np.exp(-t * 2.6) + filt(noise(n), lo=3000, hi=9000) * np.exp(-t * 6) * .5
     return norm(reverb(sub + blast * .9, 2.4, .45), 1)
+def vacuum():  # o ar sendo sugado antes do golpe (reverso de uma rajada)
+    d = .3; n = int(d * SR); w = np.linspace(0, 1, n)
+    x = (filt(noise(n), lo=400, hi=7000) * w ** 3 + osc(np.linspace(60, 220, n), d) * w ** 2 * .4) * fadeout(np.ones(n), .01)
+    return norm(x, .7)
 AMB = {'amb_night': amb_night, 'amb_town': amb_town, 'amb_room': amb_room, 'amb_space': amb_space, 'wind': wind, 'drone': drone, 'rain': rain, 'amb_wind': amb_wind}
 G = {k: v for k, v in globals().items() if callable(v) and k in {s[1] for s in SFX} and k not in AMB}
 
@@ -523,9 +527,14 @@ k = int(.12 * SR); ve = np.convolve(np.abs(voice), np.ones(k) / k, mode='same');
 sm = np.zeros(N); a_, r_ = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.16 * SR)); st = 64
 for i in range(0, N, st):
     prev = sm[i - 1] if i else 0; x = vl[i]; c = a_ if x > prev else r_; sm[i:i + st] = prev + (x - prev) * (1 - (1 - c) ** st)
-duck_mus = 1 - .66 * sm; duck_amb = 1 - .55 * sm; duck_fx = 1 - .58 * sm
+duck_mus = 1 - .72 * sm; duck_amb = 1 - .65 * sm; duck_fx = 1 - .74 * sm
+# pausa dramatica antes do soco: ambiencia e trilha quase somem (so a voz, o coracao e o ar sendo sugado)
+if 'M_pause' in CUE and 'M_hit' in CUE:
+    tt = np.arange(N) / SR; p0, p1 = CUE['M_pause'], CUE['M_hit']
+    gp = 1 - .9 * np.clip((tt - p0) / .06, 0, 1) * np.clip((p1 - .01 - tt) / .02, 0, 1)
+    duck_mus = duck_mus * gp; duck_amb = duck_amb * gp
 fx = np.tanh(fx * .9); M = norm(mus, 1)
-mix_m = voice * 1.0 + fx * .34 * duck_fx + amb * .45 * duck_amb + M * .2 * duck_mus
+mix_m = voice * 1.18 + fx * .34 * duck_fx + amb * .45 * duck_amb + M * .2 * duck_mus
 d = int(.011 * SR); SB = fx * .34 * duck_fx + M * .2 * duck_mus; side = np.concatenate([np.zeros(d), SB[:-d]]) - SB
 Lc = mix_m + .28 * side; Rc = mix_m - .28 * side
 fo = int(.6 * SR); Lc[-fo:] *= np.linspace(1, 0, fo); Rc[-fo:] *= np.linspace(1, 0, fo)

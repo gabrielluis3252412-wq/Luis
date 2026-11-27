@@ -1,6 +1,6 @@
 // Renderiza todos os quadros em frames/ (JPEG). Uso: node render.js [workers] [escala]
 // escala 1.3333 = 2K (1440x2560, padrao); 1 = 1080x1920; 2 = 4K (2160x3840)
-const {chromium}=require('playwright'),fs=require('fs'),FPS=24;
+const {chromium}=require('playwright'),fs=require('fs'),FPS=+(process.env.FPS||30);
 const NW=+(process.argv[2]||4),DSF=+(process.argv[3]||process.env.ESCALA||4/3);fs.mkdirSync(__dirname+'/frames',{recursive:true});
 let N=0;
 async function work(w){let i=w;while(i<N){const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1080,height:1920},deviceScaleFactor:DSF});

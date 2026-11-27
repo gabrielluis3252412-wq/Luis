@@ -4,16 +4,16 @@ const rr=(i,a)=>Math.abs(Math.sin(i*a+a)*43758.5453)%1;
 const SCAM={eye:[0,2.2,14],tg:[0,3.6,-12],fov:.85};
 // ---------- DISTRITO COMERCIAL (arranha-ceus de vidro, faixa de pedestres, telas) ----------
 const cbd=(n,o)=>{CUR=n;Pl(0,0,-40,1400,1400,{col:[.42,.42,.48]});Pl(0,.02,-40,9,180,{col:[.2,.2,.27],spec:.45});
- for(let z=4;z>-120;z-=5)Bx(0,.04,z,.2,.02,2.2,{col:[1,.86,.3]});[-1,1].forEach(s=>Bx(s*2.3,.04,-40,.12,.02,180,{col:[.92,.92,.95]}));
+ for(let z=o.rev?84:4;z>-120;z-=5)Bx(0,.04,z,.2,.02,2.2,{col:[1,.86,.3]});[-1,1].forEach(s=>Bx(s*2.3,.04,-40,.12,.02,180,{col:[.92,.92,.95]}));
  for(let k=-4;k<=4;k++)Bx(k*.9,.045,7.5,.55,.02,2.6,{col:[.96,.96,.98]});
  [-1,1].forEach(s=>{Bx(s*6.2,.12,-40,3.4,.24,180,{col:[.62,.6,.66]});Bx(s*4.55,.18,-40,.18,.36,180,{col:[.8,.8,.84]})});
  const GL=[[.18,.28,.45],[.25,.38,.5],[.3,.3,.38],[.2,.42,.48],[.36,.3,.44]];
- for(let k=0;k<14;k++){const z=2-k*9;[-1,1].forEach((s,i)=>{const id=k*2+i,h=14+30*rr(id,3.7),w=6+3*rr(id,1.3),x=s*(8+w/2),c=GL[id%5];
+ for(let k=o.rev?-8:0;k<14;k++){const z=2-k*9;[-1,1].forEach((s,i)=>{const id=k>=0?k*2+i:60+k*2+i,h=14+30*rr(id,3.7),w=6+3*rr(id,1.3),x=s*(8+w/2),c=GL[id%5];
   Bx(x,h/2,z,w,h,7,{col:c,spec:.9});for(let f=2.2;f<h-1;f+=1.6)Bx(x-s*(w/2+.02),f,z,.05,.18,6.6,{col:o.lit&&rr(id*7+f,2.1)>.45?[1,.85,.5]:[.75,.82,.9],emis:o.lit&&rr(id*7+f,2.1)>.45?[.9,.7,.35]:[.12,.14,.16]});
   Bx(x,h+.25,z,w+.4,.5,7.4,{col:[.55,.55,.6]});if(rr(id,5.5)>.5)Cy(x,h+2,z,.06,.12,3.5,{col:[.7,.7,.75]});
   if(k<5&&rr(id,8.8)>.35)Bx(s*7.95,4.5+3*rr(id,9.9),z-1,.1,2.2,3.6,{col:o.ad[id%o.ad.length],emis:o.ad[id%o.ad.length].map(v=>v*.9)})})}
- for(let k=0;k<26;k++){const x=(rr(k,4.1)-.5)*160,z=-150-40*rr(k,6.3),h=30+50*rr(k,2.9);Bx(x,h/2,z,10+8*rr(k,1.7),h,10,{col:o.far})}
- [-1,1].forEach(s=>{for(let k=0;k<6;k++){const z=6-k*16;Cy(s*5.1,2.2,z,.07,.09,4.4,{col:[.25,.25,.3]});Bx(s*4.7,4.35,z,.9,.08,.12,{col:[.25,.25,.3]});Sp(s*4.3,4.25,z,.16,em(o.lamp,1.4));Cy(s*6.6,.6,z-8,.45,.5,.5,{col:[.5,.45,.4]});Sp(s*6.6,1.6,z-8,.9,{col:[.25,.6,.3]})}});
+ for(let k=0;k<26;k++){const x=(rr(k,4.1)-.5)*160,z=-150-40*rr(k,6.3),h=30+50*rr(k,2.9);Bx(x,h/2,z,10+8*rr(k,1.7),h,10,{col:o.far});if(o.rev)Bx(-x,h/2,-z+40,10+8*rr(k,1.7),h,10,{col:o.far})}
+ [-1,1].forEach(s=>{for(let k=o.rev?-4:0;k<6;k++){const z=6-k*16;Cy(s*5.1,2.2,z,.07,.09,4.4,{col:[.25,.25,.3]});Bx(s*4.7,4.35,z,.9,.08,.12,{col:[.25,.25,.3]});Sp(s*4.3,4.25,z,.16,em(o.lamp,1.4));Cy(s*6.6,.6,z-8,.45,.5,.5,{col:[.5,.45,.4]});Sp(s*6.6,1.6,z-8,.9,{col:[.25,.6,.3]})}});
  [-1,1].forEach(s=>{Cy(s*4.9,1.8,9,.08,.08,3.6,{col:[.2,.2,.24]});Bx(s*4.9,3.5,9,.35,.9,.3,{col:[.15,.15,.18]});Sp(s*4.9,3.7,9.17,.1,em([1,.2,.2],1.5));Sp(s*4.9,3.4,9.17,.1,em([.3,.3,.3],1))});
  Sp(o.sun[0],o.sun[1],o.sun[2],o.sun[3],em(o.suncol,1.6));(o.clouds||[]).forEach(([x,y,z])=>{Sp(x,y,z,6,em(o.cloud,1));Sp(x+6,y-1,z,4.6,em(o.cloud,1));Sp(x-6,y-1,z,4.6,em(o.cloud,1))})};
 cbd('cbd',{lit:0,far:[.55,.66,.85],ad:[[1,.3,.45],[.2,.75,1],[1,.8,.2]],lamp:[.9,.9,.85],sun:[30,60,-200,8],suncol:[1,.98,.85],cloud:[.97,.97,1],clouds:[[-40,52,-180],[38,60,-200],[0,70,-230]]});
@@ -84,5 +84,14 @@ roof('tlh',{floor:[.38,.38,.44],wall:[.5,.5,.56],bld:[.12,.12,.22],gnd:[.06,.06,
 SETS.tlh={cam:{eye:[0,1.7,6.5],tg:[0,1.9,-10],fov:.8},L:[[0,3,1,.4,.45,.8],[-4,2,-1,.3,.3,.5],[3,1.5,0,.3,.3,.5],[0,1,4,.3,.3,.5],[2.6,4.4,-2.2,.6,.1,.1]],ka:[.3,.32,.52],kb:[.12,.12,.18],sun:[-.2,.6,-.6],sunc:[.35,.4,.7],fogc:[.1,.1,.2],fogd:.00012,miss:MISS0,bg:[.06,.06,.16]};
 roof('tlhS',{floor:[.6,.52,.5],wall:[.7,.6,.58],bld:[.45,.28,.38],gnd:[.4,.25,.3],lit:0,sun:[0,2,-200,16],suncol:[1,.6,.25],cloud:[1,.65,.5],clouds:[[-60,26,-190],[50,32,-200],[10,40,-210]]});
 SETS.tlhS={cam:{eye:[0,1.7,6.5],tg:[0,1.9,-10],fov:.8},L:NOL,ka:[.78,.5,.52],kb:[.35,.25,.2],sun:[0,.25,-.95],sunc:[1.3,.65,.35],fogc:[.98,.6,.45],fogd:.00006,miss:MISS0,bg:[.96,.55,.4]};
+// mesmo distrito ao por do sol, com a rua continuando atras da camera original: cameras novas para a luta
+cbd('cbdR',{rev:1,lit:1,far:[.45,.28,.4],ad:[[1,.3,.45],[.2,.75,1],[1,.8,.2]],lamp:[1,.8,.4],sun:[0,10,-210,16],suncol:[1,.6,.25],cloud:[1,.66,.5],clouds:[[-50,40,-200],[46,48,-210]]});
+SETS.cbdR={...SETS.cbdS,cam:SCAM};
+// monstro em (1.14, 0, -28.25), ~20 de altura; heroi em (-0.35, 0, 3.0)
+PLATES.cbdR_low={set:'cbdR',cam:{eye:[-1.1,.5,9.5],tg:[.9,10.5,-28],fov:.98}};      // contra-plongee: por cima do ombro do heroi, olhando o monstro
+PLATES.cbdR_rev={set:'cbdR',cam:{eye:[.15,1.5,-2.6],tg:[-.45,1.25,8],fov:.78}};     // contraplano: o rosto do heroi, luz do por do sol de frente
+PLATES.cbdR_side={set:'cbdR',cam:{eye:[6.2,1.25,3.9],tg:[-12,2.8,1.6],fov:.95}};      // lateral: travelling da arrancada
+PLATES.cbdR_fl={set:'cbdR',cam:{eye:[-5.4,1.2,-15],tg:[1.1,8.5,-28.25],fov:1.0}};      // 3/4 de frente, da calcada esquerda (inicio do giro)
+PLATES.cbdR_back={set:'cbdR',cam:{eye:[3.2,2.0,-50],tg:[.6,7,-18],fov:.9}};        // por tras do monstro (fim do giro, soco, lancamento)
 ['cbd','cbdS','zgh','zghN','apt','aptN','prq','prqN','prqW','tlh','tlhS'].forEach(k=>PLATES[k]={set:k});
 for(const k in PLATES)PLATES[k].cam=PLATES[k].cam||SETS[PLATES[k].set].cam;

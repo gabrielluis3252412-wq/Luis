@@ -1,6 +1,6 @@
 # E se você tivesse o poder do Saitama? — Short animado
 
-Vertical **2K (1440 × 2560), 24 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
+Vertical **2K (1440 × 2560), 30 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
 "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D. Os **11 cenários deste vídeo são novos**.
 
 **Vídeo final:** `poder-do-saitama.mp4`
@@ -120,6 +120,58 @@ acertaria um soco tão poderoso…", em 7 planos sem cortes confusos:
 O desenho base do personagem (`lib.js`, que não foi alterado) tem dois traços decorativos de luz nas laterais da cabeça,
 um laranja e um azul. Com o capuz eles ficam escondidos atrás das abas. Na versão careca, o `put()` em `main.js` remove os
 dois traços junto com a "touca" de cabelo.
+
+## Edição cinematográfica de anime (versão atual)
+Trabalho feito sobre as cenas existentes: história, narração, personagens e cenários foram preservados.
+
+**Animação dos personagens**
+- Ninguém fica totalmente parado. `still` agora significa "calmo" (respiração, cabeça e olhar em 40%). Só as imagens
+  residuais e o freeze frame congelam (`frz`).
+- A cabeça acompanha o ritmo da narração (energia da voz), e as **palavras-chave** dão um pulso de reação no
+  personagem (sobrancelha, inclinação, corpo).
+- Há antecipação antes do salto, das arrancadas e do soco, e expressão nova de "olhar determinado" (`stare`).
+
+**Câmera**
+- 5 ângulos novos no **mesmo** distrito ao pôr do sol (`cbdR_*` em `sets_saitama.js`): contra-plongée, contraplano no
+  rosto, lateral para travelling, 3/4 de frente e por trás do monstro. O monstro virou um "billboard" no mundo 3D
+  (`monW`), então fica no lugar certo em todos os ângulos.
+- Travelling lateral com borrão só no fundo, travelling para a frente na corrida, aproximações lentas antes dos
+  golpes e movimentos lentos e com propósito nas cenas calmas (terraço e apartamento).
+
+**A luta (10 passos, presa à narração)**
+1. Ameaça: contra-plongée do monstro rugindo e erguendo o punho, com o herói em silhueta.
+2. O herói observa: contraplano no rosto, iluminado pelo pôr do sol, e a sombra do punho cobrindo o quadro.
+3. O ataque: o punho desce.
+4–5. Esquiva e travelling lateral em alta velocidade: o punho explode o asfalto onde ele estava.
+6. Corrida até o monstro (de trás do herói, em silhueta).
+7. O giro em volta da criatura (3/4 → por trás) e o herói surgindo nas costas dela.
+8. Preparação: close no punho se fechando e enquadramento lateral.
+9. **Pausa dramática**: close no olho, o tempo quase para, a trilha e a ambiência somem e o ar é sugado.
+10. **O soco**: smear, impact frame, explosão de luz, linhas de velocidade, ondas de choque, partículas, tremor e
+    freeze. Depois vêm o close da reação do monstro (olhos arregalados, dentes estilhaçando) e o plano aberto do
+    lançamento, com o ar deformado e o monstro arremessado ao céu.
+
+**Edição e retenção**
+- Os 3 primeiros segundos abrem num close extremo dos olhos brilhando e dos dentes do monstro e cortam seco para o
+  herói saltando no soco (aos 0,76 s).
+- O texto na tela foi reduzido à palavra mais importante de cada momento (a legenda já mostra a narração). Os
+  textos entram com pulo e saem com fade e zoom suaves antes de cada corte.
+- Os balões de reação desviam do rosto nos closes.
+
+**Som**
+- Efeitos novos na luta: rugido, rajadas, aceleração, passos rápidos, derrapagem, ar sendo sugado na pausa, impacto
+  em camadas, estilhaços e explosão de ar.
+- A trilha e a ambiência quase somem na pausa antes do soco.
+- A voz ficou mais à frente: os efeitos abaixam mais quando a narração fala, e a voz fica de 5 a 9 dB acima nas cenas
+  de luta.
+
+**Luz e profundidade**
+- Raios de sol volumétricos automáticos, saindo da posição real do sol em cada cenário 3D, nos cenários de pôr do sol
+  e amanhecer.
+- Poeira e brilhos fora de foco em primeiro plano, com paralaxe da câmera.
+- Pico de luz no impacto (`FX.bloom`, `FX.boost`) e contraste forte na luta.
+
+**Qualidade:** 2K (1440 × 2560) a **30 fps**.
 
 ## Revisão do vídeo inteiro (quadro a quadro, a cada 0,5 s)
 Problemas encontrados e corrigidos:
