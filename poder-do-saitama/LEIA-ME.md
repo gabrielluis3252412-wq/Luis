@@ -112,7 +112,9 @@ acertaria um soco tão poderoso…", em 7 planos sem cortes confusos:
   1080 × 1920 e `node render.js 4 2` gera 4K (2160 × 3840, mais lento).
 - Os cenários novos são gerados em 1584 × 2816 (`plates.js`, supersampling 1,5×), e os canvases de brilho e partículas
   acompanham a resolução do quadro. Os desenhos 2D, textos e efeitos são vetoriais, então ficam nítidos em qualquer tamanho.
-- O vídeo é codificado com x264 `-preset slow -crf 17 -tune animation`.
+- O `refazer.sh` codifica com x264 `-preset slow -crf 17 -tune animation` (qualidade máxima, ~114 MB). Como o GitHub recusa
+  arquivos acima de 100 MB, o `poder-do-saitama.mp4` do repositório é uma versão 2K em duas passadas a ~7,3 Mbps (~97 MB),
+  visualmente quase igual. A de qualidade máxima (`poder-do-saitama-2k-max.mp4`) fica fora do git.
 
 ## Correção: linhas ao lado do rosto do herói careca
 O desenho base do personagem (`lib.js`, que não foi alterado) tem dois traços decorativos de luz nas laterais da cabeça,
