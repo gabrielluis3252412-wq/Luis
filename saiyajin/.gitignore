@@ -1,0 +1,9 @@
+frames/
+_pv/
+pvt.jpg
+_pv*.jpg
+render.log
+audio/_tts/
+audio/efeitos.wav
+audio/musica.wav
+audio/mix_final.wav

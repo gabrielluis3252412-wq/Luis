@@ -1,0 +1,78 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Cap,Poppins Black,80,&H00FFFFFF,&H00FFFFFF,&H00241018,&H96000000,0,0,0,0,100,100,0,0,1,9,4,2,90,90,330,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:00.35,0:00:00.99,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se você fosse
+Dialogue: 0,0:00:00.99,0:00:01.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um Saiyajin…
+Dialogue: 0,0:00:01.85,0:00:02.63,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e cada derrota te
+Dialogue: 0,0:00:02.63,0:00:03.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}deixasse mais forte que
+Dialogue: 0,0:00:03.67,0:00:04.09,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}antes?
+Dialogue: 0,0:00:04.53,0:00:05.44,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você nasceria em uma
+Dialogue: 0,0:00:05.44,0:00:06.58,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}das raças guerreiras mais
+Dialogue: 0,0:00:06.58,0:00:07.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}temidas do universo.
+Dialogue: 0,0:00:07.95,0:00:08.64,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Desde pequeno,
+Dialogue: 0,0:00:08.64,0:00:10.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seria treinado para enfrentar
+Dialogue: 0,0:00:10.02,0:00:11.35,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}inimigos capazes de destruir
+Dialogue: 0,0:00:11.35,0:00:12.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}planetas inteiros.
+Dialogue: 0,0:00:12.72,0:00:14.01,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas seu maior diferencial
+Dialogue: 0,0:00:14.01,0:00:15.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seria assustador…
+Dialogue: 0,0:00:15.46,0:00:16.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Quando sobrevivesse a uma
+Dialogue: 0,0:00:16.62,0:00:17.57,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}batalha extrema e se
+Dialogue: 0,0:00:17.57,0:00:18.27,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}recuperasse,
+Dialogue: 0,0:00:18.35,0:00:19.65,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seu corpo poderia aumentar
+Dialogue: 0,0:00:19.65,0:00:21.26,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}drasticamente o próprio poder.
+Dialogue: 0,0:00:21.59,0:00:22.01,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ou seja,
+Dialogue: 0,0:00:22.01,0:00:23.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}quanto mais difícil fosse
+Dialogue: 0,0:00:23.22,0:00:23.95,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sua jornada…
+Dialogue: 0,0:00:24.13,0:00:25.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}maior seria seu {\c&HFFD24F&}potencial{\c&HFFFFFF&}
+Dialogue: 0,0:00:25.28,0:00:25.97,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de evolução.
+Dialogue: 0,0:00:26.45,0:00:27.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas tudo mudaria no
+Dialogue: 0,0:00:27.28,0:00:28.23,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}dia em que enfrentasse
+Dialogue: 0,0:00:28.23,0:00:29.27,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um inimigo impossível de
+Dialogue: 0,0:00:29.27,0:00:29.80,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}derrotar.
+Dialogue: 0,0:00:30.18,0:00:31.12,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Seus amigos estariam em
+Dialogue: 0,0:00:31.12,0:00:31.56,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}perigo…
+Dialogue: 0,0:00:31.94,0:00:33.00,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E, pela primeira vez,
+Dialogue: 0,0:00:33.00,0:00:34.15,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você sentiria uma raiva
+Dialogue: 0,0:00:34.15,0:00:34.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}tão intensa
+Dialogue: 0,0:00:34.88,0:00:35.92,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}que seu corpo começaria
+Dialogue: 0,0:00:35.92,0:00:36.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}a liberar uma {\c&HFFD24F&}energia{\c&HFFFFFF&}
+Dialogue: 0,0:00:36.87,0:00:37.60,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}jamais{\c&HFFFFFF&} vista.
+Dialogue: 0,0:00:38.03,0:00:39.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Seu cabelo ficaria dourado.
+Dialogue: 0,0:00:39.70,0:00:40.61,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Seus olhos mudariam.
+Dialogue: 0,0:00:40.89,0:00:41.80,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E uma aura gigantesca
+Dialogue: 0,0:00:41.80,0:00:42.95,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}explodiria ao seu redor.
+Dialogue: 0,0:00:43.33,0:00:44.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você teria despertado o
+Dialogue: 0,0:00:44.42,0:00:45.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}lendário Super Saiyajin.
+Dialogue: 0,0:00:46.15,0:00:47.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só que essa transformação
+Dialogue: 0,0:00:47.28,0:00:48.40,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seria apenas o começo.
+Dialogue: 0,0:00:48.73,0:00:49.96,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Com treinamento e batalhas
+Dialogue: 0,0:00:49.96,0:00:51.17,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}cada vez mais difíceis,
+Dialogue: 0,0:00:51.20,0:00:52.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você alcançaria poderes capazes
+Dialogue: 0,0:00:52.71,0:00:53.65,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de rivalizar com os
+Dialogue: 0,0:00:53.65,0:00:54.57,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}próprios deuses.
+Dialogue: 0,0:00:54.95,0:00:55.61,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E, no auge da
+Dialogue: 0,0:00:55.61,0:00:56.26,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sua evolução,
+Dialogue: 0,0:00:56.26,0:00:57.93,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}despertaria o Instinto Superior…
+Dialogue: 0,0:00:58.26,0:00:59.26,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Uma habilidade em que
+Dialogue: 0,0:00:59.26,0:01:00.53,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seu corpo reagiria sozinho,
+Dialogue: 0,0:01:00.53,0:01:01.75,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}desviando de ataques quase
+Dialogue: 0,0:01:01.75,0:01:02.46,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}impossíveis.
+Dialogue: 0,0:01:02.94,0:01:03.93,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas existe uma verdade
+Dialogue: 0,0:01:03.93,0:01:05.04,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}que poucos entendem sobre
+Dialogue: 0,0:01:05.04,0:01:05.76,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}os Saiyajins…
+Dialogue: 0,0:01:06.19,0:01:07.47,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Eles não são extraordinários
+Dialogue: 0,0:01:07.47,0:01:08.86,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}porque nunca são derrotados.
+Dialogue: 0,0:01:09.19,0:01:10.82,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Eles são extraordinários porque,
+Dialogue: 0,0:01:10.82,0:01:12.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mesmo depois de cair,
+Dialogue: 0,0:01:12.10,0:01:13.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sempre encontram uma maneira
+Dialogue: 0,0:01:13.37,0:01:14.15,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de se tornar mais
+Dialogue: 0,0:01:14.15,0:01:14.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}fortes.
