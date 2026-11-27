@@ -425,7 +425,7 @@ shot('road',ps(25)-.2,(t,u)=>{
  const c0=chestP(k),ku=C[k].sp[2];if(k=='CSS'){goldAura(k,gold,1.3);fw(BOLTS(c0[0],c0[1],180*ku,GT,gold));FX.pf=[[c0[0],c0[1],380*ku,36,'255,220,120',gold,'rise']]}
  FX.rays=[[560,560,.3+.4*gold,'255,210,130',18,1800]];
  let ui='';if(GT>tCai&&GT<tEnd)ui+=TXT('MESMO DEPOIS DE CAIR...',540,320,70,'#fff',-3,pop(GT,tCai));if(GT>tMfo&&GT<tEnd)ui+=TXT('MAIS FORTES',540,440,124,GOLD,-3,pop(GT,tMfo)*(1+.03*sn(GT*7)));
- if(GT>tEnd){const a=ob(GT,tEnd,.4);ui+=`<rect x="0" y="1290" width="1080" height="330" fill="#120802" opacity="${(.82*a).toFixed(2)}"/>`+TXT('E VOCÊ?',540,300,110,'#fff',-3,pop(GT,tEnd))+TXT('CAIRIA OU LEVANTARIA?',540,420,74,GOLD,-3,pop(GT,tEnd+.15))+TXT('COMENTE AQUI EMBAIXO!',540,1470,66,'#fff',-2,pop(GT,tEnd+.3))}
+ if(GT>tEnd){ui+=TXT('E VOCÊ?',540,300,110,'#fff',-3,pop(GT,tEnd))+TXT('CAIRIA OU LEVANTARIA?',540,420,74,GOLD,-3,pop(GT,tEnd+.15))}
  const pp=C[k].sp,rr=lp(84,0,up)*Math.PI/180,Fl=foc(pp[0]+150*pp[2]*sn(rr),pp[1]-150*pp[2]*cs(rr),.3),F=foc(c0[0],c0[1]-60*ku,.3);camA([[ps(25)-.2,.34,Fl[0],Fl[1],-4],[tCai+.2,.3,Fl[0],Fl[1],-2],[tCai+.9,.25,F[0]*.6,F[1]*.6,0],[tMfo-.1,.32,F[0],F[1],0],[tMfo,.1,0,-40,0,'c'],[OLDT,.2,0,-60,1]]);
  FX.ui=ui;FX.lit=k=='CSS'?{amb:[1.1,.98,.82],rim:[255,220,120],d:[0,-1],sh:.3,ri:1}:LIT.road;FX.shake=14*sh1(GT,[tMfo],5);FX.flash=.6*sh1(GT,[tMfo],8);FX.flcol='255,240,190'},'');
 
