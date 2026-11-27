@@ -4,7 +4,7 @@ Short vertical **2160 × 3840 (4K), 60 fps, ~90 s, H.264 + AAC**, feito com o me
 "Cibito e o Loop Temporal", "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre
 cenários 3D prontos.
 
-**Vídeo final:** `poderes-do-jotaro.mp4`
+**Vídeo final:** `poderes-do-jotaro.mp4` (2160×3840, 60 fps, 90,3 s, H.264 ~8 Mbit/s, 93,5 MB; áudio AAC 48 kHz a −14,4 LUFS)
 
 ## Narração (importante)
 Nenhum roteiro nem áudio veio junto com o pedido, então **o roteiro foi escrito a partir da pesquisa**
@@ -106,4 +106,4 @@ Arquivos: `main.js` (os 25 planos, câmera, efeitos e sincronia), `stands.js` (S
 quadro: câmera, luz por personagem, variantes de cenário, inversão de cores), `sfxlist.js` (efeitos e deixas
 da trilha), `audio.py` (síntese, trilha e mixagem), `caps.py` (legendas com o tempo real das palavras),
 `render.js` (quadros 2160×3840 em 4 processos), `exportar.sh` (MP4).
-O render 4K leva cerca de 40 minutos em 4 núcleos.
+O render 4K levou cerca de 55 minutos em 4 núcleos (0,6 s por quadro), mais 5 minutos de exportação.
