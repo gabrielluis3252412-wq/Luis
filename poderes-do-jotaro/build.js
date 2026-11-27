@@ -1,0 +1,15 @@
+// Monta story.html (animacao) e plates.html (cenarios 3D). Uso: node build.js
+const fs=require('fs'),r=f=>fs.readFileSync(__dirname+'/'+f,'utf8');
+const S='const INK="#1b1024",S=`stroke="${INK}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"`;\n';
+const FONT=`@font-face{font-family:Poppins;font-weight:800;src:url(fonts/poppins-800.woff)}@font-face{font-family:Poppins;font-weight:900;src:url(fonts/poppins-900.woff)}`;
+const DEFS=`<defs><filter id="blr"><feGaussianBlur stdDeviation="7"/></filter><filter id="blr2"><feGaussianBlur stdDeviation="2.5"/></filter>
+<radialGradient id="eglow"><stop offset="0" stop-color="#e6fbff" stop-opacity=".95"/><stop offset=".3" stop-color="#5fd0ff" stop-opacity=".6"/><stop offset="1" stop-color="#1a6bff" stop-opacity="0"/></radialGradient>
+<radialGradient id="sph"><stop offset="0" stop-color="#7fd8ff" stop-opacity="0"/><stop offset=".78" stop-color="#7fd8ff" stop-opacity=".05"/><stop offset=".96" stop-color="#bff4ff" stop-opacity=".32"/><stop offset="1" stop-color="#ffffff" stop-opacity=".5"/></radialGradient></defs>`;
+// camadas de cada plano: desfocado (b), nitido, variante desfocada (xb), variante (x) -> trocadas por opacidade
+const IMGS=y=>`<img id="i${y}b"><img id="i${y}"><img id="i${y}xb"><img id="i${y}x">`;
+const head=`<!DOCTYPE html><html><head><meta charset="utf-8"><style>${FONT}html,body{margin:0;background:#000;overflow:hidden}#st{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden;background:#05071a}.pl{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:540px 1000px}.pl img{position:absolute;left:0;top:0;width:1080px;height:1920px;display:none}svg,canvas{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:540px 1000px}#UI,#O,#BG,#INV{transform:none}#aw{mix-blend-mode:screen}#INV{mix-blend-mode:difference}*{animation:none!important}</style></head><body><div id="st"><canvas id="BG" width="1080" height="1920"></canvas><div class="pl" id="LA">${IMGS('A')}</div><svg id="SV" viewBox="0 0 1080 1920">${DEFS}<g id="sg" filter="url(#blr)"></g><g id="sg2" filter="url(#blr2)"></g><g id="aw"></g><g id="cw"></g></svg><div class="pl" id="LB">${IMGS('B')}</div><svg id="SV2" viewBox="0 0 1080 1920"><g id="cw2"></g><g id="fw"></g></svg><canvas id="O" width="1080" height="1920"></canvas><svg id="INV" viewBox="0 0 1080 1920" style="display:none"></svg><svg id="UI" viewBox="0 0 1080 1920"></svg></div><script>`;
+const JS=['lib.js','sets.js','sets_loop.js','roteiro.js','env.js','engine.js','stands.js','main.js','sfxlist.js'];
+fs.writeFileSync(__dirname+'/story.html',head+S+JS.filter(f=>fs.existsSync(__dirname+'/'+f)).map(r).join('\n')+'\n</script></body></html>');
+const p='<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;background:#000}canvas{width:300px}</style></head><body><canvas id="A"></canvas><canvas id="B"></canvas><script>';
+fs.writeFileSync(__dirname+'/plates.html',p+S+r('lib.js')+'\n'+r('sets.js')+'\n'+r('sets_loop.js')+'\n'+r('plates_main.js')+'\n</script></body></html>');
+console.log('story.html e plates.html montados');
