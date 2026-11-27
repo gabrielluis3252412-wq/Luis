@@ -1,7 +1,7 @@
 # E se você tivesse o poder do Saitama? — Short animado
 
 Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
-"Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D prontos.
+"Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D. Os **11 cenários deste vídeo são novos**.
 
 **Vídeo final:** `poder-do-saitama.mp4`
 
@@ -23,6 +23,26 @@ Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cib
 - **Abertura a frio:** o vídeo começa com 1,3 s de ação (o soco no monstro) antes da primeira palavra.
   O valor fica em `ABERTURA` no `prep.py`.
 
+## Pesquisa sobre One-Punch Man (o que inspirou as cenas)
+- **A rotina real do Saitama**: 100 flexões, 100 abdominais, 100 agachamentos e 10 km de corrida por dia, durante 3 anos.
+  O cabelo caiu como efeito do treino, e ninguém acredita que o treino explique a força. Isso está nos contadores, no calendário e
+  nos moradores dizendo "IMPOSSÍVEL!".
+- **A Cidade Z**: tem um distrito comercial, uma área residencial e uma área abandonada destruída por monstros, a "cidade
+  fantasma". Por isso a luta é no distrito comercial e o depois dela, na cidade fantasma em ruínas.
+- **O soco sério**: o golpe que abre as nuvens do céu inteiro inspirou a cena do vento subindo e o céu se abrindo.
+- **O tédio**: vencer tudo com um soco tira a emoção das lutas. A parte final mostra isso devagar.
+- Fontes: [Wikipedia: Saitama](https://en.wikipedia.org/wiki/Saitama_(One-Punch_Man)), [Healthline: treino do One Punch Man](https://www.healthline.com/health/fitness/one-punch-man-workout-review),
+  [One Punch Man Wiki: Cidade Z](https://onepunchman.fandom.com/wiki/Z-City), [Fiction Horizon: soco sério](https://fictionhorizon.com/saitamas-serious-punch-how-strong-it-is/).
+
+## Cenários 3D NOVOS (`sets_saitama.js`, nenhum reaproveitado)
+| Cenário | Variações | Usado em |
+|---|---|---|
+| Distrito comercial: arranha-céus de vidro, telões, faixa de pedestres, semáforos | dia (`cbd`), pôr do sol com janelas acesas (`cbdS`) | abertura, moradores, salto, luta, final |
+| Cidade fantasma: prédios destruídos e inclinados, entulho, crateras, carros abandonados, postes tortos | pôr do sol (`zgh`), noite (`zghN`) | corrida supersônica, "sem medo", K.O., pilha de monstros |
+| Apartamento simples: tatame, futon, mesinha baixa, TV antiga, calendário, halteres | dia (`apt`), noite (`aptN`) | flashback, flexões, queda do cabelo, CARECA, tédio |
+| Parque de treino: pista de terra, barras, banco, árvores, morros | amanhecer (`prq`), noite de chuva (`prqN`), inverno com neve (`prqW`) | treino, corrida, dias e estações passando, sofrimento |
+| Terraço: parapeito, caixa d'água, ar-condicionado, skyline lá embaixo | noite (`tlh`), pôr do sol (`tlhS`) | agachamentos, repetições, solidão, coração acelerando |
+
 ## Protagonista e monstros (originais)
 - **O "você" é o Cibito.** Ele treina com o capuz de sempre e perde o cabelo mecha por mecha (`HOODN`, `HAIRFALL`).
   No "careca!", o capuz voa e revela o **herói careca**: brilho na cabeça (`SHINE`), capuz caído nas costas e
@@ -35,26 +55,26 @@ Vertical **1080 × 1920, 24 fps, ~92 s, H.264 + AAC**. Usa o mesmo motor de "Cib
 ## Estrutura (33 planos, mais os cortes rápidos de dia e noite)
 | Narração | O que acontece | Cenário |
 |---|---|---|
-| (abertura, antes da voz) + frase 1 | O herói salta e soca a cara do monstro: smear, hit-stop, impact frame e onda de choque. O monstro sai voando e vira uma estrela no céu. Depois o herói pousa com cratera | cidade de dia |
+| (abertura, antes da voz) + frase 1 | O herói salta e soca a cara do monstro: smear, hit-stop, impact frame e onda de choque. O monstro sai voando e vira uma estrela no céu. Depois o herói pousa com cratera | distrito comercial (dia) |
 | "qualquer inimigo" | O herói se teletransporta e derruba três monstros em sequência | céu vermelho + silhueta da cidade |
-| "com apenas um soco?" | Close no punho erguido e no brilho da careca, com o texto "1 SOCO" | cidade de dia |
-| frase 2 | Volta no tempo ("3 ANOS ANTES"): o Cibito decide treinar e a barra passa do "LIMITE HUMANO", que racha | quarto |
-| frase 3 | Calendário voando ("3 ANOS"), depois 100 flexões, 100 abdominais e 100 agachamentos com contadores. Em seguida, 10 km de corrida e dia e noite se alternando ("DIA 1 → 1095") | casa, sala, corredor, quintal, estrada |
-| frase 4 | Na chuva, à noite, os braços tremem e ele desaba no "esforço" | rua à noite |
-| frase 5 | Ele corre enquanto os moradores gritam "IMPOSSÍVEL!", "DESISTE!" e "LOUCURA!" | cidade |
-| frase 6 | Sequência de socos com o contador "REPETIÇÕES" até 100.000. Tudo para no "inacreditável" | quintal à noite |
-| frase 7 | Painel de atributos (FORÇA e RESISTÊNCIA chegam ao MAX), imagens residuais de velocidade e, de repente, as mechas começam a cair | estrada, quarto |
-| frase 8 | As últimas mechas pulam, o capuz voa e a careca brilha ("CARECA!"), com coro "aaah" e grilos | quarto |
-| frase 9 | Dá de ombros com cara de tédio | estrada |
-| frase 10 | Salta por cima dos prédios (cratera na decolagem), corre a velocímetro máximo com estrondo supersônico e boceja na frente de um monstro gigante (ECG a 60 BPM) | cidade, rua à noite |
-| frase 11 | O monstro colossal surge do horizonte na frente do sol, com terremoto, entulho e moradores fugindo. O herói corre em direção a ele (silhueta) | cidade ao pôr do sol |
-| frase 12 | O monstro ergue o punho. No "destruir", o outro punho desce e o herói **segura com uma mão** | cidade ao pôr do sol |
-| frase 13 | **Esquiva** (o punho abre uma cratera onde ele estava), **salto por cima dos prédios** até aparecer **atrás dele**, **silêncio** (a música some e só se ouve o coração), **o soco** (impact frames, câmera lenta, 3 ondas de choque) e o **vento abrindo as nuvens** com o monstro subindo até virar estrela | cidade ao pôr do sol, céu |
-| frase 14 | "K.O." carimbado, cronômetro "00:03" e moradores comemorando | cidade ao pôr do sol |
-| frases 15 e 16 | Sentado numa pilha de monstros nocauteados ("999+ VITÓRIAS"). A cor vai sumindo e ele fica sozinho na estrada à noite, com a barra "DESAFIO" quase em 0 | cidade à noite, estrada à noite |
-| frase 17 | No sofá, com sono e bocejando | sala |
-| frase 18 | Uma silhueta misteriosa de olhos vermelhos aparece no horizonte e o ECG vai de 48 para 170 BPM: ele sorri pela primeira vez | cidade ao pôr do sol |
-| frase 19 | Pose heroica. "COMENTE" e depois "CARECA" letra por letra, digitado numa caixa de comentário que é enviada (corações voando). Fecha em íris no brilho da careca | cidade de dia |
+| "com apenas um soco?" | Close no punho erguido e no brilho da careca, com o texto "1 SOCO" | distrito comercial (dia) |
+| frase 2 | Volta no tempo ("3 ANOS ANTES"): o Cibito decide treinar e a barra passa do "LIMITE HUMANO", que racha | apartamento |
+| frase 3 | Calendário voando ("3 ANOS"), depois 100 flexões, 100 abdominais e 100 agachamentos com contadores. Em seguida, 10 km de corrida e verão, noite e neve se alternando ("DIA 1 → 1095") | parque, apartamento, terraço, parque nas 3 estações |
+| frase 4 | Na chuva, à noite, os braços tremem e ele desaba no "esforço" | parque, noite de chuva |
+| frase 5 | Ele corre enquanto os moradores gritam "IMPOSSÍVEL!", "DESISTE!" e "LOUCURA!" | distrito comercial |
+| frase 6 | Sequência de socos com o contador "REPETIÇÕES" até 100.000. Tudo para no "inacreditável" | terraço à noite |
+| frase 7 | Painel de atributos (FORÇA e RESISTÊNCIA chegam ao MAX), imagens residuais de velocidade e, de repente, as mechas começam a cair | parque, apartamento |
+| frase 8 | As últimas mechas pulam, o capuz voa e a careca brilha ("CARECA!"), com coro "aaah" e grilos | apartamento |
+| frase 9 | Dá de ombros com cara de tédio | terraço ao pôr do sol |
+| frase 10 | Salta por cima dos prédios (cratera na decolagem), corre a velocímetro máximo com estrondo supersônico e boceja na frente de um monstro gigante (ECG a 60 BPM) | distrito comercial, cidade fantasma à noite |
+| frase 11 | O monstro colossal surge do horizonte na frente do sol, com terremoto, entulho e moradores fugindo. O herói corre em direção a ele (silhueta) | distrito comercial ao pôr do sol |
+| frase 12 | O monstro ergue o punho. No "destruir", o outro punho desce e o herói **segura com uma mão** | distrito comercial ao pôr do sol |
+| frase 13 | **Esquiva** (o punho abre uma cratera onde ele estava), **salto por cima dos prédios** até aparecer **atrás dele**, **silêncio** (a música some e só se ouve o coração), **o soco** (impact frames, câmera lenta, 3 ondas de choque) e o **vento abrindo as nuvens** com o monstro subindo até virar estrela | distrito comercial ao pôr do sol, céu |
+| frase 14 | "K.O." carimbado, cronômetro "00:03" e moradores comemorando | cidade fantasma em ruínas |
+| frases 15 e 16 | Sentado numa pilha de monstros nocauteados ("999+ VITÓRIAS"). A cor vai sumindo e ele fica sozinho na estrada à noite, com a barra "DESAFIO" quase em 0 | cidade fantasma à noite, terraço à noite |
+| frase 17 | Na mesinha, com sono e bocejando | apartamento à noite |
+| frase 18 | Uma silhueta misteriosa de olhos vermelhos aparece no horizonte e o ECG vai de 48 para 170 BPM: ele sorri pela primeira vez | terraço ao pôr do sol |
+| frase 19 | Pose heroica. "COMENTE" e depois "CARECA" letra por letra, digitado numa caixa de comentário que é enviada (corações voando). Fecha em íris no brilho da careca | distrito comercial (dia) |
 
 ## Áudio
 - **346 efeitos sincronizados** (`sfxlist.js` + `audio.py`): socos, whiffs, bloqueio, rugidos e grunhidos do monstro,
@@ -78,5 +98,5 @@ node pvt.js 5 27.3 66.8  # previa de quadros -> pvt.jpg
 ```
 Arquivos: `main.js` (personagens novos, monstro, planos, camera, efeitos), `sfxlist.js` (efeitos e deixas da trilha),
 `audio.py` (sintese, trilha e mixagem), `caps.py` (legendas com o tempo real de cada palavra), `narracao.py`,
-`prep.py`, `build.js`, `render.js`. Motor e cenários (`lib.js`, `sets.js`, `sets_loop.js`, `plates/`) são cópias
-idênticas, e nada foi recriado.
+`prep.py`, `build.js`, `render.js`. Motor (`lib.js`, `sets.js`, `sets_loop.js`) sem alterações. Os cenários novos ficam em `sets_saitama.js` e são
+renderizados em `plates/` com `node plates.js cbd cbdS zgh zghN apt aptN prq prqN prqW tlh tlhS`.
