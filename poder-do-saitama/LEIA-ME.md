@@ -121,6 +121,22 @@ O desenho base do personagem (`lib.js`, que não foi alterado) tem dois traços 
 um laranja e um azul. Com o capuz eles ficam escondidos atrás das abas. Na versão careca, o `put()` em `main.js` remove os
 dois traços junto com a "touca" de cabelo.
 
+## Revisão do vídeo inteiro (quadro a quadro, a cada 0,5 s)
+Problemas encontrados e corrigidos:
+- O título lia "E SE VOCÊ TIVESSE DO SAITAMA?". Agora são 3 linhas: "E SE VOCÊ TIVESSE / O PODER ABSURDO / DO SAITAMA?".
+- O punho erguido sumia atrás da cabeça ("1 SOCO", K.O. e o final). Agora é desenhado na frente (`fr:'R'`).
+- O calendário cobria o Cibito e reiniciava a contagem de dias: agora mostra "ANO 1 → 3" no alto, e os dias só
+  contam na montagem.
+- Nos "MÚSCULOS", manchas pretas (os "bíceps") cobriam o rosto. Foram removidas.
+- O contador de repetições, o cronômetro do K.O. e a barra "DESAFIO" estavam em cima do personagem. Subiram.
+- Agachamentos e corrida tinham o personagem grande demais e cortado: foram reenquadrados.
+- Na "velocidade absurda" o herói quase não aparecia: ficou maior, e o velocímetro subiu.
+- No "monstros gigantescos" a cabeça do monstro ficava cortada no topo: foi reposicionada.
+- Ao surgir atrás do monstro, o herói aparecia cortado na borda: foi corrigido.
+- No céu, "ABRIU AS NUVENS!" ficava em cima da legenda: subiu.
+- O monitor cardíaco escondia a silhueta do novo inimigo: ficou menor, à esquerda.
+- No final, a caixa de comentário cobria o rosto: o herói subiu no quadro.
+
 ## Como refazer
 ```
 python3 narracao.py      # (so a narracao provisoria) voz + roteiro.json com o tempo de cada palavra
