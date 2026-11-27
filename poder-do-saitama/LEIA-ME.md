@@ -1,6 +1,6 @@
 # E se você tivesse o poder do Saitama? — Short animado
 
-Vertical **2K (1440 × 2560), 30 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
+Vertical **2K (1440 × 2560), 60 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
 "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D. Os **11 cenários deste vídeo são novos**.
 
 **Vídeo final:** `poder-do-saitama.mp4`
@@ -171,7 +171,7 @@ Trabalho feito sobre as cenas existentes: história, narração, personagens e c
 - Poeira e brilhos fora de foco em primeiro plano, com paralaxe da câmera.
 - Pico de luz no impacto (`FX.bloom`, `FX.boost`) e contraste forte na luta.
 
-**Qualidade:** 2K (1440 × 2560) a **30 fps**.
+**Qualidade:** 2K (1440 × 2560) a **60 fps** (`render.js` usa 60 por padrão; `FPS=30 ./refazer.sh` gera 30).
 
 ## Revisão do vídeo inteiro (quadro a quadro, a cada 0,5 s)
 Problemas encontrados e corrigidos:
