@@ -227,38 +227,64 @@ const HAIRFALL=L=>{let s='';L.forEach(([i,t0],j)=>{const d=GT-t0;if(d<0||d>1.6)r
  s+=i==9?`<path transform="translate(${xx.toFixed(1)} ${yy.toFixed(1)}) rotate(${(d*400*(j%2?1:-1)).toFixed(0)})" d="M-16 14L-8-12L0 4L10-14L18 14Z" fill="${HC}" ${S4} opacity="${o.toFixed(2)}"/>`:`<circle cx="${xx.toFixed(1)}" cy="${yy.toFixed(1)}" r="${r}" fill="${HC}" ${S4} opacity="${o.toFixed(2)}"/>`});return s};
 // capuz voando para tras (revela a careca)
 const HOODFLY=(t0,dir=-1)=>{const d=GT-t0;if(d<0||d>1.4)return'';const k=d/1.4;return`<g transform="translate(${(dir*420*k).toFixed(1)} ${(-380*k+620*k*k).toFixed(1)}) rotate(${(dir*-260*k).toFixed(1)} 0 -250)" opacity="${(1-k*k).toFixed(2)}">${HOODN(0)}</g>`};
-// ---------- O MONSTRO COLOSSAL (design ORIGINAL) ----------
-// unidades locais: pes em (0,0), altura ~1000. fr/fl = punhos [x,y]; mo = boca 0-1; ey: mad|ko|wow|conf; back = de costas
-const KJP={a:{b:'#3e5566',b2:'#6f8a99',d:'#273743',lv:'#ff7a1a',lvg:'255,122,26'},g:{b:'#4f6b2f',b2:'#86a34c',d:'#30441c',lv:'#ffe14d',lvg:'255,225,77'},p:{b:'#5b3a78',b2:'#8a63ad',d:'#3a2450',lv:'#ff4fd0',lvg:'255,79,208'},r:{b:'#7a2e2a',b2:'#b0554a',d:'#4c1a18',lv:'#ffd23f',lvg:'255,210,63'}};
-const KJ=(o={})=>{const t=GT,P=KJP[o.pal||'a'],mo=o.mo||0,lvA=.55+.45*ab(sn(t*4.3+(o.seed||0))),bk=o.back,F=o.bigF||92,ey=o.ey||'mad';
+// ---------- O MONSTRO COLOSSAL: criatura de SOMBRA (design original inspirado na referencia enviada) ----------
+// corpo negro de contorno rasgado com brilho vermelho nas bordas, olhos vermelhos, sorriso enorme de dentes pontudos,
+// bracos longos com garras curvas, tentaculos de sombra e fumaca na base.
+// unidades locais: pes em (0,0), altura ~1000. fr/fl = maos [x,y]; mo = boca 0-1; ey: mad|ko|wow|conf; back = de costas
+const KJP={a:{b:'#0c0710',d:'#050307',lv:'#ff2340',lvg:'255,35,64',hot:'#ffe0e4'},g:{b:'#071009',d:'#030604',lv:'#86ff3a',lvg:'134,255,58',hot:'#ecffd8'},
+ p:{b:'#0d0714',d:'#050309',lv:'#b84dff',lvg:'184,77,255',hot:'#f2e2ff'},r:{b:'#120807',d:'#070302',lv:'#ff7a1a',lvg:'255,122,26',hot:'#fff0dc'}};
+// contorno rasgado: pontas irregulares, maiores na metade de cima
+const JAG=(cx,cy,rx,ry,n,amp,seed,t)=>{let d='';for(let i=0;i<n;i++){const a=i/n*6.283-Math.PI/2,up=Math.max(0,-sn(a)),r=i%2?1+amp*(.35+.65*rnd(i,seed))*(.3+up):.96+.02*sn(t*3+i);d+=(i?'L':'M')+(cx+cs(a)*rx*r+4*sn(t*2+i*1.3)).toFixed(1)+' '+(cy+sn(a)*ry*r).toFixed(1)}return d+'Z'};
+// contorno rasgado a partir de uma forma base (pontas para fora, maiores em cima)
+const JAGP=(B,m,amp,seed,t,cx=0,cy=-500)=>{let d='',k=0;for(let i=0;i<B.length;i++){const [x0,y0]=B[i],[x1,y1]=B[(i+1)%B.length];for(let j=0;j<m;j++,k++){const u=j/m,x=lp(x0,x1,u),y=lp(y0,y1,u),dx=x-cx,dy=y-cy,L=Math.hypot(dx,dy)||1,up=cl((-dy/L+.2)),e=k%2?amp*(.35+.65*rnd(k,seed))*(.25+up)*L:-.03*L;
+ d+=(k?'L':'M')+(x+dx/L*e+3*sn(t*2.2+k)).toFixed(1)+' '+(y+dy/L*e).toFixed(1)}}return d+'Z'};
+const TORSO=[[-210,-240],[-290,-400],[-345,-560],[-300,-690],[-170,-760],[0,-780],[170,-760],[300,-690],[345,-560],[290,-400],[210,-240],[0,-200]];
+// tentaculo de sombra que balanca (com um galho)
+const TEND=(x,y,ang,L,w,t,seed,P)=>{let px=x,py=y,a=ang,d=`M${x.toFixed(1)} ${y.toFixed(1)}`,h=d;const pts=[];for(let i=1;i<=7;i++){a+=.3*sn(t*1.6+seed+i*.9)+(rnd(seed,i)-.5)*.45;px+=cs(a)*L/7;py+=sn(a)*L/7;d+=`L${px.toFixed(1)} ${py.toFixed(1)}`;if(i<=3)h+=`L${px.toFixed(1)} ${py.toFixed(1)}`;pts.push([px,py,a])}
+ const b=pts[3];d+=`M${b[0].toFixed(1)} ${b[1].toFixed(1)}l${(cs(b[2]+.9)*L*.28).toFixed(1)} ${(sn(b[2]+.9)*L*.28).toFixed(1)}`;
+ return `<path d="${d}" stroke="${P.lv}" stroke-width="${(w*.5+8).toFixed(1)}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/><path d="${h}" stroke="${P.lv}" stroke-width="${(w+8).toFixed(1)}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/><path d="${d}" stroke="${P.b}" stroke-width="${(w*.5).toFixed(1)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="${h}" stroke="${P.b}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`};
+// mao com garras curvas (ang = direcao do braco, em radianos; open 0-1 abre os dedos)
+const HAND=(x,y,ang,s,P,open=1)=>{let o=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(ang*57.2958-90).toFixed(1)}) scale(${s.toFixed(3)})"><path d="M-74-46Q-96 40-52 76H52Q96 40 74-46Q0-78-74-46Z" fill="${P.b}" stroke="${P.lv}" stroke-width="8" stroke-linejoin="round"/>`;
+ [-1.5,-.5,.5,1.5].forEach(k=>{const a=k*.36*open,bx=k*32,by=62,L=230-34*ab(k),tx=bx+sn(a)*L-k*8,ty=by+cs(a)*L,mx=bx+sn(a)*L*.5+k*10,my=by+cs(a)*L*.55;
+  o+=`<path d="M${bx-17} ${by}Q${(mx-20).toFixed(0)} ${my.toFixed(0)} ${tx.toFixed(0)} ${ty.toFixed(0)}Q${(mx+14).toFixed(0)} ${(my-12).toFixed(0)} ${bx+17} ${by}Z" fill="${P.d}" stroke="${P.lv}" stroke-width="6" stroke-linejoin="round"/><path d="M${bx-5} ${by+12}Q${mx.toFixed(0)} ${(my-4).toFixed(0)} ${(tx-3).toFixed(0)} ${(ty-10).toFixed(0)}" stroke="#e8d4d4" stroke-width="3" fill="none" opacity=".5"/>`});
+ return o+`<path d="M-62 0Q-150 40-164 140Q-116 66-48 34Z" fill="${P.d}" stroke="${P.lv}" stroke-width="6" stroke-linejoin="round"/></g>`};
+const KJ=(o={})=>{const t=GT,P=KJP[o.pal||'a'],mo=o.mo||0,lvA=(.55+.45*ab(sn(t*4.3+(o.seed||0)))).toFixed(2),bk=o.back,F=(o.bigF||92)/92,ey=o.ey||'mad';
  const fr=o.fr||[250,-430],fl=o.fl||[-250,-430];
- const arm=(sx,sy,f)=>{const mx=(sx+f[0])/2+(sx>0?70:-70),my=(sy+f[1])/2+60,d=`M${sx} ${sy}Q${mx.toFixed(0)} ${my.toFixed(0)} ${f[0].toFixed(0)} ${f[1].toFixed(0)}`;
-  return `<path d="${d}" stroke="${INK}" stroke-width="126" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${P.b}" stroke-width="104" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${P.lv}" stroke-width="7" stroke-dasharray="34 70" fill="none" opacity="${(.8*lvA).toFixed(2)}"/>`+
-  `<g transform="translate(${f[0].toFixed(0)} ${f[1].toFixed(0)})"><circle r="${F}" fill="${P.b2}" ${S}/>${[-.55,-.18,.18,.55].map(u=>`<path d="M${(u*F*1.1-14).toFixed(0)} ${(-F*.55).toFixed(0)}Q${(u*F*1.1).toFixed(0)} ${(-F*.95).toFixed(0)} ${(u*F*1.1+14).toFixed(0)} ${(-F*.55).toFixed(0)}" stroke="${INK}" stroke-width="7" fill="${P.b}"/>`).join('')}<path d="M${(-F*.7).toFixed(0)} ${(F*.1).toFixed(0)}Q0 ${(F*.35).toFixed(0)} ${(F*.7).toFixed(0)} ${(F*.1).toFixed(0)}" stroke="${INK}" stroke-width="7" fill="none"/></g>`};
- let s=`<ellipse cy="10" rx="300" ry="40" fill="rgba(0,0,0,.35)"/>`;
- s+=`<path d="M-160-180Q-360-120-470-10Q-380-40-300-60Q-250-60-170-110Z" fill="${P.d}" ${S}/>`;
- [[-240,-520,-1],[-200,-660,-1],[-110,-760,-1],[240,-520,1],[200,-660,1],[110,-760,1]].forEach(([x,y,dr])=>{s+=`<path d="M${x} ${y-50}L${x+dr*120} ${y-30}L${x} ${y+60}Z" fill="${P.lv}" ${S}/>`});
- s+=`<path d="M-160-300L-200 0H-40L-60-300Z" fill="${P.d}" ${S}/><path d="M160-300L200 0H40L60-300Z" fill="${P.d}" ${S}/>${[-170,-120,-70,70,120,170].map(x=>`<path d="M${x-18} -4L${x} 26L${x+18} -4Z" fill="#e8dcc8" ${S4}/>`).join('')}`;
- if(!bk)s+=arm(-200,-600,fl);
- s+=`<path d="M-240-250Q-290-560-165-700Q0-790 165-700Q290-560 240-250Q0-180-240-250Z" fill="${P.b}" ${S}/>`;
- if(!bk){s+=`<path d="M-135-270Q-165-500-95-625Q0-668 95-625Q165-500 135-270Q0-232-135-270Z" fill="${P.b2}"/>`+[-330,-400,-470,-540].map(y=>`<path d="M-120 ${y}Q0 ${y+22} 120 ${y}" stroke="${P.d}" stroke-width="9" fill="none"/>`).join('')}
- else s+=[[-120,-640],[0,-690],[120,-640],[-60,-520],[60,-520],[0,-400]].map(([x,y])=>`<path d="M${x-40} ${y+30}L${x} ${y-70}L${x+40} ${y+30}Z" fill="${P.lv}" ${S}/>`).join('');
- s+=`<path d="M-200-560L-150-470L-185-400M190-600L150-520L175-440M-60-320L-20-280L-50-240" stroke="${P.lv}" stroke-width="9" fill="none" stroke-linecap="round" opacity="${lvA.toFixed(2)}"/>`;
- // cabeca
- s+=`<g transform="rotate(${(o.ht||0).toFixed(1)} 0 -720) translate(${(o.hx||0).toFixed(1)} 0)"><path d="M-165-705Q-195-885 0-925Q195-885 165-705Q0-645-165-705Z" fill="${P.b}" ${S}/>`;
- s+=`<path d="M-120-855L-210-1015L-70-885Z" fill="#e8dcc8" ${S}/><path d="M120-855L210-1015L70-885Z" fill="#e8dcc8" ${S}/><path d="M-32-912L0-1030L32-912Z" fill="#e8dcc8" ${S}/>`;
+ const arm=(sx,sy,f0,sd)=>{const f=[f0[0]+sd*85,f0[1]+50],mx=(sx+f[0])/2+sd*120,my=(sy+f[1])/2+90,d=`M${sx} ${sy}Q${mx.toFixed(0)} ${my.toFixed(0)} ${f[0].toFixed(0)} ${f[1].toFixed(0)}`,ang=Math.atan2(f[1]-my,f[0]-mx);
+  return `<path d="${d}" stroke="${P.lv}" stroke-width="118" fill="none" stroke-linecap="round" opacity=".9"/><path d="${d}" stroke="${P.b}" stroke-width="104" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${P.lv}" stroke-width="5" stroke-dasharray="22 50 8 34" fill="none" opacity="${lvA}"/>`+TEND(mx,my-30,-Math.PI/2+sd*.9,150,12,t,sd*3+4,P)+HAND(f[0],f[1],ang,1.05*F,P,o.grip?.25:1)};
+ let s=`<ellipse cy="10" rx="330" ry="46" fill="rgba(0,0,0,.45)"/>`;
+ // tentaculos atras do corpo
+ [[-230,-640,-2.5,260],[-160,-720,-2.0,300],[220,-650,-.65,270],[150,-730,-1.1,310],[-260,-520,-2.9,220],[270,-520,-.25,230]].forEach(([x,y,a,L],i)=>s+=TEND(x,y,a,L,22,t,i*2.3,P));
+ // pernas (quase escondidas pela fumaca)
+ s+=`<path d="M-170-320L-235 0H-70L-90-320Z" fill="${P.b}" stroke="${P.lv}" stroke-width="7" stroke-linejoin="round"/><path d="M170-320L235 0H70L90-320Z" fill="${P.b}" stroke="${P.lv}" stroke-width="7" stroke-linejoin="round"/>`;
+ if(!bk)s+=arm(-220,-610,fl,-1);
+ // tronco curvado de contorno rasgado
+ s+=`<path d="${JAGP(TORSO,5,.16,3,t)}" fill="${P.b}" stroke="${P.lv}" stroke-width="9" stroke-linejoin="round"/>`;
+ s+=bk?[-640,-575,-510,-445,-380].map((y,i)=>`<path d="M-26 ${y}L0 ${y-40}L26 ${y}Z" fill="${P.lv}" opacity="${lvA}"/>`).join('')+`<path d="M-150-600L-90-520L-130-450M150-610L100-540L140-470" stroke="${P.lv}" stroke-width="7" fill="none" stroke-linecap="round" opacity="${lvA}"/>`
+  :`<path d="M-200-560L-150-500L-170-430M190-580L150-520L170-460M-30-420L0-370L-20-320" stroke="${P.lv}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${lvA}"/>`;
+ // cabeca: coroa de pontas, olhos vermelhos e o sorriso de dentes
+ s+=`<g transform="rotate(${(o.ht||0).toFixed(1)} 0 -720) translate(${(o.hx||0).toFixed(1)} 0)">`;
+ [[-110,-880,-2.2,190],[-40,-920,-1.75,230],[40,-920,-1.35,230],[110,-880,-.95,190]].forEach(([x,y,a,L],i)=>s+=TEND(x,y,a,L,18,t,i*4.1+1,P));
+ s+=`<path d="${JAG(0,-775,170,138,40,.55,7,t)}" fill="${P.b}" stroke="${P.lv}" stroke-width="9" stroke-linejoin="round"/>`;
  if(!bk){
-  if(ey=='ko')s+=[-62,62].map(x=>`<path d="M${x-26}-826L${x+26}-778M${x+26}-826L${x-26}-778" stroke="${INK}" stroke-width="15" stroke-linecap="round"/>`).join('');
-  else if(ey=='wow')s+=[-62,62].map(x=>`<ellipse cx="${x}" cy="-800" rx="34" ry="38" fill="#fff8d0" ${S4}/><circle cx="${x}" cy="-798" r="7" fill="${INK}"/>`).join('');
-  else s+=[-62,62].map((x,i)=>`<ellipse cx="${x}" cy="-800" rx="32" ry="${ey=='conf'&&i?16:21}" fill="#ffd84d" ${S4}/><ellipse cx="${x+(o.look||0)}" cy="-798" rx="8" ry="15" fill="#d8143a"/>`).join('')+`<path d="M-118-850L-28-${ey=='conf'?832:812}M118-850L28-812" stroke="${INK}" stroke-width="20" stroke-linecap="round"/>`;
-  const my=(-700+mo*120).toFixed(0);
-  s+=`<path d="M-108-738Q0-752 108-738Q74 ${(-708+mo*80).toFixed(0)} 0 ${my}Q-74 ${(-708+mo*80).toFixed(0)}-108-738Z" fill="#2a0a12" ${S}/>`+[-80,-48,-16,16,48,80].map(x=>`<path d="M${x-13}-744L${x}-${(718-mo*10).toFixed(0)}L${x+13}-744Z" fill="#fff8e8"/>`).join('')+[-74,74].map(x=>`<path d="M${x-14} ${(+my+18).toFixed(0)}L${x} ${(+my-34-mo*20).toFixed(0)}L${x+14} ${(+my+18).toFixed(0)}Z" fill="#fff8e8" ${S4}/>`).join('')}
+  if(ey=='ko')s+=[-70,70].map(x=>`<path d="M${x-24}-822L${x+24}-778M${x+24}-822L${x-24}-778" stroke="${P.lv}" stroke-width="13" stroke-linecap="round" opacity=".7"/>`).join('');
+  else if(ey=='wow')s+=[-70,70].map(x=>`<ellipse cx="${x}" cy="-800" rx="34" ry="36" fill="${P.lv}"/><ellipse cx="${x}" cy="-800" rx="16" ry="18" fill="${P.hot}"/><circle cx="${x}" cy="-800" r="5" fill="${P.d}"/>`).join('');
+  else s+=[-1,1].map((sd,i)=>{const x=sd*70,sq=ey=='conf'&&i?.45:1;return`<path d="M${x-sd*52} ${-790}Q${x-sd*8} ${-790-34*sq} ${x+sd*54} ${-818}Q${x+sd*14} ${-790+20*sq} ${x-sd*52} ${-790}Z" fill="${P.lv}"/><path d="M${x-sd*30} ${-795}Q${x} ${-795-16*sq} ${x+sd*34} ${-810}Q${x+sd*6} ${-795+8*sq} ${x-sd*30} ${-795}Z" fill="${P.hot}"/><ellipse cx="${x+sd*6+(o.look||0)}" cy="-800" rx="4" ry="${(9*sq).toFixed(1)}" fill="${P.d}"/>`}).join('');
+  // sorriso enorme: duas fileiras de dentes pontudos
+  const U=x=>-742+42*(x/158)**2,G=x=>(16+mo*92)*(1-(x/162)**2);let mp=`M-158 ${U(-158)}`,lp_='';for(let x=-158;x<=158;x+=12)mp+=`L${x} ${U(x).toFixed(1)}`;for(let x=158;x>=-158;x-=12)lp_+=`L${x} ${(U(x)+G(x)).toFixed(1)}`;
+  s+=`<path d="${mp}${lp_}Z" fill="#20030a" stroke="${P.lv}" stroke-width="5" stroke-linejoin="round"/>`;let te='';
+  for(let i=0;i<14;i++){const x=-145+i*22.3,u=U(x),g=G(x),L=Math.max(14,g*.62+12);te+=`<path d="M${(x-10).toFixed(1)} ${(u-2).toFixed(1)}L${x.toFixed(1)} ${(u+L).toFixed(1)}L${(x+10).toFixed(1)} ${(u-2).toFixed(1)}Z" fill="#f2e6da" stroke="${INK}" stroke-width="2"/>`;
+   const x2=x+11,u2=U(x2)+G(x2),L2=Math.max(12,G(x2)*.55+10);if(x2<150)te+=`<path d="M${(x2-9).toFixed(1)} ${(u2+2).toFixed(1)}L${x2.toFixed(1)} ${(u2-L2).toFixed(1)}L${(x2+9).toFixed(1)} ${(u2+2).toFixed(1)}Z" fill="#e8dacb" stroke="${INK}" stroke-width="2"/>`}
+  s+=te}
  s+=`</g>`;
- if(!bk)s+=arm(200,-600,fr);else s+=arm(-200,-600,fl)+arm(200,-600,fr);
+ if(!bk)s+=arm(220,-610,fr,1);else s+=arm(-220,-610,fl,-1)+arm(220,-610,fr,1);
+ // fumaca na base e lascas de sombra se desprendendo
+ for(let i=0;i<9;i++){const x=(i-4)*78+18*sn(t*1.3+i),r=70+30*rnd(i,4.4)+10*sn(t*2+i);s+=`<ellipse cx="${x.toFixed(0)}" cy="${(-20-15*rnd(i,2.1)).toFixed(0)}" rx="${r.toFixed(0)}" ry="${(r*.5).toFixed(0)}" fill="#120a14" opacity=".82"/>`}
+ for(let i=0;i<14;i++){const ph=(t*.35+rnd(i,3.7))%1,x=(rnd(i,8.1)-.5)*560+40*sn(t+i),y=-620-ph*520,z=8+14*rnd(i,5.5);s+=`<path transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(t*90+i*40).toFixed(0)})" d="M${-z} 0L0 ${-z*.7}L${z} ${-z*.2}L${z*.3} ${z*.8}Z" fill="${P.b}" stroke="${P.lv}" stroke-width="3" opacity="${(sn(ph*3.14)*.9).toFixed(2)}"/>`}
  if(o.q)s+=`<g transform="translate(${o.q[0]} ${o.q[1]}) scale(${o.q[2]||1})">${TXT('?',0,0,260,'#fff')}</g>`;
  return s};
 // coloca o monstro (sprite) e acende as rachaduras de lava
-const mon=(sl,x,y,s,o={})=>{let g=KJ(o);if(o.sx!=null)g=`<g transform="scale(${o.sx.toFixed(3)} 1)">${g}</g>`;if(o.center)g=`<g transform="translate(0 480)">${g}</g>`;if(o.clip!=null)g=`<clipPath id="kc${sl}"><rect x="-3000" y="-4000" width="6000" height="${(4000+o.clip).toFixed(0)}"/></clipPath><g clip-path="url(#kc${sl})">${g}</g>`;sprite(g,x,y,s,o.z??60,sl,o.rot||0,o.op??1);CHS[sl].hf=o.hf||0;CHS[sl].sp=null;const P=KJP[o.pal||'a'];if(!o.noglow)(FX.gls=FX.gls||[]).push([x,y-480*s,520*s,P.lvg,.12*(o.op??1)])};
+const mon=(sl,x,y,s,o={})=>{let g=KJ(o);if(o.sx!=null)g=`<g transform="scale(${o.sx.toFixed(3)} 1)">${g}</g>`;if(o.center)g=`<g transform="translate(0 480)">${g}</g>`;if(o.clip!=null)g=`<clipPath id="kc${sl}"><rect x="-3000" y="-4000" width="6000" height="${(4000+o.clip).toFixed(0)}"/></clipPath><g clip-path="url(#kc${sl})">${g}</g>`;sprite(g,x,y,s,o.z??60,sl,o.rot||0,o.op??1);CHS[sl].hf=o.hf||0;CHS[sl].sp=null;const P=KJP[o.pal||'a'],op=o.op??1;if(!o.noglow){(FX.gls=FX.gls||[]).push([x,y-480*s,560*s,P.lvg,.16*op]);if(!o.back&&o.ey!='ko'&&!o.rot&&!o.center){const ex=(o.sx??1)*s;[-70,70].forEach(dx=>FX.gls.push([x+(dx+(o.hx||0))*ex,y-805*s,85*s,P.lvg,.7*op],[x+(dx+(o.hx||0))*ex,y-805*s,30*s,'255,235,240',.5*op]))}}};
 const monPt=(x,y,s,lx,ly)=>[x+lx*s,y+ly*s];
 // ---------- PECAS DE INTERFACE ----------
 const FIST=(x,y,s,c='#f6c8a0',r=0)=>`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r}) scale(${s.toFixed(3)})"><path d="M-54-40Q-60-74-26-74H40Q70-74 70-40V30Q70 66 30 66H-24Q-60 66-60 30Z" fill="${c}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/><path d="M-30-74V-20M4-74V-20M38-74V-20" stroke="${INK}" stroke-width="8" stroke-linecap="round"/><path d="M-60-6Q-90-10-90 20Q-88 44-50 40" fill="${c}" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/></g>`;
@@ -508,7 +534,7 @@ shot('cbdS',ps(11)-.2,(t,u)=>{
  let ui='';if(GT>tCol)ui+=TXT('COLOSSAL',540,300,160,RED,-3,pop(GT,tCol)*(1+.03*sn(GT*9)));if(GT>tCid)ui+=TXT('NO MEIO DA CIDADE',540,420,66,'#fff',-3,pop(GT,tCid));
  fw(DEBRIS(540,1150,tSur,1.2,18)+DEBRIS(300,1180,tSur+.3,.9,10)+DEBRIS(800,1180,tSur+.5,.9,10));
  camA([[ps(11)-.2,.0,0,60,-2],[tSur,.0,0,40,0],[ps(12),.06,0,-40,1]]);
- FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=6+20*ri*(1-ri)*4*(GT<tCid+1?1:.3);FX.tint=[255,90,40,.06];FX.fog=1},'dip');
+ FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=6+20*ri*(1-ri)*4*(GT<tCid+1?1:.3);FX.tint=[160,0,30,.1];FX.fog=1},'dip');
 // ===== 11-12) SEQUENCIA DO SOCO (encarada -> arrancada -> volta pelas costas -> punho -> soco -> freeze -> onda de choque) =====
 const tLev=wt(12,'levantaria',.1),tPun=wt(12,'punho',.1),tDst=wt(12,'destruir',.2),tTud=wt(12,'tudo',.1);
 const tDsv=wt(13,'desviaria',0),tGol=wt(13,'golpe',0),tApa=wt(13,'apareceria',0),tAtr=wt(13,'atrás',.1),tAce=wt(13,'acertaria',0),tSo2=wt(13,'soco',.15),tPod=wt(13,'poderoso',.1),tQue=wt(13,'que',0),tVen=wt(13,'vento',.1),tNuv=wt(13,'nuvens',.1);
@@ -526,7 +552,7 @@ document.body.insertAdjacentHTML('beforeend','<svg width="0" height="0" style="p
 shot('cbdS',ps(12)-.15,(t,u)=>{
  const rz=ob(GT,tLev,1.0);mon('C',MX,MY,MS,{pal:'a',mo:.4+.3*rz,ey:'mad',fr:[lp(290,140,rz),lp(-430,-1000,rz)],bigF:lp(92,125,rz),fl:[-290,-430],z:95,ht:3*sn(GT*1.5)});
  put('BAL',0,0,3.4,{sc:1.3,sil:1,still:1,wind:2.5,aR:-10,aL:10});
- const p=C.BAL.sp;fw(WINDDUST(.8,-1));const fst=monPt(MX,MY,MS,lp(290,140,rz),lp(-430,-1000,rz));(FX.gls=FX.gls||[]).push([fst[0],fst[1],260,'255,140,60',.3*rz]);
+ const p=C.BAL.sp;fw(WINDDUST(.8,-1));const fst=monPt(MX,MY,MS,lp(290,140,rz),lp(-430,-1000,rz));(FX.gls=FX.gls||[]).push([fst[0],fst[1],260,'255,30,60',.3*rz]);
  let ui='';if(GT>tPun)ui+=TXT('O PUNHO',540,290,120,'#fff',-3,pop(GT,tPun));
  const F=foc(p[0],p[1]-500,.1);camA([[ps(12)-.15,.0,0,60,-1],[tPun+.25,.08,F[0],F[1],0]]);
  FX.ui=ui;FX.lit=LIT.cbdS;FX.shake=2+3*rz;FX.vig=.75;FX.grade='contrast(1.12) saturate(1.05)'},'flashO');
@@ -553,7 +579,7 @@ shot('cbdS',tDash-.12,(t,u)=>{
   const tx=p[0]-60*ku,ty=p[1]-150*ku;s+=`<path d="M${tx.toFixed(0)} ${ty.toFixed(0)}Q${(tx-300).toFixed(0)} ${(ty+20*sn(GT*9)).toFixed(0)} ${(tx-760*acc).toFixed(0)} ${(ty+60).toFixed(0)}" stroke="${GOLD2}" stroke-width="${(30*ku*acc).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".45"/><path d="M${tx.toFixed(0)} ${ty.toFixed(0)}Q${(tx-280).toFixed(0)} ${ty.toFixed(0)} ${(tx-700*acc).toFixed(0)} ${(ty+50).toFixed(0)}" stroke="#fff" stroke-width="${(10*ku*acc).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".8"/>`;
   for(let i=0;i<14;i++){const age=((GT*6+i/14)%1),x=p[0]-age*900*acc-40,y=p[1]-10*ku-age*60;s+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${((24+70*age)*ku).toFixed(0)}" fill="#e2c7a5" stroke="${INK}" stroke-width="3" opacity="${(.7*(1-age)*acc).toFixed(2)}"/>`}}
  // o punho do monstro desce na posicao antiga (fora do quadro em cima) e explode o chao
- const g=P3(-.6,0,3.0),dn=ez(cl((GT-tSlam+.25)/.25));if(GT<tSlam+.5){const fy=lp(-500,g[1]-120,dn);s+=`<g transform="translate(${(g[0]-40).toFixed(0)} ${fy.toFixed(0)}) scale(1.9)"><circle r="92" fill="#6f8a99" stroke="${INK}" stroke-width="7"/><path d="M-60-50Q0-90 60-50" stroke="${INK}" stroke-width="7" fill="none"/></g>`}
+ const g=P3(-.6,0,3.0),dn=ez(cl((GT-tSlam+.25)/.25));if(GT<tSlam+.5){const fy=lp(-500,g[1]-200,dn);s+=HAND(g[0]-40,fy,Math.PI/2,1.9,KJP.a,.5)}
  s+=SHOCK(g[0],g[1],tSlam,1100,'#fff',.8,.3)+DUST(g[0],g[1],tSlam,ku*2,1.2)+CRACKS(g[0],g[1],ku*2,ob(GT,tSlam,.3))+DEBRIS(g[0],g[1],tSlam,1.2,22);fw(s);
  let ui=run?fastLines(.4+.5*acc,-1,300,1700):'';if(GT>tDsv)ui+=TXT('DESVIA!',540,300,140,SKY,-3,pop(GT,tDsv));
  // camera lateral: acompanha o heroi, o cenario passa borrado

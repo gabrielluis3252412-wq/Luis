@@ -62,9 +62,13 @@ acertaria um soco tão poderoso…", em 7 planos sem cortes confusos:
   No "careca!", o capuz voa e revela o **herói careca**: brilho na cabeça (`SHINE`), capuz caído nas costas e
   **cachecol vermelho** que balança com o vento (`SCARF`). Ele não usa o macacão amarelo, as luvas vermelhas nem a
   capa branca do Saitama: só a ideia de força absurda e a cara de tédio.
-- **Monstro colossal:** desenho próprio (`KJ` em `main.js`), com corpo de pedra, rachaduras de lava, chifres,
-  presas e espinhos. Ele tem vista de frente e de costas, punhos posicionáveis, boca animada e olhos que mudam
-  (bravo, susto, confuso e nocaute). Há 4 paletas: cinza-lava, verde, roxo e vermelho.
+- **Monstro colossal: criatura de sombra** (`KJ` em `main.js`), inspirada na imagem de referência enviada e desenhada no
+  traço do projeto. Tem corpo negro corcunda, ombros largos e contorno rasgado com brilho vermelho nas bordas (`JAGP`),
+  além de veias vermelhas. A coroa de pontas e os tentáculos de sombra balançam (`TEND`). Os olhos vermelhos são
+  amendoados e têm brilho de verdade no cenário. O sorriso enorme tem duas fileiras de dentes pontudos e abre com a
+  boca. Os braços são longos, com garras curvas (`HAND`). Há fumaça na base e lascas de sombra se soltando do corpo.
+  Ele tem vista de frente e de costas (com espinha brilhante), olhos que mudam (bravo, arregalado, confuso e nocaute)
+  e 4 cores de brilho: vermelho (o colossal), verde, roxo e laranja (os outros monstros).
 
 ## Estrutura (35 planos, mais os cortes rápidos das estações)
 | Narração | O que acontece | Cenário |
