@@ -9,6 +9,6 @@ python3 caps.py                 # legendas coloridas -> legendas.ass
 rm -rf frames; node render.js ${1:-4}   # quadros -> frames/
 ffmpeg -v error -y -framerate 24 -i frames/%05d.jpg -i audio/mix_final.wav \
   -vf "subtitles=legendas.ass:fontsdir=fonts" -af "loudnorm=I=-14:TP=-1.5:LRA=11" \
-  -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart \
+  -c:v libx264 -preset slow -crf 17 -tune animation -pix_fmt yuv420p -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart \
   poder-do-saitama.mp4
 echo "pronto: poder-do-saitama.mp4"

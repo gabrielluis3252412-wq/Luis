@@ -1,6 +1,6 @@
 # E se você tivesse o poder do Saitama? — Short animado
 
-Vertical **1080 × 1920, 24 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
+Vertical **2K (1440 × 2560), 24 fps, ~103 s, H.264 + AAC**. Usa o mesmo motor de "Cibito e o Loop Temporal",
 "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre cenários 3D. Os **11 cenários deste vídeo são novos**.
 
 **Vídeo final:** `poder-do-saitama.mp4`
@@ -106,6 +106,18 @@ acertaria um soco tão poderoso…", em 7 planos sem cortes confusos:
   animado.
 - A música, os efeitos e as ambiências abaixam sozinhos sob a voz, que fica pelo menos ~6 dB acima de tudo. A
   mixagem final é normalizada em −14 LUFS.
+
+## Qualidade 2K
+- Os quadros são renderizados em **1440 × 2560** (`render.js`, escala 4/3 por padrão). `node render.js 4 1` volta para
+  1080 × 1920 e `node render.js 4 2` gera 4K (2160 × 3840, mais lento).
+- Os cenários novos são gerados em 1584 × 2816 (`plates.js`, supersampling 1,5×), e os canvases de brilho e partículas
+  acompanham a resolução do quadro. Os desenhos 2D, textos e efeitos são vetoriais, então ficam nítidos em qualquer tamanho.
+- O vídeo é codificado com x264 `-preset slow -crf 17 -tune animation`.
+
+## Correção: linhas ao lado do rosto do herói careca
+O desenho base do personagem (`lib.js`, que não foi alterado) tem dois traços decorativos de luz nas laterais da cabeça,
+um laranja e um azul. Com o capuz eles ficam escondidos atrás das abas. Na versão careca, o `put()` em `main.js` remove os
+dois traços junto com a "touca" de cabelo.
 
 ## Como refazer
 ```
