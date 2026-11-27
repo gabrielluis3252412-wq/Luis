@@ -172,6 +172,11 @@ Trabalho feito sobre as cenas existentes: história, narração, personagens e c
 - Pico de luz no impacto (`FX.bloom`, `FX.boost`) e contraste forte na luta.
 
 **Qualidade:** 2K (1440 × 2560) a **60 fps** (`render.js` usa 60 por padrão; `FPS=30 ./refazer.sh` gera 30).
+- Na passagem para 60 fps, a verificação automática de quadros (cada quadro comparado com a média dos vizinhos, bloco a
+  bloco) achou quadros com camadas pintadas pela metade: o navegador às vezes capturava a tela antes de terminar de pintar
+  os filtros pesados. Correções: o `render.js` espera a pintura completa antes de cada captura; o flash e a silhueta dos
+  monstros passaram a usar filtros SVG de área fixa, em vez de filtro CSS; e **todos os quadros foram renderizados de
+  novo**. O que sobra na verificação são efeitos de propósito (impact frames, flashes, smear, cortes).
 
 ## Revisão do vídeo inteiro (quadro a quadro, a cada 0,5 s)
 Problemas encontrados e corrigidos:
