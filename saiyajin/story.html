@@ -414,22 +414,23 @@ const rivEyes=(k,a)=>{const e=eyeP(k),ku=C[k].sp[2];(FX.gls=FX.gls||[]).push([e[
 const tDer=wt(2,'derrota',.2),tFor=wt(2,'forte',.1),tSai=wt(1,'Saiyajin',.2);
 shot('twn2',0,(t,u)=>{
  const up=ob(GT,tFor-.45,.55),gl=cl((GT-tFor+.1)/.3);
- const k=GT>tFor?'CSS':'CIB';put(k,lp(-.7,.2,up),0,3.2,{sc:2.4,m:GT<tFor-.45?'sad':GT<tFor?'angry':'grin',rot:lp(84,0,up),aR:lp(-60,-30,up),aL:lp(60,30,up),nobob:up<1,brow:6,sq:SQ(tFor,1.2),six:GT>tFor?.0:undefined,extra:GT<tFor?SWEAT(-80,-300,.8):''});
- if(GT>tFor){goldAura(k,gl);const c0=chestP(k),ku=C[k].sp[2];fw(BOLTS(c0[0],c0[1],170*ku,GT,gl));FX.pf=[[c0[0],c0[1],330*ku,30,'255,220,120',gl,'rise']]}
- const p=C[k].sp,q=zpS(p[0],p[1]);let ui=TXT('E SE VOCÊ FOSSE',540,250,72,'#fff',-3,pop(GT,.05))+(GT>tSai-.1?TXT('UM SAIYAJIN?',540,370,124,GOLD,-3,pop(GT,tSai-.1)*(1+.025*sn(GT*6))):'');
+ const k=GT>tFor?'CSS':'CIB';put(k,lp(-1.6,.2,up),0,3.2,{sc:2.4,m:GT<tFor-.45?'sad':GT<tFor?'angry':'grin',rot:lp(84,0,up),aR:lp(-60,-30,up),aL:lp(60,30,up),nobob:up<1,brow:6,sq:SQ(tFor,1.2),six:GT>tFor?.0:undefined,extra:GT<tFor?SWEAT(-80,-300,.8):''});
+ const c0=chestP(k),ku=C[k].sp[2],pre=GT<tFor?.35+.35*ab(sn(GT*5.5))*(.5+.5*cl(GT/tFor)):0;if(GT>tFor){goldAura(k,gl);fw(BOLTS(c0[0],c0[1],170*ku,GT,gl));FX.pf=[[c0[0],c0[1],330*ku,30,'255,220,120',gl,'rise']]}
+ else{const rr=lp(84,0,up)*Math.PI/180,bx=C[k].sp[0]+150*ku*sn(rr),by=C[k].sp[1]-150*ku*cs(rr);fw(BOLTS(bx,by,200*ku,GT,pre*.8)+RIP(bx,by,Math.floor(GT/.75)*.75,.6,420*ku,GOLD2));(FX.gls=FX.gls||[]).push([bx,by,320*ku,'255,200,90',pre*.7]);FX.pf=[[bx,by,300*ku,26,'255,220,120',pre,'in']]}
+ const p=C[k].sp,q=zpS(p[0],p[1]);let ui=TXT('E SE VOCÊ FOSSE',540,250,72,'#fff',-3,pop(GT,.05))+(GT>tSai-.1?TXT('UM SAIYAJIN?',540,370,108,GOLD,-3,pop(GT,tSai-.1)*(1+.025*sn(GT*6))):'');
  ui+=RIP(q[0],q[1],0,.7,500,'#ffe9b0')+RAYS(GT,tFor,q[0],q[1]-300,.45,18,GOLD2);
  if(GT>tDer-.1&&GT<tFor)ui+=TXT('DERROTA...',540,500,64,'#ff6b6b',-3,pop(GT,tDer-.1));
  if(GT>tFor)ui+=TXT('MAIS FORTE!',540,500,84,GOLD2,-3,pop(GT,tFor));
- const rr=lp(84,0,up)*Math.PI/180,F=foc(p[0]+150*p[2]*sn(rr),p[1]-150*p[2]*cs(rr),.4);
- camA([[0,.55,F[0],F[1],-4],[.5,.4,F[0],F[1],2],[tFor-.1,.35,F[0],F[1],0],[tFor,.18,F[0]*.5,F[1]*.5,-2,'c'],[ps(3),.24,F[0]*.6,F[1]*.6,1]]);
- FX.ui=ui;FX.lit=GT>tFor?{amb:[1.05,.95,.8],rim:[255,220,120],d:[0,-1],sh:.3,ri:1}:LIT.road;FX.shake=18*sh1(GT,[0],4)+14*sh1(GT,[tFor],5);FX.flash=Math.max(.5*cl(1-GT/.25),.55*sh1(GT,[tFor],9));FX.flcol='255,235,170';FX.chroma=5*sh1(GT,[tFor],4)},'');
+ const rr=lp(84,0,up)*Math.PI/180,F=foc(p[0]+260*p[2]*sn(rr),p[1]-200*p[2]*cs(rr),.4);
+ camA([[0,.42,F[0],F[1],-4],[.6,.22,F[0],F[1],2],[2.2,.32,F[0],F[1],-2],[tFor-.1,.38,F[0],F[1],0],[tFor,.18,F[0]*.5,F[1]*.5,-2,'c'],[ps(3),.24,F[0]*.6,F[1]*.6,1]]);
+ FX.ui=ui;FX.lit=GT>tFor?{amb:[1.05,.95,.8],rim:[255,220,120],d:[0,-1],sh:.3,ri:1}:LIT.road;FX.shake=18*sh1(GT,[0],4)+14*sh1(GT,[tFor],5)+(GT<tFor?5*sh1(GT,[0,.75,1.5,2.25,3,3.75],9):0);FX.flash=Math.max(.5*cl(1-GT/.25),.55*sh1(GT,[tFor],9));FX.flcol='255,235,170';FX.chroma=5*sh1(GT,[tFor],4)},'');
 // ===== 1) raca guerreira mais temida do universo =====
 const tRac=wt(3,'raças',.2),tTem=wt(3,'temidas',.2);
 shot(null,ps(3)-.2,(t,u)=>{FX.bg=c=>{cosmos(c,GT,{warm:1,c0:'#5a1a3a',c1:'#1a0820'});planet(c,820,560,150,GT,0)};
  [['T1',-2.6],['T2',-1.3],['T3',1.3],['R4',2.6],['R5',0]].forEach(([k,x],i)=>{const a=ob(GT,ps(3)+i*.15,.4);put(k,0,0,0,{px:[540+x*150,1250-ab(x)*20],ku:1.25,m:'angry',sil:1,op:a,still:1,zz:3})});
  put('CIB',0,0,0,{px:[540,1640],ku:2.1,m:'angry',brow:7,aR:-30,aL:30,zz:1,nodrift:1});
  [['T1',-2.6],['T2',-1.3],['T3',1.3],['R4',2.6],['R5',0]].forEach(([k,x])=>{const e=eyeP(k),ku=C[k].sp[2];(FX.gls=FX.gls||[]).push([e[0]-25*ku,e[1],30,'255,40,60',.9],[e[0]+25*ku,e[1],30,'255,40,60',.9])});
- let ui='';if(GT>tRac)ui+=TXT('RAÇA GUERREIRA',540,300,104,'#ff5d6d',-3,pop(GT,tRac));if(GT>tTem)ui+=TXT('A MAIS TEMIDA DO UNIVERSO',540,410,52,'#fff',-3,pop(GT,tTem));
+ let ui='';if(GT>tRac)ui+=TXT('RAÇA GUERREIRA',540,300,88,'#ff5d6d',-3,pop(GT,tRac));if(GT>tTem)ui+=TXT('A MAIS TEMIDA DO UNIVERSO',540,410,52,'#fff',-3,pop(GT,tTem));
  camA([[ps(3)-.2,.3,0,-120,-2],[ps(4),.05,0,0,1]]);
  FX.ui=ui;FX.lit={amb:[.8,.7,.8],rim:[255,90,110],d:[0,-1],sh:.4,ri:1};FX.vig=.75;FX.tint=[120,0,30,.08]},'flashR');
 // ===== 2) treinado desde pequeno =====
@@ -548,8 +549,8 @@ const tBat=wt(19,'batalhas',.2),tDif2=wt(19,'difíceis',.2);
 shot('twn3',ps(19)-.15,(t,u)=>{
  const hits=[tBat,tBat+.55,tDif2,tDif2+.45];const mp=P3(1.7,0,2.6,1.3);
  const lunge=hits.reduce((m,h)=>Math.max(m,Math.exp(-((GT-h)**2)/.01)),0);
- put('CSS',-1+.25*lunge,0,3.2,{sc:2.3,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});goldAura('CSS',.8,1.2);
- put('RIV',1.85-.25*lunge,0,3.2,{sc:2.3,flip:-1,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});darkAura('RIV',.7,1.15);const mp2=C.RIV.sp;mp[0]=mp2[0];
+ put('CSS',-.85+.25*lunge,0,3.2,{sc:2.3,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});goldAura('CSS',.8,1.2);
+ put('RIV',1.6-.25*lunge,0,3.2,{sc:2.3,flip:-1,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});darkAura('RIV',.7,1.15);const mp2=C.RIV.sp;mp[0]=mp2[0];
  const p=C.CSS.sp,ku=p[2],hx=(p[0]+mp[0])/2,hy=p[1]-200*ku;let s='';hits.forEach(h=>s+=BURSTX(hx,hy,h,ku*1.4)+RIP(hx,hy,h,.4,300,GOLD2));fw(s);
  let ui='';if(GT>tBat)ui+=TXT('BATALHAS',540,310,110,'#fff',-3,pop(GT,tBat));if(GT>tDif2)ui+=TXT('CADA VEZ MAIS DIFÍCEIS',540,425,60,'#ff6b6b',-3,pop(GT,tDif2));
  camA([[ps(19)-.15,.15,0,-40,-2],[ps(20),.25,0,-60,2]]);
@@ -580,7 +581,7 @@ shot('twn3',ps(22)-.2,(t,u)=>{
  // imagens residuais onde ele estava
  atk.forEach((h,i)=>{const d=GT-h;if(d>0&&d<.5){const g=i%2?'G1':'G2',sd=i?(i-1)%2?-1:1:0;put(g,-.7+sd*.5,0,3.4,{sc:2.3,m:'calm',still:1,op:(.45*(1-d/.5)).toFixed(2)})}});
  const mp=P3(2.2,0,1.6,1.25),pc=C.CUI.sp,ku=pc[2];const lastA=atk.filter(h=>GT>h-.25).pop()||atk[0],ap=cl((GT-lastA+.25)/.25),tg=[pc[0]-side*0+(GT<lastA?0:0),pc[1]-200*ku];
- const pu=atk.reduce((mx,h)=>Math.max(mx,Math.exp(-((GT-h)**2)/.012)),0);put('RIV',lp(2.3,1.25,pu),0,3.4,{sc:2.3,flip:-1,m:'angry',brow:9,aR:lp(15,-92,pu),aL:20,tilt:6*pu,sq:{sx:1+.05*pu,sy:1-.04*pu}});darkAura('RIV',.6,1.1);
+ const pu=atk.reduce((mx,h)=>Math.max(mx,Math.exp(-((GT-h)**2)/.012)),0);put('RIV',lp(2.0,1.1,pu),0,3.4,{sc:2.3,flip:-1,m:'angry',brow:9,aR:lp(15,-92,pu),aL:20,tilt:6*pu,sq:{sx:1+.05*pu,sy:1-.04*pu}});darkAura('RIV',.6,1.1);
  let s='';atk.forEach(h=>s+=RIP(P3(-.7,0,3.4)[0],pc[1]-200*ku,h,.35,200,SILV));fw(s);
  let ui='';if(GT>tSoz)ui+=TXT('REAGE SOZINHO',540,320,96,SILV,-3,pop(GT,tSoz));if(GT>tQua)ui+=TXT('QUASE IMPOSSÍVEL',540,440,62,'#fff',-3,pop(GT,tQua));
  camA([[ps(22)-.2,.12,-60,-40,-1],[ps(23),.2,-60,-60,1]]);
@@ -690,7 +691,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  SH.forEach((s,i)=>{if(i&&s.tin){const k=s.tin=='zoom'?'zoom':s.tin.startsWith('flash')?'flash':s.tin=='glitch'?'glitch':s.tin=='dip'?'dark':'whoosh';a(s.t0-(k=='dark'?.3:.2),k,.85)}});
  a(0,'M_hook');a(tFor,'M_up');a(cut(1),'M_race');a(tDes,'M_boom');a(cut(4),'M_drop');a(cut(5),'M_rec');a(tDra,'M_pow');a(cut(7),'M_enemy');a(cut(9),'M_rage');a(tExp,'M_exp');a(cut(16),'M_ui');a(cut(17),'M_dodge');a(cut(18),'M_truth');a(cut(20),'M_rise');a(tMfo,'M_hero');
  // 0 gancho
- a(0,'boom',1.2);a(0,'impact',1);a(0,'amb_town',.7);a(tDer,'heart',.8);a(tFor-.45,'riser_s',.8);a(tFor,'boom',1.1);a(tFor,'energy',1);a(tFor,'shimmer',.6);
+ a(0,'boom',1.2);a(0,'impact',1);[.75,1.5,2.25,3,3.75].forEach(t=>{a(t,'heart',.9);a(t,'energy_pulse',.4)});a(.3,'energy_dark',.6);a(0,'amb_town',.7);a(tDer,'heart',.8);a(tFor-.45,'riser_s',.8);a(tFor,'boom',1.1);a(tFor,'energy',1);a(tFor,'shimmer',.6);
  // 1 raca guerreira
  a(cut(1),'amb_space',.8);a(tRac,'sting_low',.9);a(tTem,'pop',.4);
  // 2 treino

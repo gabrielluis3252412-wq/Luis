@@ -3,7 +3,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  SH.forEach((s,i)=>{if(i&&s.tin){const k=s.tin=='zoom'?'zoom':s.tin.startsWith('flash')?'flash':s.tin=='glitch'?'glitch':s.tin=='dip'?'dark':'whoosh';a(s.t0-(k=='dark'?.3:.2),k,.85)}});
  a(0,'M_hook');a(tFor,'M_up');a(cut(1),'M_race');a(tDes,'M_boom');a(cut(4),'M_drop');a(cut(5),'M_rec');a(tDra,'M_pow');a(cut(7),'M_enemy');a(cut(9),'M_rage');a(tExp,'M_exp');a(cut(16),'M_ui');a(cut(17),'M_dodge');a(cut(18),'M_truth');a(cut(20),'M_rise');a(tMfo,'M_hero');
  // 0 gancho
- a(0,'boom',1.2);a(0,'impact',1);a(0,'amb_town',.7);a(tDer,'heart',.8);a(tFor-.45,'riser_s',.8);a(tFor,'boom',1.1);a(tFor,'energy',1);a(tFor,'shimmer',.6);
+ a(0,'boom',1.2);a(0,'impact',1);[.75,1.5,2.25,3,3.75].forEach(t=>{a(t,'heart',.9);a(t,'energy_pulse',.4)});a(.3,'energy_dark',.6);a(0,'amb_town',.7);a(tDer,'heart',.8);a(tFor-.45,'riser_s',.8);a(tFor,'boom',1.1);a(tFor,'energy',1);a(tFor,'shimmer',.6);
  // 1 raca guerreira
  a(cut(1),'amb_space',.8);a(tRac,'sting_low',.9);a(tTem,'pop',.4);
  // 2 treino
