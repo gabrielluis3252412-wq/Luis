@@ -203,6 +203,15 @@ const planet=(c,x,y,r,t,boom)=>{if(boom<1){c.save();c.globalAlpha=1-boom;const g
  if(boom>0){c.globalCompositeOperation='lighter';const R=r*(.6+boom*3),g=c.createRadialGradient(x,y,0,x,y,R);g.addColorStop(0,`rgba(255,240,200,${(1-boom)*.95})`);g.addColorStop(.4,`rgba(255,150,60,${(1-boom)*.7})`);g.addColorStop(1,'rgba(255,60,30,0)');c.fillStyle=g;c.fillRect(x-R,y-R,2*R,2*R);c.globalCompositeOperation='source-over'}};
 const goldAura=(k,a,sc=1.25)=>aura(k,a,'#ffb300','#fff3a0',sc,1,2);
 const silvAura=(k,a,sc=1.15)=>aura(k,a,'#8fa8ff','#f2f6ff',sc,1,4);
+// rival Saiyajin ORIGINAL (arquetipo do rival orgulhoso; design proprio, no traco do projeto)
+const RIV_HAIR=`<path d="M-70-250L-100-332L-62-312L-80-414L-32-342L-22-456L6-350L32-446L46-340L88-404L66-300L100-322L70-250Z" fill="#17121f" ${S}/><path d="M-30-350L-22-420M10-360L28-430M50-330L76-382" stroke="#4d4470" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M-60-272L-44-246L-30-272L-14-244L2-272L18-246L32-272L46-250L60-274Z" fill="#17121f"/>`;
+const RIV_FX=`<path d="M30-262L50-212" stroke="#b55a5a" stroke-width="4" stroke-linecap="round"/><path d="M-44-212Q-34-206-24-212M24-212Q34-206 44-212" stroke="rgba(27,16,36,.35)" stroke-width="4" fill="none"/>`;
+const RIV_BX=`<ellipse cx="-50" cy="-172" rx="26" ry="15" fill="#b3192e" ${S4}/><ellipse cx="50" cy="-172" rx="26" ry="15" fill="#b3192e" ${S4}/><path d="M-40-166H40L44-116Q0-102-44-116Z" fill="#6b7383" ${S4}/><path d="M-30-150H30" stroke="#b3192e" stroke-width="10"/><path d="M-36-130H36" stroke="rgba(255,255,255,.35)" stroke-width="5"/><rect x="-52" y="-104" width="104" height="12" fill="#111"/>`;
+Object.assign(CHD,{RIV:{sk:'#e8b48c',hc:'#17121f',hs:'short',sh:'#2a1838',pa:'#1e1028',shoe:'#3a3442',ic:'#c81e3a',hat:RIV_HAIR,fx:RIV_FX,bx:RIV_BX,id:18}});CHS.RIV={...mkg(),d:CHD.RIV,id:18};
+document.querySelector('#SV defs').insertAdjacentHTML('beforeend','<radialGradient id="pball"><stop offset="0" stop-color="#fff2ff"/><stop offset=".35" stop-color="#d48cff"/><stop offset="1" stop-color="#6a1aa8" stop-opacity="0"/></radialGradient>');
+const PBALL=s=>`<g transform="translate(0 46) scale(${(+s).toFixed(3)})"><circle r="60" fill="url(#pball)"/><circle r="22" fill="#f6e4ff" stroke="#b56bff" stroke-width="4"/></g>`;
+const darkAura=(k,a,sc=1.2)=>aura(k,a,'#5a12a0','#d49bff',sc,1,6);
+const rivEyes=(k,a)=>{const e=eyeP(k),ku=C[k].sp[2];(FX.gls=FX.gls||[]).push([e[0]-25*ku,e[1],16*ku,'255,40,70',.22*a],[e[0]+25*ku,e[1],16*ku,'255,40,70',.22*a])};
 // ===== 0) GANCHO: derrubado... e levanta mais forte =====
 const tDer=wt(2,'derrota',.2),tFor=wt(2,'forte',.1),tSai=wt(1,'Saiyajin',.2);
 shot('twn2',0,(t,u)=>{
@@ -238,7 +247,8 @@ const BURSTX=(x,y,t0,ku)=>{const d=GT-t0;if(d<0||d>.25)return'';const k=d/.25;le
 // ===== 3) inimigos capazes de destruir planetas =====
 const tDes=wt(4,'destruir',.3),tPla=wt(4,'planetas',.3);
 shot(null,tIni-.1,(t,u)=>{const bm=cl((GT-tDes)/1.1);FX.bg=c=>{cosmos(c,GT,{warm:1,k:.7});planet(c,560,820,230,GT,bm)};
- const mp=[880,1500],mk=1.9,arm=ob(GT,tDes-.5,.45);sprite(CURSE({fx:lp(-170,-260,arm),fy:lp(-200,-520,arm),mouth:.6+.4*sn(GT*5),str:bm>0?.5:0}),mp[0],mp[1],mk,1,'C2');
+ const tTh=tDes-.4,hasB=GT<tTh+.05;put('RIV',0,0,0,{px:[850,1660],ku:1.9,flip:-1,m:'grin',hold:hasB?PBALL(.4+.8*ob(GT,tIni,.8)):undefined,aR:GT<tTh?tw(-20,-165,tIni+.1,.5):tw(-165,-60,tTh,.15),aL:20,nodrift:1,zz:1,brow:4,look:[-6,-4]});darkAura('RIV',.75,1.2);rivEyes('RIV',1);
+ if(GT>tTh&&GT<tDes+.05){const k=ez(cl((GT-tTh)/(tDes-tTh))),x=lp(700,560,k),y=lp(1010,820,k);fw(`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(1.4-.5*k).toFixed(2)})"><circle r="70" fill="url(#pball)"/><circle r="26" fill="#f6e4ff"/></g>`)}
  let ui='';if(GT>tDes)ui+=TXT('DESTRUIR',540,300,120,'#ff5d6d',-3,pop(GT,tDes))+TXT('PLANETAS INTEIROS',540,410,70,'#fff',-3,pop(GT,tPla));
  camA([[tIni-.1,.2,0,0,-2],[tDes,.12,0,60,1,'c'],[ps(5),.2,0,80,-1]]);
  FX.ui=ui;FX.lit={amb:[.85,.7,.8],rim:[255,120,80],d:[-1,-.5],sh:.4,ri:1};FX.shake=20*sh1(GT,[tDes],3);FX.flash=.7*sh1(GT,[tDes],6);FX.flcol='255,210,150';FX.chroma=6*sh1(GT,[tDes],3)},'zoom');
@@ -270,8 +280,8 @@ shot(null,ps(8)-.2,(t,u)=>{FX.bg=c=>cosmos(c,GT,{k:.6,c0:'#3a2a0a',c1:'#140a02',
 // ===== 7) um inimigo impossivel de derrotar =====
 const tImp=wt(10,'impossível',.2);
 shot('twn3',ps(10)-.25,(t,u)=>{
- const mp=P3(.6,0,-3,4.2),rise=ob(GT,ps(10)+.3,.9);sprite(CURSE({fx:-170+20*sn(GT*2),fy:-200,mouth:.5+.5*ab(sn(GT*3))}),mp[0],mp[1]+(1-rise)*600,mp[2],mp[3],'C2');
- put('CIB',-.4,0,4.2,{sc:2.3,m:GT<tImp?'worry':'scared',look:[4,-10],brow:6,sq:SQ(tImp,1)});
+ const rise=ob(GT,ps(10)+.3,.9);put('RIV',1.5,0,1.4,{sc:3.9,flip:-1,m:GT<tImp?'smirk':'grin',aR:28,aL:-28,brow:6,look:[-6,6],bobv:-(1-rise)*900,nodrift:1});darkAura('RIV',.4+.5*rise,1.3);rivEyes('RIV',rise);
+ put('CIB',-1,0,4.2,{sc:2.3,m:GT<tImp?'worry':'scared',look:[4,-10],brow:6,sq:SQ(tImp,1)});
  let ui='';if(GT>tImp)ui+=TXT('IMPOSSÍVEL',540,300,128,'#ff4d6d',-3,pop(GT,tImp))+TXT('DE DERROTAR',540,410,72,'#fff',-3,pop(GT,tImp+.15));
  camA([[ps(10)-.25,.0,0,0,-2],[tImp,.12,0,-40,0,'c'],[ps(11),.16,0,-60,2]]);
  FX.ui=ui;FX.lit=LIT.twn3;FX.vig=.8;FX.shake=4*rise+10*sh1(GT,[tImp],5);FX.tint=[90,0,60,.12];FX.fog=1},'dip');
@@ -279,7 +289,7 @@ shot('twn3',ps(10)-.25,(t,u)=>{
 const tPer=wt(11,'perigo',.2);
 shot('twn3',ps(11)-.2,(t,u)=>{
  [['T1',-1.6,0],['T3',-.3,1],['R4',1.1,2]].forEach(([k,x,i])=>put(k,x,0,1.8,{sc:2.1,m:'scared',rot:4*sn(GT*18+i),look:[-3,-8],brow:8,extra:SWEAT(-80,-300,.8)}));
- const mp=P3(.3,0,-4,4.2);sprite(CURSE({fx:-60,fy:-120+30*sn(GT*3),mouth:.9}),mp[0],mp[1],mp[2],mp[3],'C2');
+ put('RIV',.4,0,-1.6,{sc:3.3,flip:-1,m:'grin',hold:PBALL(1+.12*sn(GT*9)),aR:-95,aL:24,brow:6,look:[-4,6]});darkAura('RIV',.9,1.3);rivEyes('RIV',1);
  let ui='';if(GT>tPer)ui+=TXT('AMIGOS EM PERIGO',540,320,92,'#ff4d6d',-3,pop(GT,tPer)*(1+.03*sn(GT*9)));
  camA([[ps(11)-.2,.3,0,120,-2],[ps(12),.2,0,60,1]]);
  FX.ui=ui;FX.lit=LIT.twn3;FX.vig=.8;FX.tint=[200,0,30,.12+.06*ab(sn(GT*6))];FX.shake=3},'wr');
@@ -340,8 +350,8 @@ const tBat=wt(19,'batalhas',.2),tDif2=wt(19,'difíceis',.2);
 shot('twn3',ps(19)-.15,(t,u)=>{
  const hits=[tBat,tBat+.55,tDif2,tDif2+.45];const mp=P3(1.7,0,2.6,1.3);
  const lunge=hits.reduce((m,h)=>Math.max(m,Math.exp(-((GT-h)**2)/.01)),0);
- put('CSS',-.6+.25*lunge,0,3.2,{sc:2.3,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});goldAura('CSS',.8,1.2);
- sprite(CURSE({fx:-150-60*lunge,fy:-230,str:lunge,mouth:.8}),mp[0]+40*lunge,mp[1],mp[2],mp[3],'C2');
+ put('CSS',-1+.25*lunge,0,3.2,{sc:2.3,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});goldAura('CSS',.8,1.2);
+ put('RIV',1.85-.25*lunge,0,3.2,{sc:2.3,flip:-1,m:'angry',brow:9,aR:-90+30*lunge,aL:20,tilt:5*lunge,sq:{sx:1+.06*lunge,sy:1-.05*lunge}});darkAura('RIV',.7,1.15);const mp2=C.RIV.sp;mp[0]=mp2[0];
  const p=C.CSS.sp,ku=p[2],hx=(p[0]+mp[0])/2,hy=p[1]-200*ku;let s='';hits.forEach(h=>s+=BURSTX(hx,hy,h,ku*1.4)+RIP(hx,hy,h,.4,300,GOLD2));fw(s);
  let ui='';if(GT>tBat)ui+=TXT('BATALHAS',540,310,110,'#fff',-3,pop(GT,tBat));if(GT>tDif2)ui+=TXT('CADA VEZ MAIS DIFÍCEIS',540,425,60,'#ff6b6b',-3,pop(GT,tDif2));
  camA([[ps(19)-.15,.15,0,-40,-2],[ps(20),.25,0,-60,2]]);
@@ -367,13 +377,13 @@ shot(null,ps(21)-.25,(t,u)=>{const si=ob(GT,tIns-.2,.6);FX.bg=c=>cosmos(c,GT,{c0
 const tSoz=wt(22,'sozinho',.1),tDsv=wt(22,'desviando',.0),tQua=wt(22,'impossíveis',.2);
 shot('twn3',ps(22)-.2,(t,u)=>{
  const atk=[ps(22)+.35,tSoz,tDsv,tDsv+.55,tQua+.1];let off=0,cur=0;atk.forEach((h,i)=>{const d=GT-h;if(d>-.08){cur=i;off+=(i%2?-1:1)*.9*ez(cl((d+.08)/.16))}});
- const x0=-.2+off*.0;const side=atk.reduce((s,h,i)=>GT>h-.08?(i%2?-1:1):s,0);const xC=-.2+side*.55;
+ const x0=-.2+off*.0;const side=atk.reduce((s,h,i)=>GT>h-.08?(i%2?-1:1):s,0);const xC=-.7+side*.5;
  put('CUI',xC,0,3.4,{sc:2.3,m:'calm',aR:-12,aL:12,look:[0,0],still:1,tilt:-side*4});silvAura('CUI',.7,1.1);
  // imagens residuais onde ele estava
- atk.forEach((h,i)=>{const d=GT-h;if(d>0&&d<.5){const g=i%2?'G1':'G2',sd=i?(i-1)%2?-1:1:0;put(g,-.2+sd*.55,0,3.4,{sc:2.3,m:'calm',still:1,op:(.45*(1-d/.5)).toFixed(2)})}});
+ atk.forEach((h,i)=>{const d=GT-h;if(d>0&&d<.5){const g=i%2?'G1':'G2',sd=i?(i-1)%2?-1:1:0;put(g,-.7+sd*.5,0,3.4,{sc:2.3,m:'calm',still:1,op:(.45*(1-d/.5)).toFixed(2)})}});
  const mp=P3(2.2,0,1.6,1.25),pc=C.CUI.sp,ku=pc[2];const lastA=atk.filter(h=>GT>h-.25).pop()||atk[0],ap=cl((GT-lastA+.25)/.25),tg=[pc[0]-side*0+(GT<lastA?0:0),pc[1]-200*ku];
- const fxs=lp(mp[0]-170*mp[2],P3(-.2,0,3.4)[0]+40*ku,ez(ap)),fys=pc[1]-210*ku;sprite(CURSE({fx:(fxs-mp[0])/mp[2],fy:(fys-mp[1])/mp[2],mouth:.7,str:.4}),mp[0],mp[1],mp[2],mp[3],'C2');
- let s='';atk.forEach(h=>s+=RIP(P3(-.2,0,3.4)[0],pc[1]-200*ku,h,.35,200,SILV));fw(s);
+ const pu=atk.reduce((mx,h)=>Math.max(mx,Math.exp(-((GT-h)**2)/.012)),0);put('RIV',lp(2.3,1.25,pu),0,3.4,{sc:2.3,flip:-1,m:'angry',brow:9,aR:lp(15,-92,pu),aL:20,tilt:6*pu,sq:{sx:1+.05*pu,sy:1-.04*pu}});darkAura('RIV',.6,1.1);
+ let s='';atk.forEach(h=>s+=RIP(P3(-.7,0,3.4)[0],pc[1]-200*ku,h,.35,200,SILV));fw(s);
  let ui='';if(GT>tSoz)ui+=TXT('REAGE SOZINHO',540,320,96,SILV,-3,pop(GT,tSoz));if(GT>tQua)ui+=TXT('QUASE IMPOSSÍVEL',540,440,62,'#fff',-3,pop(GT,tQua));
  camA([[ps(22)-.2,.12,-60,-40,-1],[ps(23),.2,-60,-60,1]]);
  FX.ui=ui;FX.lit={amb:[.92,.96,1.1],rim:[220,232,255],d:[1,-.6],sh:.3,ri:1};FX.shake=5*atk.reduce((m,h)=>Math.max(m,Math.exp(-((GT-h)**2)/.004)),0);FX.vig=.7},'flash');
