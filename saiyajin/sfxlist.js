@@ -7,7 +7,7 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 1 raca guerreira
  a(cut(1),'amb_space',.8);a(tRac,'sting_low',.9);a(tTem,'pop',.4);
  // 2 treino
- a(cut(2),'amb_night',.7);for(let t=cut(2)+.1;t<cut(3)-.1;t+=1/7)a(t,'impact',.35);a(tTre,'swish',.6);
+ a(cut(2),'amb_night',.7);TRH.forEach(h=>{a(h-.07,'whiff',.6);a(h,'punch',.55)});a(tTre,'swish',.6);
  // 3 planeta
  a(cut(3),'amb_space',.8);a(cut(3)+.2,'energy_dark',.8);a(tDes-.4,'swish',.8);a(tDes-.4,'riser_s',.7);a(tDes,'boom',1.3);a(tDes,'thunder',.8);a(tPla,'glass',.6);
  // 4 assustador
@@ -29,12 +29,12 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 13-14 Super Saiyajin
  a(cut(13),'hum',.7);a(tSup,'hit',1);a(tSup,'shimmer',.8);for(let t=cut(13)+.3;t<cut(15);t+=.7)a(t,'zap',.3);a(tCom,'swish',.6);
  // 15 batalhas e deuses
- [tBat,tBat+.55,tDif2,tDif2+.45].forEach(h=>{a(h,'impact',1);a(h,'whoosh_soft',.6)});
+ {const E=ps(20)-.15,h0=tBat,h1=tBat+.6,h2=Math.min(tDif2,E-.8),h3=Math.min(h2+.42,E-.3);[h0,h1,h2,h3].forEach(h=>a(h-.08,'whiff',.8));a(h0,'punch',1);a(h1,'block',1);a(h1,'punch',.4);a(h2,'clash',1.2);a(h2,'glass',.4);a(h3,'punch',1.1);a(h3,'boom',.9);a(h3+.12,'whoosh',.8)}
  a(cut(16)-.15,'amb_space',.8);a(tDeu,'chime',.8);a(tDeu,'shimmer',.9);
  // 16 Instinto Superior
  a(tIns-.2,'sonar',.8);a(tIns-.2,'eye_open',.9);a(tIns,'shimmer',.7);
  // 17 desviando
- [ps(22)+.35,tSoz,tDsv,tDsv+.55,tQua+.1].forEach(h=>{a(h-.05,'swish',.8);a(h,'ripple',.5)});
+ [ps(22)+.35,tSoz,tDsv,tDsv+.55,tQua+.1].forEach(h=>{a(h-.1,'whiff',.9);a(h-.05,'swish',.6);a(h,'ripple',.5)});
  // 18-19 verdade e queda
  a(cut(19),'wind',.9);a(tDrr+.25,'impact',1);a(tDrr+.3,'boom',.6);
  // 20 levanta mais forte

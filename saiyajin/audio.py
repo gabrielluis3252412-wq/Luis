@@ -215,6 +215,21 @@ def sting_hi():
     for f in (1661, 1760, 1865, 2217): x += osc(f * (1 + .006 * np.sin(2 * np.pi * 6.5 * t)), d, 'saw')
     x = filt(x, lo=900, hi=6000) * att(n, .02) * dec(n, 2.5)
     return norm(reverb(x, 1.2, .35), .55)
+def punch():  # soco: estalo seco + baque grave
+    d = .7; n = int(d * SR); t = T(d)
+    thud = osc(np.linspace(140, 45, n), d) * dec(n, 9); crack = filt(noise(n), lo=1800, hi=9000) * dec(n, 45)
+    body = filt(noise(n), lo=150, hi=1200) * dec(n, 16)
+    return norm(reverb(thud * 1.2 + crack * .9 + body * .7, .6, .18), .95)
+def whiff():  # braco cortando o ar
+    d = .22; n = int(d * SR); e = np.sin(np.linspace(0, np.pi, n)) ** 2
+    return norm(filt(noise(n), lo=1200, hi=7000) * e * np.linspace(.4, 1, n), .6)
+def block():  # defesa: impacto abafado + vibracao
+    d = .6; n = int(d * SR); x = osc(np.linspace(220, 90, n), d, 'tri') * dec(n, 10) + filt(noise(n), lo=600, hi=4000) * dec(n, 25) * .8
+    return norm(reverb(x, .5, .2), .85)
+def clash():  # choque de punhos: explosao + estalo + cauda
+    d = 2.4; n = int(d * SR); x = punch()[:n] if len(punch()) >= n else np.pad(punch(), (0, n - len(punch())))
+    x = x + osc(np.linspace(70, 28, n), d) * dec(n, 2.6) * 1.2 + filt(noise(n), hi=2500) * dec(n, 5) * .6
+    return norm(reverb(x, 1.8, .35), 1)
 def amb_night(d):
     n = int(d * SR); t = T(d); cr = osc(4600, d) * ((np.sin(2 * np.pi * 28 * t) > .2) * (np.sin(2 * np.pi * .9 * t) > 0)) * .04
     return cr + filt(noise(n), lo=80, hi=400) * .12
