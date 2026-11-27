@@ -482,7 +482,7 @@ shot('twn3',T0,(t,u)=>{
  if(GT>tLik-.15&&GT<tIns-.1)ui+=TXT('DEIXE O LIKE!',540,330,118,'#5fd0ff',-3,pop(GT,tLik-.15));
  if(GT>tFor2-.05&&GT<tCur-.2)ui+=TXT('MOSTRE SUA',540,290,72,'#fff',-3,pop(GT,tFor2-.05))+TXT('FORÇA!',540,420,160,'#ffd23f',-3,pop(GT,tFor2+.1)*(1+.04*sn(GT*10)))+RAYS(GT,tFor2+.1,540,400,.45,18,'#ffe27a');
  if(GT>tTra-.05&&GT<tSer)ui+=TXT('TRANSFORMAÇÃO',540,330,104,GOLD,-3,pop(GT,tTra));
- if(ser&&GT<tEndO+.2)ui+=TXT('SERÁ QUE ELE',540,300,76,'#fff',-3,pop(GT,tSer))+TXT('VAI CONSEGUIR?',540,410,110,'#ffd23f',-3,pop(GT,wt(31,'conseguir',0)));
+ if(ser&&GT<tEndO+.2)ui+=TXT('SERÁ QUE ELE',540,300,76,'#fff',-3,pop(GT,tSer))+TXT('VAI CONSEGUIR?',540,410,92,'#ffd23f',-3,pop(GT,wt(31,'conseguir',0)));
  // final elegante: iris se fechando no olho brilhante do Cibito
  const ir=ob(GT,tEndO,.7);if(GT>tEndO){const q=zpE(e),R=lp(1500,0,ez(cl((GT-tEndO)/.8)));ui+=`<path fill-rule="evenodd" d="M-10-10H1090V1930H-10ZM${(q[0]-R).toFixed(1)} ${q[1].toFixed(1)}a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(2*R).toFixed(1)} 0a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(-2*R).toFixed(1)} 0Z" fill="#02030c"/><circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${R.toFixed(1)}" fill="none" stroke="${GOLD}" stroke-width="${(10*(1-ir*.5)).toFixed(1)}"/>`+(R<200?EMB(q[0],q[1],90,GT,cl((200-R)/150)*(1-cl((GT-tEndO-.8)/.4)),GOLD):'')}
  FX.pf=[[c0[0],c0[1],420*ku/2.1,34,'255,220,120',.7+.3*tr,flex||tr>0?'rise':'orbit']];
