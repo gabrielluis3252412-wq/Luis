@@ -1,0 +1,78 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: Cap,Poppins Black,80,&H00FFFFFF,&H00FFFFFF,&H00241018,&H96000000,0,0,0,0,100,100,0,0,1,9,4,2,90,90,330,1
+
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+Dialogue: 0,0:00:01.61,0:00:02.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se você tivesse
+Dialogue: 0,0:00:02.67,0:00:03.89,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o mesmo poder {\c&H3FD2FF&}absurdo{\c&HFFFFFF&}
+Dialogue: 0,0:00:03.89,0:00:04.64,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de {\c&H3FD2FF&}Saitama,{\c&HFFFFFF&}
+Dialogue: 0,0:00:04.64,0:00:06.13,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}capaz de derrotar qualquer
+Dialogue: 0,0:00:06.13,0:00:07.14,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}inimigo com apenas um
+Dialogue: 0,0:00:07.14,0:00:07.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}soco?{\c&HFFFFFF&}
+Dialogue: 0,0:00:08.12,0:00:09.59,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Tudo começaria quando você
+Dialogue: 0,0:00:09.59,0:00:11.36,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}decidisse {\c&HFFD24F&}treinar{\c&HFFFFFF&} até ultrapassar
+Dialogue: 0,0:00:11.36,0:00:12.50,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}os {\c&H6D4DFF&}limites{\c&HFFFFFF&} {\c&H6D4DFF&}humanos.{\c&HFFFFFF&}
+Dialogue: 0,0:00:12.97,0:00:14.16,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Durante {\c&H3FD2FF&}três{\c&HFFFFFF&} {\c&H3FD2FF&}anos,{\c&HFFFFFF&}
+Dialogue: 0,0:00:14.16,0:00:15.81,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você faria {\c&H3FD2FF&}cem{\c&HFFFFFF&} flexões,
+Dialogue: 0,0:00:15.81,0:00:16.86,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}cem{\c&HFFFFFF&} abdominais,
+Dialogue: 0,0:00:16.86,0:00:18.40,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}cem{\c&HFFFFFF&} agachamentos e correria
+Dialogue: 0,0:00:18.40,0:00:19.79,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}dez{\c&HFFFFFF&} {\c&H3FD2FF&}quilômetros{\c&HFFFFFF&} todos os
+Dialogue: 0,0:00:19.79,0:00:20.19,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}dias.
+Dialogue: 0,0:00:20.71,0:00:21.45,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}No início,
+Dialogue: 0,0:00:21.45,0:00:22.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seu corpo sofreria com
+Dialogue: 0,0:00:22.67,0:00:23.35,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o {\c&H6D4DFF&}esforço…{\c&HFFFFFF&}
+Dialogue: 0,0:00:23.82,0:00:25.18,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas você continuaria,
+Dialogue: 0,0:00:25.18,0:00:26.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mesmo quando todos dissessem
+Dialogue: 0,0:00:26.62,0:00:27.53,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}que era {\c&H6D4DFF&}impossível.{\c&HFFFFFF&}
+Dialogue: 0,0:00:28.04,0:00:28.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Até que,
+Dialogue: 0,0:00:28.67,0:00:29.83,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}depois de {\c&H3FD2FF&}milhares{\c&HFFFFFF&} de
+Dialogue: 0,0:00:29.83,0:00:32.50,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}repetições, algo {\c&HFFD24F&}inacreditável{\c&HFFFFFF&} aconteceria.
+Dialogue: 0,0:00:32.97,0:00:34.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Seus {\c&H3FD2FF&}músculos{\c&HFFFFFF&} ficariam extremamente
+Dialogue: 0,0:00:34.85,0:00:37.04,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}resistentes,{\c&HFFFFFF&} sua {\c&HFFD24F&}velocidade{\c&HFFFFFF&} aumentaria
+Dialogue: 0,0:00:37.04,0:00:38.15,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e, de repente,
+Dialogue: 0,0:00:38.15,0:00:39.56,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}seus {\c&HFF8BC9&}cabelos{\c&HFFFFFF&} começariam a
+Dialogue: 0,0:00:39.56,0:00:40.01,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF8BC9&}cair…{\c&HFFFFFF&}
+Dialogue: 0,0:00:40.38,0:00:42.00,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Até você ficar completamente
+Dialogue: 0,0:00:42.00,0:00:42.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}careca!{\c&HFFFFFF&}
+Dialogue: 0,0:00:43.16,0:00:43.98,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas essa seria a
+Dialogue: 0,0:00:43.98,0:00:45.84,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFD24F&}menor{\c&HFFFFFF&} das suas preocupações.
+Dialogue: 0,0:00:46.26,0:00:47.25,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Porque agora,
+Dialogue: 0,0:00:47.25,0:00:48.75,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você conseguiria {\c&HFFD24F&}saltar{\c&HFFFFFF&} por
+Dialogue: 0,0:00:48.75,0:00:49.89,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}cima de {\c&HFFD24F&}prédios,{\c&HFFFFFF&}
+Dialogue: 0,0:00:49.89,0:00:51.76,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}correr em {\c&HFFD24F&}velocidades{\c&HFFFFFF&} {\c&HFFD24F&}absurdas{\c&HFFFFFF&}
+Dialogue: 0,0:00:51.76,0:00:53.43,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e enfrentar {\c&HFF8BC9&}monstros{\c&HFFFFFF&} {\c&HFF8BC9&}gigantescos{\c&HFFFFFF&}
+Dialogue: 0,0:00:53.43,0:00:54.41,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sem sentir {\c&H3FD2FF&}medo.{\c&HFFFFFF&}
+Dialogue: 0,0:00:54.97,0:00:56.43,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Um inimigo {\c&H6D4DFF&}colossal{\c&HFFFFFF&} surgiria
+Dialogue: 0,0:00:56.43,0:00:57.46,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}no meio da {\c&H6D4DFF&}cidade.{\c&HFFFFFF&}
+Dialogue: 0,0:00:57.87,0:00:58.91,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele levantaria o {\c&H6D4DFF&}punho{\c&HFFFFFF&}
+Dialogue: 0,0:00:58.91,0:01:00.10,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}para {\c&H6D4DFF&}destruir{\c&HFFFFFF&} tudo…
+Dialogue: 0,0:01:00.52,0:01:01.75,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas você {\c&HFFD24F&}desviaria{\c&HFFFFFF&} do
+Dialogue: 0,0:01:01.75,0:01:03.67,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}golpe, apareceria {\c&HFFD24F&}atrás{\c&HFFFFFF&} dele
+Dialogue: 0,0:01:03.67,0:01:04.65,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e acertaria um {\c&H3FD2FF&}soco{\c&HFFFFFF&}
+Dialogue: 0,0:01:04.65,0:01:05.64,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}tão {\c&H3FD2FF&}poderoso{\c&HFFFFFF&} que o
+Dialogue: 0,0:01:05.64,0:01:07.17,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFD24F&}vento{\c&HFFFFFF&} abriria caminho entre
+Dialogue: 0,0:01:07.17,0:01:07.82,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}as {\c&HFFD24F&}nuvens.{\c&HFFFFFF&}
+Dialogue: 0,0:01:08.38,0:01:09.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}O monstro seria {\c&H3FD2FF&}derrotado{\c&HFFFFFF&}
+Dialogue: 0,0:01:09.69,0:01:10.39,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}em {\c&H3FD2FF&}segundos.{\c&HFFFFFF&}
+Dialogue: 0,0:01:11.06,0:01:11.66,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só que,
+Dialogue: 0,0:01:11.66,0:01:12.92,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}depois de vencer todas
+Dialogue: 0,0:01:12.92,0:01:13.78,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}as batalhas,
+Dialogue: 0,0:01:13.78,0:01:15.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você perceberia algo {\c&HFF8BC9&}assustador…{\c&HFFFFFF&}
+Dialogue: 0,0:01:16.28,0:01:18.00,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ser tão {\c&H3FD2FF&}poderoso{\c&HFFFFFF&} significava
+Dialogue: 0,0:01:18.00,0:01:19.08,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF8BC9&}nunca{\c&HFFFFFF&} mais encontrar um
+Dialogue: 0,0:01:19.08,0:01:20.61,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF8BC9&}adversário{\c&HFFFFFF&} à sua {\c&HFF8BC9&}altura.{\c&HFFFFFF&}
+Dialogue: 0,0:01:21.18,0:01:22.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E talvez o maior
+Dialogue: 0,0:01:22.02,0:01:23.45,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFD24F&}desafio{\c&HFFFFFF&} não fosse derrotar
+Dialogue: 0,0:01:23.45,0:01:24.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}monstros…
+Dialogue: 0,0:01:24.43,0:01:25.52,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas encontrar algo que
+Dialogue: 0,0:01:25.52,0:01:26.82,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ainda fizesse seu {\c&H6D4DFF&}coração{\c&HFFFFFF&}
+Dialogue: 0,0:01:26.82,0:01:27.49,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6D4DFF&}acelerar.{\c&HFFFFFF&}
+Dialogue: 0,0:01:28.11,0:01:29.83,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}Comente{\c&HFFFFFF&} {\c&H3FD2FF&}“CARECA”{\c&HFFFFFF&} se você
+Dialogue: 0,0:01:29.83,0:01:30.99,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}aceitaria esse {\c&H3FD2FF&}poder!{\c&HFFFFFF&}
