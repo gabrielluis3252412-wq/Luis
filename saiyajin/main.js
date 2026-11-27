@@ -10,7 +10,7 @@ const PH=PHR.map(p=>p[0]),PT=PHR.map(p=>[p[1],p[2]]);
 const ps=i=>PT[i-1][0]+OFF,pe=i=>PT[i-1][1]+OFF;
 const nrm=x=>x.toLowerCase().replace(/[^a-zà-ú0-9]/g,'');
 const wt=(i,w,f=.5)=>{const q=nrm(w.split(' ')[0]);if(typeof PWD!='undefined'&&PWD&&PWD[i-1]){const x=PWD[i-1].find(z=>nrm(z[0]).startsWith(q));if(x)return x[1]+(x[2]-x[1])*f+OFF}const s=PH[i-1].toLowerCase(),p=Math.max(0,s.indexOf(w.toLowerCase()));return ps(i)+(pe(i)-ps(i))*(p+w.length*f)/s.length};
-const TOTAL=Math.round((pe(PH.length)+3.4)*24)/24,OLDT=TOTAL;window.TOTAL=TOTAL;window.PHRASES=PH.map((t,i)=>[t,ps(i+1),pe(i+1)]);
+const OLDT=Math.round((pe(Math.min(26,PH.length))+3.4)*24)/24,TOTAL=PH.length>26?Math.round((pe(PH.length)+1.45)*24)/24:OLDT;window.TOTAL=TOTAL;window.PHRASES=PH.map((t,i)=>[t,ps(i+1),pe(i+1)]);
 // energia da voz por quadro (pulsa o brilho dos olhos com a narracao)
 const vox=t=>ENV[Math.floor((t-OFF)*24)]||0;
 const mouthAt=(k,t)=>({o:0,w:0,on:0});
@@ -294,48 +294,62 @@ shot('twn3',ps(11)-.2,(t,u)=>{
  let ui='';if(GT>tPer)ui+=TXT('AMIGOS EM PERIGO',540,320,92,'#ff4d6d',-3,pop(GT,tPer)*(1+.03*sn(GT*9)));
  camA([[ps(11)-.2,.3,0,120,-2],[ps(12),.2,0,60,1]]);
  FX.ui=ui;FX.lit=LIT.twn3;FX.vig=.8;FX.tint=[200,0,30,.12+.06*ab(sn(GT*6))];FX.shake=3},'wr');
+// ---- efeitos extras da transformacao ----
+Object.assign(CHD,{CSH:{...CHD.CIB,hat:HOODC(GOLD),id:19}});CHS.CSH={...mkg(),d:CHD.CSH,id:19};
+document.querySelector('#SV defs').insertAdjacentHTML('beforeend','<linearGradient id="pillg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ffb300" stop-opacity="0"/><stop offset=".3" stop-color="#ffcf40" stop-opacity=".55"/><stop offset=".5" stop-color="#fffbe6" stop-opacity=".95"/><stop offset=".7" stop-color="#ffcf40" stop-opacity=".55"/><stop offset="1" stop-color="#ffb300" stop-opacity="0"/></linearGradient>');
+const PILLAR=(k,a,w=1)=>{if(a<=.01)return;const p=CHS[k].sp,ku=p[2],ww=320*ku*w*(1+.06*sn(GT*23));FX.aw=(FX.aw||'')+`<rect x="${(p[0]-ww/2).toFixed(1)}" y="-700" width="${ww.toFixed(1)}" height="${(p[1]+720).toFixed(1)}" fill="url(#pillg)" opacity="${Math.min(1,a).toFixed(2)}"/>`};
+const CRACKS=(x,y,ku,a)=>{if(a<=0)return'';let s='';for(let i=0;i<8;i++){const an=i/8*6.283+.2,L=(120+160*rnd(i,3.3))*ku*a;let d=`M${x.toFixed(1)} ${y.toFixed(1)}`;for(let k=1;k<=4;k++){const r=L*k/4;d+=`L${(x+cs(an)*r+(rnd(i*7+k,5.1)-.5)*30*ku).toFixed(1)} ${(y+sn(an)*r*.28+(rnd(i*7+k,8.3)-.5)*8*ku).toFixed(1)}`}s+=`<path d="${d}" stroke="${INK}" stroke-width="${(9*ku).toFixed(1)}" fill="none" stroke-linejoin="round" stroke-linecap="round"/><path d="${d}" stroke="${GOLD2}" stroke-width="${(3.5*ku).toFixed(1)}" fill="none" stroke-linecap="round" opacity="${(.6+.4*ab(sn(GT*12+i))).toFixed(2)}"/>`}return s};
+const DUST=(x,y,t0,ku,life=1.1)=>{const d=GT-t0;if(d<0||d>life)return'';const k=d/life,R=(80+900*(1-(1-k)*(1-k)))*ku;let s=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${R.toFixed(1)}" ry="${(R*.22).toFixed(1)}" fill="none" stroke="#fff3c8" stroke-width="${(14*(1-k)*ku+1).toFixed(1)}" opacity="${(1-k).toFixed(2)}"/>`;for(let i=0;i<16;i++){const a=i/16*6.283;s+=`<circle cx="${(x+cs(a)*R).toFixed(1)}" cy="${(y+sn(a)*R*.22-30*ku*k).toFixed(1)}" r="${((22+20*rnd(i,4.4))*ku*(.5+k)).toFixed(1)}" fill="#d9c9a8" stroke="${INK}" stroke-width="${(3*ku).toFixed(1)}" opacity="${(.8*(1-k)).toFixed(2)}"/>`}return s};
+const SPEEDG=(a,cx=540,cy=1000)=>{if(a<=0)return'';let s='';for(let i=0;i<34;i++){const an=rnd(i,9.1)*6.283,ph=(GT*3.4+rnd(i,4.2))%1,r1=480+rnd(i,7.7)*160+ph*80,L=140+rnd(i,2.2)*220;s+=`<line x1="${(cx+cs(an)*r1).toFixed(1)}" y1="${(cy+sn(an)*r1*1.5).toFixed(1)}" x2="${(cx+cs(an)*(r1+L)).toFixed(1)}" y2="${(cy+sn(an)*(r1+L)*1.5).toFixed(1)}" stroke="${i%3?GOLD2:'#fff'}" stroke-width="${(5+rnd(i,6)*7).toFixed(1)}" stroke-linecap="round" opacity="${(a*(.4+.5*rnd(i,1.1))).toFixed(2)}"/>`}return s};
+// pisca entre a forma antiga e a nova antes de firmar (estilo anime)
+const flick=(t0,dur=.9,rate=10)=>GT>=t0?true:GT<t0-dur?false:rnd(Math.floor(GT*rate),5.3)<cl((GT-t0+dur)/dur)*.85;
+const GLIT={amb:[1.05,.95,.8],rim:[255,220,120],d:[0,-1],sh:.3,ri:1};
 // ===== 9) raiva: energia jamais vista =====
 const tRai=wt(12,'raiva',.2),tLib=wt(13,'liberar',.2),tJam=wt(13,'jamais',.2);
 shot('twn3',ps(12)-.15,(t,u)=>{
  const rg=cl((GT-tRai)/2.4),scr=GT>tLib,flk=rnd(Math.floor(GT*18),3.7)<rg*.7,k=flk&&scr?'CSS':'CIB';
- put(k,0,0,3.6,{sc:2.5,m:scr?'talka':'angry',mry:scr?16+4*sn(GT*30):undefined,mrx:18,aR:-25-20*rg,aL:25+20*rg,brow:10,rot:3*rg*sn(GT*40),tilt:2*sn(GT*33),nobob:1});
- const c0=chestP(k),ku=C[k].sp[2];goldAura(k,rg*(flk?1:.45));fw(ROCKS(c0[0],c0[1]+120*ku,300*ku,GT,rg)+BOLTS(c0[0],c0[1],180*ku,GT,rg*rg));
+ put(k,0,0,3.6,{sc:2.5,m:scr?'talka':'angry',mry:scr?16+4*sn(GT*30):undefined,mrx:18,aR:-25-20*rg,aL:25+20*rg,brow:10,rot:3*rg*sn(GT*40),tilt:2*sn(GT*33),nobob:1,sq:SQ(tLib,1.1)});
+ const p=C[k].sp,c0=chestP(k),ku=p[2];goldAura(k,rg*(flk?1:.45));PILLAR(k,scr?(flk?.55:.18)*rg:0,.8);
+ fw(CRACKS(p[0],p[1],ku,ob(GT,tLib-.1,.6))+DUST(p[0],p[1],tLib,ku)+ROCKS(c0[0],c0[1]+120*ku,300*ku,GT,rg)+BOLTS(c0[0],c0[1],180*ku,GT,rg*rg));
  FX.pf=[[c0[0],c0[1]+100*ku,320*ku,30,'255,220,120',rg,'rise']];
- let ui='';if(GT>tRai)ui+=TXT('RAIVA',540,310,150,'#ff4d6d',-4,pop(GT,tRai)*(1+.05*sn(GT*20)));if(GT>tJam)ui+=TXT('ENERGIA JAMAIS VISTA',540,430,62,GOLD2,-3,pop(GT,tJam));
- const e=eyeP(k),F=foc(e[0],e[1]+140*ku,.55);camA([[ps(12)-.15,.15,F[0]*.3,F[1]*.3,0],[tLib,.45,F[0]*.8,F[1]*.8,-2],[ps(14),.6,F[0],F[1],2]]);
- FX.ui=ui;FX.lit={...LIT.twn3,rim:flk?[255,220,120]:[255,90,90],ri:1};FX.vig=.85;FX.shake=2+12*rg;FX.chroma=6*rg;FX.tint=[255,40,40,.06*rg];FX.flash=flk&&scr?.12:0;FX.flcol='255,230,150'},'zoom');
-// ===== 10) cabelo dourado =====
+ let ui=scr?SPEEDG(.45*rg):'';if(GT>tRai)ui+=TXT('RAIVA',540,310,150,'#ff4d6d',-4,pop(GT,tRai)*(1+.05*sn(GT*20)));if(GT>tJam)ui+=TXT('ENERGIA JAMAIS VISTA',540,430,62,GOLD2,-3,pop(GT,tJam));
+ const e=eyeP(k),F=foc(e[0],e[1]+140*ku,.55),Fw=foc(p[0],p[1]-170*ku,.12);camA([[ps(12)-.15,.15,F[0]*.3,F[1]*.3,0],[tLib-.05,.45,F[0]*.8,F[1]*.8,-2],[tLib,.14,Fw[0],Fw[1],0,'c'],[tJam,.3,F[0]*.6,F[1]*.6,1],[ps(14),.6,F[0],F[1],2]]);
+ FX.ui=ui;FX.lit={...LIT.twn3,rim:flk?[255,220,120]:[255,90,90],ri:1};FX.vig=.85;FX.shake=2+12*rg+14*sh1(GT,[tLib],5);FX.chroma=6*rg;FX.tint=[255,40,40,.06*rg];FX.flash=Math.max(flk&&scr?.12:0,.4*sh1(GT,[tLib],9));FX.flcol='255,230,150'},'zoom');
+// ===== 10) cabelo dourado (pisca ate firmar) =====
 const tDou=wt(14,'dourado',.0);
 shot('twn3',ps(14)-.25,(t,u)=>{
- const k=GT>tDou?'CSS':'CIB';put(k,0,0,3.6,{sc:2.5,m:'angry',brow:9,aR:-40,aL:40,nobob:1,sq:SQ(tDou,1.4)});goldAura(k,GT>tDou?1:.4);
+ const on=flick(tDou,1.0,11),k=on?'CSH':'CIB',fl=on&&GT<tDou;
+ put(k,0,0,3.6,{sc:2.5,m:'angry',brow:9,aR:-40,aL:40,nobob:1,sq:SQ(tDou,1.4),tilt:fl?4*sn(GT*40):0});goldAura(k,GT>tDou?1:on?.7:.35);PILLAR(k,GT>tDou?.75:on?.45:.08,1);
  const p=C[k].sp,ku=p[2],hd=[p[0],p[1]-330*ku],q=zpS(hd[0],hd[1]);fw(BOLTS(hd[0],hd[1],140*ku,GT,1));
- let ui='';if(GT>tDou)ui+=TXT('DOURADO',540,330,150,GOLD,-3,pop(GT,tDou))+RAYS(GT,tDou,q[0],q[1],.5,20,GOLD2);
+ if(GT>tDou)FX.pf=[[hd[0],hd[1],240*ku,30,'255,230,140',1,'rise']];
+ let ui=GT>tDou?SPEEDG(.5*(1-cl((GT-tDou)/1.2))+.15,q[0],q[1]):'';if(GT>tDou)ui+=TXT('DOURADO',540,330,150,GOLD,-3,pop(GT,tDou))+RAYS(GT,tDou,q[0],q[1],.5,20,GOLD2);
  const F=foc(hd[0],hd[1]+60*ku,.9);camA([[ps(14)-.25,.85,F[0],F[1]+80,-2],[tDou,.95,F[0],F[1],1,'c'],[ps(15),1.0,F[0],F[1],0]]);
- FX.ui=ui;FX.lit={amb:[1.05,.95,.8],rim:[255,220,120],d:[0,-1],sh:.3,ri:1};FX.shake=16*sh1(GT,[tDou],5);FX.flash=.7*sh1(GT,[tDou],8);FX.flcol='255,235,160';FX.chroma=6*sh1(GT,[tDou],4)},'flashO');
-// ===== 11) olhos mudam =====
+ FX.ui=ui;FX.lit=on?GLIT:LIT.twn3;FX.shake=(fl?6:0)+16*sh1(GT,[tDou],5);FX.flash=Math.max(fl?.22:0,.7*sh1(GT,[tDou],8));FX.flcol='255,235,160';FX.chroma=(fl?3:0)+6*sh1(GT,[tDou],4)},'flashO');
+// ===== 11) olhos mudam (cabelo ja dourado) =====
 const tOlh=wt(15,'mudariam',.0);
 shot('twn3',ps(15)-.15,(t,u)=>{
- const k=GT>tOlh?'CSS':'CIB';put(k,0,0,3.6,{sc:2.5,m:'focus',six:GT>tOlh?.0:undefined,brow:6,look:[0,0],nobob:1,still:1,noblink:1});
- const e=eyeP(k),ku=C[k].sp[2];if(GT>tOlh)(FX.gls=FX.gls||[]).push([e[0]-25*ku,e[1],40*ku,'60,240,200',.5],[e[0]+25*ku,e[1],40*ku,'60,240,200',.5]);
- let ui='';if(GT>tOlh)ui+=TXT('OS OLHOS MUDAM',540,320,96,'#3ff0c8',-3,pop(GT,tOlh));
+ const on=flick(tOlh,.6,12),k=on?'CSS':'CSH';put(k,0,0,3.6,{sc:2.5,m:'focus',brow:6,look:[0,0],nobob:1,still:1,noblink:1});
+ const e=eyeP(k),ku=C[k].sp[2],q=zpE(e);if(on)(FX.gls=FX.gls||[]).push([e[0]-25*ku,e[1],40*ku,'60,240,200',GT>tOlh?.5:.3],[e[0]+25*ku,e[1],40*ku,'60,240,200',GT>tOlh?.5:.3]);
+ let ui='';if(GT>tOlh)ui+=TXT('OS OLHOS MUDAM',540,320,96,'#3ff0c8',-3,pop(GT,tOlh))+SCAN(q[0],q[1],tOlh,.8,900,'#3ff0c8');
  const F=foc(e[0],e[1],1.6);camA([[ps(15)-.15,1.55,F[0],F[1],0],[ps(16),1.7,F[0],F[1],0]]);
- FX.ui=ui;FX.lit={amb:[1.05,.95,.8],rim:[255,220,120],d:[0,-1],sh:.3,ri:1};FX.flash=.5*sh1(GT,[tOlh],10);FX.flcol='170,255,230';FX.shake=6*sh1(GT,[tOlh],6)},'zoom');
+ FX.ui=ui;FX.lit=GLIT;FX.flash=Math.max(on&&GT<tOlh?.2:0,.5*sh1(GT,[tOlh],10));FX.flcol='170,255,230';FX.shake=6*sh1(GT,[tOlh],6)},'zoom');
 // ===== 12) a aura gigantesca explode =====
 const tAur=wt(16,'aura',.2),tExp=wt(16,'explodiria',.3);
 shot('twn3',ps(16)-.2,(t,u)=>{
- const ex=ob(GT,tExp-.1,.4);put('CSS',0,0,3.4,{sc:2.4,m:'angry',brow:9,aR:-150*ex-20*(1-ex),aL:150*ex+20*(1-ex),sq:SQ(tExp,1.5),nobob:1});
- const c0=chestP('CSS'),ku=C.CSS.sp[2];goldAura('CSS',.6+.4*ex,1.2+1.8*ex);fw(BOLTS(c0[0],c0[1],220*ku,GT,1,GOLD2,7)+ROCKS(c0[0],c0[1]+150*ku,420*ku,GT,ex)+RIP(c0[0],c0[1],tExp,.8,1400,'#fff3a0')+RIP(c0[0],c0[1],tExp+.15,.8,1100,GOLD));
+ const ex=ob(GT,tExp-.1,.4),pre=cl((GT-ps(16))/(tExp-ps(16)));put('CSS',0,0,3.4,{sc:2.4,m:GT<tExp-.1?'angry':'talka',mry:GT>tExp-.1&&GT<tExp+1.2?18:undefined,mrx:18,brow:9,aR:-150*ex-20*(1-ex),aL:150*ex+20*(1-ex),sq:SQ(tExp,1.5),nobob:1,rot:GT<tExp?2*pre*sn(GT*45):0});
+ const p=C.CSS.sp,c0=chestP('CSS'),ku=p[2];goldAura('CSS',.6+.4*ex,1.2+1.8*ex);PILLAR('CSS',.3*pre+1.1*ex,1+1.6*ex);
+ fw(CRACKS(p[0],p[1],ku,.3+.7*ex)+DUST(p[0],p[1],tExp,ku,1.3)+BOLTS(c0[0],c0[1],220*ku,GT,1,GOLD2,7)+ROCKS(c0[0],c0[1]+150*ku,420*ku,GT,ex)+RIP(c0[0],c0[1],tExp,.8,1400,'#fff3a0')+RIP(c0[0],c0[1],tExp+.15,.8,1100,GOLD));
  FX.warp=GT>tExp?[c0[0],c0[1],lp(200,1600,cl((GT-tExp)/.9)),90*(1-cl((GT-tExp)/.9))]:null;
- FX.pf=[[c0[0],c0[1],500*ku,40,'255,220,120',ex,'rise']];FX.rays=[[c0[0],c0[1],.5*ex,'255,200,90',18,1800]];
- let ui='';if(GT>tAur)ui+=TXT('AURA GIGANTESCA',540,320,98,GOLD,-3,pop(GT,tAur));
- camA([[ps(16)-.2,.3,0,-60,-2],[tExp,.0,0,0,0,'c'],[ps(17),.06,0,-30,2]]);
- FX.ui=ui;FX.lit={amb:[1.1,.98,.8],rim:[255,225,130],d:[0,-1],sh:.25,ri:1};FX.shake=4+22*sh1(GT,[tExp],3);FX.flash=.85*sh1(GT,[tExp],6);FX.flcol='255,240,190';FX.chroma=8*sh1(GT,[tExp],3)},'wu');
+ FX.pf=[[c0[0],c0[1],500*ku,40,'255,220,120',.3+.7*ex,'rise']];FX.rays=[[c0[0],c0[1],.15*pre+.5*ex,'255,200,90',18,1800]];
+ let ui=SPEEDG(GT>tExp?.6*(1-cl((GT-tExp)/1.6))+.12:.2*pre);if(GT>tAur)ui+=TXT('AURA GIGANTESCA',540,320,98,GOLD,-3,pop(GT,tAur));
+ const e=eyeP('CSS'),F=foc(e[0],e[1]+100*ku,.5);camA([[ps(16)-.2,.3,F[0]*.6,F[1]*.6,-2],[tExp-.1,.55,F[0],F[1],0],[tExp,.0,0,0,0,'c'],[ps(17),.08,0,-30,2]]);
+ FX.ui=ui;FX.lit={amb:[1.1,.98,.8],rim:[255,225,130],d:[0,-1],sh:.25,ri:1};FX.shake=4+6*pre+22*sh1(GT,[tExp],3);FX.flash=.85*sh1(GT,[tExp],6);FX.flcol='255,240,190';FX.chroma=8*sh1(GT,[tExp],3)},'wu');
 // ===== 13) o lendario Super Saiyajin =====
 const tLen=wt(17,'lendário',.2),tSup=wt(17,'Super',.0);
 shot('twn3',ps(17)-.2,(t,u)=>{
  put('CSS',0,0,4.8,{sc:2.3,m:'cool',brow:5,aR:-14,aL:14,look:[0,-2]});const c0=chestP('CSS'),ku=C.CSS.sp[2];goldAura('CSS',1,1.5);fw(BOLTS(c0[0],c0[1],200*ku,GT,.9));
  FX.pf=[[c0[0],c0[1],420*ku,36,'255,220,120',1,'rise']];FX.rays=[[c0[0],c0[1]-100*ku,.4,'255,200,90',16,1600]];
- let ui='';if(GT>tLen)ui+=TXT('O LENDÁRIO',540,280,76,'#fff',-3,pop(GT,tLen));if(GT>tSup)ui+=TXT('SUPER',540,410,150,GOLD,-3,pop(GT,tSup))+TXT('SAIYAJIN',540,550,130,GOLD,-3,pop(GT,tSup+.2)*(1+.02*sn(GT*6)))+RAYS(GT,tSup,540,450,.5,22,GOLD2);
+ let ui='';if(GT>tLen)ui+=TXT('O LENDÁRIO',540,245,70,'#fff',-3,pop(GT,tLen));if(GT>tSup)ui+=TXT('SUPER',540,355,130,GOLD,-3,pop(GT,tSup))+TXT('SAIYAJIN',540,470,112,GOLD,-3,pop(GT,tSup+.2)*(1+.02*sn(GT*6)))+RAYS(GT,tSup,540,380,.5,22,GOLD2);
  const F=foc(c0[0],c0[1]-120*ku,.2);camA([[ps(17)-.2,.0,0,-300,-3],[tSup,.18,F[0],F[1]+80,0],[ps(18),.22,F[0],F[1]+60,2]]);
  FX.ui=ui;FX.lit={amb:[1.1,.98,.8],rim:[255,225,130],d:[0,-1],sh:.25,ri:1};FX.shake=10*sh1(GT,[tSup],5);FX.flash=.45*sh1(GT,[tSup],9);FX.flcol='255,240,190'},'flashO');
 // ===== 14) apenas o comeco =====
@@ -412,11 +426,74 @@ shot('road',ps(25)-.2,(t,u)=>{
  FX.rays=[[560,560,.3+.4*gold,'255,210,130',18,1800]];
  let ui='';if(GT>tCai&&GT<tEnd)ui+=TXT('MESMO DEPOIS DE CAIR...',540,320,70,'#fff',-3,pop(GT,tCai));if(GT>tMfo&&GT<tEnd)ui+=TXT('MAIS FORTES',540,440,124,GOLD,-3,pop(GT,tMfo)*(1+.03*sn(GT*7)));
  if(GT>tEnd){const a=ob(GT,tEnd,.4);ui+=`<rect x="0" y="1290" width="1080" height="330" fill="#120802" opacity="${(.82*a).toFixed(2)}"/>`+TXT('E VOCÊ?',540,300,110,'#fff',-3,pop(GT,tEnd))+TXT('CAIRIA OU LEVANTARIA?',540,420,74,GOLD,-3,pop(GT,tEnd+.15))+TXT('COMENTE AQUI EMBAIXO!',540,1470,66,'#fff',-2,pop(GT,tEnd+.3))}
- const pp=C[k].sp,rr=lp(84,0,up)*Math.PI/180,Fl=foc(pp[0]+150*pp[2]*sn(rr),pp[1]-150*pp[2]*cs(rr),.3),F=foc(c0[0],c0[1]-60*ku,.3);camA([[ps(25)-.2,.34,Fl[0],Fl[1],-4],[tCai+.2,.3,Fl[0],Fl[1],-2],[tCai+.9,.25,F[0]*.6,F[1]*.6,0],[tMfo-.1,.32,F[0],F[1],0],[tMfo,.1,0,-40,0,'c'],[TOTAL,.2,0,-60,1]]);
+ const pp=C[k].sp,rr=lp(84,0,up)*Math.PI/180,Fl=foc(pp[0]+150*pp[2]*sn(rr),pp[1]-150*pp[2]*cs(rr),.3),F=foc(c0[0],c0[1]-60*ku,.3);camA([[ps(25)-.2,.34,Fl[0],Fl[1],-4],[tCai+.2,.3,Fl[0],Fl[1],-2],[tCai+.9,.25,F[0]*.6,F[1]*.6,0],[tMfo-.1,.32,F[0],F[1],0],[tMfo,.1,0,-40,0,'c'],[OLDT,.2,0,-60,1]]);
  FX.ui=ui;FX.lit=k=='CSS'?{amb:[1.1,.98,.82],rim:[255,220,120],d:[0,-1],sh:.3,ri:1}:LIT.road;FX.shake=14*sh1(GT,[tMfo],5);FX.flash=.6*sh1(GT,[tMfo],8);FX.flcol='255,240,190'},'');
 
+// ===== 17) ENCERRAMENTO: like + inscreva-se (Cibito precisa da sua ajuda) =====
+if(PH.length>26){
+const T0=OLDT,tLock=wt(27,'desbloquear',.3),tPod=wt(27,'poder',.2),tMas=wt(28,'mas',.1),tAju=wt(28,'ajuda',.0),tLik=wt(29,'like',.0),tPress=wt(29,'like',.9)+.05,
+ tIns=wt(29,'inscreva',.0),tCan=wt(29,'canal',.3),tFor2=wt(29,'força',.0),tCur=wt(30,'curtida',.0),tTra=wt(30,'transformação',.35),tSer=wt(31,'será',.0),tEndO=pe(31)+.25;
+// icones em unidades de tela (desenhados no mesmo traco grosso)
+const THUMB=(c='#fff')=>`<path d="M-58 2H-28V70H-58Z" fill="${c}" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/><path d="M-20 4L8-44Q16-70 34-58Q44-50 38-20H70Q90-18 84 4L72 58Q68 72 52 72H-20Z" fill="${c}" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/>`;
+const LIKEB=(on,pr)=>`<circle r="128" fill="rgba(0,0,0,.28)" cy="10"/><circle r="122" fill="${on?'url(#likeg)':'#fff'}" stroke="${INK}" stroke-width="12"/><circle r="104" fill="none" stroke="${on?'rgba(255,255,255,.35)':'rgba(31,123,255,.18)'}" stroke-width="8"/><g transform="translate(4 -6) scale(${(1.05+.12*pr).toFixed(3)})">${THUMB(on?'#fff':'#1f7bff')}</g>`;
+const SUBB=(on)=>`<rect x="-300" y="-72" width="600" height="144" rx="72" fill="rgba(0,0,0,.3)" transform="translate(0 10)"/><rect x="-300" y="-72" width="600" height="144" rx="72" fill="${on?'#3a3a46':'#ff1f3d'}" stroke="${INK}" stroke-width="12"/><text y="22" font-size="62" text-anchor="middle" fill="#fff" font-family="Poppins,DejaVu Sans" font-weight="900">${on?'INSCRITO ✓':'INSCREVA-SE'}</text>`;
+const BELL=(sw,ring)=>`<g transform="rotate(${sw.toFixed(1)} 0 -70)"><path d="M-62 40Q-58-50 0-66Q58-50 62 40L80 62H-80Z" fill="#ffd23f" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/><circle cy="-74" r="14" fill="#ffd23f" stroke="${INK}" stroke-width="8"/><circle cy="78" r="18" fill="#ffd23f" stroke="${INK}" stroke-width="8"/><path d="M-36-20Q-30-40-12-46" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/></g>`+(ring>0?[1,2].map(i=>`<path d="M${-100-i*26}-40Q${-120-i*30} 0 ${-100-i*26} 40M${100+i*26}-40Q${120+i*30} 0 ${100+i*26} 40" stroke="#ffd23f" stroke-width="10" fill="none" stroke-linecap="round" opacity="${(ring*(.9-.3*i)).toFixed(2)}"/>`).join(''):'');
+const CURSOR=`<path d="M0 0L0 88L22 68L38 104L54 96L38 62L66 60Z" fill="#fff" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>`;
+const LOCK=(sh,cr,op)=>`<g transform="rotate(${sh.toFixed(1)})"><path d="M-46-30V${(-70-60*op).toFixed(0)}Q-46${(-130-60*op).toFixed(0)} 0${(-130-60*op).toFixed(0)}Q46${(-130-60*op).toFixed(0)} 46${(-70-60*op).toFixed(0)}V-30" fill="none" stroke="${INK}" stroke-width="30"/><path d="M-46-30V${(-70-60*op).toFixed(0)}Q-46${(-130-60*op).toFixed(0)} 0${(-130-60*op).toFixed(0)}Q46${(-130-60*op).toFixed(0)} 46${(-70-60*op).toFixed(0)}V-30" fill="none" stroke="#c9ced8" stroke-width="16"/><rect x="-80" y="-40" width="160" height="130" rx="24" fill="#ffc02e" stroke="${INK}" stroke-width="12"/><circle cy="12" r="16" fill="${INK}"/><path d="M0 18V50" stroke="${INK}" stroke-width="14" stroke-linecap="round"/>${cr>0?`<path d="M-60-30L-20 10L-40 40L0 80M50-30L20 0L40 30" stroke="${CY2}" stroke-width="${(4+5*cr).toFixed(1)}" fill="none" stroke-linecap="round" opacity="${cr.toFixed(2)}"/>`:''}</g>`;
+const FINGER=`<path d="M-7 4V40Q0 50 7 40V4Z" fill="#f6c8a0" stroke="${INK}" stroke-width="5" stroke-linejoin="round"/>`;
+document.querySelector('#SV defs').insertAdjacentHTML('beforeend','<linearGradient id="likeg" x1="0" y1="-1" x2="0" y2="1"><stop offset="0" stop-color="#5fd0ff"/><stop offset="1" stop-color="#1f5bff"/></linearGradient>');
+shot('twn3',T0,(t,u)=>{
+ const inn=ob(GT,T0+.12,.5),jy=(1-inn)*900,pressA=GT>tPress-.25&&GT<tPress+.35,flex=GT>tFor2&&GT<tCur+.2,tr=ob(GT,tTra,.3),ser=GT>tSer;
+ // pose do Cibito, sincronizada com cada frase
+ let aR=-20+6*sn(GT*5),aL=20-6*sn(GT*4.6),m='grin',hold=null,tilt=4*sn(GT*2.2),brow=0,look=[0,-2];
+ if(GT>tMas-.1&&GT<tAju-.05){m='hope';aR=-30;aL=30;brow=4;look=[6,0]}
+ if(GT>=tAju-.05&&GT<tIns-.1){m=GT<tLik?'happy':'grin';hold=FINGER;aR=GT<tLik-.15?tw(-30,-105,tAju-.05,.3):GT<tPress-.25?tw(-105,-72,tLik-.15,.3):GT<tPress?-38:tw(-38,-74,tPress,.18);look=[8,-4]}
+ if(GT>=tIns-.1&&GT<tFor2){m='grin';aR=-120+10*sn(GT*9);aL=20;look=[-6,-8]}
+ if(flex){m='focus';aR=-150+6*sn(GT*14);aL=150-6*sn(GT*14);brow=8}
+ if(GT>=tCur+.2&&!ser){m=GT<tTra?'awe':'grin';aR=-40+8*sn(GT*6);aL=40-8*sn(GT*6)}
+ if(ser){m='worry';aR=-14;aL=14;brow=5;look=[0,-6]}
+ const kk=GT<tTra?'CIB':GT<tSer?'CSS':(rnd(Math.floor(GT*9),4.7)<.55?'CSS':'CIB'),px=[380,1560+jy];
+ put(kk,0,0,0,{px,ku:2.1,top:1,m,hold,aR,aL,tilt,brow,look,nodrift:1,bob:1.5,brr:3,sq:GT<T0+.8?SQ(T0+.45,1.3):pressA?SQ(tPress,.6):flex?SQ(tFor2,1):SQ(tTra,1.2)});
+ goldAura(kk,(kk=='CSS'?.6:.25)+.35*(flex?1:0)+.4*tr,1.1+.5*tr);if(kk=='CSS'||flex){const cc=chestP(kk),uk=C[kk].sp[2];fw(BOLTS(cc[0],cc[1],170*uk,GT,kk=='CSS'?.9:.5))}
+ const p=C[kk].sp,ku=p[2],c0=chestP(kk),e=eyeP(kk);
+ // cadeado do "novo poder" acima da cabeca: treme, racha e quase abre
+ const lockA=ob(GT,tLock-.2,.4)*(1-ob(GT,tAju-.3,.3)*.6)*(GT>tLik-.2&&GT<tCur?0:1),crack=cl((GT-tPod)/.4)*.5+.5*cl((GT-tCur)/(tTra-tCur)),opn=tr*.35;
+ if(lockA>0)fw(`<g transform="translate(${(p[0]+330).toFixed(1)} ${(p[1]-560+30*sn(GT*2)).toFixed(1)}) scale(${(lockA*.8*(1+.08*sh1(GT,[tPod,tTra],5))).toFixed(3)})">${LOCK((GT>tPod?6:2)*sn(GT*30)*(.4+crack),crack,opn)}</g>`);
+ // botao de LIKE: surge com impacto, balanca e e pressionado pela mao do Cibito
+ const lkA=GT<tLik-.15?0:ob(GT,tLik-.15,.45),on=GT>tPress,lsq=pressA?SQ(tPress,1.6):{sx:1,sy:1},lx=p[0]+210*ku,ly=p[1]-185*ku;
+ if(lkA>0&&GT<tFor2+.4){const out=1-ob(GT,tFor2-.15,.3),sc=lkA*out*(.95+.05*sn(GT*6))*(1+.12*sh1(GT,[tPress],7));
+  fw(`<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)}) rotate(${(5*sn(GT*4)).toFixed(1)}) scale(${(1.15*sc*lsq.sx).toFixed(3)} ${(1.15*sc*lsq.sy).toFixed(3)})">${LIKEB(on,sh1(GT,[tPress],6))}</g>`+RIP(lx,ly,tPress,.6,320,'#7fd8ff')+RIP(lx,ly,tPress+.12,.6,240,'#fff'));
+  if(on){let s='';for(let i=0;i<10;i++){const d=GT-tPress,a=rnd(i,3.3)*6.283,r=60+520*d*(.5+rnd(i,7.1)),o=cl(1-d/1.2);if(o>0)s+=`<g transform="translate(${(lx+cs(a)*r).toFixed(1)} ${(ly+sn(a)*r-120*d).toFixed(1)}) scale(${(.22+.18*rnd(i,5.5)).toFixed(2)})" opacity="${o.toFixed(2)}">${i%2?THUMB('#5fd0ff'):`<path d="M0 30C-60-10-50-70 0-34C50-70 60-10 0 30Z" fill="#ff3b6b" stroke="${INK}" stroke-width="10"/>`}</g>`}fw(s)}}
+ // INSCREVA-SE + cursor + sino
+ const sbA=GT<tIns-.2?0:ob(GT,tIns-.2,.4),sOn=GT>tCan,sx0=540+(1-sbA)*900,sy0=640;
+ let ui='';
+ if(sbA>0&&GT<tFor2+.4){const out=1-ob(GT,tFor2-.15,.3),ssq=GT>tCan&&GT<tCan+.5?SQ(tCan,1.3):{sx:1,sy:1};
+  fw(`<g transform="translate(${(sx0-60).toFixed(1)} ${sy0}) scale(${(out*ssq.sx*(1+.06*sh1(GT,[tCan],7))).toFixed(3)} ${(out*ssq.sy).toFixed(3)})">${SUBB(sOn)}</g>`+RIP(sx0-60,sy0,tCan,.6,380,'#ff7a8a'));
+  const bA=ob(GT,tCan+.1,.35)*out;if(bA>0)fw(`<g transform="translate(860 ${sy0-150}) scale(${(.85*bA).toFixed(3)})">${BELL(28*Math.exp(-(GT-tCan-.1)*2.2)*sn((GT-tCan)*16),Math.exp(-(GT-tCan-.1)*1.5))}</g>`);
+  const cp=ob(GT,tIns+.1,.5),cx=lp(1150,sx0+30,cp),cy=lp(1150,sy0+20,cp),cs2=GT>tCan-.06&&GT<tCan+.12?.82:1;if(GT<tCan+.6)fw(`<g transform="translate(${cx.toFixed(1)} ${cy.toFixed(1)}) scale(${(cs2*1.15).toFixed(2)})" opacity="${cl(1-(GT-tCan-.3)/.3).toFixed(2)}">${CURSOR}</g>`)}
+ // medidor de curtidas -> transformacao
+ if(GT>tCur-.2){const a=ob(GT,tCur-.2,.35),f=GT<tTra?lp(.12,.92,ez((GT-tCur)/(tTra-tCur))):lp(.92,.99,cl((GT-tTra)/.5)),blink=ser&&sn(GT*18)>0?1:.65,val=Math.round(f*100);
+  ui+=`<g opacity="${a.toFixed(2)}"><rect x="140" y="1330" width="800" height="150" rx="30" fill="#070a24" opacity=".85" stroke="${CY}" stroke-width="6"/><rect x="330" y="1380" width="580" height="54" rx="27" fill="#16204e"/><rect x="336" y="1386" width="${(568*f).toFixed(1)}" height="42" rx="21" fill="${ser?`rgba(255,210,63,${blink})`:CY}"/></g><g transform="translate(240 1410) scale(.6)" opacity="${a.toFixed(2)}">${THUMB('#5fd0ff')}</g>`+TXT(`PODER ${val}%`,620,1315,54,'#fff',0,a);
+  // curtidas voando ate o Cibito
+  if(GT<tTra+.2){let s='';for(let i=0;i<8;i++){const ph=((GT-tCur)*1.1+i/8)%1;const q=zpE([c0[0],c0[1]]),x=lp(240,q[0],ez(ph)),y=lp(1410,q[1],ez(ph))-160*sn(ph*3.14);s+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(.3*(1-ph*.5)).toFixed(2)})" opacity="${sn(ph*3.14).toFixed(2)}">${THUMB('#5fd0ff')}</g>`}ui+=s}}
+ // textos
+ if(GT>tLock-.1&&GT<tMas)ui+=TXT('NOVO PODER',540,330,120,'#ffd23f',-3,pop(GT,tPod-.05))+(GT>wt(27,'animação',0)?TXT('DESBLOQUEANDO...',540,440,58,CY2,-3,pop(GT,wt(27,'animação',0))):'');
+ if(GT>tAju-.05&&GT<tLik-.2)ui+=TXT('PRECISO DA',540,290,72,'#fff',-4,pop(GT,tAju-.05))+TXT('SUA AJUDA!',540,410,136,CY,-4,pop(GT,tAju+.08)*(1+.03*sn(GT*8)));
+ if(GT>tLik-.15&&GT<tIns-.1)ui+=TXT('DEIXE O LIKE!',540,330,118,'#5fd0ff',-3,pop(GT,tLik-.15));
+ if(GT>tFor2-.05&&GT<tCur-.2)ui+=TXT('MOSTRE SUA',540,290,72,'#fff',-3,pop(GT,tFor2-.05))+TXT('FORÇA!',540,420,160,'#ffd23f',-3,pop(GT,tFor2+.1)*(1+.04*sn(GT*10)))+RAYS(GT,tFor2+.1,540,400,.45,18,'#ffe27a');
+ if(GT>tTra-.05&&GT<tSer)ui+=TXT('TRANSFORMAÇÃO',540,330,104,GOLD,-3,pop(GT,tTra));
+ if(ser&&GT<tEndO+.2)ui+=TXT('SERÁ QUE ELE',540,300,76,'#fff',-3,pop(GT,tSer))+TXT('VAI CONSEGUIR?',540,410,110,'#ffd23f',-3,pop(GT,wt(31,'conseguir',0)));
+ // final elegante: iris se fechando no olho brilhante do Cibito
+ const ir=ob(GT,tEndO,.7);if(GT>tEndO){const q=zpE(e),R=lp(1500,0,ez(cl((GT-tEndO)/.8)));ui+=`<path fill-rule="evenodd" d="M-10-10H1090V1930H-10ZM${(q[0]-R).toFixed(1)} ${q[1].toFixed(1)}a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(2*R).toFixed(1)} 0a${R.toFixed(1)} ${R.toFixed(1)} 0 1 0 ${(-2*R).toFixed(1)} 0Z" fill="#02030c"/><circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="${R.toFixed(1)}" fill="none" stroke="${GOLD}" stroke-width="${(10*(1-ir*.5)).toFixed(1)}"/>`+(R<200?EMB(q[0],q[1],90,GT,cl((200-R)/150)*(1-cl((GT-tEndO-.8)/.4)),GOLD):'')}
+ FX.pf=[[c0[0],c0[1],420*ku/2.1,34,'255,220,120',.7+.3*tr,flex||tr>0?'rise':'orbit']];
+ const F=foc(e[0],e[1]+120*ku,.4),Fp=foc(e[0],e[1],.85),Fw=foc(640,1100,.08);
+ camA([[T0,.45,F[0],F[1],-3],[T0+.6,.22,F[0]*.6,F[1]*.6,1],[tMas,.25,F[0]*.6,F[1]*.6,0],[tAju-.1,.3,F[0]*.7,F[1]*.7,0],[tAju,.48,F[0],F[1],-2,'c'],[tLik-.25,.5,F[0],F[1],0],[tLik-.15,.06,Fw[0],Fw[1],0,'c'],[tFor2-.1,.06,Fw[0],Fw[1],1],[tFor2,.3,F[0]*.8,F[1]*.8,-2,'c'],[tCur,.12,0,0,0],[tTra,.35,F[0],F[1],0,'c'],[tSer,.4,F[0],F[1],0],[tEndO+.6,.85,Fp[0],Fp[1],0]]);
+ FX.ui=ui;FX.lit=kk=='CSS'?{amb:[1.05,.95,.82],rim:[255,225,130],d:[0,-1],sh:.3,ri:1}:LIT.twn3;FX.vig=.55;FX.shake=14*sh1(GT,[T0+.45],5)+6*sh1(GT,[tPress,tCan],8)+12*sh1(GT,[tFor2,tTra],5);
+ FX.flash=Math.max(.9*cl(1-(GT-T0)/.35),.35*sh1(GT,[tPod,tPress],10),.6*sh1(GT,[tTra],7));FX.flcol=GT<T0+.4?'255,240,200':'255,235,170';FX.chroma=5*sh1(GT,[tFor2,tTra],4);
+ if(GT>tCur)FX.rays=[[c0[0],c0[1]-60*ku,.25+.4*tr,'255,200,90',16,1500]]},'');
+}
 // ---------- REACOES DO CIBITO NAS PAUSAS DA NARRACAO (balao + "voz" de desenho) ----------
-const RWORD={1:'EU?!',2:'HEHE!',3:'UAU!',4:'SÉRIO?!',5:'O QUÊ?',7:'ISSO!',8:'HMM...',9:'BORA!',10:'GULP!',11:'NÃO!',13:'GRRR!',14:'!!',15:'WOW!',16:'AAAAH!',17:'HEHE!',18:'MAIS!',20:'DEUSES?!',21:'SHHH...',22:'FÁCIL!',23:'HMM...',24:'AI!'};
+const RWORD={1:'EU?!',2:'HEHE!',3:'UAU!',4:'SÉRIO?!',5:'O QUÊ?',7:'ISSO!',8:'HMM...',9:'BORA!',10:'GULP!',11:'NÃO!',13:'GRRR!',14:'!!',15:'WOW!',16:'AAAAH!',17:'HEHE!',18:'MAIS!',20:'DEUSES?!',21:'SHHH...',22:'FÁCIL!',23:'HMM...',24:'AI!',27:'POR FAVOR!',28:'BORA!',29:'AAAH!',30:'QUASE!'};
 const REACTS=[];for(let i=1;i<PH.length;i++){const g0=pe(i),g1=ps(i+1);if(RWORD[i]&&g1-g0>=.25)REACTS.push({i,w:RWORD[i],t0:g0+.03,t1:Math.max(g1,g0+.55)})}
 window.REACTS=REACTS;let REAC=null;
 const BUBBLE=(x,y,txt,k,flip)=>{const w=Math.max(150,txt.length*34+70),h=104,s=pop(GT,k);return`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(s*(1+.03*sn(GT*14))).toFixed(3)})"><path d="M${-w/2} ${-h/2}H${w/2}Q${w/2+18} ${-h/2} ${w/2+18} 0Q${w/2+18} ${h/2} ${w/2} ${h/2}H${flip?-w/2+70:w/2-50}L${flip?-w/2+30:w/2-10} ${h/2+44}L${flip?-w/2+40:w/2-90} ${h/2}H${-w/2}Q${-w/2-18} ${h/2} ${-w/2-18} 0Q${-w/2-18} ${-h/2} ${-w/2} ${-h/2}Z" fill="#fff" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/><text y="18" font-size="54" text-anchor="middle" fill="${INK}" font-family="Poppins,DejaVu Sans,sans-serif" font-weight="900">${txt}</text></g>`};

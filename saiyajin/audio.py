@@ -340,8 +340,27 @@ for k, m in enumerate([74, 72, 69, 67, 65, 64, 62, 65]): P(c('M_truth') + .3 + k
 # J) levanta mais forte: construcao -> final heroico
 chords(c('M_rise'), c('M_hero'), 'pad', .3); pulses(c('M_rise'), c('M_hero'), .3, 38, .4, True)
 P(c('M_hero'), taiko() * 1.5, 1)
-chords(c('M_hero'), TOTAL, 'choir', .55, 2); chords(c('M_hero'), TOTAL, 'brass', .3, 2); bassline(c('M_hero'), TOTAL - 1.5, .45); drums(c('M_hero'), TOTAL - 1.5, .55, True)
-P(TOTAL - 1.6, taiko() * 1.3, 1); P(TOTAL - 1.6, note(38, 1.8, 'brass') + note(50, 1.8, 'choir') + note(57, 1.8, 'choir') + note(62, 1.8, 'choir'), .4)
+ENDM = CUE.get('M_outro', TOTAL)
+chords(c('M_hero'), ENDM, 'choir', .55, 2); chords(c('M_hero'), ENDM, 'brass', .3, 2); bassline(c('M_hero'), ENDM - 1.5, .45); drums(c('M_hero'), ENDM - 1.5, .55, True)
+P(ENDM - 1.6, taiko() * 1.3, 1); P(ENDM - 1.6, note(38, 1.8, 'brass') + note(50, 1.8, 'choir') + note(57, 1.8, 'choir') + note(62, 1.8, 'choir'), .4)
+# ENCERRAMENTO: trilha animada (re maior, mais rapida)
+if 'M_outro' in CUE:
+    o0, o1, oE = cu('M_outro'), cu('M_o_like'), cu('M_o_end')
+    BO = .44; DMJ = [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]]  # D Bm G A
+    P(o0 + .1, taiko() * 1.3, 1); P(o0 + .1, note(38, 2.5, 'brass') + note(50, 2.5, 'choir') + note(57, 2.5, 'choir'), .4)
+    t = o0 + .5; k = 0
+    while t < oE - .2:
+        c = DMJ[int((t - o0) / (BO * 8)) % 4]; amp = .6 if t > o1 else .5
+        P(t, note(c[0] - 12, BO * .9, 'bass'), .45 * amp / .6)
+        P(t, note(c[(k % 3) + 1] + 12, .4, 'pluck'), .16); P(t + BO / 2, note(c[((k + 1) % 3) + 1] + 12, .4, 'pluck'), .12)
+        if k % 2 == 0: P(t, kick(), .5 * amp)
+        else: P(t, taiko(), .35 * amp)
+        if t > o1:
+            for h in range(2): P(t + h * BO / 2, hat(), .7)
+        if k % 8 == 0:
+            for m in c[1:]: P(t, note(m, BO * 8 + .3, 'choir'), .1)
+        t += BO; k += 1
+    P(oE - .2, taiko() * 1.4, 1); P(oE - .2, note(38, 2.2, 'brass') + note(50, 2.2, 'choir') + note(57, 2.2, 'choir') + note(62, 2.2, 'choir') + note(66, 2.2, 'choir'), .45)
 mus = reverb(mus, 2.0, .3)[:N]
 
 # ---------------- MIXAGEM ----------------

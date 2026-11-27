@@ -21,11 +21,11 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  // 8 amigos
  a(cut(8),'drone',1);a(cut(8)+.2,'hum',.6);a(tPer,'sting_hi',.8);for(let t=cut(8)+.2;t<cut(9);t+=.6)a(t,'heart',.8);
  // 9 raiva
- a(cut(9),'drone',.8);a(tRai,'energy_dark',1);a(tRai,'riser_s',.6);for(let t=tLib;t<cut(10);t+=.35)a(t,'thunder',.35);a(tLib,'roar',.8);a(tJam,'riser_s',.9);
+ a(cut(9),'drone',.8);a(tRai,'energy_dark',1);a(tRai,'riser_s',.6);for(let t=tLib;t<cut(10);t+=.35)a(t,'thunder',.35);a(tLib,'roar',.8);a(tLib,'boom',.9);a(tLib,'glass',.5);a(tJam,'riser_s',.9);
  // 10-11 cabelo e olhos
- a(tDou,'boom',1.2);a(tDou,'eye_open',.8);a(tDou,'energy',.9);a(tOlh,'eye_open',1.1);a(tOlh,'shimmer',.6);
+ for(let t=tDou-1;t<tDou;t+=.09)a(t,'zap',.45);a(tDou,'boom',1.2);a(tDou,'eye_open',.8);a(tDou,'energy',.9);for(let t=tOlh-.6;t<tOlh;t+=.08)a(t,'zap',.35);a(tOlh,'eye_open',1.1);a(tOlh,'shimmer',.6);
  // 12 aura explode
- a(tExp-.6,'riser_s',1);a(tExp,'boom',1.4);a(tExp,'warp',1);a(tExp+.05,'thunder',.9);a(tAur,'energy',.8);
+ a(tExp-.6,'riser_s',1);a(tExp-.1,'roar',.9);a(tExp+.1,'impact',1);a(tExp,'boom',1.4);a(tExp,'warp',1);a(tExp+.05,'thunder',.9);a(tAur,'energy',.8);
  // 13-14 Super Saiyajin
  a(cut(13),'hum',.7);a(tSup,'hit',1);a(tSup,'shimmer',.8);for(let t=cut(13)+.3;t<cut(15);t+=.7)a(t,'zap',.3);a(tCom,'swish',.6);
  // 15 batalhas e deuses
@@ -39,5 +39,17 @@ window.getSFX=()=>{const L=[],a=(t,k,v=1)=>L.push([+Math.max(0,t).toFixed(3),k,v
  a(cut(19),'wind',.9);a(tDrr+.25,'impact',1);a(tDrr+.3,'boom',.6);
  // 20 levanta mais forte
  a(cut(21),'wind',.8);a(tCai+.2,'breath',.6);a(tMfo-.6,'riser_s',.9);a(tMfo,'boom',1.3);a(tMfo,'energy',1);a(tMfo,'shimmer',.8);a(tEnd,'final',.9);
+
+ // encerramento: like + inscreva-se
+ if(PH.length>26){const T0=OLDT,w=(i,k,f=.5)=>wt(i,k,f),tP=w(29,'like',.9)+.05,tC=w(29,'canal',.3),tF=w(29,'força',0),tT=w(30,'transformação',.35),tE=pe(31)+.25;
+  a(T0,'M_outro');a(w(29,'like',0),'M_o_like');a(tE,'M_o_end');
+  a(T0,'flash',.9);a(T0+.4,'boom',1.1);a(T0+.45,'whoosh',.8);a(T0+.5,'energy',.7);a(T0,'amb_night',.6);
+  a(w(27,'desbloquear',.1),'lock_rattle',.8);a(w(27,'poder',.2),'shimmer',.7);a(w(27,'poder',.2),'hit',.5);
+  a(w(28,'ajuda',0),'swish',.7);a(w(28,'ajuda',0),'pop',.7);
+  a(w(29,'like',0)-.15,'pop',.9);a(w(29,'like',0)-.15,'whoosh',.5);a(tP,'click',1);a(tP,'ding',.8);a(tP+.05,'sparkle',.6);
+  a(w(29,'inscreva',0)-.2,'swish',.7);a(tC,'click',1);a(tC+.1,'bell_ring',.9);
+  a(tF,'boom',1);a(tF,'energy',.8);
+  for(let t=w(30,'curtida',0);t<tT;t+=.22)a(t,'pop',.28);a(w(30,'curtida',0),'charge',.7);a(tT-.4,'riser_s',.8);a(tT,'boom',1.2);a(tT,'unlock',.9);a(tT+.05,'shimmer',.8);
+  for(let t=w(31,'será',0);t<tE;t+=.55){a(t,'heart',.8);a(t+.2,'zap',.4)}a(tE,'whoosh',.7);a(tE+.5,'final',.9)}
  REACTS.forEach((r,j)=>{a(r.t0,'babble',.9);a(r.t0,'pop',.45);a(r.t0-.05,['shimmer','swish','energy_pulse','whoosh_soft'][j%4],.5)});
  L.sort((x,y)=>x[0]-y[0]);return L};
