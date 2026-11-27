@@ -700,16 +700,16 @@ shot('zghN',ps(15)-.25,(t,u)=>{
  put('BAL',0,0,0,{px:[545,1470],ku:.9,sit:1,m:GT<tAss?'blank':'sad',aR:-14,aL:14,look:[0,4],glint:.2,wind:.6,brr:1});
  let ui='';const n=SW(ps(15),tBat+.3,1,999);ui+=COUNTER(540,600,ob(GT,ps(15),.3),(n>=999?'999+':String(n)),'VITÓRIAS',GOLD,.85);
  if(GT>tVen2&&GT<tPer)ui+='';if(GT>tAss)ui+=TXT('ALGO ASSUSTADOR...',540,330,82,'#b8c4ff',-3,pop(GT,tAss));
- const e=eyeP('BAL'),F=foc(e[0],e[1]+120,.7);camA([[ps(15)-.25,.05,0,-60,-1],[tPer,.12,F[0]*.2,F[1]*.2,0],[pe(15)+.3,.7,F[0],F[1],0]]);
+ const e=eyeP('BAL'),F=foc(e[0],e[1]+120,.7),Fc=foc(e[0],e[1]+60,.95);camA([[ps(15)-.25,.95,Fc[0],Fc[1],-1],[tBat+.35,.06,0,-60,1],[tPer,.12,F[0]*.2,F[1]*.2,0],[pe(15)+.3,.7,F[0],F[1],0]]);
  FX.ui=ui;FX.lit=LIT.zghN;FX.vig=lp(.55,.82,cl((GT-tPer)/1.5));FX.grade=`contrast(1.05) saturate(${lp(1.05,.55,cl((GT-tPer)/1.5)).toFixed(2)})`},'dip');
 // ===== 15) nunca mais um adversario a sua altura =====
 const tNun=wt(16,'nunca',.1),tAdv=wt(16,'adversário',.1),tAlt=wt(16,'altura',.1);
 shot('tlh',ps(16)-.25,(t,u)=>{
  put('BAL',.3,0,-1.4,{sc:.9,m:'blank',aR:-14,aL:14,look:[0,2],glint:.15,wind:2.2,brr:.9});
  let s='';for(let i=0;i<9;i++){const ph=((GT*.35+rnd(i,4.4))%1),x=lp(-60,1140,ph),y=lp(900,1500,rnd(i,2.2))+40*sn(GT*3+i);s+=`<path transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(GT*200+i*40).toFixed(0)})" d="M-14 0Q0-12 14 0Q0 12-14 0Z" fill="#c9783a" stroke="${INK}" stroke-width="3" opacity=".8"/>`}
- let ui=s;if(GT>tNun)ui+=TXT('NENHUM ADVERSÁRIO',540,300,92,'#fff',-3,pop(GT,tNun));if(GT>tAdv)ui+='';
+ let ui=s;if(GT>tNun)ui+=TXT('NENHUM ADVERSÁRIO',540,300,78,'#fff',-3,pop(GT,tNun));if(GT>tAdv)ui+='';
  ui+=STATS(0,0,0,0)+`<g opacity="${ob(GT,tAlt,.3).toFixed(2)}">`+BAR(160,600,760,'DESAFIO',.02+.02*sn(GT*3),RED,1,0)+'</g>';
- camA([[ps(16)-.25,.1,-40,-110,-1],[ps(17),.26,40,-70,1]]);FX.ui=ui;FX.lit=LIT.tlh;FX.vig=.85;FX.fog=1;FX.grade='contrast(1.05) saturate(.6)'},'dip');
+ {const eB=eyeP('BAL'),Fb=foc(eB[0],eB[1]+140,.9);camA([[ps(16)-.25,.9,Fb[0],Fb[1],-1],[tNun-.1,.35,Fb[0]*.4,Fb[1]*.4,0],[ps(17),.06,0,-60,1]])}FX.ui=ui;FX.lit=LIT.tlh;FX.vig=.85;FX.fog=1;FX.grade='contrast(1.05) saturate(.6)'},'dip');
 // ===== 16) talvez o maior desafio nao fosse derrotar monstros =====
 const tTal=wt(17,'talvez',.1),tDes=wt(17,'desafio',.1),tNao=wt(17,'não',0),tMon=wt(17,'monstros',.1);
 shot('aptN',ps(17)-.25,(t,u)=>{
@@ -827,5 +827,5 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  const fl=Math.max(Tn.fl,FX.flash||0);if(fl>0){c.fillStyle=`rgba(${(FX.flash||0)>Tn.fl?(FX.flcol||'255,255,255'):Tn.col},${fl})`;c.fillRect(0,0,W,H)}
  const fd=gt<OLDT?cl((gt-(OLDT-.6))/.6):0;if(fd>0){c.fillStyle=`rgba(0,0,0,${fd})`;c.fillRect(0,0,W,H)}
  const RCH=['CIB','CHR','BAL'].map(k=>CHS[k]).find(c=>FR.includes(c)&&c.sp&&+c.g.style.opacity>.5);if(REAC&&RCH){const p=RCH.sp,ku=p[2],q=zpS(p[0],p[1]-(RCH.sit?240:330)*ku),fl=q[0]>620,fc=zpS(p[0],p[1]-(RCH.sit?145:235)*ku),hr=78*ku*XF.s;let bx=Math.min(860,Math.max(220,q[0]+(fl?-200:200))),by=q[1]-90;if(by<560){by=560;const sx=fc[0]+(fl?-1:1)*(hr+240);if(sx>=200&&sx<=880&&fc[1]-hr<560+70)bx=sx;else if(fc[1]+hr>500){bx=Math.min(860,Math.max(220,fc[0]+(fl?-1:1)*60));by=Math.min(1420,fc[1]+hr+120)}}by=Math.min(1420,by);const fo=1-cl((gt-REAC.t1+.12)/.12);FX.ui=(FX.ui||'')+`<g opacity="${fo.toFixed(2)}">`+BUBBLE(bx,by,REAC.w,REAC.t0,!fl)+'</g>'}
- const te=sh.t1-gt,uo=te<.16&&sh!=SH[SH.length-1]?ez(te/.16):1;
+ const te=sh.t1-gt,uo=te<.16&&sh!=SH[SH.length-1]&&sh.t1-sh.t0>.6?ez(te/.16):1;
  $('UI').innerHTML=FX.ui||'';$('UI').style.opacity=((1-fd)*uo).toFixed(3);$('UI').style.transformOrigin='540px 900px';$('UI').style.transform=uo<1?`scale(${(1+(1-uo)*.08).toFixed(3)})`:'none';$('st').style.filter=FX.impact?'grayscale(1) invert(1) contrast(2.4) brightness(1.05)':(FX.grade||'contrast(1.06) saturate(1.1)')};
