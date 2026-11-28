@@ -1,6 +1,6 @@
 # Luis — Shorts animados (projeto "Histórias IA")
 
-Shorts verticais para YouTube (**1080 × 1920, 24 fps, H.264 + AAC**; o do Jotaro em **2160 × 3840, 60 fps**) com personagens 2D de contorno preto
+Shorts verticais para YouTube (**1080 × 1920, 24 fps, H.264 + AAC**; o do Jotaro em **1440 × 2560 (2K), 60 fps**) com personagens 2D de contorno preto
 grosso sobre cenários 3D estilo cartoon. Tudo é gerado por código: HTML + JavaScript + WebGL, renderizado
 quadro a quadro no Chromium e montado com ffmpeg. Não há modelos 3D nem texturas separadas: os cenários
 são desenhados por código (`sets.js`) e já estão prontos como PNG em `plates/`.
@@ -12,7 +12,7 @@ são desenhados por código (`sets.js`) e já estão prontos como PNG em `plates
 | [`cibito-loop-temporal/`](cibito-loop-temporal/) | Cibito e o Loop Temporal — Parte 1 | ~88 s | `cibito-loop-temporal-parte1.mp4` | [LEIA-ME](cibito-loop-temporal/LEIA-ME.md) |
 | [`seis-olhos-gojo/`](seis-olhos-gojo/) | E se você tivesse os Seis Olhos? | ~105 s | `seis-olhos-gojo.mp4` | [LEIA-ME](seis-olhos-gojo/LEIA-ME.md) |
 | [`saiyajin/`](saiyajin/) | E se você fosse um Saiyajin? | ~121 s | `saiyajin.mp4` | [LEIA-ME](saiyajin/LEIA-ME.md) |
-| [`poderes-do-jotaro/`](poderes-do-jotaro/) | E se você despertasse os poderes do Jotaro? | ~90 s, **4K 60 fps** | `poderes-do-jotaro.mp4` | [LEIA-ME](poderes-do-jotaro/LEIA-ME.md) |
+| [`poderes-do-jotaro/`](poderes-do-jotaro/) | E se você despertasse os poderes do Jotaro? | ~102 s, **2K 60 fps** | `poderes-do-jotaro.mp4` | [LEIA-ME](poderes-do-jotaro/LEIA-ME.md) |
 
 Todos usam o mesmo motor. O **Cibito** é o protagonista (o "você" das histórias). Personagens de outras
 obras (Gojo, Jotaro, personagens de Dragon Ball) **não são desenhados**: só aparecem citados na narração ou como

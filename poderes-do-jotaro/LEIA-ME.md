@@ -1,13 +1,34 @@
 # E se você despertasse os poderes do Jotaro? — Short animado
 
-Short vertical **2160 × 3840 (4K), 60 fps, ~90 s, H.264 + AAC**, feito com o mesmo motor de
+Short vertical **1440 × 2560 (2K), 60 fps, ~102 s, H.264 + AAC**, feito com o mesmo motor de
 "Cibito e o Loop Temporal", "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre
 cenários 3D prontos.
 
 **Vídeos finais (narração do ElevenLabs, voz "Will", 101,8 s):**
-- `poderes-do-jotaro-celular.mp4`: 1080×1920, 60 fps, H.264 nível 4.2, 85 MB. **Toca em qualquer celular.**
-- `poderes-do-jotaro.mp4`: 2160×3840 (4K), 60 fps, H.264 nível 5.2, ~7 Mbit/s, 92 MB. Para subir no YouTube pelo computador.
+- `poderes-do-jotaro.mp4`: 1440×2560 (2K), 60 fps, H.264 High nível 5.1, até 7 Mbit/s, 91 MB.
+  **É o vídeo principal:** toca no celular e é o que vai para o YouTube.
+- `poderes-do-jotaro-celular.mp4`: 1080×1920, 60 fps, H.264 nível 4.2, 83 MB. Reserva para celulares antigos.
+
 Áudio AAC 48 kHz a −14,9 LUFS, pico −1,3 dBFS.
+
+## Sem piscadas e sem sumiços
+- **Tela piscando:** os golpes (fim da rajada ORA e soco final) alternavam quadros em negativo a cada
+  2 quadros. Isso saiu; ficou só a explosão. Os flashes brancos foram limitados a 40% e os efeitos que
+  pulsavam rápido (rajada, vermelho do "AI!", fantasma no quarto) ficaram estáveis. No "AI!", o flash
+  vermelho e o texto agora entram no mesmo quadro (antes sobrava um quadro branco isolado).
+- **Personagem sumindo:** com 4 navegadores renderizando ao mesmo tempo, o Chrome às vezes capturava a
+  tela antes de terminar de pintar, e um pedaço retangular do personagem ficava de fora por 1 ou 2
+  quadros. O `render.js` agora espera a pintura terminar e abre o Chrome com
+  `--run-all-compositor-stages-before-draw`. Filtros aplicados na camada inteira (desfoque de movimento,
+  aberração cromática), que o Chrome às vezes descartava por um quadro, também saíram.
+- **Luz trocando no meio do plano:** cada personagem tem contorno iluminado ou só a cor da luz, conforme
+  o tamanho na tela. A escolha era feita em cada navegador e mudava quando ele reiniciava no meio de um
+  plano (aos 21 s e aos 85 s). Agora um pré-passo (`preLuz`, em `render.js`) decide uma vez para todos.
+- **Conferência:** o vídeo foi renderizado duas vezes por inteiro e comparado quadro a quadro: 6107 de
+  6110 quadros saíram idênticos byte a byte. Nos outros 3, a diferença era de no máximo 2 pixels (um
+  pontinho que só apareceu na segunda renderização), e o vídeo usa a versão que combina com os quadros
+  vizinhos. Nenhum quadro tem pedaço faltando. A luminância de cada quadro também foi medida: nenhuma
+  alternância rápida (estrobo) e nenhum flash isolado de um quadro.
 
 ## Narração (importante)
 O roteiro foi escrito a partir da pesquisa (abaixo). A voz do vídeo é a **narração do ElevenLabs (voz "Will")**,
@@ -17,7 +38,7 @@ do próprio sintetizador, e cada corte, efeito, texto e som está preso à palav
 Para trocar pela voz definitiva (ElevenLabs, voz "Will"), grave **o mesmo texto** do roteiro abaixo e rode:
 ```
 python3 alinhar_dtw.py audio/narracao-elevenlabs.mp3   # compara com a provisória e transfere o tempo de cada palavra
-./refazer.sh 4                                         # trilha, efeitos, legendas, quadros 4K e MP4
+./refazer.sh 4                                         # trilha, efeitos, legendas, quadros 2K e MP4
 ```
 O alinhamento usa só numpy + ffmpeg (DTW entre a voz nova e a provisória do mesmo texto). Num teste com a
 voz esticada e com outro tom, o erro médio por palavra foi de 11 ms. Se o texto falado mudar, ajuste as
@@ -68,7 +89,8 @@ frases em `narracao.py`, rode `python3 narracao.py` e então o alinhamento.
 
 ## Cenários 3D
 Os mesmos cenários dos projetos anteriores (`sets.js` / `sets_loop.js`, nada recriado), **renderizados de
-novo a partir do mesmo código em 2376×4224** para o vídeo 4K (`node plates.js`). O render na resolução antiga
+novo a partir do mesmo código em 2376×4224** (`node plates.js`), acima da resolução do vídeo, para
+continuarem nítidos com o zoom da câmera. O render na resolução antiga
 bate com os PNG originais (camada B idêntica; camada A com diferença média de 0,15/255).
 `variantes.py` gera, a partir dessas imagens, as versões desfocada (profundidade de campo), noturna e
 "tempo parado" (duotono roxo do Star Platinum / dourado do rival), trocadas por opacidade no vídeo.
@@ -83,7 +105,7 @@ bate com os PNG originais (camada B idêntica; camada A com diferença média de
 | Ponto 2 | Close nos olhos com HUD · foto do inimigo com lupa (a mosca) · esboço em 1 segundo + mapa do Egito | estrelas, sala |
 | Ponto 3 | Relógio gigante · "STAR PLATINUM: THE WORLD" (esfera, mundo congelado, pássaros e pessoas parados) · travelling lateral no mundo parado · cronômetro e recarga · cozinha: o tempo para só meio segundo e a xícara quebra | cidade ao pôr do sol, cozinha |
 | Rival | A mesma dor (punho dourado acerta o Stand) · usuários se atraem · o Stand dourado surge · o rival para o tempo (duotono dourado), mas você se move | cidade e rua à noite |
-| Clímax | Corrida com imagens residuais, passa pelo rival, **soco final** (quadros de impacto invertidos, ondas de choque, distorção do espaço) · o tempo volta e o rival é lançado longe | rua à noite |
+| Clímax | Corrida com imagens residuais, passa pelo rival, **soco final** (explosão roxa, ondas de choque, faíscas) · o tempo volta e o rival é lançado longe | rua à noite |
 | Final | "Yare yare daze" ao pôr do sol · "Você aguentaria?" SIM / NÃO · o tempo para de novo (final em loop) | pôr do sol, estrelas |
 
 ## Áudio
@@ -100,13 +122,14 @@ Música, ambiência e efeitos abaixam sob a voz, e a mixagem final é normalizad
 ```
 python3 narracao.py              # (só a voz provisória) voz + roteiro.json com o tempo de cada palavra
 python3 alinhar_dtw.py voz.mp3   # (voz definitiva) no lugar do passo acima
-./refazer.sh 4                   # tudo o resto: trilha, legendas, quadros 4K 60 fps e MP4
-node pvt.js 5 27.3 66.8          # prévia de quadros (1080p) -> pvt.jpg   |  --hd = prévia em 4K
+./refazer.sh 4                   # tudo o resto: trilha, legendas, quadros 2K 60 fps e MP4
+node pvt.js 5 27.3 66.8          # prévia de quadros (1080p) -> pvt.jpg   |  --hd = prévia em 2K
 node plates.js str twn3          # (re)gera cenários em 2376x4224; depois python3 variantes.py
+OUT=/tmp/conf node render.js 4 60 1.333333333333   # 2ª renderização em outra pasta, para comparar com frames/
 ```
 Arquivos: `main.js` (os 25 planos, câmera, efeitos e sincronia), `stands.js` (Stands, rival, sobretudo,
 ゴゴゴ, chuva, pássaros, bala, relógio, rajada, impactos, esfera do tempo parado), `engine.js` (motor de
 quadro: câmera, luz por personagem, variantes de cenário, inversão de cores), `sfxlist.js` (efeitos e deixas
 da trilha), `audio.py` (síntese, trilha e mixagem), `caps.py` (legendas com o tempo real das palavras),
-`render.js` (quadros 2160×3840 em 4 processos), `exportar.sh` (MP4).
-O render 4K levou cerca de 55 minutos em 4 núcleos (0,6 s por quadro), mais 5 minutos de exportação.
+`render.js` (quadros 1440×2560 em 4 processos, com o pré-passo de luz), `exportar.sh` (os dois MP4).
+O render 2K levou cerca de 1 hora em 4 núcleos (0,6 s por quadro), mais cerca de 7 minutos de exportação.
