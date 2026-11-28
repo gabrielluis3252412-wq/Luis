@@ -4,7 +4,9 @@ Short vertical **2160 × 3840 (4K), 60 fps, ~90 s, H.264 + AAC**, feito com o me
 "Cibito e o Loop Temporal", "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre
 cenários 3D prontos.
 
-**Vídeo final:** `poderes-do-jotaro.mp4` (2160×3840, 60 fps, 90,3 s, H.264 ~8 Mbit/s, 93,5 MB; áudio AAC 48 kHz a −14,4 LUFS)
+**Vídeos finais:**
+- `poderes-do-jotaro-celular.mp4`: 1080×1920, 60 fps (H.264 nível 4.2). **Toca em qualquer celular**; use para assistir.
+- `poderes-do-jotaro.mp4`: 2160×3840 (4K), 60 fps, H.264 nível 5.2, ~8 Mbit/s. Para subir no YouTube pelo computador; muitos celulares não reproduzem 4K vertical a 60 fps.
 
 ## Narração (importante)
 Nenhum roteiro nem áudio veio junto com o pedido, então **o roteiro foi escrito a partir da pesquisa**
