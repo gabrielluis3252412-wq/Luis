@@ -122,5 +122,5 @@ Exporte em MP3 (ou WAV) **em um único arquivo** com a narração inteira e colo
 python3 alinhar_dtw.py audio/narracao-elevenlabs.mp3
 ./refazer.sh 4
 ```
-Isso gera de novo as duas versões do vídeo com a voz nova: a 4K e a de celular.
+Isso gera de novo as duas versões do vídeo com a voz nova: a 2K (1440×2560) e a de celular (1080p).
 Ou é só mandar o MP3 na conversa que eu faço tudo.

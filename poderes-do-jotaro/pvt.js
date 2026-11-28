@@ -1,6 +1,6 @@
-// Previa de quadros: node pvt.js [--hd] 1.5 12 30  -> pvt.jpg (tempos em segundos). --hd = 2160x3840
+// Previa de quadros: node pvt.js [--hd] 1.5 12 30  -> pvt.jpg (tempos em segundos). --hd = 1440x2560 (2K, igual ao video)
 const {chromium}=require('playwright'),fs=require('fs');
-(async()=>{const a=process.argv.slice(2),hd=a.includes('--hd'),ts=a.filter(x=>x!='--hd').map(Number),D=hd?2:1;
+(async()=>{const a=process.argv.slice(2),hd=a.includes('--hd'),ts=a.filter(x=>x!='--hd').map(Number),D=hd?4/3:1;
  const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1080,height:1920},deviceScaleFactor:D});
  await pg.addInitScript(d=>{window.RS=d},D);pg.on('pageerror',e=>console.log('ERR',e.message));pg.on('console',m=>{if(m.type()=='error'||m.type()=='warning')console.log('CONSOLE',m.text())});
  await pg.goto('file://'+__dirname+'/story.html');await pg.evaluate(()=>document.fonts.ready);

@@ -233,7 +233,7 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  $('aw').innerHTML=FX.aw||'';$('fw').innerHTML=FX.fw||'';
  // luz por personagem (filtro so na area de cada um: bem mais leve em 4K) + congelado / silhueta / perspectiva atmosferica
  const fzc=FX.frzc=='g'?' sepia(.55) saturate(1.4)':' sepia(.35) hue-rotate(205deg) saturate(1.3)';
- FR.forEach(c=>{const kk=c.sp?c.sp[2]:1,ar=(c.shp?1000*1300*(c.ss||1)*(c.ss||1):260*420)*kk*kk*(XF.s*RS)**2;const lk=CSH.t0+'|'+(c.k||'');if(!LITM.has(lk))LITM.set(lk,ar>5e6);let f=c.nolit?'':LITM.get(lk)?'url(#litT)':'url(#lit)';
+ FR.forEach(c=>{const kk=c.sp?c.sp[2]:1,ar=(c.shp?1000*1300*(c.ss||1)*(c.ss||1):260*420)*kk*kk*(XF.s*RS)**2;const lk=CSH.t0+'|'+(c.k||'');if(!LITM.has(lk))LITM.set(lk,window.LITPRE&&lk in window.LITPRE?window.LITPRE[lk]:ar>5e6);let f=c.nolit?'':LITM.get(lk)?'url(#litT)':'url(#lit)';
   if(c.hf)f='brightness(2.6) saturate(.15)';else if(c.sil)f='brightness(0) drop-shadow(0 0 8px rgba(255,60,80,.7))';
   else if(c.frz>.01){const z=cl(c.frz);f+=` saturate(${(1-.85*z).toFixed(2)}) brightness(${(1-.12*z).toFixed(2)}) contrast(${(1+.15*z).toFixed(2)})`+(z>.5?fzc:'')}
   else if(c.k!='C'&&CSH.plate&&c.sp){const k=cl((c.sp[2]>0?(.55-c.sp[2])/.45:0));if(k>.02)f+=` saturate(${(1-.45*k).toFixed(2)}) contrast(${(1-.25*k).toFixed(2)}) brightness(${(1-.08*k).toFixed(2)})`}
