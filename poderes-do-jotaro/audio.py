@@ -570,14 +570,16 @@ def rd(f):
     w = wave.open(f); a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float64) / 32768; ch = w.getnchannels(); w.close()
     return a.reshape(-1, ch).mean(1) if ch > 1 else a
 v = rd('audio/narracao.wav'); voice = np.zeros(N); voice[:min(N, len(v))] = v[:N]
-k = int(.12 * SR); ve = np.convolve(np.abs(voice), np.ones(k) / k, mode='same'); vl = np.clip(ve / .06, 0, 1)
+# o resto da mixagem segue o volume da fala (referencia: -15,6 dB RMS da voz provisoria), sem alterar a voz
+_sp = v[np.abs(v) > .01]; VK = 10 ** ((20 * np.log10(np.sqrt(np.mean(_sp ** 2)) + 1e-9) + 15.6) / 20) if len(_sp) else 1.0
+k = int(.12 * SR); ve = np.convolve(np.abs(voice), np.ones(k) / k, mode='same'); vl = np.clip(ve / (.06 * VK), 0, 1)
 sm = np.zeros(N); a_, r_ = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.16 * SR)); st = 64
 for i in range(0, N, st):
     prev = sm[i - 1] if i else 0; x = vl[i]; c = a_ if x > prev else r_; sm[i:i + st] = prev + (x - prev) * (1 - (1 - c) ** st)
 duck_mus = 1 - .58 * sm; duck_amb = 1 - .5 * sm; duck_fx = 1 - .4 * sm
 fx = np.tanh(fx * .9); M = np.tanh(mus / (np.percentile(np.abs(mus), 99.7) + 1e-9) * .75); M = M / np.max(np.abs(M))  # trilha com picos domados (corpo mais presente)
-mix_m = voice * 1.0 + fx * .3 * duck_fx + amb * .42 * duck_amb + M * .34 * duck_mus
-d = int(.011 * SR); SB = fx * .3 * duck_fx + M * .34 * duck_mus; side = np.concatenate([np.zeros(d), SB[:-d]]) - SB
+mix_m = voice * 1.0 + (fx * .3 * duck_fx + amb * .42 * duck_amb + M * .34 * duck_mus) * VK
+d = int(.011 * SR); SB = (fx * .3 * duck_fx + M * .34 * duck_mus) * VK; side = np.concatenate([np.zeros(d), SB[:-d]]) - SB
 Lc = mix_m + .28 * side; Rc = mix_m - .28 * side
 fo = int(.6 * SR); Lc[-fo:] *= np.linspace(1, 0, fo); Rc[-fo:] *= np.linspace(1, 0, fo)
 pk = max(np.max(np.abs(Lc)), np.max(np.abs(Rc))); Lc /= max(1, pk / .97); Rc /= max(1, pk / .97)

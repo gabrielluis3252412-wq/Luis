@@ -10,82 +10,82 @@ Style: Cap,Poppins Black,76,&H00FFFFFF,&H00FFFFFF,&H00241018,&H96000000,0,0,0,0,
 
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
-Dialogue: 0,0:00:00.18,0:00:01.31,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}O tempo {\c&HFF6BC8&}parou.{\c&HFFFFFF&}
-Dialogue: 0,0:00:01.74,0:00:02.60,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}A {\c&H3FD2FF&}bala{\c&HFFFFFF&} congela a
-Dialogue: 0,0:00:02.60,0:00:03.96,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}centímetros do seu rosto…
-Dialogue: 0,0:00:04.19,0:00:04.94,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e só você se
-Dialogue: 0,0:00:04.94,0:00:05.29,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}move.{\c&HFFFFFF&}
-Dialogue: 0,0:00:05.78,0:00:07.00,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se você despertasse
-Dialogue: 0,0:00:07.00,0:00:08.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}os poderes do {\c&H3FD2FF&}Jotaro?{\c&HFFFFFF&}
-Dialogue: 0,0:00:08.80,0:00:10.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Primeiro, um {\c&HFF6BC8&}espírito{\c&HFFFFFF&} estranho
-Dialogue: 0,0:00:10.42,0:00:11.53,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sairia do seu corpo.
-Dialogue: 0,0:00:11.81,0:00:12.88,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}O {\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} achou que
-Dialogue: 0,0:00:12.88,0:00:14.04,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}estava {\c&H6D4DFF&}possuído{\c&HFFFFFF&} e se
-Dialogue: 0,0:00:14.04,0:00:15.08,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}trancou numa {\c&H6D4DFF&}cela.{\c&HFFFFFF&}
-Dialogue: 0,0:00:15.46,0:00:16.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas era um {\c&HFF6BC8&}Stand:{\c&HFFFFFF&}
-Dialogue: 0,0:00:16.28,0:00:17.72,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}a sua {\c&HFFF69F&}energia{\c&HFFFFFF&} {\c&HFFF69F&}vital{\c&HFFFFFF&}
-Dialogue: 0,0:00:17.72,0:00:18.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ganhando forma ao seu
-Dialogue: 0,0:00:18.69,0:00:19.06,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}lado.
-Dialogue: 0,0:00:19.39,0:00:20.05,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E o seu seria
-Dialogue: 0,0:00:20.05,0:00:21.04,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o {\c&H3FD2FF&}Star{\c&HFFFFFF&} {\c&H3FD2FF&}Platinum.{\c&HFFFFFF&}
-Dialogue: 0,0:00:21.62,0:00:22.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto um:
-Dialogue: 0,0:00:22.28,0:00:23.39,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}força{\c&HFFFFFF&} e {\c&H3FD2FF&}velocidade.{\c&HFFFFFF&}
-Dialogue: 0,0:00:23.67,0:00:24.78,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Na ficha oficial,
-Dialogue: 0,0:00:24.78,0:00:25.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ele tem nota {\c&H3FD2FF&}máxima{\c&HFFFFFF&}
-Dialogue: 0,0:00:25.69,0:00:26.32,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}em força,
-Dialogue: 0,0:00:26.32,0:00:27.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}velocidade{\c&HFFFFFF&} e {\c&HFFF69F&}precisão.{\c&HFFFFFF&}
-Dialogue: 0,0:00:27.89,0:00:28.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só o alcance é
-Dialogue: 0,0:00:28.71,0:00:29.16,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6D4DFF&}curto.{\c&HFFFFFF&}
-Dialogue: 0,0:00:29.49,0:00:30.76,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Num piscar de olhos,
-Dialogue: 0,0:00:30.76,0:00:31.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ele solta uma chuva
-Dialogue: 0,0:00:31.69,0:00:32.29,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de {\c&HFF6BC8&}socos:{\c&HFFFFFF&}
-Dialogue: 0,0:00:32.32,0:00:33.82,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}ORA{\c&HFFFFFF&} {\c&HFF6BC8&}ORA{\c&HFFFFFF&} {\c&HFF6BC8&}ORA!{\c&HFFFFFF&}
-Dialogue: 0,0:00:34.15,0:00:34.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E pega no ar
-Dialogue: 0,0:00:34.85,0:00:35.99,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}até uma {\c&H3FD2FF&}bala{\c&HFFFFFF&} disparada
-Dialogue: 0,0:00:35.99,0:00:36.71,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}à {\c&H6D4DFF&}queima-roupa.{\c&HFFFFFF&}
-Dialogue: 0,0:00:37.19,0:00:37.99,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto dois:
-Dialogue: 0,0:00:37.99,0:00:39.02,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}precisão e {\c&HFFF69F&}visão.{\c&HFFFFFF&}
-Dialogue: 0,0:00:39.30,0:00:40.29,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele enxerga até uma
-Dialogue: 0,0:00:40.29,0:00:42.03,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}mosca{\c&HFFFFFF&} minúscula escondida numa
-Dialogue: 0,0:00:42.03,0:00:42.38,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}foto.{\c&HFFFFFF&}
-Dialogue: 0,0:00:42.61,0:00:43.26,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Foi assim que o
-Dialogue: 0,0:00:43.26,0:00:44.44,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} descobriu que o
-Dialogue: 0,0:00:44.44,0:00:45.79,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}inimigo estava no {\c&H3FD2FF&}Egito.{\c&HFFFFFF&}
-Dialogue: 0,0:00:46.27,0:00:46.86,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto três:
-Dialogue: 0,0:00:46.86,0:00:48.48,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o poder mais {\c&H6D4DFF&}assustador.{\c&HFFFFFF&}
-Dialogue: 0,0:00:48.86,0:00:49.98,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}Star{\c&HFFFFFF&} {\c&H3FD2FF&}Platinum:{\c&HFFFFFF&}
-Dialogue: 0,0:00:49.98,0:00:50.63,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}The{\c&HFFFFFF&} {\c&HFF6BC8&}World.{\c&HFFFFFF&}
-Dialogue: 0,0:00:51.26,0:00:52.29,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você para o {\c&HFFF69F&}tempo.{\c&HFFFFFF&}
-Dialogue: 0,0:00:52.72,0:00:53.70,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Chuva, pássaros,
-Dialogue: 0,0:00:53.70,0:00:55.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}pessoas… tudo {\c&HFFF69F&}congela.{\c&HFFFFFF&}
-Dialogue: 0,0:00:55.46,0:00:56.47,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só você se {\c&HFFF69F&}move.{\c&HFFFFFF&}
-Dialogue: 0,0:00:56.85,0:00:57.83,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas só por alguns
-Dialogue: 0,0:00:57.83,0:00:59.08,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}segundos,{\c&HFFFFFF&} e {\c&H6D4DFF&}nunca{\c&HFFFFFF&} duas
-Dialogue: 0,0:00:59.08,0:00:59.98,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}vezes seguidas.
-Dialogue: 0,0:01:00.26,0:01:01.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Dez anos depois,
-Dialogue: 0,0:01:01.37,0:01:02.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o {\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} só conseguia
-Dialogue: 0,0:01:02.42,0:01:03.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}parar o tempo por
-Dialogue: 0,0:01:03.34,0:01:03.99,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}meio{\c&HFFFFFF&} {\c&H3FD2FF&}segundo!{\c&HFFFFFF&}
-Dialogue: 0,0:01:04.47,0:01:05.07,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se o seu
-Dialogue: 0,0:01:05.07,0:01:06.09,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}Stand{\c&HFFFFFF&} se machucar,
-Dialogue: 0,0:01:06.09,0:01:07.33,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você sente a mesma
-Dialogue: 0,0:01:07.33,0:01:07.70,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6D4DFF&}dor.{\c&HFFFFFF&}
-Dialogue: 0,0:01:08.08,0:01:09.26,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E usuários de {\c&HFF6BC8&}Stand{\c&HFFFFFF&}
-Dialogue: 0,0:01:09.26,0:01:09.88,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}se {\c&H3FD2FF&}atraem…{\c&HFFFFFF&}
-Dialogue: 0,0:01:10.16,0:01:11.23,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cedo ou tarde,
-Dialogue: 0,0:01:11.23,0:01:12.35,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um {\c&HFF6BC8&}Stand{\c&HFFFFFF&} {\c&H3FD2FF&}dourado{\c&HFFFFFF&} viria
-Dialogue: 0,0:01:12.35,0:01:13.27,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}atrás de você.
-Dialogue: 0,0:01:13.75,0:01:14.70,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele também pararia o
-Dialogue: 0,0:01:14.70,0:01:15.05,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}tempo…{\c&HFFFFFF&}
-Dialogue: 0,0:01:15.23,0:01:16.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mas você se moveria
-Dialogue: 0,0:01:16.34,0:01:16.98,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}dentro{\c&HFFFFFF&} dele.
-Dialogue: 0,0:01:17.36,0:01:18.18,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você avança,
-Dialogue: 0,0:01:18.18,0:01:19.03,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}passa por ele,
-Dialogue: 0,0:01:19.03,0:01:19.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e acerta o golpe
-Dialogue: 0,0:01:19.87,0:01:20.32,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}final:{\c&HFFFFFF&}
-Dialogue: 0,0:01:20.40,0:01:20.73,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}ORA!{\c&HFFFFFF&}
-Dialogue: 0,0:01:21.20,0:01:21.96,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E o tempo volta
-Dialogue: 0,0:01:21.96,0:01:22.54,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}a {\c&HFFF69F&}correr.{\c&HFFFFFF&}
-Dialogue: 0,0:01:23.12,0:01:24.34,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}Yare{\c&HFFFFFF&} {\c&HFF6BC8&}yare{\c&HFFFFFF&} {\c&H3FD2FF&}daze.{\c&HFFFFFF&}
-Dialogue: 0,0:01:24.78,0:01:26.17,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você aguentaria esse {\c&H3FD2FF&}poder?{\c&HFFFFFF&}
-Dialogue: 0,0:01:26.17,0:01:27.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Comenta: {\c&HFFF69F&}sim{\c&HFFFFFF&} ou {\c&H6D4DFF&}não.{\c&HFFFFFF&}
+Dialogue: 0,0:00:00.29,0:00:01.24,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}O tempo {\c&HFF6BC8&}parou.{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.57,0:00:02.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}A {\c&H3FD2FF&}bala{\c&HFFFFFF&} congela a
+Dialogue: 0,0:00:02.62,0:00:04.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}centímetros do seu rosto…
+Dialogue: 0,0:00:04.55,0:00:05.80,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e só você se
+Dialogue: 0,0:00:05.80,0:00:06.19,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}move.{\c&HFFFFFF&}
+Dialogue: 0,0:00:06.68,0:00:07.97,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se você despertasse
+Dialogue: 0,0:00:07.97,0:00:09.24,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}os poderes do {\c&H3FD2FF&}Jotaro?{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.58,0:00:11.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Primeiro, um {\c&HFF6BC8&}espírito{\c&HFFFFFF&} estranho
+Dialogue: 0,0:00:11.55,0:00:12.74,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}sairia do seu corpo.
+Dialogue: 0,0:00:13.02,0:00:13.93,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}O {\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} achou que
+Dialogue: 0,0:00:13.93,0:00:15.22,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}estava {\c&H6D4DFF&}possuído{\c&HFFFFFF&} e se
+Dialogue: 0,0:00:15.22,0:00:16.39,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}trancou numa {\c&H6D4DFF&}cela.{\c&HFFFFFF&}
+Dialogue: 0,0:00:16.67,0:00:17.82,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas era um {\c&HFF6BC8&}Stand:{\c&HFFFFFF&}
+Dialogue: 0,0:00:17.82,0:00:19.35,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}a sua {\c&HFFF69F&}energia{\c&HFFFFFF&} {\c&HFFF69F&}vital{\c&HFFFFFF&}
+Dialogue: 0,0:00:19.35,0:00:20.45,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ganhando forma ao seu
+Dialogue: 0,0:00:20.45,0:00:20.86,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}lado.
+Dialogue: 0,0:00:21.07,0:00:22.27,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E o seu seria
+Dialogue: 0,0:00:22.27,0:00:23.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o {\c&H3FD2FF&}Star{\c&HFFFFFF&} {\c&H3FD2FF&}Platinum.{\c&HFFFFFF&}
+Dialogue: 0,0:00:24.03,0:00:24.90,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto um:
+Dialogue: 0,0:00:24.90,0:00:26.46,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}força{\c&HFFFFFF&} e {\c&H3FD2FF&}velocidade.{\c&HFFFFFF&}
+Dialogue: 0,0:00:26.74,0:00:27.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Na ficha oficial,
+Dialogue: 0,0:00:27.85,0:00:29.10,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ele tem nota {\c&H3FD2FF&}máxima{\c&HFFFFFF&}
+Dialogue: 0,0:00:29.10,0:00:29.80,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}em força,
+Dialogue: 0,0:00:29.80,0:00:31.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}velocidade{\c&HFFFFFF&} e {\c&HFFF69F&}precisão.{\c&HFFFFFF&}
+Dialogue: 0,0:00:31.75,0:00:32.70,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só o alcance é
+Dialogue: 0,0:00:32.70,0:00:33.11,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6D4DFF&}curto.{\c&HFFFFFF&}
+Dialogue: 0,0:00:33.31,0:00:34.73,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Num piscar de olhos,
+Dialogue: 0,0:00:34.73,0:00:35.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}ele solta uma chuva
+Dialogue: 0,0:00:35.85,0:00:36.58,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}de {\c&HFF6BC8&}socos:{\c&HFFFFFF&}
+Dialogue: 0,0:00:36.67,0:00:37.97,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}ORA{\c&HFFFFFF&} {\c&HFF6BC8&}ORA{\c&HFFFFFF&} {\c&HFF6BC8&}ORA!{\c&HFFFFFF&}
+Dialogue: 0,0:00:38.11,0:00:39.08,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E pega no ar
+Dialogue: 0,0:00:39.08,0:00:40.38,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}até uma {\c&H3FD2FF&}bala{\c&HFFFFFF&} disparada
+Dialogue: 0,0:00:40.38,0:00:41.28,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}à {\c&H6D4DFF&}queima-roupa.{\c&HFFFFFF&}
+Dialogue: 0,0:00:41.65,0:00:42.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto dois:
+Dialogue: 0,0:00:42.55,0:00:44.06,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}precisão e {\c&HFFF69F&}visão.{\c&HFFFFFF&}
+Dialogue: 0,0:00:44.28,0:00:45.40,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele enxerga até uma
+Dialogue: 0,0:00:45.40,0:00:47.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}mosca{\c&HFFFFFF&} minúscula escondida numa
+Dialogue: 0,0:00:47.42,0:00:47.87,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}foto.{\c&HFFFFFF&}
+Dialogue: 0,0:00:48.04,0:00:48.79,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Foi assim que o
+Dialogue: 0,0:00:48.79,0:00:50.00,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} descobriu que o
+Dialogue: 0,0:00:50.00,0:00:51.45,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}inimigo estava no {\c&H3FD2FF&}Egito.{\c&HFFFFFF&}
+Dialogue: 0,0:00:51.79,0:00:52.58,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ponto três:
+Dialogue: 0,0:00:52.58,0:00:54.52,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o poder mais {\c&H6D4DFF&}assustador.{\c&HFFFFFF&}
+Dialogue: 0,0:00:54.80,0:00:56.12,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}Star{\c&HFFFFFF&} {\c&H3FD2FF&}Platinum:{\c&HFFFFFF&}
+Dialogue: 0,0:00:56.12,0:00:56.83,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}The{\c&HFFFFFF&} {\c&HFF6BC8&}World.{\c&HFFFFFF&}
+Dialogue: 0,0:00:57.12,0:00:58.63,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você para o {\c&HFFF69F&}tempo.{\c&HFFFFFF&}
+Dialogue: 0,0:00:58.85,0:01:00.27,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Chuva, pássaros,
+Dialogue: 0,0:01:00.27,0:01:02.37,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}pessoas… tudo {\c&HFFF69F&}congela.{\c&HFFFFFF&}
+Dialogue: 0,0:01:02.59,0:01:04.09,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Só você se {\c&HFFF69F&}move.{\c&HFFFFFF&}
+Dialogue: 0,0:01:04.33,0:01:05.30,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Mas só por alguns
+Dialogue: 0,0:01:05.30,0:01:07.12,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}segundos,{\c&HFFFFFF&} e {\c&H6D4DFF&}nunca{\c&HFFFFFF&} duas
+Dialogue: 0,0:01:07.12,0:01:08.08,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}vezes seguidas.
+Dialogue: 0,0:01:08.25,0:01:09.59,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Dez anos depois,
+Dialogue: 0,0:01:09.59,0:01:10.89,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}o {\c&H3FD2FF&}Jotaro{\c&HFFFFFF&} só conseguia
+Dialogue: 0,0:01:10.89,0:01:12.12,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}parar o tempo por
+Dialogue: 0,0:01:12.12,0:01:12.94,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}meio{\c&HFFFFFF&} {\c&H3FD2FF&}segundo!{\c&HFFFFFF&}
+Dialogue: 0,0:01:13.18,0:01:13.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E se o seu
+Dialogue: 0,0:01:13.69,0:01:14.85,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}Stand{\c&HFFFFFF&} se machucar,
+Dialogue: 0,0:01:14.85,0:01:16.30,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}você sente a mesma
+Dialogue: 0,0:01:16.30,0:01:16.69,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H6D4DFF&}dor.{\c&HFFFFFF&}
+Dialogue: 0,0:01:16.91,0:01:18.38,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E usuários de {\c&HFF6BC8&}Stand{\c&HFFFFFF&}
+Dialogue: 0,0:01:18.38,0:01:19.19,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}se {\c&H3FD2FF&}atraem…{\c&HFFFFFF&}
+Dialogue: 0,0:01:19.46,0:01:20.55,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Cedo ou tarde,
+Dialogue: 0,0:01:20.55,0:01:22.12,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}um {\c&HFF6BC8&}Stand{\c&HFFFFFF&} {\c&H3FD2FF&}dourado{\c&HFFFFFF&} viria
+Dialogue: 0,0:01:22.12,0:01:22.95,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}atrás de você.
+Dialogue: 0,0:01:23.16,0:01:24.16,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Ele também pararia o
+Dialogue: 0,0:01:24.16,0:01:24.81,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}tempo…{\c&HFFFFFF&}
+Dialogue: 0,0:01:25.00,0:01:26.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}mas você se moveria
+Dialogue: 0,0:01:26.42,0:01:27.18,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFFF69F&}dentro{\c&HFFFFFF&} dele.
+Dialogue: 0,0:01:27.44,0:01:28.60,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você avança,
+Dialogue: 0,0:01:28.60,0:01:29.65,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}passa por ele,
+Dialogue: 0,0:01:29.65,0:01:30.70,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}e acerta o golpe
+Dialogue: 0,0:01:30.70,0:01:31.15,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&}final:{\c&HFFFFFF&}
+Dialogue: 0,0:01:31.39,0:01:32.05,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}ORA!{\c&HFFFFFF&}
+Dialogue: 0,0:01:32.26,0:01:33.25,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}E o tempo volta
+Dialogue: 0,0:01:33.25,0:01:33.83,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}a {\c&HFFF69F&}correr.{\c&HFFFFFF&}
+Dialogue: 0,0:01:34.11,0:01:35.62,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}{\c&HFF6BC8&}Yare{\c&HFFFFFF&} {\c&HFF6BC8&}yare{\c&HFFFFFF&} {\c&H3FD2FF&}daze.{\c&HFFFFFF&}
+Dialogue: 0,0:01:35.92,0:01:37.42,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Você aguentaria esse {\c&H3FD2FF&}poder?{\c&HFFFFFF&}
+Dialogue: 0,0:01:37.42,0:01:39.36,Cap,,0,0,0,,{\fscx85\fscy85\t(0,90,\fscx100\fscy100)}Comenta: {\c&HFFF69F&}sim{\c&HFFFFFF&} ou {\c&H6D4DFF&}não.{\c&HFFFFFF&}

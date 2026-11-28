@@ -44,6 +44,15 @@ def mapt(t):
 R = json.load(open('audio/provisoria/roteiro.json')); dur = len(load('audio/narracao.wav')) / SR
 fr2 = [[p, round(mapt(a), 3), round(mapt(b), 3)] for p, a, b in R['frases']]
 pw2 = [[[w, round(mapt(a), 3), round(mapt(b), 3)] for w, a, b in ws] for ws in R['palavras']]
+# encaixa inicio/fim de cada frase nas pausas reais (silencedetect), dentro de 0,4 s
+log = subprocess.run(['ffmpeg', '-i', 'audio/narracao.wav', '-af', 'silencedetect=noise=-38dB:d=0.1', '-f', 'null', '-'], capture_output=True, text=True).stderr
+ss = [float(x) for x in re.findall(r'silence_start: ([\d.]+)', log)]; se = [float(x) for x in re.findall(r'silence_end: ([\d.]+)', log)]
+def snap(t, L):
+    c = [v for v in L if abs(v - t) < .4]; return min(c, key=lambda v: abs(v - t)) if c else t
+for k, (f, ws) in enumerate(zip(fr2, pw2)):
+    a0, b0 = snap(f[1], se), snap(f[2], ss)
+    if b0 > a0 + .15:
+        f[1], f[2] = round(a0, 3), round(b0, 3); ws[0][1] = max(ws[0][1], f[1]) if ws[0][1] < f[1] else f[1]; ws[-1][2] = f[2]
 for k in range(1, len(fr2)):
     fr2[k][1] = max(fr2[k][1], fr2[k - 1][2]); fr2[k][2] = max(fr2[k][2], fr2[k][1] + .2)
 json.dump({'fonte': os.path.basename(src), 'duracao': round(dur, 3), 'frases': fr2, 'palavras': pw2}, open('roteiro.json', 'w'), ensure_ascii=False, indent=1)
