@@ -7,7 +7,7 @@ let N=0,I0=0,done=0,T0=Date.now();
 async function work(w){let i=I0+w;while(i<N){const b=await chromium.launch();const pg=await b.newPage({viewport:{width:1080,height:1920},deviceScaleFactor:D});
  await pg.addInitScript(d=>{window.RS=d},D);pg.on('pageerror',e=>console.log('ERR',e.message));
  await pg.goto('file://'+__dirname+'/story.html');await pg.evaluate(()=>document.fonts.ready);const cdp=await pg.context().newCDPSession(pg);
- let n=0;while(i<N&&n<160){const f=`${OUT}/${String(i).padStart(5,'0')}.jpg`;if(!fs.existsSync(f)){await pg.evaluate(t=>F(t),i/FPS);
+ let n=0;while(i<N&&n<160){const f=`${OUT}/${String(i).padStart(5,'0')}.jpg`;if(!fs.existsSync(f)){await pg.evaluate(t=>F(t),i/FPS);await pg.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(r,0)))));  // espera o navegador terminar de pintar
    const r=await cdp.send('Page.captureScreenshot',{format:'jpeg',quality:94,optimizeForSpeed:true,clip:{x:0,y:0,width:1080,height:1920,scale:D}});fs.writeFileSync(f+'.tmp',Buffer.from(r.data,'base64'));fs.renameSync(f+'.tmp',f);done++}
   i+=NW;n++}
  await b.close();const el=(Date.now()-T0)/1000;console.log(`processo ${w} ate ${i} | ${done} quadros em ${el.toFixed(0)} s (${(el/Math.max(1,done)).toFixed(2)} s/quadro)`)}}
