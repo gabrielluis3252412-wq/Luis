@@ -4,13 +4,14 @@ Short vertical **2160 × 3840 (4K), 60 fps, ~90 s, H.264 + AAC**, feito com o me
 "Cibito e o Loop Temporal", "Seis Olhos" e "Saiyajin": personagens 2D de contorno grosso sobre
 cenários 3D prontos.
 
-**Vídeos finais:**
-- `poderes-do-jotaro-celular.mp4`: 1080×1920, 60 fps (H.264 nível 4.2). **Toca em qualquer celular**; use para assistir.
-- `poderes-do-jotaro.mp4`: 2160×3840 (4K), 60 fps, H.264 nível 5.2, ~8 Mbit/s. Para subir no YouTube pelo computador; muitos celulares não reproduzem 4K vertical a 60 fps.
+**Vídeos finais (narração do ElevenLabs, voz "Will", 101,8 s):**
+- `poderes-do-jotaro-celular.mp4`: 1080×1920, 60 fps, H.264 nível 4.2, 85 MB. **Toca em qualquer celular.**
+- `poderes-do-jotaro.mp4`: 2160×3840 (4K), 60 fps, H.264 nível 5.2, ~7 Mbit/s, 92 MB. Para subir no YouTube pelo computador.
+Áudio AAC 48 kHz a −14,9 LUFS, pico −1,3 dBFS.
 
 ## Narração (importante)
-Nenhum roteiro nem áudio veio junto com o pedido, então **o roteiro foi escrito a partir da pesquisa**
-(abaixo) e a voz do vídeo é **provisória** (espeak-ng + MBROLA, offline). Os tempos de cada palavra vêm
+O roteiro foi escrito a partir da pesquisa (abaixo). A voz do vídeo é a **narração do ElevenLabs (voz "Will")**,
+alinhada palavra por palavra com `alinhar_dtw.py`. A voz provisória (espeak-ng + MBROLA) ficou em `audio/provisoria/`. Os tempos de cada palavra vêm
 do próprio sintetizador, e cada corte, efeito, texto e som está preso à palavra exata (`wt(frase,'palavra')`).
 
 Para trocar pela voz definitiva (ElevenLabs, voz "Will"), grave **o mesmo texto** do roteiro abaixo e rode:
