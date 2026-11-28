@@ -946,9 +946,9 @@ shot('twn3',T18,(t,u)=>{
  const fa=SPT(S,...FK(1,-38,140,-60)),gk=cl((GT-T18)/(hit-T18));fw(`<g transform="translate(${R2(lp(1500,fa[0]+90*ku,ez(gk)))} ${R2(fa[1])}) scale(${R2(-ku*.9,3)} ${R2(ku*.9,3)})">${`<path d="M-200 -40L-40 -46L-40 46L-200 40Z" fill="${GSC.au}" ${ST7}/><circle cx="10" cy="0" r="62" fill="${GSC.gy}" ${ST7}/>`}</g>`);
  const ca=cl((GT-hit)/.2);fw(BURST(fa[0]+60*ku,fa[1],140*ku,hit,'#fff',GD)+CRACK(fa[0],fa[1],ku*1.2,ca));
  const ha=[p[0]-75*ku,p[1]-110*ku];if(GT>tSen)fw(CRACK(ha[0],ha[1],ku*.8,cl((GT-tSen)/.2))+`<path d="M${R2(fa[0])} ${R2(fa[1])}Q${R2((fa[0]+ha[0])/2)} ${R2(fa[1]-200*ku)} ${R2(ha[0])} ${R2(ha[1])}" fill="none" stroke="${RED}" stroke-width="${R2(8*ku)}" stroke-dasharray="${R2(24*ku)} ${R2(14*ku)}" stroke-dashoffset="${R2(-GT*200)}" opacity=".9"/>`);
- let ui='';if(GT>tSen)ui+=JTXT('A MESMA DOR',540,330,104,RED,-5,pop(GT,tSen),'#5a0a1a');if(GT>tDor)ui+=JTXT('AI!',300,620,110,'#fff',-10,pop(GT,tDor),PU2);
+ let ui='';if(GT>tSen)ui+=JTXT('A MESMA DOR',540,330,104,RED,-5,pop(GT,tSen),'#5a0a1a');if(GT>=tDor)ui+=JTXT('AI!',300,620,110,'#fff',-10,pop(GT,tDor),PU2);
  FX.ui=ui;const F=foc(p[0]+200*ku,p[1]-260*ku,.15);camA([[T18,.15,F[0],F[1],0],[hit,.3,F[0],F[1],-3,'c'],[ps(26),.22,F[0],F[1],1]]);
- FX.lit={...LIT.twn3,rim:[255,120,140]};FX.vig=.75;FX.shake=22*sh1(GT,[hit],5)+8*sh1(GT,[tDor],7);FX.flash=.5*sh1(GT,[hit],10)+.3*sh1(GT,[tDor],8);FX.flcol=GT>tDor?'255,40,60':'255,240,200';FX.tint=GT>tSen?[200,0,30,.1]:null},'wr');
+ FX.lit={...LIT.twn3,rim:[255,120,140]};FX.vig=.75;FX.shake=22*sh1(GT,[hit],5)+8*sh1(GT,[tDor],7);FX.flash=.5*sh1(GT,[hit],10)+.3*sh1(GT,[tDor],8);FX.flcol=GT>=tDor?'255,40,60':'255,240,200';FX.tint=GT>tSen?[200,0,30,.1]:null},'wr');
 // ===== 19) USUARIOS DE STAND SE ATRAEM... um Stand dourado =====
 const tUsu=wt(26,'usuários',0),tAtr=wt(26,'atraem',0),tCed=wt(27,'Cedo',0),tDou=wt(27,'dourado',0),tVo2=wt(27,'você',0),T19=ps(26)-.2;
 shot('str',T19,(t,u)=>{
