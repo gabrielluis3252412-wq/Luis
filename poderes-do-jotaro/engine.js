@@ -136,7 +136,7 @@ const trans=(gt,sh)=>{const R={dx:0,dy:0,s:1,bx:0,by:0,fl:0,col:'255,255,255',r:
   if(type=='wl'||type=='wr'){const dr=(type=='wl'?-1:1)*(io=='out'?1:-1);R.s=1+.34*e;R.dx=dr*e*190;R.bx=e*50;R.r=dr*e*1.6}
   else if(type=='wu'){const dr=io=='out'?-1:1;R.s=1+.3*e;R.dy=dr*e*260;R.by=e*60}
   else if(type=='zoom'){R.s=1+.55*e;R.bx=R.by=e*12}
-  else if(type.startsWith('flash')){R.s=1+.08*e;R.fl=Math.min(.95,e*1.1);R.col=type=='flashO'?'255,170,90':type=='flashR'?'255,40,60':type=='flashB'?'140,215,255':type=='flashP'?'190,110,255':'255,255,255';R.bx=R.by=e*5}
+  else if(type.startsWith('flash')){R.s=1+.08*e;R.fl=Math.min(.42,e*.6);R.col=type=='flashO'?'255,170,90':type=='flashR'?'255,40,60':type=='flashB'?'140,215,255':type=='flashP'?'190,110,255':'255,255,255';R.bx=R.by=e*5}
   else if(type=='dip'){R.fl=e*.92;R.col='3,4,18'}
   else if(type=='glitch'){R.vhs=Math.max(R.vhs,p);R.dx=(rnd(Math.floor(gt*40),3.1)-.5)*120*p;R.bx=p*30}};
  const ti=gt-sh.t0,dI=sh.tin=='dip'||sh.tin=='glitch'?.4:TDUR;if(sh.tin&&ti<dI)ap(sh.tin,1-ti/dI,'in');
@@ -213,7 +213,7 @@ const zpE=p=>zpS(p[0],p[1]);
 // ---------- RENDER DE UM QUADRO ----------
 const load=(im,src)=>new Promise(r=>{if(im.getAttribute('src')==src)return r();im.onload=()=>{im.dataset.ok=1;r()};im.onerror=()=>{im.dataset.ok='';r()};im.src=src});
 const setOp=(id,a)=>{const e=$(id);if(a<=.002||!e.dataset.ok){e.style.display='none';return}e.style.display='block';e.style.opacity=Math.min(1,a).toFixed(3)};
-let TONE=null;
+let TONE=null;const LITM=new Map();
 window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1];
  if(sh!=CSH){CSH=sh;sh.pl=sh.plate?getPl(sh.plate):{VP:getPl('road').VP,tf:1,cam:{}};
   if(sh.plate){const P=`${PDIR}/${sh.plate}`,al=sh.alt;const L=[];for(const y of 'AB'){L.push(load($('i'+y),`${P}_${y}.png`),load($('i'+y+'b'),`${P}_${y}b.webp`));
@@ -233,14 +233,14 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  $('aw').innerHTML=FX.aw||'';$('fw').innerHTML=FX.fw||'';
  // luz por personagem (filtro so na area de cada um: bem mais leve em 4K) + congelado / silhueta / perspectiva atmosferica
  const fzc=FX.frzc=='g'?' sepia(.55) saturate(1.4)':' sepia(.35) hue-rotate(205deg) saturate(1.3)';
- FR.forEach(c=>{const kk=c.sp?c.sp[2]:1,ar=(c.shp?1000*1300*(c.ss||1)*(c.ss||1):260*420)*kk*kk*(XF.s*RS)**2;let f=c.nolit?'':ar>5e6?'url(#litT)':'url(#lit)';
+ FR.forEach(c=>{const kk=c.sp?c.sp[2]:1,ar=(c.shp?1000*1300*(c.ss||1)*(c.ss||1):260*420)*kk*kk*(XF.s*RS)**2;const lk=CSH.t0+'|'+(c.k||'');if(!LITM.has(lk))LITM.set(lk,ar>5e6);let f=c.nolit?'':LITM.get(lk)?'url(#litT)':'url(#lit)';
   if(c.hf)f='brightness(2.6) saturate(.15)';else if(c.sil)f='brightness(0) drop-shadow(0 0 8px rgba(255,60,80,.7))';
   else if(c.frz>.01){const z=cl(c.frz);f+=` saturate(${(1-.85*z).toFixed(2)}) brightness(${(1-.12*z).toFixed(2)}) contrast(${(1+.15*z).toFixed(2)})`+(z>.5?fzc:'')}
   else if(c.k!='C'&&CSH.plate&&c.sp){const k=cl((c.sp[2]>0?(.55-c.sp[2])/.45:0));if(k>.02)f+=` saturate(${(1-.45*k).toFixed(2)}) contrast(${(1-.25*k).toFixed(2)}) brightness(${(1-.08*k).toFixed(2)})`}
   c.g.style.filter=f.trim()||'none'});
  bg.clearRect(0,0,W,H);if(FX.bg)FX.bg(bg);
  const ox=`${dx}px,${dy}px`;
- const bl=Tn.bx>.4||Tn.by>.4?'url(#mbx)':'';$('mbg').setAttribute('stdDeviation',`${Tn.bx.toFixed(1)} ${Tn.by.toFixed(1)}`);
+ const bl='';  // desfoque de camada inteira removido (risco de a camada sumir em closes)$('mbg').setAttribute('stdDeviation',`${Tn.bx.toFixed(1)} ${Tn.by.toFixed(1)}`);
  $('LA').style.transform=`translate(${ox}) scale(${1+z0}) rotate(${rl}deg)`;$('SV').style.transform=$('SV2').style.transform=`translate(${ox}) scale(${1+z0*1.06}) rotate(${rl}deg)`;$('LB').style.transform=`translate(${ox}) scale(${1+z0*1.16}) rotate(${rl}deg)`;
  $('BG').style.transform=`scale(${1+z0*.5}) rotate(${rl*.5}deg)`;
  // cenario: profundidade de campo e variantes (noite / tempo parado) trocadas por opacidade
@@ -251,7 +251,7 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  const bri=FX.dark?`brightness(${1-FX.dark})`:'';
  $('LA').style.filter=(pf+' '+bl+' '+bri).trim()||'none';$('LB').style.filter=(pf+' '+bl+' '+bri).trim()||'none';
  const chr=FX.chroma||0;
- $('SV').style.filter=((chr>.5?`drop-shadow(${chr.toFixed(1)}px 0 0 rgba(255,0,80,.45)) drop-shadow(${(-chr).toFixed(1)}px 0 0 rgba(0,220,255,.45)) `:'')+bl+' '+bri).trim()||'none';
+ $('SV').style.filter=bri||'none';  // sem drop-shadow na camada inteira
  const c=oc;c.clearRect(0,0,W,H);
  c.globalCompositeOperation='lighter';
  const glow=(x,y,r,col,al)=>{if(al<=0||r<=0)return;const q=c.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${Math.min(1,al)})`);q.addColorStop(1,`rgba(${col},0)`);c.fillStyle=q;c.fillRect(x-r,y-r,2*r,2*r)};
@@ -276,9 +276,9 @@ window.F=async gt=>{GT=gt;const sh=SH.find(s=>gt>=s.t0&&gt<s.t1)||SH[SH.length-1
  const vh=Math.max(FX.vhs||0,Tn.vhs||0);if(vh>.01){for(let i=0;i<7;i++){const y=(rnd(Math.floor(gt*24)+i,7.7)*H),h=10+rnd(i+Math.floor(gt*24),2.3)*60;c.fillStyle=`rgba(180,230,255,${(.18*vh).toFixed(3)})`;c.fillRect(0,y,W,h);c.fillStyle=`rgba(255,40,120,${(.12*vh).toFixed(3)})`;c.fillRect(rnd(i,5)*80,y+h,W,6)}
   for(let y=0;y<H;y+=6){c.fillStyle=`rgba(0,0,0,${(.15*vh).toFixed(3)})`;c.fillRect(0,y,W,2)}}
  for(let i=0;i<260;i++){const x=rnd(i+gt*97,1.7)*W,y=rnd(i+gt*31,8.3)*H;c.fillStyle=i%2?'rgba(255,255,255,.04)':'rgba(0,0,0,.05)';c.fillRect(x,y,2.2,2.2)}
- const fl=Math.max(Tn.fl,FX.flash||0);if(fl>0){c.fillStyle=`rgba(${(FX.flash||0)>Tn.fl?(FX.flcol||'255,255,255'):Tn.col},${fl})`;c.fillRect(0,0,W,H)}
+ const fl=Math.min(.4,Math.max(Tn.fl,(FX.flash||0)*.6));if(fl>0){c.fillStyle=`rgba(${(FX.flash||0)>Tn.fl?(FX.flcol||'255,255,255'):Tn.col},${fl})`;c.fillRect(0,0,W,H)}
  if(FX.black>0){c.fillStyle=`rgba(0,0,0,${cl(FX.black)})`;c.fillRect(0,0,W,H)}
  // inversao de cores do tempo parado (circulos em "difference": negativo dentro da esfera)
  const inv=FX.inv||[];$('INV').style.display=inv.length?'':'none';if(inv.length)$('INV').innerHTML=inv.map(([x,y,r,a,sc])=>{const p=sc?[x,y]:zpS(x,y),R=sc?r:r*XF.s;return R>=2400?`<rect width="1080" height="1920" fill="#fff" opacity="${cl(a).toFixed(3)}"/>`:`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${Math.max(0,R).toFixed(1)}" fill="#fff" opacity="${cl(a).toFixed(3)}"/>`}).join('');
  const RCH=['CIB','CJ'].map(k=>CHS[k]).find(c=>FR.includes(c)&&c.sp&&+c.g.style.opacity>.5);if(REAC&&RCH){const p=RCH.sp,ku=p[2],q=zpS(p[0],p[1]-(RCH.sit?240:330)*ku),fl=q[0]>620,bx=Math.min(860,Math.max(220,q[0]+(fl?-200:200))),by=Math.min(1420,Math.max(560,q[1]-90)),fo=1-cl((gt-REAC.t1+.12)/.12);FX.ui=(FX.ui||'')+`<g opacity="${fo.toFixed(2)}">`+BUBBLE(bx,by,REAC.w,REAC.t0,!fl)+'</g>'}
- $('UI').innerHTML=FX.ui||'';$('st').style.filter=FX.impact?'grayscale(1) invert(1) contrast(2.4) brightness(1.05)':(FX.grade||'none')};
+ $('UI').innerHTML=FX.ui||'';$('st').style.filter=FX.grade||'none'};

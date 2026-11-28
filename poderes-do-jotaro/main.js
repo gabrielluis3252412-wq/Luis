@@ -94,7 +94,7 @@ shot('str',tTit,(t,u)=>{
 const tEsp=wt(5,'espírito',0),tCor=wt(5,'corpo',0);
 shot('bed',ps(5)-.25,(t,u)=>{
  const sc=GT>tEsp;put('CIB',0,.55,-2.45,{sit:1,noshd:1,m:GT<tEsp?'sleepy':GT<tCor?'scared':'shock',brow:GT>tEsp?8:0,look:GT>tEsp?[-6,-6]:[0,0],aR:GT>tCor?-60:-14,aL:GT>tCor?60:14,sq:SQ(tCor,1.2),rot:GT>tCor?3*sn(GT*30)*cl(1-(GT-tCor)/1):0,extra:GT>tEsp?SWEAT(-80,-300,.9)+SWEAT(76,-270,.7):''});
- const p=C.CIB.sp,ku=p[2],a=cl((GT-tEsp+.4)/.9)*(.55+.2*sn(GT*13)*sn(GT*7.1)),S=stPlace('CIB',-10,-120,.5);
+ const p=C.CIB.sp,ku=p[2],a=cl((GT-tEsp+.4)/.9)*(.6+.08*sn(GT*2.5)),S=stPlace('CIB',-10,-120,.5);
  stDraw(S,'S1','sp',{alpha:a,aura:a*1.4,face:'stern',aR:[-60+20*sn(GT*1.5),-40,'open'],aL:[30,-20,'open'],back:'none',wind:.8,legs:0,eye:1});spEyes(S,a*1.2);
  let ui='';if(GT>tEsp)ui+=JTXT('UM ESPÍRITO?!',540,330,86,'#fff',-5,pop(GT,tEsp),PU2);
  FX.ui=ui;const e=eyeP('CIB'),F=foc(e[0],e[1]-40*ku,.2);camA([[ps(5)-.25,.05,F[0],F[1],0],[tCor-.05,.2,F[0],F[1],1],[tCor,.42,F[0],F[1]+40,-2,'c'],[ps(6),.5,F[0],F[1]+40,0]]);
@@ -167,7 +167,7 @@ shot('twn',ps(12)-.25,(t,u)=>{
  if(GT>tChu&&GT<tSoc)ui+=JTXT('CHUVA DE SOCOS',540,320,74,GD,-5,pop(GT,tChu),GD2);
  if(rush)ui+=SPEEDL(.5,-10,30,'#fff');FX.ui=ui;
  const F0=foc(p[0]+330*ku,p[1]-420*ku,.12),F1=foc(sx-200*ku,sy+180*ku,.4);camA([[ps(12)-.25,.1,F0[0],F0[1],-1],[tSoc-.1,.18,F0[0],F0[1],1],[tSoc,.5,F1[0],F1[1],-3,'c'],[fin,.62,F1[0],F1[1],2],[fin+.02,.25,F0[0],F0[1],0,'c'],[ps(14),.2,F0[0],F0[1],0]]);
- FX.lit=LIT.twn;FX.shake=(rush?14:0)+22*sh1(GT,[fin],4);FX.flash=Math.max(rush?.08*ab(sn(GT*40)):0,.6*sh1(GT,[fin],8));FX.chroma=rush?4:0;FX.impact=GT>fin&&GT<fin+.07},'wl');
+ FX.lit=LIT.twn;FX.shake=(rush?14:0)+22*sh1(GT,[fin],4);FX.flash=.6*sh1(GT,[fin],8)},'wl');
 // ===== 9) A BALA A QUEIMA-ROUPA =====
 const tBa2=wt(14,'bala',0),tQue=wt(14,'queima-roupa',0);
 shot('twn',ps(14)-.2,(t,u)=>{
@@ -285,7 +285,7 @@ shot('twn3',T18,(t,u)=>{
  const ha=[p[0]-75*ku,p[1]-110*ku];if(GT>tSen)fw(CRACK(ha[0],ha[1],ku*.8,cl((GT-tSen)/.2))+`<path d="M${R2(fa[0])} ${R2(fa[1])}Q${R2((fa[0]+ha[0])/2)} ${R2(fa[1]-200*ku)} ${R2(ha[0])} ${R2(ha[1])}" fill="none" stroke="${RED}" stroke-width="${R2(8*ku)}" stroke-dasharray="${R2(24*ku)} ${R2(14*ku)}" stroke-dashoffset="${R2(-GT*200)}" opacity=".9"/>`);
  let ui='';if(GT>tSen)ui+=JTXT('A MESMA DOR',540,330,104,RED,-5,pop(GT,tSen),'#5a0a1a');if(GT>tDor)ui+=JTXT('AI!',300,620,110,'#fff',-10,pop(GT,tDor),PU2);
  FX.ui=ui;const F=foc(p[0]+200*ku,p[1]-260*ku,.15);camA([[T18,.15,F[0],F[1],0],[hit,.3,F[0],F[1],-3,'c'],[ps(26),.22,F[0],F[1],1]]);
- FX.lit={...LIT.twn3,rim:[255,120,140]};FX.vig=.75;FX.shake=22*sh1(GT,[hit],5)+8*sh1(GT,[tDor],7);FX.flash=.5*sh1(GT,[hit],10)+.3*sh1(GT,[tDor],8);FX.flcol=GT>tDor?'255,40,60':'255,240,200';FX.tint=GT>tSen?[200,0,30,.08+.05*ab(sn(GT*8))]:null},'wr');
+ FX.lit={...LIT.twn3,rim:[255,120,140]};FX.vig=.75;FX.shake=22*sh1(GT,[hit],5)+8*sh1(GT,[tDor],7);FX.flash=.5*sh1(GT,[hit],10)+.3*sh1(GT,[tDor],8);FX.flcol=GT>tDor?'255,40,60':'255,240,200';FX.tint=GT>tSen?[200,0,30,.1]:null},'wr');
 // ===== 19) USUARIOS DE STAND SE ATRAEM... um Stand dourado =====
 const tUsu=wt(26,'usuários',0),tAtr=wt(26,'atraem',0),tCed=wt(27,'Cedo',0),tDou=wt(27,'dourado',0),tVo2=wt(27,'você',0),T19=ps(26)-.2;
 shot('str',T19,(t,u)=>{
@@ -330,7 +330,7 @@ shot('str',T21,(t,u)=>{
  if(post)ui+=JTXT('ORA!',540,520,240,'#fff',-8,pop(GT,hitT)*(1+.04*sn(GT*30)),PU2);
  FX.ui=ui;const Fm=foc(p[0],p[1]-240*ku,.2),Fh=foc(fh[0],fh[1],.6);camA([[T21,.2,foc(-200,0,0)[0],Fm[1],0],[tPss+.3,.25,Fm[0],Fm[1],4],[tGol,.4,Fh[0],Fh[1],-3,'c'],[hitT,.55,Fh[0],Fh[1],2],[hitT+.02,.75,Fh[0],Fh[1],-4,'c'],[ps(32),.45,Fh[0],Fh[1],0]]);
  FX.alt=1;FX.frzc='g';FX.lit={amb:[.95,.88,.7],rim:[255,210,100],d:[1,-.6],sh:.4,ri:1};FX.fog=1;FX.vig=.7;
- FX.shake=(run>0&&run<1?6:0)+34*sh1(GT,[hitT],3);FX.impact=GT>hitT&&GT<hitT+.12&&Math.floor((GT-hitT)*30)%2==0;FX.flash=.8*sh1(GT,[hitT],7);FX.flcol='255,255,255';FX.chroma=10*sh1(GT,[hitT],3)},'');ALT('g');
+ FX.shake=(run>0&&run<1?6:0)+34*sh1(GT,[hitT],3);FX.flash=.8*sh1(GT,[hitT],7);FX.flcol='255,255,255';FX.chroma=10*sh1(GT,[hitT],3)},'');ALT('g');
 // ===== 22) E O TEMPO VOLTA A CORRER =====
 const tVol=wt(32,'volta',0),tCor2=wt(32,'correr',0),T22=ps(32)-.2;
 shot('str',T22,(t,u)=>{
